@@ -1,0 +1,6 @@
+the_ROM_image:
+{
+  [bootloader]FSBL.elf
+  bitstream.bit
+  u-boot.elf
+}

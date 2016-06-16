@@ -1,0 +1,20 @@
+[submodule "ip/rocket-chip"]
+	path = ip/rocket-chip
+	url = https://github.com/ucb-bar/rocket-chip.git
+	branch = master
+[submodule "parallella/oh"]
+	path = parallella/oh
+	url = https://github.com/parallella/oh.git
+	branch = stable
+[submodule "boot/dtc"]
+	path = boot/dtc
+	url = https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+	branch = master
+[submodule "boot/u-boot-xlnx"]
+	path = boot/u-boot-xlnx
+	url = https://github.com/Xilinx/u-boot-xlnx.git
+	branch = master
+[submodule "boot/linux-xlnx"]
+	path = boot/linux-xlnx
+	url = https://github.com/Xilinx/linux-xlnx.git
+	branch = master
