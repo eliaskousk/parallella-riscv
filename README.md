@@ -1,22 +1,6 @@
 # RISC-V port to Parallella Board
-=================================
 
-## Google Summer of Code 2016 Project
-
-[FOSSi](http://www.fossi-foundation.org)
-
-[Parallella](https://www.parallella.org)
-
-[RISC-V](http://riscv.org)
-
-
-[Google Summer of Code](https://developers.google.com/open-source/gsoc/)
-
-[FOSSi GSoC'16 Projects](https://summerofcode.withgoogle.com/organizations/5516229267685376/#projects)
-
-=====
-
-## Abstract
+## A Google Summer of Code 2016 Project
 
 With this project I hope to benefit the open-source hardware enthusiast
 community with work related to the incredible Parallella board used by thousands
@@ -33,22 +17,22 @@ will be created to aid inexperienced users make the most of this work and allow
 them to modify it for their own needs and purposes with custom hardware and /
 or software code.
 
-=====
-
 ## Build instructions
 
 In order to build a bitstream run the following:
 
 * **Parallella**
 
-    ./parallella/fpga/build.sh
-
+```bash
+./parallella/fpga/build.sh
+```
 You can view / edit the Parallella design by opening the `./parallella/fpga/parallella_riscv_rv64g/system.xpr` Vivado project.
 
 * **Zedboard** (Only for development and testing)
 
-    ./zedboard/fpga/build.sh
-
+```bash
+./zedboard/fpga/build.sh
+```
 You can view / edit the Zedboard design by opening the `./zedboard/fpga/zedboard_riscv_rv64g/system.xpr` Vivado project.
 
 ## Design
@@ -61,10 +45,19 @@ It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI i
 
 * **AXI Slave**:  ARM to HostIO of RV64G Core (boot / control the core)
 
-![Vivado Block Diagram](doc/images/vivado.parallella.riscv.rv64g.bd)
+![Vivado Block Diagram](doc/images/vivado.parallella.riscv.rv64g.bd.png)
 
+## Links
 
-=====
+[FOSSi](http://www.fossi-foundation.org)
+
+[Parallella](https://www.parallella.org)
+
+[RISC-V](http://riscv.org)
+
+[Google Summer of Code](https://developers.google.com/open-source/gsoc/)
+
+[FOSSi GSoC'16 Projects](https://summerofcode.withgoogle.com/organizations/5516229267685376/#projects)
 
 ## Contributors
 
