@@ -17,27 +17,72 @@ will be created to aid inexperienced users make the most of this work and allow
 them to modify it for their own needs and purposes with custom hardware and /
 or software code.
 
-## Build instructions
+## Setup Dependencies
 
-In order to build a bitstream run the following:
+This repository uses the following Git submodules:
+
+* [Parallella Open Hardware](https://github.com/parallella/oh)
+  - Mapped to `root_dir/parallella/oh/`
+  - Run in root dir: `git submodule update --init -- parallella/oh`
+  - Needed to build the bitstream for Parallella or Zedboard (dev)
+    inside the `root_dir/$board/fpga/` folder
+
+* [Rocket-Chip Generator](https://github.com/ucb-bar/rocket-chip)
+  - Mapped to `root_dir/ip/rocket-chip/`
+  - Run in root dir: `git submodule update --init -- ip/rocket-chip`
+  - Needed to update the generated RISC-V Rocket Core RV64G IP
+    inside the `root_dir/ip/RISCV_Rocket_Core_RV64G_1.0/` folder
+
+* [Device Tree Compiler](https://git.kernel.org/cgit/utils/dtc/dtc.git)
+  - Mapped to `root_dir/boot/dtc`
+  - Run in root dir: `git submodule update --init -- boot/dtc`
+  - Needed to build the RISC-V U-Boot bootloader (u-boot.elf)
+    inside the `root_dir/board/output/boot/` folder and possibly
+    a new device tree blob (devicetree.dtb) inside the
+    `root_dir/$board/output/final/` folder
+
+* [Xilinx U-Boot Bootloader](https://github.com/Xilinx/u-boot-xlnx)
+  - Mapped to `root_dir/boot/u-boot-xlnx`
+  - Run in root dir: `git submodule update --init -- boot/u-boot-xlnx`
+  - Needed to build the RISC-V U-Boot bootloader (u-boot.elf)
+    inside the `root_dir/$board/output/boot/` folder
+
+* [Xilinx Linux Kernel](https://github.com/Xilinx/linux-xlnx)
+  - Mapped to `root_dir/boot/linux-xlnx/`
+  - Run in root dir: `git submodule update --init -- boot/linux-xlnx`
+  - Needed to build the RISC-V Linux kernel (uImage)
+    inside the `root_dir/$board/output/final/` folder
+
+Scripts are currently being developed in `root_dir/scripts/` folder to automate
+the dependency setup and build the bitstream(s) along with the rest of the
+needed output files for each board.
+    
+## Build Bitstream
+
+In order to quickly build a bitstream first populate the Parallella OH submodule (see above)
+and then run the following:
 
 * **Parallella**
 
 ```bash
-./parallella/fpga/build.sh
+cd parallella/fpga/
+./build.sh
 ```
-You can view / edit the Parallella design by opening the `./parallella/fpga/parallella_riscv_rv64g/system.xpr` Vivado project.
+You can view / edit the Parallella design by opening the `root_dir/parallella/fpga/parallella_riscv_rv64g/system.xpr` Vivado project.
 
 * **Zedboard** (Only for development and testing)
 
 ```bash
-./zedboard/fpga/build.sh
+cd zedboard/fpga/
+./build.sh
 ```
-You can view / edit the Zedboard design by opening the `./zedboard/fpga/zedboard_riscv_rv64g/system.xpr` Vivado project.
+You can view / edit the Zedboard design by opening the `root_dir/zedboard/fpga/zedboard_riscv_rv64g/system.xpr` Vivado project.
 
 ## Design
 
-Currently the design contains a RISC-V RV64G Core produced by [Rocket Chip Generator](https://github.com/ucb-bar/rocket-chip).
+Currently the design contains a RISC-V RV64G (**G** = **IMAFD** = **I**nteger, **M**ultiply/Division, **A**tomic,
+**F**loating Point with Single or **D**ouble Precision extensions) Core produced by
+[Rocket Chip Generator](https://github.com/ucb-bar/rocket-chip).
 
 It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI interfaces:
 
@@ -61,5 +106,11 @@ It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI i
 
 ## Contributors
 
-- Elias Kouskoumvekakis
+### Code
 
+- Elias Kouskoumvekakis - [Blog](http://eliaskousk.teamdac.com)
+
+### GSoC Mentors
+
+- Olof    Kindgren ([OpenRISC](http://openrisc.io))
+- Andreas Olofsson ([Adapteva](http://www.adapteva.com))
