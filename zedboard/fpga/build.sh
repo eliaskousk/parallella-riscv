@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#clean build directory
+rm -rf zedboard_riscv_rv64g
+
 #package IP
 vivado -mode batch -source package.tcl
 
