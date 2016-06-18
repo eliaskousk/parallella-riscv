@@ -20,15 +20,19 @@ ROCKETCHIP=$TOP/ip/rocket-chip
 export ROCKETCHIP
 echo "\$ROCKETCHIP directory was set to $ROCKETCHIP"
 
-RISCV=$ROCKETCHIP/riscv-tools
+RISCV=$TOP/ip/toolchain
 export RISCV
 echo "\$RISCV directory was set to $RISCV"
 
 PATH=$PATH:$RISCV/bin
 export PATH
-echo "\$RISCV=$RISCV/bin was added to \$PATH"
+echo "\$RISCV/bin was added to \$PATH"
 
 BOARD=zedboard
 export BOARD
 echo "\$BOARD=$BOARD"
+
+JOBS=8
+export JOBS
+echo "\$JOBS=$JOBS"
 
