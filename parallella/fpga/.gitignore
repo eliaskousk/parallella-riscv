@@ -1,1 +1,3 @@
 /parallella_riscv_rv64g/
+*.bit
+*.bit.bin

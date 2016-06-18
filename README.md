@@ -17,9 +17,25 @@ will be created to aid inexperienced users make the most of this work and allow
 them to modify it for their own needs and purposes with custom hardware and /
 or software code.
 
-## Setup Dependencies
+## Build Instructions
 
-This repository uses the following Git submodules:
+### Main Build Script
+    
+You can build everything in one step using the master build script:
+
+```bash
+./scripts/build.sh
+```
+
+This script automates the dependency setup and builds an FPGA bitstream along with the rest of the
+needed output files (boot) for the chosen board. Feel free to edit it if want to skip something, until
+we have a final makefile with the "sections" of this script. You can also edit `scripts/set.env.sh`
+if you need to change the target board (to e.g `zedboard` instead of the default `parallella`) or the
+number of jobs your machine can simultaneously handle while building (default is `8`).
+
+### Setup Dependencies
+
+This repository uses the following Git submodules. You can initialize each one separately if needed.
 
 * [Parallella Open Hardware](https://github.com/parallella/oh)
   - Mapped to `root_dir/parallella/oh/`
@@ -53,13 +69,9 @@ This repository uses the following Git submodules:
   - Needed to build the RISC-V Linux kernel (uImage)
     inside the `root_dir/$board/output/final/` folder
 
-Scripts are currently being developed in `root_dir/scripts/` folder to automate
-the dependency setup and build the bitstream(s) along with the rest of the
-needed output files for each board.
-    
-## Build Bitstream
+### Build Bitstream
 
-In order to quickly build a bitstream first populate the Parallella OH submodule (see above)
+In order to only build a bitstream, first populate the Parallella OH submodule (see above)
 and then run the following:
 
 * **Parallella**
@@ -108,7 +120,7 @@ It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI i
 
 ### Code
 
-- Elias Kouskoumvekakis - [Blog](http://eliaskousk.teamdac.com)
+- Elias Kouskoumvekakis ([Blog](http://eliaskousk.teamdac.com))
 
 ### GSoC Mentors
 
