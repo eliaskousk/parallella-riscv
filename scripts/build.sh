@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPTS=$(dirname "$(readlink -f "$0")")
-source "$SCRIPTS/set.env.sh"
+source "${SCRIPTS}/set.env.sh"
 
 # The rest of these sections should be inserted in the Makefrag
 # so that the user doesn't have to run everything and instead
