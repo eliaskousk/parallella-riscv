@@ -28,7 +28,7 @@ PATH=$PATH:$RISCV/bin
 export PATH
 echo "\$RISCV/bin was added to \$PATH"
 
-BOARD=zedboard
+BOARD=parallella
 export BOARD
 echo "\$BOARD=$BOARD"
 

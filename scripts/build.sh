@@ -29,8 +29,8 @@ sed -i "s/JOBS=\([0-9]\{\0,2\}\)/JOBS=${JOBS}/g" build.common
 sed -i "s/JOBS=${JOBS}/JOBS=16/g" build.common
 
 # Build the Rocket Chip emulator
-cd ${ROCKETCHIP}/emulator
-make -j${JOBS}
+#cd ${ROCKETCHIP}/emulator
+#make -j${JOBS}
 
 # Build the Rocket Chip Verilog RTL (for FPGAs)
 FPGAConfig="DefaultFPGAConfig"
@@ -54,6 +54,5 @@ cd ${TOP}/${BOARD}/fpga
 #cd ${TOP}/common/dtc/
 #make
 #export PATH=$PATH:$i{TOP}/common/dtc
-u
 #cd ${TOP}/${BOARD}
 #make arm-uboot
