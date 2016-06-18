@@ -35,7 +35,7 @@ make -j${JOBS}
 # Build the Rocket Chip Verilog RTL (for FPGAs)
 FPGAConfig="DefaultFPGAConfig"
 RocketCoreIPName="RISCV_Rocket_Core_RV64G_1.0"
-cd ${TOP}/fsim
+cd ${ROCKETCHIP}/fsim
 make verilog CONFIG=${FPGAConfig}
 make verilog MODEL=ZynqAdapter CONFIG=${FPGAConfig}
 cp generated-src/Top.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.Core.v
