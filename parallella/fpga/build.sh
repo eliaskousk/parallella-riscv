@@ -1,20 +1,21 @@
 #!/bin/bash
 
-#clean build directory
+# Clean build directory
 rm -rf parallella_riscv_rv64g
 
-#package IP
-vivado -mode batch -source package.tcl
+# Package Parallella Base and RISC-V RV64 IPs
+vivado -mode batch -source package_parallella.tcl
+vivado -mode batch -source package_riscv.tcl
 
-#create bit stream
+# Create bitstream
 vivado -mode batch -source run.tcl
 
-#make final bitstream image (bin instead of bit)
-cp ./parallella_riscv_rv64g/system.runs/impl_1/system_wrapper.bit ./bitstream.bit
+# Make final bitstream image (bin instead of bit)
+cp ./parallella_riscv/system.runs/impl_1/system_wrapper.bit ./bitstream.bit
 bootgen -image bit2bin.bif -split bin 
 #cp parallella.bit.bin parallella_backup.bit.bin
 mv bitstream.bit.bin parallella.bit.bin
 
-#clean up
+# Clean up
 rm bit2bin.bin
 
