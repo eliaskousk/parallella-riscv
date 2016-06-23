@@ -40,7 +40,7 @@ if {[llength $ip_files] != 0} {
     foreach file $ip_files {
 	#TODO: is this needed?
 	set file_obj [get_files -of_objects [get_filesets sources_1] $file]
-	set_property "synth_checkpoint_mode" "Singular" $file_obj
+	#set_property "synth_checkpoint_mode" "Singular" $file_obj
     }    
     #RERUN/UPGRADE IP
     upgrade_ip [get_ips]
@@ -69,14 +69,14 @@ if {[llength $ip_files] != 0} {
 ###########################################################
 
 ipx::package_project -import_files -force -root_dir $projdir
-ipx::associate_bus_interfaces -busif s_axi -clock s_axi_aclk [ipx::current_core]
-ipx::associate_bus_interfaces -busif m_axi -clock m_axi_aclk [ipx::current_core]
+ipx::associate_bus_interfaces -busif s_axi -clock $clk_s_axi [ipx::current_core]
+ipx::associate_bus_interfaces -busif m_axi -clock $clk_m_axi [ipx::current_core]
 
 ipx::remove_memory_map {s_axi} [ipx::current_core]
 ipx::add_memory_map {s_axi} [ipx::current_core]
 set_property slave_memory_map_ref {s_axi} [ipx::get_bus_interfaces s_axi -of_objects [ipx::current_core]]
 ipx::add_address_block {axi_lite} [ipx::get_memory_maps s_axi -of_objects [ipx::current_core]]
-set_property range {4096} [ipx::get_address_blocks axi_lite -of_objects \
+set_property range {65536} [ipx::get_address_blocks axi_lite -of_objects \
     [ipx::get_memory_maps s_axi -of_objects [ipx::current_core]]]
 
 set_property vendor              {www.parallella.org}    [ipx::current_core]

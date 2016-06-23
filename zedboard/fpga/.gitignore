@@ -1,2 +1,3 @@
 *.bit
-/zedboard_riscv_rv64g/
+/riscv_rv64g/
+/zedboard_riscv/

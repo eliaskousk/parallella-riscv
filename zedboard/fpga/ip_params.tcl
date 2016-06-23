@@ -1,6 +1,8 @@
-set design RISCV_Rocket_Core_RV64G
-set projdir ./zedboard_riscv_rv64g/
-set root "../../parallella/oh"
+set design riscv_rv64g
+
+set projdir ./riscv_rv64g/
+
+set root "../../parallella"
 
 # Device name
 set partname "xc7z020clg484-1"
@@ -9,17 +11,13 @@ set partname "xc7z020clg484-1"
 set boardpart "em.avnet.com:zed:part0:1.3"
 
 set hdl_files [list \
-                ../hdl/ \
-                $root/common/hdl/ \
-                $root/emesh/hdl \
-                $root/emmu/hdl \
-                $root/axi/hdl \
-                $root/emailbox/hdl \
-                $root/edma/hdl \
-                $root/elink/hdl \
-                ]
+               $root/hdl/riscv.rv64g/ \
+              ]
 
 set ip_files   []
 
 set constraints_files []
+
+set clk_m_axi "m_axi_aclk"
+set clk_s_axi "s_axi_aclk"
 

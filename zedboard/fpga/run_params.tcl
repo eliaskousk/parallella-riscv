@@ -2,7 +2,7 @@
 set design system
 
 #Project directory
-set projdir ./zedboard_riscv_rv64g/
+set projdir ./zedboard_riscv/
 
 #Device name
 set partname "xc7z020clg484-1"
@@ -12,7 +12,7 @@ set boardpart "em.avnet.com:zed:part0:1.3"
 
 #Paths to all IP blocks to use in Vivado "system.bd"
 
-set ip_repos [list "./zedboard_riscv_rv64g"]
+set ip_repos [list "./riscv_rv64g"]
 
 #All source files
 set hdl_files []
