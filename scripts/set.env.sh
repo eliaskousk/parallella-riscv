@@ -36,3 +36,5 @@ JOBS=8
 export JOBS
 echo "\$JOBS set to ${JOBS}"
 
+VIVADO=2015.4
+
