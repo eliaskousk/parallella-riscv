@@ -43,8 +43,7 @@ cp generated-src/ZynqAdapter.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/R
 
 # Build Vivado Project
 source /opt/Xilinx/Vivado/${VIVADO}/settings64.sh
-cd ${TOP}/${BOARD}/fpga
-sed -i 's/v[0-9]\{4\}\.[0-9]/v2016.1/'
+cd ${TOP}/${BOARD}
 ./build.sh
 
 # Build U-Boot
