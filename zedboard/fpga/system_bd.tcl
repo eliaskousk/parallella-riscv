@@ -150,22 +150,22 @@ proc create_root_design { parentCell } {
   # Create ports
 
   # Create instance: RISCV_Rocket_Core_RV64G_0, and set properties
-  set RISCV_Rocket_Core_RV64G_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:RISCV_Rocket_Core_RV64G:1.0 RISCV_Rocket_Core_RV64G_0 ]
+  set RISCV_Rocket_Core_RV64G_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:RISCV_Rocket_Core_RV64G: RISCV_Rocket_Core_RV64G_0 ]
 
   # Create instance: axi_mem_intercon_PS_master, and set properties
-  set axi_mem_intercon_PS_master [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon_PS_master ]
+  set axi_mem_intercon_PS_master [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: axi_mem_intercon_PS_master ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_master
 
   # Create instance: axi_mem_intercon_PS_slave, and set properties
-  set axi_mem_intercon_PS_slave [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon_PS_slave ]
+  set axi_mem_intercon_PS_slave [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: axi_mem_intercon_PS_slave ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_slave
 
   # Create instance: clk_wiz_0_100M_to_25M, and set properties
-  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.2 clk_wiz_0_100M_to_25M ]
+  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_25M ]
   set_property -dict [ list \
 CONFIG.CLKOUT1_DRIVES {BUFG} \
 CONFIG.CLKOUT1_JITTER {181.828} \
@@ -192,7 +192,7 @@ CONFIG.USE_PHASE_ALIGNMENT {true} \
  ] $clk_wiz_0_100M_to_25M
 
   # Create instance: processing_system7_0, and set properties
-  set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
+  set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7: processing_system7_0 ]
   set_property -dict [ list \
 CONFIG.PCW_QSPI_GRP_FBCLK_ENABLE {1} \
 CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1} \
@@ -202,7 +202,7 @@ CONFIG.preset {ZedBoard} \
  ] $processing_system7_0
 
   # Create instance: rst_processing_system7_0_25M, and set properties
-  set rst_processing_system7_0_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_processing_system7_0_25M ]
+  set rst_processing_system7_0_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset: rst_processing_system7_0_25M ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net RISCV_Rocket_Core_RV64G_0_M_AXI [get_bd_intf_pins RISCV_Rocket_Core_RV64G_0/m_axi] [get_bd_intf_pins axi_mem_intercon_PS_slave/S00_AXI]

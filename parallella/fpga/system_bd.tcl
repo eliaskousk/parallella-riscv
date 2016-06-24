@@ -183,28 +183,28 @@ proc create_root_design { parentCell } {
   set txo_lclk_p [ create_bd_port -dir O txo_lclk_p ]
 
   # Create instance: RISCV_Rocket_Core_RV64G_0, and set properties
-  set RISCV_Rocket_Core_RV64G_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:RISCV_Rocket_Core_RV64G:1.0 RISCV_Rocket_Core_RV64G_0 ]
+  set RISCV_Rocket_Core_RV64G_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:RISCV_Rocket_Core_RV64G: RISCV_Rocket_Core_RV64G_0 ]
 
   # Create instance: axi_mem_intercon, and set properties
-  set axi_mem_intercon [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon ]
+  set axi_mem_intercon [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: axi_mem_intercon ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon
 
   # Create instance: axi_mem_intercon_PS_master, and set properties
-  set axi_mem_intercon_PS_master [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon_PS_master ]
+  set axi_mem_intercon_PS_master [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: axi_mem_intercon_PS_master ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_master
 
   # Create instance: axi_mem_intercon_PS_slave, and set properties
-  set axi_mem_intercon_PS_slave [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_mem_intercon_PS_slave ]
+  set axi_mem_intercon_PS_slave [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: axi_mem_intercon_PS_slave ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_slave
 
   # Create instance: clk_wiz_0_100M_to_25M, and set properties
-  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.2 clk_wiz_0_100M_to_25M ]
+  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_25M ]
   set_property -dict [ list \
 CONFIG.CLKOUT1_DRIVES {BUFG} \
 CONFIG.CLKOUT1_JITTER {181.828} \
@@ -231,16 +231,16 @@ CONFIG.USE_PHASE_ALIGNMENT {true} \
  ] $clk_wiz_0_100M_to_25M
 
   # Create instance: parallella_base_0, and set properties
-  set parallella_base_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:parallella_base:1.0 parallella_base_0 ]
+  set parallella_base_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:parallella_base: parallella_base_0 ]
   set_property -dict [ list \
 CONFIG.NGPIO {24} \
  ] $parallella_base_0
 
   # Create instance: proc_sys_reset_0, and set properties
-  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
+  set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset: proc_sys_reset_0 ]
 
   # Create instance: processing_system7_0, and set properties
-  set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
+  set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7: processing_system7_0 ]
   set_property -dict [ list \
 CONFIG.PCW_CORE0_FIQ_INTR {0} \
 CONFIG.PCW_ENET0_ENET0_IO {MIO 16 .. 27} \
@@ -298,16 +298,16 @@ CONFIG.PCW_USE_S_AXI_HP1 {1} \
  ] $processing_system7_0
 
   # Create instance: processing_system7_0_axi_periph, and set properties
-  set processing_system7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 processing_system7_0_axi_periph ]
+  set processing_system7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect: processing_system7_0_axi_periph ]
   set_property -dict [ list \
 CONFIG.NUM_MI {1} \
  ] $processing_system7_0_axi_periph
 
   # Create instance: rst_processing_system7_0_25M, and set properties
-  set rst_processing_system7_0_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_processing_system7_0_25M ]
+  set rst_processing_system7_0_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset: rst_processing_system7_0_25M ]
 
   # Create instance: sys_concat_intc, and set properties
-  set sys_concat_intc [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 sys_concat_intc ]
+  set sys_concat_intc [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat: sys_concat_intc ]
   set_property -dict [ list \
 CONFIG.NUM_PORTS {16} \
  ] $sys_concat_intc
