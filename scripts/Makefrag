@@ -8,20 +8,51 @@ base_dir = $(abspath ..)
 default: bitstream
 
 #
-# --------------------
-# Bitstream generation
-# --------------------
+# -------------------------------------------
+# IP, System Project and Bitstream Generation
+# -------------------------------------------
 #
 
-fpga_dir = $(base_sir)/$(BOARD)/fpga
+fpga_dir = $(base_dir)/$(BOARD)/fpga
 
-project = $(fpga_dir)/$(BOARD)_riscv_rv64g/system.xpr
+parallella_bitstream = $(fpga_dir)/parallella.bit.bin
+$(parallella_bitstream): bitstream
+	# Make final Parallella bitstream image (bin instead of bit)
+	cd $(fpga_dir) && bootgen -image bit2bin.bif -split bin
+	cd $(fpga_dir) && mv parallella_riscv.bit.bin parallella.bit.bin
+	cd $(fpga_dir) && rm bit2bin.bin
+parallella_bitstream: $(parallella_bitstream)
 
-bitstream = $(fpga_dir)/bistream.bit
-
-$(bitstream): $(project)
-	$(fpga_dir)/build.sh
+bitstream = $(fpga_dir)/$(BOARD)_riscv.bit
+$(bitstream): $(BOARD)_ip_deps $(fpga_dir)/system_params.tcl
+	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl;
+	cd $(fpga_dir) && cp ./$(BOARD)_riscv/system.runs/impl_1/system_wrapper.bit ./$(BOARD)_riscv.bit
 bitstream: $(bitstream)
+
+system_project = $(fpga_dir)/$(BOARD)_riscv/system.xpr
+$(system_project): $(BOARD)_ip_deps $(fpga_dir)/system_params.tcl
+	cd $(fpga_dir) && rm -rf $(BOARD)_riscv
+	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/system_project.tcl;
+system_project: $(system_project)
+
+parallella_ip_deps: parallella_ip_package riscv_ip_package
+zedboard_ip_deps: riscv_ip_package
+
+parallella_ip_package = $(fpga_dir)/parallella_base/parallella_base.xpr
+$(parallella_ip_package): $(fpga_dir)/ip_params_parallella.tcl
+	cd $(fpga_dir) && rm -rf parallella_base
+	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/ip_package_parallella.tcl
+parallella_ip_package: $(parallella_ip_package)
+
+riscv_ip_package = $(fpga_dir)/riscv_rv64g/riscv_rv64g.xpr
+$(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
+	cd $(fpga_dir) && rm -rf riscv_rv64g
+	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/ip_package_riscv.tcl
+riscv_ip_package: $(riscv_ip_package)
+
+system_bd_update:
+	cd $(fpga_dir) && sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO}/" system_bd.tcl
+
 
 #
 # ----------------------------

@@ -10,6 +10,8 @@ PART = xc7z020clg484-1
 
 UBOOT_CONFIG = zed
 
+VIVADO = 2015.4
+
 # Include the rest of the make configuration
 # which is common for all boards
 include ../scripts/Makefrag
