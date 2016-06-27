@@ -21,7 +21,7 @@ or software code.
 
 ### Main Build Script
     
-You can build everything in one step using the master build script:
+You can build everything (bitstream and software) in one step using the master build script:
 
 ```bash
 ./scripts/build.sh
@@ -49,60 +49,91 @@ This repository uses the following Git submodules. You can initialize each one s
   - Needed to update the generated RISC-V Rocket Core RV64G IP
     inside the `root_dir/ip/RISCV_Rocket_Core_RV64G_1.0/` folder
 
-* [Device Tree Compiler](https://git.kernel.org/cgit/utils/dtc/dtc.git)
-  - Mapped to `root_dir/boot/dtc`
-  - Run in root dir: `git submodule update --init -- boot/dtc`
-  - Needed to build the RISC-V U-Boot bootloader (u-boot.elf)
-    inside the `root_dir/board/output/boot/` folder and possibly
-    a new device tree blob (devicetree.dtb) inside the
-    `root_dir/$board/output/final/` folder
+In order to build the boot images (U-Boot, Linux Kernel) for Parallella board target:
+
+* [Parallella U-Boot Bootloader](https://github.com/parallella/parallella-uboot)
+  - Mapped to `root_dir/boot/parallella-uboot`
+  - Run in root dir: `git submodule update --init -- boot/parallella-uboot`
+  - Needed to build the Parallella U-Boot bootloader (u-boot.elf)
+    inside the `root_dir/$board/output/boot/` folder
+
+* [Parallella Linux Kernel](https://github.com/parallella/parallella-linux)
+  - Mapped to `root_dir/boot/parallella-linux`
+  - Run in root dir: `git submodule update --init -- boot/parallella-linux`
+  - Needed to build the Zynq ARM Linux kernel of Parallella (uImage)
+    inside the `root_dir/$board/output/final/` folder
+
+In order to build the boot images (U-Boot, Linux Kernel) for ZedBoard board target (development only):
 
 * [Xilinx U-Boot Bootloader](https://github.com/Xilinx/u-boot-xlnx)
   - Mapped to `root_dir/boot/u-boot-xlnx`
   - Run in root dir: `git submodule update --init -- boot/u-boot-xlnx`
-  - Needed to build the RISC-V U-Boot bootloader (u-boot.elf)
+  - Needed to build the ZedBoard U-Boot bootloader (u-boot.elf)
     inside the `root_dir/$board/output/boot/` folder
 
 * [Xilinx Linux Kernel](https://github.com/Xilinx/linux-xlnx)
   - Mapped to `root_dir/boot/linux-xlnx/`
   - Run in root dir: `git submodule update --init -- boot/linux-xlnx`
-  - Needed to build the RISC-V Linux kernel (uImage)
+  - Needed to build the ZedBoard Linux kernel (uImage)
     inside the `root_dir/$board/output/final/` folder
+
+* [Device Tree Compiler](https://git.kernel.org/cgit/utils/dtc/dtc.git)
+  - Mapped to `root_dir/boot/dtc`
+  - Run in root dir: `git submodule update --init -- boot/dtc`
+  - Needed to build the ZedBoard U-Boot bootloader (u-boot.elf)
+    inside the `root_dir/board/output/boot/` folder and possibly
+    a new device tree blob (devicetree.dtb) inside the
+    `root_dir/$board/output/final/` folder
 
 ### Build Bitstream
 
-In order to only build a bitstream, first populate the Parallella OH submodule (see above)
+In order to only build a bitstream (no software), first populate the Parallella OH submodule (see above)
 and then run the following:
 
 * **Parallella**
 
 ```bash
-cd parallella/fpga/
+cd parallella
 ./build.sh
 ```
-You can view / edit the Parallella design by opening the `root_dir/parallella/fpga/parallella_riscv_rv64g/system.xpr` Vivado project.
+You can view / edit the Parallella design by opening the `root_dir/parallella/fpga/parallella_riscv/system.xpr` Vivado project.
 
 * **Zedboard** (Only for development and testing)
 
 ```bash
-cd zedboard/fpga/
+cd zedboard
 ./build.sh
 ```
-You can view / edit the Zedboard design by opening the `root_dir/zedboard/fpga/zedboard_riscv_rv64g/system.xpr` Vivado project.
+You can view / edit the Zedboard design by opening the `root_dir/zedboard/fpga/zedboard_riscv/system.xpr` Vivado project.
 
 ## Design
 
-Currently the design contains a RISC-V RV64G (**G** = **IMAFD** = **I**nteger, **M**ultiply/Division, **A**tomic,
+![Vivado Block Diagram](doc/images/vivado.parallella.riscv.bd.png)
+
+### Parallella Base Component
+This design contains the Parallella Base component connected to the ARM cores via AXI4.
+The Parallella Base component contains the `E-Link` needed for communication with the `Epiphany` chip on-board Parallella
+along with `GPIO` single ended passthrough (PL <-> PS connections) and `I2C` bus connection to the on-board power regulators
+that power mangage the Epiphany chip. All these mean that the bitstreams produced here have identical functionality with
+those provided by Parallella plus the RISC-V core (see below).
+
+### RISC-V RV64G Core
+The design contains a `RISC-V RV64G` (**G** = **IMAFD** = **I**nteger, **M**ultiply/Division, **A**tomic,
 **F**loating Point with Single or **D**ouble Precision extensions) Core produced by
 [Rocket Chip Generator](https://github.com/ucb-bar/rocket-chip).
 
-It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI interfaces:
+It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI4 interfaces:
 
 * **AXI Master**: RV64G Core to DDR3 via ARM  (memory access of the core)
 
 * **AXI Slave**:  ARM to HostIO of RV64G Core (boot / control the core)
 
-![Vivado Block Diagram](doc/images/vivado.parallella.riscv.rv64g.bd.png)
+### Timing
+The Parallella Base component runs with a 100 MHz clock and the RISC-V RV64G core runs with a 25 MHz clock.
+It can be synthesized and implemented with the latest Xilinx Vivado tools (tested with 2015.4 and 2016.1).
+
+You can select your version of the Xilinx tools by editing the `VIVADO` variable in `root_dir/scripts/set.env.sh`
+before running the build scripts to produce a bitstream (see above).
 
 ## Links
 
