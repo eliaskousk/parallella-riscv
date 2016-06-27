@@ -8,7 +8,15 @@ BOARD_MODEL = none
 
 PART = xc7z020clg400-1
 
-UBOOT_CONFIG = parallella
+LINUX_REPO = parallella-linux
+
+LINUX_CONFIG = parallella
+
+UBOOT_REPO = parallella-uboot
+
+UBOOT_CONFIG = adapteva_parallella
+
+DTS = zynq-parallella
 
 VIVADO = 2015.4
 

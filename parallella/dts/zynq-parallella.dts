@@ -1,0 +1,130 @@
+/*
+ * Copyright (c) 2014 SUSE LINUX Products GmbH
+ * Copyright (c) 2015 SUSE Linux GmbH
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+/dts-v1/;
+#include "zynq-parallella1.dtsi"
+
+/ {
+	model = "Adapteva Parallella Board with HDMI bitstream";
+
+	hdmi-connector {
+		compatible = "hdmi-connector";
+		type = "d";
+		label = "hdmi";
+
+		port {
+			hdmi_connector_in: endpoint {
+				remote-endpoint = <&adv7513_out>;
+			};
+		};
+	};
+	
+    htif_0: htif@43c00000 {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        compatible = "generic-uio", "uio", "uio_pdrv";
+        reg = <0x43c00000 0x1000>;
+    };
+};
+
+&usb_phy0 {
+	status = "okay";
+};
+
+&usb_phy1 {
+	status = "okay";
+};
+
+&fpga {
+	axi_vdma: axi-vdma@43000000 {
+		compatible = "xlnx,axi-vdma-1.00.a";
+		reg = <0x43000000 0x1000>;
+		#dma-cells = <1>;
+		xlnx,num-fstores = <3>;
+		xlnx,include-sg = <0>;
+		xlnx,flush-fsync = <2>;
+
+		dma-channel@43000000 {
+			compatible = "xlnx,axi-vdma-mm2s-channel";
+			interrupt-parent = <&intc>;
+			interrupts = <0 59 4>;
+			xlnx,datawidth = <64>;
+			xlnx,include-dre = <0>;
+			xlnx,genlock-mode = <0>;
+		};
+	};
+
+	axi_clkgen: axi-clkgen@66000000 {
+		compatible = "adi,axi-clkgen-1.00.a";
+		reg = <0x66000000 0x10000>;
+		#clock-cells = <0>;
+		clocks = <&clkc 17>;
+	};
+
+	audio_clock: audio-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <12288000>;
+	};
+
+	axi-spdif-tx@75c00000 {
+		compatible = "adi,axi-spdif-tx-1.00.a";
+		reg = <0x75c00000 0x1000>;
+		clocks = <&clkc 15>, <&audio_clock>;
+		clock-names = "axi", "ref";
+		dmas = <&dmac_s 0>;
+		dma-names = "tx";
+	};
+};
+
+&i2c0 {
+	adv7513: hdmi@39 {
+		compatible = "adi,adv7513";
+		reg = <0x39>;
+		adi,input-depth = <8>;
+		adi,input-colorspace = "rgb";
+		adi,input-clock = "1x";
+		adi,input-style = <2>;
+		adi,input-justification = "left";
+		adi,clock-delay = <3>;
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+
+				adv7513_in: endpoint {
+					/*remote-endpoint = <&dpi_out>;*/
+				};
+			};
+
+			port@1 {
+				reg = <1>;
+
+				adv7513_out: endpoint {
+					remote-endpoint = <&hdmi_connector_in>;
+				};
+			};
+		};
+	};
+};
+
+&usb0 {
+	status = "okay";
+};
+
+&usb1 {
+	status = "okay";
+};

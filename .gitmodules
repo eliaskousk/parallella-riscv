@@ -18,3 +18,11 @@
 	path = boot/linux-xlnx
 	url = https://github.com/Xilinx/linux-xlnx.git
 	branch = master
+[submodule "boot/parallella-uboot"]
+	path = boot/parallella-uboot
+	url = https://github.com/parallella/parallella-uboot.git
+	branch = parallella-next
+[submodule "boot/parallella-linux"]
+	path = boot/parallella-linux
+	url = https://github.com/parallella/parallella-linux.git
+	branch = parallella-linux-2016.3

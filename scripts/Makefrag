@@ -60,9 +60,9 @@ system_bd_update:
 # ----------------------------
 #
 
-arm_linux_dir = $(base_dir)/boot/linux-xlnx
+arm_linux_dir = $(base_dir)/boot/$(LINUX_REPO)
 
-uboot_dir = $(base_dir)/boot/u-boot-xlnx
+uboot_dir = $(base_dir)/boot/$(UBOOT_REPO)
 
 dtc_dir = $(base_dir)/boot/dtc
 
@@ -70,42 +70,46 @@ boot_build_dir = output/boot
 
 final_output_dir = output/final
 
-boot-bin: arm-linux arm-dtb
+boot-bin: arm-uboot-$(BOARD) arm-linux arm-dtb
 	cd $(boot_build_dir)
 	ln -s ../../fpga/bitstream.bit .
 	bootgen -image bit2bin.bif -o boot.bin
 	cd $(final_output_dir)
 	cp ../boot/boot.bin .
 
-arm-linux: arm-uboot # must first build uboot because we need tools
-	# compile kernel
+arm-linux: arm-uboot-$(BOARD) # Must first build uboot because we need its tools
+	# Compile kernel
 	git submodule update --init $(arm_linux_dir)
-	# no make clean included here since one copy of linux should work on all boards
-	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- xilinx_zynq_defconfig 
+	# No make clean included here since one copy of linux should work on all boards
+	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_CONFIG)_defconfig
 	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j$(JOBS)
 	# convert zImage to uImage
 	cd $(arm_linux_dir) && export PATH=$(uboot_dir)/tools:$$PATH && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- UIMAGE_LOADADDR=0x8000 uImage
 	mkdir -p $(final_output_dir)
 	cp $(arm_linux_dir)/arch/arm/boot/uImage $(final_output_dir)/
 
-arm-uboot: arm-dtc # we need dtc to build uboot
-	# compile board-compatible u-boot
+arm-uboot-parallella: arm-uboot
+arm-uboot-zedboard: arm-dtc arm-uboot # We need dtc to build ZedBoard's U-Boot from upstream u-boot-xlnx repo
+
+arm-uboot:
+	# Compile board-compatible u-boot
 	git submodule update --init $(uboot_dir)
-	# copy relevant configuration files
-	cp uboot/zynq_$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
-	# actually build
-	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- zynq_$(UBOOT_CONFIG)_defconfig
-	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j$(JOBS)
+	# Copy relevant configuration files
+	cp uboot/$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
+	# Configure U-Boot
+	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(UBOOT_CONFIG)_defconfig
+	# Build U-Boot but first unset LD_LIBRARY_PATH that points to Xilinx libraries in order to not break the U-Boot Build
+	export PATH=$(dtc_dir):$$PATH && export LD_LIBRARY_PATH= && cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j$(JOBS)
 	mkdir -p $(boot_build_dir)
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
 arm-dtc:
-    # compile device tree compiler
+    # Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
 	git submodule update --init $(dtc_dir)
 	cd $(dtc_dir) && make -j$(JOBS)
 
 arm-dtb:
-	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb dts/devicetree.dts
+	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb dts/$(DTS).dts
 
 #
 # ---------------------

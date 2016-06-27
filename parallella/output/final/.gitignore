@@ -1,0 +1,4 @@
+*.bin
+*.dtb
+/uImage
+/uramdisk.image.gz

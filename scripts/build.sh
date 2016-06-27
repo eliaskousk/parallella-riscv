@@ -46,13 +46,3 @@ source /opt/Xilinx/Vivado/${VIVADO}/settings64.sh
 cd ${TOP}/${BOARD}
 ./build.sh
 
-# Build U-Boot
-#source /opt/Xilinx/Vivado/2015.4/settings64.sh
-# Unset LD_LIBRARY_PATH that points to Xilinx libraries
-# in order to not break the u-boot Build
-#export LD_LIBRARY_PATH=
-#cd ${TOP}/common/dtc/
-#make
-#export PATH=$PATH:$i{TOP}/common/dtc
-#cd ${TOP}/${BOARD}
-#make arm-uboot
