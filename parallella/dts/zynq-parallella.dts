@@ -28,13 +28,14 @@
 			};
 		};
 	};
-	
-    htif_0: htif@43c00000 {
-        #address-cells = <1>;
-        #size-cells = <1>;
-        compatible = "generic-uio", "uio", "uio_pdrv";
-        reg = <0x43c00000 0x1000>;
-    };
+
+	htif_0: htif@43c00000 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "generic-uio", "uio", "uio_pdrv";
+		reg = <0x43c00000 0x1000>;
+	};
+
 };
 
 &usb_phy0 {
