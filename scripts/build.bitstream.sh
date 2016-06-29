@@ -5,7 +5,7 @@ source "${SCRIPTS}/set.env.sh"
 
 # Build Bitstream
 
-source /opt/Xilinx/Vivado/${VIVADO}/settings64.sh
+source ${VIVADO_PATH}/${VIVADO_VERSION}/settings64.sh
 cd ${TOP}/${BOARD}
 make ${BOARD}_bitstream
 

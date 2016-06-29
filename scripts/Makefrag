@@ -87,7 +87,7 @@ $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
 riscv_ip_package: $(riscv_ip_package)
 
 system_bd_update:
-	cd $(fpga_dir) && sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO}/" system_bd.tcl
+	cd $(fpga_dir) && sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
 
 
 #
