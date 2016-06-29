@@ -19,19 +19,6 @@ or software code.
 
 ## Build Instructions
 
-### Main Build Script
-    
-You can build everything (bitstream and software) in one step using the master build script:
-
-```bash
-./scripts/build.sh
-```
-
-This script automates the dependency setup and builds an FPGA bitstream along with the rest of the
-needed output files (boot) for the chosen board. Feel free to edit it if want to skip something, until
-we have a final makefile with the "sections" of this script. You can also edit `scripts/set.env.sh`
-if you need to change the target board (to e.g `zedboard` instead of the default `parallella`) or the
-number of jobs your machine can simultaneously handle while building (default is `8`).
 
 ### Setup Dependencies
 
@@ -85,26 +72,68 @@ In order to build the boot images (U-Boot, Linux Kernel) for ZedBoard board targ
     a new device tree blob (devicetree.dtb) inside the
     `root_dir/$board/output/final/` folder
 
-### Build Bitstream
+### Build Bitstream and Platform Software
 
-In order to only build a bitstream (no software), first populate the Parallella OH submodule (see above)
-and then run the following:
+In order to build a bitstream along with the necessary platform software to boot the board, first populate
+the Parallella OH submodule (see above) and edit the `BOARD`, `JOBS`, `VIVADO_PATH` and `VIVADO_VERSION`
+variables in `${TOP}/scripts/settings.sh` if you need to change the target board (to e.g `zedboard` instead
+of the default `parallella`) or the number of jobs your machine can simultaneously handle while building
+(default is `8`) or the installation path and version of Vivado tools you have installed on your system.
 
-* **Parallella**
-
-```bash
-cd parallella
-./build.sh
-```
-You can view / edit the Parallella design by opening the `root_dir/parallella/fpga/parallella_riscv/system.xpr` Vivado project.
-
-* **Zedboard** (Only for development and testing)
+Then run the following from the root directory:
 
 ```bash
-cd zedboard
-./build.sh
+./scripts/build.bitstream.sh
 ```
-You can view / edit the Zedboard design by opening the `root_dir/zedboard/fpga/zedboard_riscv/system.xpr` Vivado project.
+
+This script automates the dependency setup and builds an FPGA bitstream along with the rest of the
+needed output files for the chosen board. Feel free to edit it if want to skip something, until
+we have a final makefile with the "sections" of this script. You can also edit `scripts/set.env.sh`
+
+The final output files are placed in the `${TOP}/${BOARD}/output/final/` directory.
+Copy them to your SD card and then boot your board with it.
+
+You can also view / edit the design in Vivado by opening the `${TOP}/${BOARD}/fpga/${BOARD}_riscv/system.xpr` project.
+
+### Build the RISC-V Toolchain
+
+You can build the RISC-V toolchain by running the following script from the root directory:
+
+```bash
+./scripts/build.toolchain.sh
+```
+
+Building the RISC-V toolchain might take a lot of time and is NOT necessary to build the FPGA bitstream and
+platform software (see above).
+
+### Re-Build the RISC-V RV64G Rocket Core (Optional)
+
+In case you want to (re)build the RISC-V RV64G rocket core IP you can run the following script from the root directory:
+
+```bash
+./scripts/build.rocketcore.sh
+```
+
+Building the RISC-V emulator is NOT necessary to build the FPGA bitstream or the RISC-V Toolchain (see above).
+
+### Build the RISC-V Emulator (Optional)
+
+You can build the RISC-V emulator which simulates the rocket core with Verilator by running the following script
+from the root directory:
+
+```bash
+./scripts/build.emulator.sh
+```
+
+Building the RISC-V emulator is NOT necessary to build the FPGA bitstream or the RISC-V Toolchain (see above).
+
+### Run Make Targets Manually
+
+All the above scripts just run the respective make targets inside `${TOP}/scripts/Makefrag` which is included
+in `${TOP}/${BOARD}/Makefile`. You can enter your desired `${TOP}/${BOARD}/` folder and manually run the targets
+in a the sequence you desire. Make sure you source the `${TOP}/scripts/set.env.sh` first though to set the
+necessary environment variables or your Vivado settings64.sh file if you need to use Vivado to e.g build a bitstream.
+
 
 ## Design
 
@@ -132,7 +161,7 @@ It communicates with the rest of the ARM SoC of the Zynq FPGA device using AXI4 
 The Parallella Base component runs with a 100 MHz clock and the RISC-V RV64G core runs with a 25 MHz clock.
 It can be synthesized and implemented with the latest Xilinx Vivado tools (tested with 2015.4 and 2016.1).
 
-You can select your version of the Xilinx tools by editing the `VIVADO` variable in `root_dir/scripts/set.env.sh`
+You can select your version of the Xilinx tools by editing the `VIVADO` variable in `${TOP}/scripts/set.env.sh`
 before running the build scripts to produce a bitstream (see above).
 
 ## Links
