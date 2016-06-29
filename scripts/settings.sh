@@ -8,7 +8,11 @@ JOBS=8
 export JOBS
 echo "\$JOBS set to ${JOBS}"
 
-VIVADO=2015.4
-export VIVADO
-echo "Vivado version set to ${VIVADO}"
+VIVADO_PATH=/opt/Xilinx/Vivado
+export VIVADO_PATH
+echo "Vivado path set to ${VIVADO_PATH}"
+
+VIVADO_VERSION=2015.4
+export VIVADO_VERSION
+echo "Vivado version set to ${VIVADO_VERSION}"
 
