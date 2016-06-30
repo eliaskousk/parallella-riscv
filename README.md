@@ -43,6 +43,8 @@ In order to build the boot images (U-Boot, Linux Kernel) for Parallella board ta
   - Run in root dir: `git submodule update --init -- boot/parallella-uboot`
   - Needed to build the Parallella U-Boot bootloader (u-boot.elf)
     inside the `root_dir/$board/output/boot/` folder
+  - Currently deprecated since we prefer not having to replace U-Boot
+    or the FSBL by flashing the board (unsafe and needs JTAG or serial cable)
 
 * [Parallella Linux Kernel](https://github.com/parallella/parallella-linux)
   - Mapped to `root_dir/boot/parallella-linux`
@@ -72,9 +74,9 @@ In order to build the boot images (U-Boot, Linux Kernel) for ZedBoard board targ
     a new device tree blob (devicetree.dtb) inside the
     `root_dir/$board/output/final/` folder
 
-### Build Bitstream and Platform Software
+### Build Bitstream and / or Platform Software
 
-In order to build a bitstream along with the necessary platform software to boot the board, first populate
+In order to build a bitstream and / or the necessary platform software to boot the board, first populate
 the Parallella OH submodule (see above) and edit the `BOARD`, `JOBS`, `VIVADO_PATH` and `VIVADO_VERSION`
 variables in `${TOP}/scripts/settings.sh` if you need to change the target board (to e.g `zedboard` instead
 of the default `parallella`) or the number of jobs your machine can simultaneously handle while building
@@ -82,18 +84,77 @@ of the default `parallella`) or the number of jobs your machine can simultaneous
 
 Then run the following from the root directory:
 
+* Build just the bitstream
+
+This will build either the `parallella.bit.bin` for Parallella board or `zedboard.bit` fo
+
 ```bash
 ./scripts/build.bitstream.sh
 ```
 
-This script automates the dependency setup and builds an FPGA bitstream along with the rest of the
-needed output files for the chosen board. Feel free to edit it if want to skip something, until
-we have a final makefile with the "sections" of this script. You can also edit `scripts/set.env.sh`
+You can view / edit the design in Vivado by opening the `${TOP}/${BOARD}/fpga/${BOARD}_riscv/system.xpr` project.
 
-The final output files are placed in the `${TOP}/${BOARD}/output/final/` directory.
-Copy them to your SD card and then boot your board with it.
+* Build just the software
 
-You can also view / edit the design in Vivado by opening the `${TOP}/${BOARD}/fpga/${BOARD}_riscv/system.xpr` project.
+The following will build U-Boot, the Linux kernel uImage (optional for Parallella if you it's official ESDK
+from below) and the DTB (Device Tree Blob - necessary for both the Parallella and ZedBoard in order to use Rocket Core's
+Host I/O interface)
+
+```bash
+./scripts/build.software.sh
+```
+
+* Build both the bitstream and the software
+
+To build both the software and bitstream run the following.
+
+You must run them in this order for Zedboard
+since the bitstream step will also generate the final boot.bin image which contains FSBL + bitstream + U-Boot.
+
+```bash
+./scripts/build.software.sh
+./scripts/build.bitstream.sh
+```
+
+All the final output files are placed in the `${TOP}/${BOARD}/output/final/` directory and should be placed in your SD card.
+Before booting your board though you need the following:
+
+1. Linux Root Image
+2. RISC-V Frontend Server
+3. A RISC-V program to test
+
+See below on how to obtain these.
+
+### Linux Root Image
+
+The software above does not include a root image for Linux. If you don't want to bother with building
+your own you can use an existing from the following repositories:
+
+* [Parallella](https://github.com/parallella/pubuntu/releases)
+
+If you use the Parallella ESDK image linked here you also have the choice of not building the Linux kernel yourself.
+This image contains both the Linux kernel and the root image to boot Parallella so you only need to build (see above)
+and copy on your SD card the DTB (Device Tree Blob) and of-course the bitstream.
+
+* [ZedBoard](https://github.com/ucb-bar/fpga-images-zedboard/blob/master/uramdisk.image.gz)
+
+This is just a root image and to use it you still need to build the Linux Kernel and the Device Tree Blob (see above), besides
+the bitstream.
+
+### RISC-V Frontend Server and Proxy Kernel
+
+Make sure your image or your SD card contains the RISC-V frontend server (${TOP}/ip/toolchain/bin/fesvr) and proxy kernel
+(${TOP}/ip/toolchain/bin/pk). These are automatically built with the RISC-V toolchain (see below). When installing fesvr-zynq,
+don't forget to copy the library as well (${TOP}/ip/toolchain/lib/libfesvr.so to /usr/local/lib on the root image).
+
+Then fesvr and pk can be used to load RISC-V programs from ARM like this:
+
+```bash
+root@zynq:~# ./fesvr-zynq pk hello
+hello!
+```
+
+Instructions on booting Linux on your RISC-V core will follow soon.
 
 ### Build the RISC-V Toolchain
 
@@ -115,6 +176,12 @@ In case you want to (re)build the RISC-V RV64G rocket core IP you can run the fo
 ```
 
 Building the RISC-V emulator is NOT necessary to build the FPGA bitstream or the RISC-V Toolchain (see above).
+
+Do not attempt to generate a new rocket-core with the latest rocket-chip upstream since the UCB guys have replaced
+the HTIF port (Host I/O interface) with a new Debug port. This means that their AXI -> HTIF adapter needs to be
+rewritten for AXI -> Debug if one wants to use a latest rocket-core inside Zynq. This repo has a core generated with
+an older rocket-chip version from May 2016 so hopefully this will work fine for now. You can of-course regenerate one
+yourself using an earlier than June 23rd 2016 where HTIF was removed.
 
 ### Build the RISC-V Emulator (Optional)
 
