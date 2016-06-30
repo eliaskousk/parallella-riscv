@@ -1,0 +1,453 @@
+/*
+ * Copyright (c) 2014 SUSE LINUX Products GmbH
+ * Copyright (c) 2015 SUSE Linux GmbH
+ * Copyright (c) 2015 Adapteva Inc.
+ *
+ * Derived from zynq-zed.dts:
+ *
+ *  Copyright (C) 2011 Xilinx
+ *  Copyright (C) 2012 National Instruments Corp.
+ *  Copyright (C) 2013 Xilinx
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+/include/ "zynq-7000.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	compatible = "adapteva,parallella", "xlnx,zynq-7000";
+
+	aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart1;
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x0 0x40000000>;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+		emem: emem@3e000000 {
+			reg = <0x3e000000 0x2000000>;
+			no-map;
+		};
+	};
+
+	chosen {
+		bootargs = "console=ttyPS0,115200 earlyprintk root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait";
+		linux,stdout-path = "/amba/serial@e0001000";
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		cr10 {
+			label = "parallella:cr10:usr";
+			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+	};
+
+	usb_phy0: phy0 {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		status = "disabled";
+	};
+
+	usb_phy1: phy1 {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		status = "disabled";
+	};
+
+	elink0: elink0@80000000 {
+	};
+
+	iio_hwmon {
+		compatible = "iio-hwmon";
+		/* 1 temperature channel, and 8 voltage channels */
+		io-channels = <&adc 0>,
+			    <&adc 1>, <&adc 2>, <&adc 3>, <&adc 4>,
+			    <&adc 5>, <&adc 6>, <&adc 7>, <&adc 8>;
+	};
+};
+
+&clkc {
+	fclk-enable = <0xf>;
+	ps-clk-frequency = <33333333>;
+};
+
+&elink0 {
+	compatible = "adapteva,elink";
+
+	interrupts = <0 55 1>;
+	interrupt-parent = <&intc>;
+
+	clocks = <&clkc 15>, <&clkc 16>, <&clkc 17>, <&clkc 18>;
+	clock-names = "fclk0", "fclk1", "fclk2", "fclk3";
+
+	#address-cells = <2>; /* <north-west core's id, side (NESW)> */
+	#size-cells = <2>; /* <#chip rows, #chip cols> */
+
+	/* Can have more than one reserved memory region. Memory regions
+	 * can be shared by elinks.  */
+	memory-region = <&emem>;
+
+	/* Can have at most one child node with compatible string
+	 * "adapteva,array" or "adapteva,gpio" ??? */
+
+	/* First range is FPGA config regs.
+	 * Second range is mappable emesh region.
+	 * _4_ * 64 * (1<<20)
+	 */
+	reg = <0x81000000 0x100000>, <0x80000000 0x10000000>;
+
+	/* (Optional) coreid pin-out register(s) configuration. */
+	/* If we add some constraints we could derive this from the
+	 * child node ???
+	 */
+	/*adapteva,coreid = <0x808>; */
+
+	/* No connection between elink coreid pins and the Epiphany chip */
+	adapteva,no-coreid-pinout;
+
+	/* Initial FPGA elink MMU config. This is hardcoded in the FPGA
+	 * code now.
+	 * Not sure if we actually need it here. Driver needs to probe
+	 * bitstream version to check whether it is supported or not
+	 * anyways. And if not this is the only mapping we will allow */
+	adapteva,mmu = <0x8e000000 0x3e000000 0x02000000>;
+
+	/* Optional power / thermal control. Will not implement much for
+	 * now but will read supply voltage to check if we can
+	 * run chip elink TX at full speed. Can be a list. */
+	vdd-supply = <&regulator_epiphany>; /* Can be a list */
+	/*io-channels = <&adc 0>;*/
+	/*io-channel-names = "zynq_temp";*/
+
+	array0@808 {
+		compatible = "adapteva,chip-array";
+		/* North-westmost coreid, #NESW, #chip rows, #chip cols */
+		reg = <0x808 1 1 1>;
+
+/*
+		// reg North=0, East=1, South=2, West=3
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			port@0 {
+				reg = <1>;
+
+				array0_east: endpoint {
+					remote-endpoint = <&elink0_port>;
+				};
+			};
+		};
+*/
+	};
+};
+
+&gem0 {
+	status = "okay";
+	phy-mode = "rgmii-id";
+	phy-handle = <&ethernet_phy>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_gem0_default>;
+
+	ethernet_phy: ethernet-phy@0 {
+		/* Marvell 88E1318 */
+		compatible = "ethernet-phy-id0141.0e90",
+		             "ethernet-phy-ieee802.3-c22";
+		reg = <0>;
+		marvell,reg-init = <0x3 0x10 0xff00 0x1e>,
+		                   <0x3 0x11 0xfff0 0xa>;
+	};
+};
+
+&gpio0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_gpio0_default>;
+};
+
+&i2c0 {
+	status = "okay";
+
+	isl9305: isl9305@68 {
+		compatible = "isil,isl9305";
+		reg = <0x68>;
+
+		regulators {
+			regulator_epiphany: dcd1 {
+				regulator-name = "VDD_DSP";
+				regulator-min-microvolt =  <900000>;
+				regulator-max-microvolt = <1200000>;
+			};
+			dcd2 {
+				regulator-name = "1P35V";
+				regulator-always-on;
+			};
+			ldo1 {
+				regulator-name = "VDD_ADJ";
+				regulator-always-on;
+			};
+			ldo2 {
+				regulator-name = "VDD_GPIO";
+				regulator-always-on;
+			};
+		};
+	};
+};
+
+&pinctrl0 {
+	pinctrl_gem0_default: gem0-default {
+		mux {
+			function = "ethernet0";
+			groups = "ethernet0_0_grp";
+		};
+
+		conf {
+			groups = "ethernet0_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+		};
+
+		conf-rx {
+			pins = "MIO22", "MIO23", "MIO24", "MIO25", "MIO26", "MIO27";
+			bias-high-impedance;
+			low-power-disable;
+		};
+
+		conf-tx {
+			pins = "MIO16", "MIO17", "MIO18", "MIO19", "MIO20", "MIO21";
+			bias-disable;
+			low-power-enable;
+		};
+
+		mux-mdio {
+			function = "mdio0";
+			groups = "mdio0_0_grp";
+		};
+
+		conf-mdio {
+			groups = "mdio0_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+			bias-disable;
+		};
+	};
+
+	pinctrl_gpio0_default: gpio0-default {
+		mux {
+			function = "gpio0";
+			groups = "gpio0_7_grp";
+		};
+
+		conf {
+			groups = "gpio0_7_grp";
+			slew-rate = <0>;
+			io-standard = <3>;
+		};
+
+		conf-pull-up {
+			pins = "MIO7";
+			bias-pull-up;
+		};
+	};
+
+	pinctrl_qspi0_default: qspi0-default {
+		mux {
+			function = "qspi0";
+			groups = "qspi0_0_grp";
+		};
+
+		conf {
+			groups = "qspi0_0_grp";
+			io-standard = <3>;
+		};
+	};
+
+	pinctrl_sdhci1_default: sdhci1-default {
+		mux {
+			function = "sdio1";
+			groups = "sdio1_0_grp";
+		};
+
+		conf {
+			groups = "sdio1_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+			bias-disable;
+		};
+
+		mux-cd {
+			function = "sdio1_cd";
+			groups = "gpio0_0_grp";
+		};
+
+		conf-cd {
+			groups = "gpio0_0_grp";
+			bias-high-impedance;
+			bias-pull-up;
+			slew-rate = <0>;
+			io-standard = <3>;
+		};
+	};
+
+	pinctrl_uart1_default: uart1-default {
+		mux {
+			function = "uart1";
+			groups = "uart1_0_grp";
+		};
+
+		conf {
+			groups = "uart1_0_grp";
+			slew-rate = <0>;
+			io-standard = <3>;
+		};
+
+		conf-rx {
+			pins = "MIO9";
+			bias-high-impedance;
+		};
+
+		conf-tx {
+			pins = "MIO8";
+			bias-disable = <0>;
+		};
+	};
+
+	pinctrl_usb0_default: usb0-default {
+		mux {
+			function = "usb0";
+			groups = "usb0_0_grp";
+		};
+
+		conf {
+			groups = "usb0_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+		};
+
+		conf-rx {
+			pins = "MIO29", "MIO31", "MIO36";
+			bias-high-impedance;
+		};
+
+		conf-tx {
+			pins = "MIO28", "MIO30", "MIO32", "MIO33", "MIO34",
+			       "MIO35", "MIO37", "MIO38", "MIO39";
+			bias-disable;
+		};
+	};
+
+	pinctrl_usb1_default: usb1-default {
+		mux {
+			function = "usb1";
+			groups = "usb1_0_grp";
+		};
+
+		conf {
+			groups = "usb1_0_grp";
+			slew-rate = <0>;
+			io-standard = <1>;
+		};
+
+		conf-rx {
+			pins = "MIO41", "MIO43", "MIO48";
+			bias-high-impedance;
+		};
+
+		conf-tx {
+			pins = "MIO40", "MIO42", "MIO44", "MIO45", "MIO46",
+			       "MIO47", "MIO49", "MIO50", "MIO51";
+			bias-disable;
+		};
+	};
+};
+
+&qspi {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_qspi0_default>;
+
+	flash@0 {
+		compatible = "micron,n25q128a13";
+		reg = <0x0>;
+		spi-max-frequency = <50000000>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		m25p,fast-read;
+		partition@0x00000000 {
+			label = "boot";
+			reg = <0x00000000 0x004e0000>;
+		};
+		partition@0x004e0000 {
+			label = "bootenv";
+			reg = <0x004e0000 0x00020000>;
+		};
+		partition@0x00ff0000 {
+			label = "version";
+			reg = <0x00ff0000 0x00010000>;
+			/* Offset	Name	Description
+			 * 0x0:		Version	32-bit LSB running number @0x0
+			 * 0x4		Magic	"0x13371338"
+			 */
+		};
+	};
+};
+
+&sdhci1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdhci1_default>;
+};
+
+&uart1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1_default>;
+	cdns,rx-no-pullup; /* Missing pull-up resistor */
+};
+
+&usb0 {
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usb0_default>;
+};
+
+&usb1 {
+	dr_mode = "peripheral";
+	usb-phy = <&usb_phy1>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usb1_default>;
+};
+
+&adc {
+	#io-channel-cells = <1>;
+	xlnx,channels {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		channel@0 {
+			#io-channel-cells = <0>;
+			reg = <0>;
+		};
+	};
+};
+
+&devcfg {
+	/* Override clocks, xdevcfg driver wants fclk{0..3} */
+	clocks = <&clkc 12>, <&clkc 15>, <&clkc 16>, <&clkc 17>, <&clkc 18>;
+	clock-names = "ref_clk", "fclk0", "fclk1", "fclk2", "fclk3";
+};
