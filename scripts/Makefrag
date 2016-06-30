@@ -3,43 +3,39 @@
 
 base_dir = $(abspath ..)
 
-default: $(BOARD_NAME)_bitstream
+output_dir = $(base_dir)/$(BOARD_NAME)/output
+
+boot_build_dir = $(output_dir)/boot
+
+final_output_dir = $(output_dir)/final
+
+default: $(BOARD_NAME)
+
 
 
 #
-# ---------------------------------
-# RISC-V Rocket Cores and Toolchain
-# ---------------------------------
+# ----------------------------------------------------------
+# Bitstream / boot image
+# ----------------------------------------------------------
+# Parallella: Binary bitstream image (no board flash needed)
+# ZedBoard  : Full boot image (FSBL + bitstream + U-Boot)
+# ----------------------------------------------------------
 #
 
-riscv_emulator:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-	# Build the Rocket Chip emulator
-	cd ${ROCKETCHIP}/emulator && \
-	make -j${JOBS}
+parallella_bitstream = $(final_output_dir)/parallella.bit.bin
+$(parallella_bitstream): bitstream
+	# Make final Parallella bitstream image (bin instead of bit)
+	cd $(boot_build_dir) && bootgen -image bit2bin.bif -w on -split bin
+	cd $(boot_build_dir) && rm bit2bin.bin
+	cd $(boot_build_dir) && cp parallella.bit.bin $(final_output_dir)/
+parallella_bitstream: $(parallella_bitstream)
 
-riscv_rocketcore:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-	# Build the Rocket Chip Verilog RTL (for FPGAs)
-	export FPGAConfig="DefaultFPGAConfig" && \
-	export RocketCoreIPName="RISCV_Rocket_Core_RV64G_1.0" && \
-	cd ${ROCKETCHIP}/fsim && \
-	make verilog CONFIG=${FPGAConfig} && \
-	make verilog MODEL=ZynqAdapter CONFIG=${FPGAConfig} && \
-	cp generated-src/Top.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.Core.v && \
-	cp generated-src/ZynqAdapter.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.HostIO.Adapter.v
-
-riscv_toolchain:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-	# Install necessary packages (Ubuntu)
-	sudo apt-get install autoconf automake autotools-dev curl \
-	libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex \
-	texinfo gperf libtool patchutils bc
-	# Build the RISC-V Toolchain (Newlib version for use without an OS)
-	cd ${ROCKETCHIP}/riscv-tools && git submodule update --init --recursive && \
-	sed -i "s/JOBS=\([0-9]\{\0,2\}\)/JOBS=${JOBS}/g" build.common && \
-	./build.sh && sed -i "s/JOBS=${JOBS}/JOBS=16/g" build.common
-
+zedboard_bitstream = $(final_output_dir)/boot.bin
+$(zedboard_bitstream): bitstream
+	# Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
+	cd $(boot_build_dir) && bootgen -image boot.bif -w on -o boot.bin
+	cd $(boot_build_dir) && cp boot.bin $(final_output_dir)/
+zedboard_bitstream: $(zedboard_bitstream)
 
 #
 # -------------------------------------------
@@ -49,20 +45,11 @@ riscv_toolchain:
 
 fpga_dir = $(base_dir)/$(BOARD_NAME)/fpga
 
-parallella_bitstream = $(fpga_dir)/parallella.bit.bin
-$(parallella_bitstream): bitstream
-	# Make final Parallella bitstream image (bin instead of bit)
-	cd $(fpga_dir) && bootgen -image bit2bin.bif -split bin
-	cd $(fpga_dir) && mv parallella_riscv.bit.bin parallella.bit.bin
-	cd $(fpga_dir) && rm bit2bin.bin
-parallella_bitstream: $(parallella_bitstream)
-
-zedboard_bitstream: bitstream
-
-bitstream = $(fpga_dir)/$(BOARD_NAME)_riscv.bit
+bitstream = $(fpga_dir)/$(BOARD_NAME).bit
 $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl;
-	cd $(fpga_dir) && cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit ./$(BOARD_NAME)_riscv.bit
+	cd $(fpga_dir) && cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit
+	cd $(boot_build_dir) && ln -sf $(fpga_dir)/$(BOARD_NAME).bit .
 bitstream: $(bitstream)
 
 system_project = $(fpga_dir)/$(BOARD_NAME)_riscv/system.xpr
@@ -106,22 +93,12 @@ dtb_dir = $(arm_linux_dir)/arch/arm/boot/dts
 
 dts_dir = $(base_dir)/$(BOARD_NAME)/dts
 
-output_dir = $(base_dir)/$(BOARD_NAME)/output
-
-boot_build_dir = $(output_dir)/boot
-
-final_output_dir = $(output_dir)/final
 
 # Unset LD_LIBRARY_PATH that points to Xilinx libraries (from sourcing setting64.sh)
 # in order to not break various commandline tools that are used during building (e.g awk)
 export LD_LIBRARY_PATH=
 
-boot-bin: arm-uboot-$(BOARD_NAME) arm-linux arm-dtb
-	cd $(boot_build_dir)
-	ln -s ../../fpga/bitstream.bit .
-	bootgen -image bit2bin.bif -o boot.bin
-	cd $(final_output_dir)
-	cp ../boot/boot.bin .
+$(BOARD_NAME)_software: arm-uboot-$(BOARD_NAME) arm-linux arm-dtb
 
 arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its tools
 	# Compile kernel
@@ -166,6 +143,41 @@ arm-dtb: arm-linux
 # use the local dts that may be out of date and also needs the dtc repo as the ZedBoard U-Boot target.
 arm-dtb-local: arm-dtc
 	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb $(dts_dir)/$(LINUX_DTS).dts
+
+
+#
+# ---------------------------------
+# RISC-V Rocket Cores and Toolchain
+# ---------------------------------
+#
+
+riscv_emulator:
+	${SCRIPTS}/setup.rocketchip.submodule.sh
+	# Build the Rocket Chip emulator
+	cd ${ROCKETCHIP}/emulator && \
+	make -j${JOBS}
+
+riscv_rocketcore:
+	${SCRIPTS}/setup.rocketchip.submodule.sh
+	# Build the Rocket Chip Verilog RTL (for FPGAs)
+	export FPGAConfig="DefaultFPGAConfig" && \
+	export RocketCoreIPName="RISCV_Rocket_Core_RV64G_1.0" && \
+	cd ${ROCKETCHIP}/fsim && \
+	make verilog CONFIG=${FPGAConfig} && \
+	make verilog MODEL=ZynqAdapter CONFIG=${FPGAConfig} && \
+	cp generated-src/Top.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.Core.v && \
+	cp generated-src/ZynqAdapter.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.HostIO.Adapter.v
+
+riscv_toolchain:
+	${SCRIPTS}/setup.rocketchip.submodule.sh
+	# Install necessary packages (Ubuntu)
+	sudo apt-get install autoconf automake autotools-dev curl \
+	libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex \
+	texinfo gperf libtool patchutils bc
+	# Build the RISC-V Toolchain (Newlib version for use without an OS)
+	cd ${ROCKETCHIP}/riscv-tools && git submodule update --init --recursive && \
+	sed -i "s/JOBS=\([0-9]\{\0,2\}\)/JOBS=${JOBS}/g" build.common && \
+	./build.sh && sed -i "s/JOBS=${JOBS}/JOBS=16/g" build.common
 
 
 #

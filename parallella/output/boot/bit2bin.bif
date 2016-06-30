@@ -1,6 +1,6 @@
 the_ROM_image:
 {
 	[bootloader]dummy.elf
-	./parallella_riscv.bit
+	./parallella.bit
 }
 
