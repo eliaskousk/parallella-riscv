@@ -117,6 +117,7 @@ since the bitstream step will also generate the final boot.bin image which conta
 ```
 
 All the final output files are placed in the `${TOP}/${BOARD}/output/final/` directory and should be placed in your SD card.
+
 Before booting your board though you need the following:
 
 1. Linux Root Image
@@ -132,7 +133,7 @@ your own you can use an existing from the following repositories:
 
 * [Parallella](https://github.com/parallella/pubuntu/releases)
 
-If you use the Parallella ESDK image linked here you also have the choice of not building the Linux kernel yourself.
+If you use the `Parallella ESDK` image linked here you also have the choice of not building the Linux kernel yourself.
 This image contains both the Linux kernel and the root image to boot Parallella so you only need to build (see above)
 and copy on your SD card the DTB (Device Tree Blob) and of-course the bitstream.
 
@@ -143,14 +144,15 @@ the bitstream.
 
 ### RISC-V Frontend Server and Proxy Kernel
 
-Make sure your image or your SD card contains the RISC-V frontend server (${TOP}/ip/toolchain/bin/fesvr) and proxy kernel
-(${TOP}/ip/toolchain/bin/pk). These are automatically built with the RISC-V toolchain (see below). When installing fesvr-zynq,
-don't forget to copy the library as well (${TOP}/ip/toolchain/lib/libfesvr.so to /usr/local/lib on the root image).
+Make sure your image or your SD card contains the RISC-V frontend server `${TOP}/ip/toolchain/bin/fesvr-zedboard` for both
+Parallella (...) and ZedBoard along with the proxy kernel `${TOP}/ip/toolchain/riscv64-unknown-elf/bin/pk`. These are automatically
+built with the RISC-V toolchain (see below). When installing fesvr-zynq, don't forget to copy the library located at
+`${TOP}/ip/toolchain/lib/libfesvr.so` to `/usr/local/lib` on the root image.
 
 Then fesvr and pk can be used to load RISC-V programs from ARM like this:
 
 ```bash
-root@zynq:~# ./fesvr-zynq pk hello
+root@zynq:~# ./fesvr pk hello
 hello!
 ```
 
