@@ -144,10 +144,15 @@ the bitstream.
 
 ### RISC-V Frontend Server and Proxy Kernel
 
-Make sure your image or your SD card contains the RISC-V frontend server `${TOP}/ip/toolchain/bin/fesvr-zedboard` for both
-Parallella (...) and ZedBoard along with the proxy kernel `${TOP}/ip/toolchain/riscv64-unknown-elf/bin/pk`. These are automatically
-built with the RISC-V toolchain (see below). When installing fesvr-zynq, don't forget to copy the library located at
-`${TOP}/ip/toolchain/lib/libfesvr.so` to `/usr/local/lib` on the root image.
+Make sure you place on your board the RISC-V frontend server (ARM binary) for both Parallella and ZedBoard along with
+the proxy kernel. These can be built with the following script and the output will be in `${TOP}/${BOARD}/final/output/.
+For the frontend server don't forget to copy the shared library `libfesvr.so` to `/usr/local/lib` on the root image of your board
+and running sudo ldconfig to update the library cache.
+
+```bash
+./scripts/build.riscv.software.sh
+hello!
+```
 
 Then fesvr and pk can be used to load RISC-V programs from ARM like this:
 
@@ -163,7 +168,7 @@ Instructions on booting Linux on your RISC-V core will follow soon.
 You can build the RISC-V toolchain by running the following script from the root directory:
 
 ```bash
-./scripts/build.toolchain.sh
+./scripts/build.riscv.toolchain.sh
 ```
 
 Building the RISC-V toolchain might take a lot of time and is NOT necessary to build the FPGA bitstream and
@@ -174,7 +179,7 @@ platform software (see above).
 In case you want to (re)build the RISC-V RV64G rocket core IP you can run the following script from the root directory:
 
 ```bash
-./scripts/build.rocketcore.sh
+./scripts/build.riscv.rocketcore.sh
 ```
 
 Building the RISC-V emulator is NOT necessary to build the FPGA bitstream or the RISC-V Toolchain (see above).
@@ -191,7 +196,7 @@ You can build the RISC-V emulator which simulates the rocket core with Verilator
 from the root directory:
 
 ```bash
-./scripts/build.emulator.sh
+./scripts/build.riscv.emulator.sh
 ```
 
 Building the RISC-V emulator is NOT necessary to build the FPGA bitstream or the RISC-V Toolchain (see above).
