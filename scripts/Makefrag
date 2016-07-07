@@ -129,7 +129,7 @@ arm-uboot:
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
 arm-dtc:
-    # Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
+	# Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
 	git submodule update --init $(dtc_dir)
 	cd $(dtc_dir) && make -j${JOBS}
 
@@ -179,6 +179,28 @@ riscv_toolchain:
 	sed -i "s/JOBS=\([0-9]\{\0,2\}\)/JOBS=${JOBS}/g" build.common && \
 	./build.sh && sed -i "s/JOBS=${JOBS}/JOBS=16/g" build.common
 
+riscv_software: riscv_fesvr riscv_pk riscv_hello
+
+riscv_fesvr:
+	${SCRIPTS}/setup.rocketchip.submodule.sh
+	# Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
+	# Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
+	cd ${ROCKETCHIP}/riscv-tools/riscv-fesvr && \
+	mkdir -p build.arm && cd build.arm && \
+	../configure --host=arm-linux-gnueabihf && make && \
+	cp fesvr-zedboard $(final_output_dir)/riscv/fesvr && \
+	cp libfesvr.so $(final_output_dir)/riscv/ && \
+	cd ${ROCKETCHIP}/riscv-tools/riscv-fesvr && \
+	rm -rf build.arm
+
+riscv_pk:
+	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
+	chmod 755 pk && cp pk $(final_output_dir)/riscv/
+
+riscv_hello:
+	cd $(base_dir)/examples/hello/ && \
+	riscv64-unknown-elf-gcc -o hello hello.c && \
+	cp hello $(final_output_dir)/riscv/
 
 #
 # ---------------------
