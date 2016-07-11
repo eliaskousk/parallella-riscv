@@ -2,7 +2,7 @@
 
 module RISCV_Rocket_Core_RV64G #(
     // AXI Master
-    parameter integer C_M_AXI_ID_WIDTH        = 5,
+    parameter integer C_M_AXI_ID_WIDTH        = 6,
     parameter integer C_M_AXI_ADDR_WIDTH      = 32,
     parameter integer C_M_AXI_DATA_WIDTH      = 64,
     parameter integer C_M_AXI_AWUSER_WIDTH    = 0,
