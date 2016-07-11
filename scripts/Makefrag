@@ -134,15 +134,15 @@ arm-dtc:
 	cd $(dtc_dir) && make -j${JOBS}
 
 arm-dtb: arm-linux
-	cp $(dts_dir)/$(LINUX_DTS).dts $(dtb_dir) && \
-	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- zynq-parallella.dtb && \
-	cp $(dtb_dir)/$(LINUX_DTS).dtb $(final_output_dir)/devicetree.dtb
+	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir) && \
+	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_DTB).dtb && \
+	cp $(dtb_dir)/$(LINUX_DTB).dtb $(final_output_dir)/devicetree.dtb
 
 # Instead of using the above you can use the following to build locally (not in Linux repo)
 # if you don't want to init its huge repo just for a device tree build. This will of-course
 # use the local dts that may be out of date and also needs the dtc repo as the ZedBoard U-Boot target.
 arm-dtb-local: arm-dtc
-	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb $(dts_dir)/$(LINUX_DTS).dts
+	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb $(dts_dir)/$(LINUX_DTB).dts
 
 
 #

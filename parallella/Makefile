@@ -12,7 +12,9 @@ LINUX_REPO = parallella-linux
 
 LINUX_CONFIG = parallella
 
-LINUX_DTS = zynq-parallella-headless
+LINUX_DTS = zynq-parallella1
+
+LINUX_DTB = zynq-parallella-headless
 
 UBOOT_REPO = parallella-uboot
 

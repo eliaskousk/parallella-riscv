@@ -14,6 +14,8 @@ LINUX_CONFIG = xilinx_zynq
 
 LINUX_DTS = zynq-zed
 
+LINUX_DTB = zynq-zed
+
 UBOOT_REPO = u-boot-xlnx
 
 UBOOT_CONFIG = zynq_zed

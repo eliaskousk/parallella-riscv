@@ -3,7 +3,7 @@
 SCRIPTS=$(dirname "$(readlink -f "$0")")
 source "${SCRIPTS}/set.env.sh"
 
-# Build Bitstream
+# Build RISC-V Toolchain
 
 cd ${TOP}/${BOARD}
 make riscv_toolchain
