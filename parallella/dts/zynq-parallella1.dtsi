@@ -38,6 +38,11 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		ranges;
+        rmem: rmem@30000000 {
+			reg = <0x30000000 0xe000000>;
+			no-map;
+		};
+
 		emem: emem@3e000000 {
 			reg = <0x3e000000 0x2000000>;
 			no-map;
