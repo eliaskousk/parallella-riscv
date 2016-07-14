@@ -10,16 +10,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     parameter integer C_M_AXI_ADDR_WIDTH   = 32,
     // Width of Data Bus
     parameter integer C_M_AXI_DATA_WIDTH   = 64,
-    // Width of User Write Address Bus
-    parameter integer C_M_AXI_AWUSER_WIDTH = 0,
-    // Width of User Read Address Bus
-    parameter integer C_M_AXI_ARUSER_WIDTH = 0,
-    // Width of User Write Data Bus
-    parameter integer C_M_AXI_WUSER_WIDTH  = 0,
-    // Width of User Read Data Bus
-    parameter integer C_M_AXI_RUSER_WIDTH  = 0,
-    // Width of User Response Bus
-    parameter integer C_M_AXI_BUSER_WIDTH  = 0,
 
     // AXI Slave
     
@@ -28,17 +18,7 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Width of S_AXI data bus
     parameter integer C_S_AXI_DATA_WIDTH   = 32,
     // Width of S_AXI address bus
-    parameter integer C_S_AXI_ADDR_WIDTH   = 32,
-    // Width of optional user defined signal in write address channel
-    parameter integer C_S_AXI_AWUSER_WIDTH = 0,
-    // Width of optional user defined signal in read address channel
-    parameter integer C_S_AXI_ARUSER_WIDTH = 0,
-    // Width of optional user defined signal in write data channel
-    parameter integer C_S_AXI_WUSER_WIDTH  = 0,
-    // Width of optional user defined signal in read data channel
-    parameter integer C_S_AXI_RUSER_WIDTH  = 0,
-    // Width of optional user defined signal in write response channel
-    parameter integer C_S_AXI_BUSER_WIDTH  = 0
+    parameter integer C_S_AXI_ADDR_WIDTH   = 32
 )
 (
     // AXI Master
@@ -70,8 +50,9 @@ module RISCV_Rocket_Core_RV64G_AXI #
     output wire [2 : 0]                       M_AXI_AWPROT,
     // Quality of Service, QoS identifier sent for each write transaction.
     output wire [3 : 0]                       M_AXI_AWQOS,
-    // Optional User-defined signal in the write address channel.
-    output wire [C_M_AXI_AWUSER_WIDTH-1 : 0]  M_AXI_AWUSER,
+    // Region identifier. Permits a single physical interface
+    // on a slave to be used for multiple logical interfaces.
+    output wire [3 : 0]                       M_AXI_AWREGION,
     // Write address valid. This signal indicates that
     // the channel is signaling valid write address and control information.
     output wire                               M_AXI_AWVALID,
@@ -86,8 +67,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     output wire [C_M_AXI_DATA_WIDTH/8-1 : 0]  M_AXI_WSTRB,
     // Write last. This signal indicates the last transfer in a write burst.
     output wire  M_AXI_WLAST,
-    // Optional User-defined signal in the write data channel.
-    output wire [C_M_AXI_WUSER_WIDTH-1 : 0]   M_AXI_WUSER,
     // Write valid. This signal indicates that valid write
     // data and strobes are available
     output wire                               M_AXI_WVALID,
@@ -98,8 +77,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     input wire [C_M_AXI_ID_WIDTH-1 : 0]       M_AXI_BID,
     // Write response. This signal indicates the status of the write transaction.
     input wire [1 : 0] M_AXI_BRESP,
-    // Optional User-defined signal in the write response channel
-    input wire [C_M_AXI_BUSER_WIDTH-1 : 0]    M_AXI_BUSER,
     // Write response valid. This signal indicates that the
     // channel is signaling a valid write response.
     input wire                                M_AXI_BVALID,
@@ -130,8 +107,9 @@ module RISCV_Rocket_Core_RV64G_AXI #
     output wire [2 : 0]                       M_AXI_ARPROT,
     // Quality of Service, QoS identifier sent for each read transaction
     output wire [3 : 0]                       M_AXI_ARQOS,
-    // Optional User-defined signal in the read address channel.
-    output wire [C_M_AXI_ARUSER_WIDTH-1 : 0]  M_AXI_ARUSER,
+    // Region identifier. Permits a single physical interface
+    // on a slave to be used for multiple logical interfaces.
+    output wire [3 : 0]                       M_AXI_ARREGION,
     // Write address valid. This signal indicates that
     // the channel is signaling valid read address and control information
     output wire                               M_AXI_ARVALID,
@@ -147,8 +125,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     input wire [1 : 0]                        M_AXI_RRESP,
     // Read last. This signal indicates the last transfer in a read burst
     input wire                                M_AXI_RLAST,
-    // Optional User-defined signal in the read address channel.
-    input wire [C_M_AXI_RUSER_WIDTH-1 : 0]    M_AXI_RUSER,
     // Read valid. This signal indicates that the channel
     // is signaling the required read data.
     input wire                                M_AXI_RVALID,
@@ -191,8 +167,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Region identifier. Permits a single physical interface
     // on a slave to be used for multiple logical interfaces.
     input wire [3 : 0]                        S_AXI_AWREGION,
-    // Optional User-defined signal in the write address channel.
-    input wire [C_S_AXI_AWUSER_WIDTH-1 : 0]   S_AXI_AWUSER,
     // Write address valid. This signal indicates that
     // the channel is signaling valid write address and
     // control information.
@@ -210,8 +184,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Write last. This signal indicates the last transfer
     // in a write burst.
     input wire                                S_AXI_WLAST,
-    // Optional User-defined signal in the write data channel.
-    input wire [C_S_AXI_WUSER_WIDTH-1 : 0]    S_AXI_WUSER,
     // Write valid. This signal indicates that valid write
     // data and strobes are available.
     input wire                                S_AXI_WVALID,
@@ -224,8 +196,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Write response. This signal indicates the status
     // of the write transaction.
     output wire [1 : 0]                       S_AXI_BRESP,
-    // Optional User-defined signal in the write response channel.
-    output wire [C_S_AXI_BUSER_WIDTH-1 : 0]   S_AXI_BUSER,
     // Write response valid. This signal indicates that the
     // channel is signaling a valid write response.
     output wire                               S_AXI_BVALID,
@@ -261,8 +231,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Region identifier. Permits a single physical interface
     // on a slave to be used for multiple logical interfaces.
     input wire [3 : 0]                        S_AXI_ARREGION,
-    // Optional User-defined signal in the read address channel.
-    input wire [C_S_AXI_ARUSER_WIDTH-1 : 0]   S_AXI_ARUSER,
     // Write address valid. This signal indicates that
     // the channel is signaling valid read address and
     // control information.
@@ -282,8 +250,6 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // Read last. This signal indicates the last transfer
     // in a read burst.
     output wire                               S_AXI_RLAST,
-    // Optional User-defined signal in the read address channel.
-    output wire [C_S_AXI_RUSER_WIDTH-1 : 0]   S_AXI_RUSER,
     // Read valid. This signal indicates that the channel
     // is signaling the required read data.
     output wire                               S_AXI_RVALID,
@@ -370,14 +336,14 @@ module RISCV_Rocket_Core_RV64G_AXI #
         .io_nasti_r_valid        (S_AXI_RVALID),
         .io_nasti_r_ready        (S_AXI_RREADY),
         .io_nasti_r_bits_id      (S_AXI_RID),
-        .io_nasti_r_bits_resp    (),
+        .io_nasti_r_bits_resp    (S_AXI_RRESP),
         .io_nasti_r_bits_data    (S_AXI_RDATA),
         .io_nasti_r_bits_last    (S_AXI_RLAST),
 
         .io_nasti_b_valid        (S_AXI_BVALID),
         .io_nasti_b_ready        (S_AXI_BREADY),
         .io_nasti_b_bits_id      (S_AXI_BID),
-        .io_nasti_b_bits_resp    (2'b00)
+        .io_nasti_b_bits_resp    (S_AXI_BRESP)
     );
     
     // ======================
@@ -387,14 +353,23 @@ module RISCV_Rocket_Core_RV64G_AXI #
     wire [31:0] mem_araddr;
     wire [31:0] mem_awaddr;
 
+    // Parallella
+    // ----------
     // Setting the upper 7 address bits to 0011_110 gives this core
     // access to 228 MB of the 1024 MB DRAM of the Parallella
     // board (E-Link occupies the last 32 MB of the upper 256MB).
     // Thus the RISC-V core has access to the range 0x30000000 - 3DFFFFFF.
     // For other boards change accordingly.
-    
+
     assign M_AXI_ARADDR = {4'd3, 3'd6, mem_araddr[24:0]};
     assign M_AXI_AWADDR = {4'd3, 3'd6, mem_awaddr[24:0]};
+
+    // ZedBoard
+    // --------
+    // Use the upper 256 MB of the 512 MB DRAM of ZedBoard
+
+    //assign M_AXI_ARADDR = {4'd1, mem_araddr[27:0]};
+    //assign M_AXI_AWADDR = {4'd1, mem_awaddr[27:0]};
 
     Top RV64G_Top (
         .clk                     (host_clk),
@@ -424,7 +399,7 @@ module RISCV_Rocket_Core_RV64G_AXI #
         
         .io_mem_axi_0_ar_valid       (M_AXI_ARVALID),
         .io_mem_axi_0_ar_ready       (M_AXI_ARREADY),
-        .io_mem_axi_0_ar_bits_addr   (mem_ARADDR),
+        .io_mem_axi_0_ar_bits_addr   (mem_araddr),
         .io_mem_axi_0_ar_bits_id     (M_AXI_ARID),
         .io_mem_axi_0_ar_bits_size   (M_AXI_ARSIZE),
         .io_mem_axi_0_ar_bits_len    (M_AXI_ARLEN),
@@ -437,7 +412,7 @@ module RISCV_Rocket_Core_RV64G_AXI #
         
         .io_mem_axi_0_aw_valid       (M_AXI_AWVALID),
         .io_mem_axi_0_aw_ready       (M_AXI_AWREADY),
-        .io_mem_axi_0_aw_bits_addr   (mem_AWADDR),
+        .io_mem_axi_0_aw_bits_addr   (mem_awaddr),
         .io_mem_axi_0_aw_bits_id     (M_AXI_AWID),
         .io_mem_axi_0_aw_bits_size   (M_AXI_AWSIZE),
         .io_mem_axi_0_aw_bits_len    (M_AXI_AWLEN),
