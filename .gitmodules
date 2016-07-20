@@ -26,3 +26,11 @@
 	path = boot/parallella-linux
 	url = https://github.com/parallella/parallella-linux.git
 	branch = parallella-linux-2016.3
+[submodule "boot/riscv-linux"]
+	path = boot/riscv-linux
+	url = https://github.com/riscv/riscv-linux.git
+	branch = master
+[submodule "boot/riscv-poky"]
+	path = boot/riscv-poky
+	url = https://github.com/riscv/riscv-poky.git
+	branch = master
