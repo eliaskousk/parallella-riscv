@@ -16,9 +16,17 @@ SCRIPTS=${TOP}/scripts
 export SCRIPTS
 echo "\$SCRIPTS directory was set to ${SCRIPTS}"
 
+BOOT=${TOP}/boot
+export BOOT
+echo "\$BOOT directory was set to ${BOOT}"
+
 ROCKETCHIP=${TOP}/ip/rocket-chip
 export ROCKETCHIP
 echo "\$ROCKETCHIP directory was set to ${ROCKETCHIP}"
+
+RISCVTOOLS=${ROCKETCHIP}/riscv-tools
+export RISCVTOOLS
+echo "\$RISCVTOOLS directory was set to ${RISCVTOOLS}"
 
 RISCV=${TOP}/ip/toolchain
 export RISCV

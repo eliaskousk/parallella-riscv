@@ -1,5 +1,7 @@
+#
 # Do not run directly!
 # It is sourced by each board's subdirectory
+#
 
 base_dir = $(abspath ..)
 
@@ -10,7 +12,6 @@ boot_build_dir = $(output_dir)/boot
 final_output_dir = $(output_dir)/final
 
 default: $(BOARD_NAME)
-
 
 
 #
@@ -36,6 +37,7 @@ $(zedboard_bitstream): bitstream
 	cd $(boot_build_dir) && bootgen -image boot.bif -w on -o boot.bin
 	cd $(boot_build_dir) && cp boot.bin $(final_output_dir)/
 zedboard_bitstream: $(zedboard_bitstream)
+
 
 #
 # -------------------------------------------
@@ -151,6 +153,9 @@ arm-dtb-local: arm-dtc
 # ---------------------------------
 #
 
+FPGAConfig = "DefaultFPGAConfig"
+RocketCoreIPName = "RISCV_Rocket_Core_RV64G_1.0"
+
 riscv_emulator:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	# Build the Rocket Chip emulator
@@ -160,13 +165,11 @@ riscv_emulator:
 riscv_rocketcore:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	# Build the Rocket Chip Verilog RTL (for FPGAs)
-	export FPGAConfig="DefaultFPGAConfig" && \
-	export RocketCoreIPName="RISCV_Rocket_Core_RV64G_1.0" && \
 	cd ${ROCKETCHIP}/fsim && \
-	make verilog CONFIG=${FPGAConfig} && \
-	make verilog MODEL=ZynqAdapter CONFIG=${FPGAConfig} && \
-	cp generated-src/Top.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.Core.v && \
-	cp generated-src/ZynqAdapter.${FPGAConfig}.v ${TOP}/ip/${RocketCoreIPName}/src/RV64G.HostIO.Adapter.v
+	make verilog CONFIG=$(FPGAConfig) && \
+	make verilog MODEL=ZynqAdapter CONFIG=$(FPGAConfig) && \
+	cp generated-src/Top.$(FPGAConfig).v ${TOP}/ip/$(RocketCoreIPName)/src/RV64G.Core.v && \
+	cp generated-src/ZynqAdapter.$(FPGAConfig).v ${TOP}/ip/$(RocketCoreIPName)/src/RV64G.HostIO.Adapter.v
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -175,9 +178,18 @@ riscv_toolchain:
 	libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex \
 	texinfo gperf libtool patchutils bc
 	# Build the RISC-V Toolchain (Newlib version for use without an OS)
-	cd ${ROCKETCHIP}/riscv-tools && git submodule update --init --recursive && \
-	sed -i "s/JOBS=\([0-9]\{\0,2\}\)/JOBS=${JOBS}/g" build.common && \
-	./build.sh && sed -i "s/JOBS=${JOBS}/JOBS=16/g" build.common
+	cd ${RISCVTOOLS} && \
+	git checkout -B current && \
+	git checkout master && \
+	git submodule update --init --recursive && \
+	export MAKEFLAGS=-j${JOBS} && \
+	./build.sh && \
+	cd riscv-gnu-toolchain && \
+	./configure --prefix=${RISCV} && \
+	make linux && \
+	cd ${RISCVTOOLS} && \
+	git checkout current && \
+	git submodule update --init --recursive
 
 riscv_software: riscv_fesvr riscv_pk riscv_hello
 
