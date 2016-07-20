@@ -191,19 +191,33 @@ riscv_toolchain:
 	git checkout current && \
 	git submodule update --init --recursive
 
-riscv_software: riscv_fesvr riscv_pk riscv_hello
+
+#
+# -----------------------------
+# RISC-V Software, Linux Kernel
+# -----------------------------
+#
+
+riscv_allsoftware: riscv_software riscv_linux
+
+riscv_software: riscv_fesvr riscv_bbl riscv_pk riscv_hello
 
 riscv_fesvr:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	# Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
 	# Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
-	cd ${ROCKETCHIP}/riscv-tools/riscv-fesvr && \
+	cd ${RISCVTOOLS}/riscv-fesvr && \
 	mkdir -p build.arm && cd build.arm && \
-	../configure --host=arm-linux-gnueabihf && make && \
+	../configure --host=arm-linux-gnueabihf && \
+	make && \
 	cp fesvr-zedboard $(final_output_dir)/riscv/fesvr && \
 	cp libfesvr.so $(final_output_dir)/riscv/ && \
-	cd ${ROCKETCHIP}/riscv-tools/riscv-fesvr && \
+	cd ${RISCVTOOLS}/riscv-fesvr && \
 	rm -rf build.arm
+
+riscv_bbl:
+	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
+	chmod 755 bbl && cp bbl $(final_output_dir)/riscv/
 
 riscv_pk:
 	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
@@ -213,6 +227,19 @@ riscv_hello:
 	cd $(base_dir)/examples/hello/ && \
 	riscv64-unknown-elf-gcc -o hello hello.c && \
 	cp hello $(final_output_dir)/riscv/
+
+RISCVLinuxVersion = 4.1.17
+
+riscv_linux:
+	git submodule update --init  -- ${BOOT}/riscv-linux
+	cd ${BOOT} && \
+	curl -L https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$(RISCVLinuxVersion).tar.xz | tar -xJkf - && \
+	rsync -a --ignore-existing linux-$(RISCVLinuxVersion)/ riscv-linux/ && \
+	rm -rf linux-$(RISCVLinuxVersion) && \
+	cd riscv-linux && \
+	make ARCH=riscv defconfig && \
+	make -j${JOBS} ARCH=riscv vmlinux && \
+	cp vmlinux $(final_output_dir)/riscv/
 
 #
 # ---------------------
