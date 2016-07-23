@@ -20,6 +20,7 @@
  */
 /include/ "zynq-7000.dtsi"
 #include <dt-bindings/gpio/gpio.h>
+#include "settings.h"
 
 / {
 	compatible = "adapteva,parallella", "xlnx,zynq-7000";
@@ -38,8 +39,8 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		ranges;
-        rmem: rmem@30000000 {
-			reg = <0x30000000 0xe000000>;
+        rmem: rmem@20000000 {
+			reg = <RISCV_DRAM_BASE RISCV_DRAM_SIZE>;
 			no-map;
 		};
 

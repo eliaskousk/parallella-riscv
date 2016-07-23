@@ -2,14 +2,17 @@
 
 module RISCV_Rocket_Core_RV64G_AXI #
 (
+    parameter integer C_DRAM_BASE        = 3'd1,
+    parameter integer C_DRAM_BITS        = 29,
+
     // AXI Master
     
     // Thread ID Width
-    parameter integer C_M_AXI_ID_WIDTH     = 6,
+    parameter integer C_M_AXI_ID_WIDTH   = 6,
     // Width of Address Bus
-    parameter integer C_M_AXI_ADDR_WIDTH   = 32,
+    parameter integer C_M_AXI_ADDR_WIDTH = 32,
     // Width of Data Bus
-    parameter integer C_M_AXI_DATA_WIDTH   = 64,
+    parameter integer C_M_AXI_DATA_WIDTH = 64,
 
     // AXI Slave
     
@@ -353,23 +356,8 @@ module RISCV_Rocket_Core_RV64G_AXI #
     wire [31:0] mem_araddr;
     wire [31:0] mem_awaddr;
 
-    // Parallella
-    // ----------
-    // Setting the upper 7 address bits to 0011_110 gives this core
-    // access to 228 MB of the 1024 MB DRAM of the Parallella
-    // board (E-Link occupies the last 32 MB of the upper 256MB).
-    // Thus the RISC-V core has access to the range 0x30000000 - 3DFFFFFF.
-    // For other boards change accordingly.
-
-    assign M_AXI_ARADDR = {4'd3, 3'd6, mem_araddr[24:0]};
-    assign M_AXI_AWADDR = {4'd3, 3'd6, mem_awaddr[24:0]};
-
-    // ZedBoard
-    // --------
-    // Use the upper 256 MB of the 512 MB DRAM of ZedBoard
-
-    //assign M_AXI_ARADDR = {4'd1, mem_araddr[27:0]};
-    //assign M_AXI_AWADDR = {4'd1, mem_awaddr[27:0]};
+    assign M_AXI_ARADDR = {C_DRAM_BASE, mem_araddr[C_DRAM_BITS-1:0]};
+    assign M_AXI_AWADDR = {C_DRAM_BASE, mem_awaddr[C_DRAM_BITS-1:0]};
 
     Top RV64G_Top (
         .clk                     (host_clk),

@@ -1,6 +1,12 @@
 `timescale 1 ns / 1 ps
 
+`include "settings.vh"
+
 module RISCV_Rocket_Core_RV64G #(
+
+    parameter integer C_DRAM_BASE             = `RISCV_DRAM_BASE,
+    parameter integer C_DRAM_BITS             = `RISCV_DRAM_BITS,
+
     // AXI Master
     parameter integer C_M_AXI_ID_WIDTH        = 6,
     parameter integer C_M_AXI_ADDR_WIDTH      = 32,
@@ -99,7 +105,10 @@ module RISCV_Rocket_Core_RV64G #(
     input  wire                                s_axi_rready
 );
 
-    RISCV_Rocket_Core_RV64G_AXI #( 
+    RISCV_Rocket_Core_RV64G_AXI #(
+        .C_DRAM_BASE            (C_DRAM_BASE),
+        .C_DRAM_BITS            (C_DRAM_BITS),
+
         // AXI Master
         .C_M_AXI_ID_WIDTH       (C_M_AXI_ID_WIDTH),
         .C_M_AXI_ADDR_WIDTH     (C_M_AXI_ADDR_WIDTH),

@@ -26,16 +26,18 @@ default: $(BOARD_NAME)
 parallella_bitstream = $(final_output_dir)/parallella.bit.bin
 $(parallella_bitstream): bitstream
 	# Make final Parallella bitstream image (bin instead of bit)
-	cd $(boot_build_dir) && bootgen -image bit2bin.bif -w on -split bin
-	cd $(boot_build_dir) && rm bit2bin.bin
-	cd $(boot_build_dir) && cp parallella.bit.bin $(final_output_dir)/
+	cd $(boot_build_dir) && \
+	bootgen -image bit2bin.bif -w on -split bin && \
+	rm bit2bin.bin && \
+	cp parallella.bit.bin $(final_output_dir)/
 parallella_bitstream: $(parallella_bitstream)
 
 zedboard_bitstream = $(final_output_dir)/boot.bin
 $(zedboard_bitstream): bitstream
 	# Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
-	cd $(boot_build_dir) && bootgen -image boot.bif -w on -o boot.bin
-	cd $(boot_build_dir) && cp boot.bin $(final_output_dir)/
+	cd $(boot_build_dir) && \
+	bootgen -image boot.bif -w on -o boot.bin && \
+	cp boot.bin $(final_output_dir)/
 zedboard_bitstream: $(zedboard_bitstream)
 
 
@@ -49,34 +51,41 @@ fpga_dir = $(base_dir)/$(BOARD_NAME)/fpga
 
 bitstream = $(fpga_dir)/$(BOARD_NAME).bit
 $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
-	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl;
-	cd $(fpga_dir) && cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit
-	cd $(boot_build_dir) && ln -sf $(fpga_dir)/$(BOARD_NAME).bit .
+	cd $(fpga_dir) && \
+	vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl && \
+	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit
+	cd $(boot_build_dir) && \
+	ln -sf $(fpga_dir)/$(BOARD_NAME).bit .
 bitstream: $(bitstream)
 
 system_project = $(fpga_dir)/$(BOARD_NAME)_riscv/system.xpr
 $(system_project): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
-	cd $(fpga_dir) && rm -rf $(BOARD_NAME)_riscv
-	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/system_project.tcl;
+	cd $(fpga_dir) && \
+	rm -rf $(BOARD_NAME)_riscv && \
+	sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
+	vivado -mode tcl -source $(fpga_dir)/system_project.tcl
 system_project: $(system_project)
 
-parallella_ip_deps: parallella_ip_package riscv_ip_package
-zedboard_ip_deps: riscv_ip_package
+parallella_ip_deps: parallella_ip_package riscv_ip_package riscv_board_setup
+zedboard_ip_deps: riscv_ip_package riscv_board_setup
 
 parallella_ip_package = $(fpga_dir)/parallella_base/parallella_base.xpr
 $(parallella_ip_package): $(fpga_dir)/ip_params_parallella.tcl
-	cd $(fpga_dir) && rm -rf parallella_base
-	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/ip_package_parallella.tcl
+	cd $(fpga_dir) && \
+	rm -rf parallella_base && \
+	vivado -mode tcl -source $(fpga_dir)/ip_package_parallella.tcl
 parallella_ip_package: $(parallella_ip_package)
 
 riscv_ip_package = $(fpga_dir)/riscv_rv64g/riscv_rv64g.xpr
 $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
-	cd $(fpga_dir) && rm -rf riscv_rv64g
-	cd $(fpga_dir) && vivado -mode tcl -source $(fpga_dir)/ip_package_riscv.tcl
+	cd $(fpga_dir) && \
+	rm -rf riscv_rv64g && \
+	vivado -mode tcl -source $(fpga_dir)/ip_package_riscv.tcl
 riscv_ip_package: $(riscv_ip_package)
 
-system_bd_update:
-	cd $(fpga_dir) && sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
+riscv_board_setup:
+	sed -i "s/\(\`define RISCV_DRAM_BASE\) [0-9]\'d[0-9]/\1 $(RISCV_DRAM_BASE_RTL)/" $(RocketCoreIPDir)/settings.vh
+	sed -i "s/\(\`define RISCV_DRAM_BITS\) [0-9]\{2\}/\1 $(RISCV_DRAM_BITS_RTL)/" $(RocketCoreIPDir)/settings.vh
 
 
 #
@@ -107,11 +116,15 @@ arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its 
 	git submodule update --init $(arm_linux_dir)
 	# No make clean included here since one copy of linux should work on all boards
 	# Configure Linux kernel
-	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_CONFIG)_defconfig
+	cd $(arm_linux_dir) && \
+	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_CONFIG)_defconfig
 	# Build Linux kernel
-	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
+	cd $(arm_linux_dir) && \
+	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
 	# Convert zImage to uImage
-	cd $(arm_linux_dir) && export PATH=$(uboot_dir)/tools:$$PATH && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- UIMAGE_LOADADDR=0x8000 uImage
+	cd $(arm_linux_dir) && \
+	export PATH=$(uboot_dir)/tools:$$PATH && \
+	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- UIMAGE_LOADADDR=0x8000 uImage
 	mkdir -p $(final_output_dir)
 	cp $(arm_linux_dir)/arch/arm/boot/uImage $(final_output_dir)/
 
@@ -124,9 +137,11 @@ arm-uboot:
 	# Copy relevant configuration files
 	cp uboot/$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
 	# Configure U-Boot
-	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(UBOOT_CONFIG)_defconfig
+	cd $(uboot_dir) && \
+	make CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(UBOOT_CONFIG)_defconfig
 	# Build U-Boot
-	export PATH=$(dtc_dir):$$PATH && cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
+	export PATH=$(dtc_dir):$$PATH && \
+	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
 	mkdir -p $(boot_build_dir)
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
@@ -135,16 +150,21 @@ arm-dtc:
 	git submodule update --init $(dtc_dir)
 	cd $(dtc_dir) && make -j${JOBS}
 
-arm-dtb: arm-linux
-	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir) && \
-	cd $(arm_linux_dir) && make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_DTB).dtb && \
+arm-dtb:
+	sed -i "s/\(#define RISCV_DRAM_BASE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_BASE_DTS)/" $(dts_dir)/settings.h
+	sed -i "s/\(#define RISCV_DRAM_SIZE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_SIZE_DTS)/" $(dts_dir)/settings.h
+	cp $(dts_dir)/settings.h $(dtb_dir)
+	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir)
+	cd $(arm_linux_dir) && \
+	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_DTB).dtb
 	cp $(dtb_dir)/$(LINUX_DTB).dtb $(final_output_dir)/devicetree.dtb
 
 # Instead of using the above you can use the following to build locally (not in Linux repo)
 # if you don't want to init its huge repo just for a device tree build. This will of-course
 # use the local dts that may be out of date and also needs the dtc repo as the ZedBoard U-Boot target.
 arm-dtb-local: arm-dtc
-	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb $(dts_dir)/$(LINUX_DTB).dts
+	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && \
+	dtc -I dts -O dtb -o $(final_output_dir)/devicetree.dtb $(dts_dir)/$(LINUX_DTB).dts
 
 
 #
@@ -155,6 +175,7 @@ arm-dtb-local: arm-dtc
 
 FPGAConfig = "DefaultFPGAConfig"
 RocketCoreIPName = "RISCV_Rocket_Core_RV64G_1.0"
+RocketCoreIPDir = $(base_dir)/ip/$(RocketCoreIPName)/src
 
 riscv_emulator:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -168,8 +189,8 @@ riscv_rocketcore:
 	cd ${ROCKETCHIP}/fsim && \
 	make verilog CONFIG=$(FPGAConfig) && \
 	make verilog MODEL=ZynqAdapter CONFIG=$(FPGAConfig) && \
-	cp generated-src/Top.$(FPGAConfig).v ${TOP}/ip/$(RocketCoreIPName)/src/RV64G.Core.v && \
-	cp generated-src/ZynqAdapter.$(FPGAConfig).v ${TOP}/ip/$(RocketCoreIPName)/src/RV64G.HostIO.Adapter.v
+	cp generated-src/Top.$(FPGAConfig).v $(RocketCoreIPDir)/RV64G.Core.v && \
+	cp generated-src/ZynqAdapter.$(FPGAConfig).v $(RocketCoreIPDir)/src/RV64G.HostIO.Adapter.v
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -237,6 +258,7 @@ riscv_linux:
 	rsync -a --ignore-existing linux-$(RISCVLinuxVersion)/ riscv-linux/ && \
 	rm -rf linux-$(RISCVLinuxVersion) && \
 	cd riscv-linux && \
+	sed -i "s/\(CONFIG_CMDLINE=\"root=\/dev\/htifblk0\)\"/\1 mem=$(RISCV_DRAM_SIZE_LINUX)\"/" arch/riscv/configs/riscv64_spike && \
 	make ARCH=riscv defconfig && \
 	make -j${JOBS} ARCH=riscv vmlinux && \
 	cp vmlinux $(final_output_dir)/riscv/

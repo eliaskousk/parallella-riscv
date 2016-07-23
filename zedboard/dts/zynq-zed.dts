@@ -13,6 +13,7 @@
  */
 /dts-v1/;
 #include "zynq-7000.dtsi"
+#include "settings.h"
 
 / {
 	model = "Zynq Zed Development Board";
