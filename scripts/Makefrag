@@ -47,6 +47,8 @@ zedboard_bitstream: $(zedboard_bitstream)
 # -------------------------------------------
 #
 
+RocketCoreIPName = "RISCV_Rocket_Core_RV64_1.0"
+RocketCoreIPDir = $(base_dir)/ip/$(RocketCoreIPName)/src
 fpga_dir = $(base_dir)/$(BOARD_NAME)/fpga
 
 bitstream = $(fpga_dir)/$(BOARD_NAME).bit
@@ -173,9 +175,6 @@ arm-dtb-local: arm-dtc
 # RISC-V Rocket Cores and Toolchain
 # ---------------------------------
 #
-
-RocketCoreIPName = "RISCV_Rocket_Core_RV64G_1.0"
-RocketCoreIPDir = $(base_dir)/ip/$(RocketCoreIPName)/src
 
 riscv_emulator:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
