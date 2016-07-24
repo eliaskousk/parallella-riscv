@@ -1,6 +1,8 @@
 `timescale 1 ns / 1 ps
 
-module RISCV_Rocket_Core_RV64G_AXI #
+`include "settings.vh"
+
+module RISCV_Rocket_Core_RV64_AXI #
 (
     parameter integer C_DRAM_BASE        = 3'd1,
     parameter integer C_DRAM_BITS        = 29,
@@ -8,7 +10,7 @@ module RISCV_Rocket_Core_RV64G_AXI #
     // AXI Master
     
     // Thread ID Width
-    parameter integer C_M_AXI_ID_WIDTH   = 6,
+    parameter integer C_M_AXI_ID_WIDTH   = 5,
     // Width of Address Bus
     parameter integer C_M_AXI_ADDR_WIDTH = 32,
     // Width of Data Bus
@@ -359,7 +361,11 @@ module RISCV_Rocket_Core_RV64G_AXI #
     assign M_AXI_ARADDR = {C_DRAM_BASE, mem_araddr[C_DRAM_BITS-1:0]};
     assign M_AXI_AWADDR = {C_DRAM_BASE, mem_awaddr[C_DRAM_BITS-1:0]};
 
-    Top RV64G_Top (
+`ifdef RISCV_CORE_NAME_RV64G
+    Rocket_Core_RV64G RV64G_Rocket_Core (
+`elsif RISCV_CORE_NAME_RV64IMA
+    Rocket_Core_RV64IMA RV64IMA_Rocket_Core (
+`endif
         .clk                     (host_clk),
         .reset                   (reset_cpu),
         

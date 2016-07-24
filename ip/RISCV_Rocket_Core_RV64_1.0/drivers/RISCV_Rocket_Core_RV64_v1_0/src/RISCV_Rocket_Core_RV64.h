@@ -1,6 +1,6 @@
 
-#ifndef RISCV_ROCKET_CORE_RV64G_H
-#define RISCV_ROCKET_CORE_RV64G_H
+#ifndef RISCV_ROCKET_CORE_RV64_H
+#define RISCV_ROCKET_CORE_RV64_H
 
 
 /****************** Include Files ********************/
@@ -11,22 +11,22 @@
 /**************************** Type Definitions *****************************/
 /**
  *
- * Write/Read 32 bit value to/from RISCV_ROCKET_CORE_RV64G user logic memory (BRAM).
+ * Write/Read 32 bit value to/from RISCV_ROCKET_CORE_RV64 user logic memory (BRAM).
  *
- * @param   Address is the memory address of the RISCV_ROCKET_CORE_RV64G device.
+ * @param   Address is the memory address of the RISCV_ROCKET_CORE_RV64 device.
  * @param   Data is the value written to user logic memory.
  *
  * @return  The data from the user logic memory.
  *
  * @note
  * C-style signature:
- * 	void RISCV_ROCKET_CORE_RV64G_mWriteMemory(u32 Address, u32 Data)
- * 	u32 RISCV_ROCKET_CORE_RV64G_mReadMemory(u32 Address)
+ * 	void RISCV_ROCKET_CORE_RV64_mWriteMemory(u32 Address, u32 Data)
+ * 	u32 RISCV_ROCKET_CORE_RV64_mReadMemory(u32 Address)
  *
  */
-#define RISCV_ROCKET_CORE_RV64G_mWriteMemory(Address, Data) \
+#define RISCV_ROCKET_CORE_RV64_mWriteMemory(Address, Data) \
     Xil_Out32(Address, (u32)(Data))
-#define RISCV_ROCKET_CORE_RV64G_mReadMemory(Address) \
+#define RISCV_ROCKET_CORE_RV64_mReadMemory(Address) \
     Xil_In32(Address)
 
 /************************** Function Prototypes ****************************/
@@ -38,7 +38,7 @@
  * If the hardware system is not built correctly, this function may never
  * return to the caller.
  *
- * @param   baseaddr_p is the base address of the RISCV_ROCKET_CORE_RV64Ginstance to be worked on.
+ * @param   baseaddr_p is the base address of the RISCV_ROCKET_CORE_RV64instance to be worked on.
  *
  * @return
  *
@@ -49,6 +49,6 @@
  * @note    Self test may fail if data memory and device are not on the same bus.
  *
  */
-XStatus RISCV_ROCKET_CORE_RV64G_Mem_SelfTest(void * baseaddr_p);
+XStatus RISCV_ROCKET_CORE_RV64_Mem_SelfTest(void * baseaddr_p);
 
-#endif // RISCV_ROCKET_CORE_RV64G_H
+#endif // RISCV_ROCKET_CORE_RV64_H

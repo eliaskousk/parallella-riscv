@@ -1,7 +1,7 @@
 
 `timescale 1 ns / 1 ps
 
-`include "RISCV_Rocket_Core_RV64G_v1_0_tb_include.vh"
+`include "RISCV_Rocket_Core_RV64_v1_0_tb_include.vh"
 
 // Burst Size Defines
 `define BURST_SIZE_4_BYTES   3'b010
@@ -24,7 +24,7 @@
 `define S_AXI_RUSER_BUS_WIDTH 1
 `define S_AXI_WUSER_BUS_WIDTH 1
 
-module RISCV_Rocket_Core_RV64G_v1_0_tb;
+module RISCV_Rocket_Core_RV64_v1_0_tb;
 	reg tb_ACLK;
 	reg tb_ARESETn;
 

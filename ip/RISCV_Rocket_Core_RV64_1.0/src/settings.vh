@@ -1,6 +1,13 @@
 `ifndef settings_vh
 `define settings_vh
 
+
+//
+// RV64 Core Name
+//
+
+`define RISCV_CORE_NAME_RV64G
+
 //
 // Memory address base and width to use
 //

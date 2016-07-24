@@ -84,8 +84,8 @@ proc create_ipi_design { offsetfile design_name } {
 	connect_bd_net [get_bd_pins sys_reset_0/slowest_sync_clk] [get_bd_pins sys_clk_0/clk_out1]
 	connect_bd_net [get_bd_pins sys_clk_0/locked] [get_bd_pins sys_reset_0/dcm_locked]
 
-	# Create instance: RISCV_Rocket_Core_RV64G_0, and set properties
-	set RISCV_Rocket_Core_RV64G_0 [ create_bd_cell -type ip -vlnv user.org:user:RISCV_Rocket_Core_RV64G:1.0 RISCV_Rocket_Core_RV64G_0 ]
+	# Create instance: RISCV_Rocket_Core_RV64_0, and set properties
+	set RISCV_Rocket_Core_RV64_0 [ create_bd_cell -type ip -vlnv user.org:user:RISCV_Rocket_Core_RV64:1.0 RISCV_Rocket_Core_RV64_0 ]
 
 	# Create instance: jtag_axi_0, and set properties
 	set jtag_axi_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:jtag_axi jtag_axi_0 ]
@@ -158,32 +158,32 @@ proc create_ipi_design { offsetfile design_name } {
 	set_property -dict [ list CONFIG.NUM_PORTS {2}  ] $xlconcat_0
 	connect_bd_net [get_bd_pins xlconcat_0/dout] [get_bd_pins axi_gpio_in/gpio_io_i]
 
-	# Connect all clock & reset of RISCV_Rocket_Core_RV64G_0 slave interfaces..
-	connect_bd_intf_net [get_bd_intf_pins axi_peri_interconnect/M00_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64G_0/S_AXI]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/s_axi_aclk] [get_bd_pins sys_clk_0/clk_out1]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/s_axi_aresetn] [get_bd_pins sys_reset_0/peripheral_aresetn]
+	# Connect all clock & reset of RISCV_Rocket_Core_RV64_0 slave interfaces..
+	connect_bd_intf_net [get_bd_intf_pins axi_peri_interconnect/M00_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/S_AXI]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins sys_clk_0/clk_out1]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aresetn] [get_bd_pins sys_reset_0/peripheral_aresetn]
 
-	# Connect all clock, reset & status pins of RISCV_Rocket_Core_RV64G_0 master interfaces..
-	connect_bd_intf_net [get_bd_intf_pins axi_mem_interconnect/S00_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64G_0/M_AXI]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/m_axi_aclk] [get_bd_pins sys_clk_0/clk_out1]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/m_axi_aresetn] [get_bd_pins sys_reset_0/peripheral_aresetn]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/m_axi_txn_done] [get_bd_pins xlconcat_0/In0]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/m_axi_error] [get_bd_pins xlconcat_0/In1]
-	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64G_0/m_axi_init_axi_txn] [ get_bd_pins axi_gpio_out/gpio_io_o ]
+	# Connect all clock, reset & status pins of RISCV_Rocket_Core_RV64_0 master interfaces..
+	connect_bd_intf_net [get_bd_intf_pins axi_mem_interconnect/S00_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/M_AXI]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins sys_clk_0/clk_out1]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aresetn] [get_bd_pins sys_reset_0/peripheral_aresetn]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_txn_done] [get_bd_pins xlconcat_0/In0]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_error] [get_bd_pins xlconcat_0/In1]
+	connect_bd_net [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_init_axi_txn] [ get_bd_pins axi_gpio_out/gpio_io_o ]
 
 
 	# Auto assign address
 	assign_bd_address
 
-	# Configure address param & range of RISCV_Rocket_Core_RV64G_0 master interfaces..
+	# Configure address param & range of RISCV_Rocket_Core_RV64_0 master interfaces..
 	set_property range 16K [get_bd_addr_segs {jtag_axi_0/Data/SEG_axi_bram_ctrl_0_Mem0}]
-	set_property range 16K [get_bd_addr_segs {RISCV_Rocket_Core_RV64G_0/M_AXI/SEG_axi_bram_ctrl_0_Mem0}]
-	set_property -dict [list  CONFIG.C_M_AXI_TARGET_SLAVE_BASE_ADDR {0xC0000000} ] [get_bd_cells RISCV_Rocket_Core_RV64G_0]
+	set_property range 16K [get_bd_addr_segs {RISCV_Rocket_Core_RV64_0/M_AXI/SEG_axi_bram_ctrl_0_Mem0}]
+	set_property -dict [list  CONFIG.C_M_AXI_TARGET_SLAVE_BASE_ADDR {0xC0000000} ] [get_bd_cells RISCV_Rocket_Core_RV64_0]
 
-	# Copy all address to RISCV_Rocket_Core_RV64G_v1_0_include.tcl file
+	# Copy all address to RISCV_Rocket_Core_RV64_v1_0_include.tcl file
 	set bd_path [get_property DIRECTORY [current_project]]/[current_project].srcs/[current_fileset]/bd
 	upvar 1 $offsetfile offset_file
-	set offset_file "${bd_path}/RISCV_Rocket_Core_RV64G_v1_0_include.tcl"
+	set offset_file "${bd_path}/RISCV_Rocket_Core_RV64_v1_0_include.tcl"
 	set fp [open $offset_file "w"]
 	puts $fp "# Configuration address parameters"
 
@@ -193,15 +193,15 @@ proc create_ipi_design { offsetfile design_name } {
 	set offset [get_property OFFSET [get_bd_addr_segs /jtag_axi_0/Data/SEG_axi_gpio_out_Reg ]]
 	puts $fp "set axi_gpio_out_addr ${offset}"
 
-	set offset [get_property OFFSET [get_bd_addr_segs /jtag_axi_0/Data/SEG_RISCV_Rocket_Core_RV64G_0_S_AXI_* ]]
+	set offset [get_property OFFSET [get_bd_addr_segs /jtag_axi_0/Data/SEG_RISCV_Rocket_Core_RV64_0_S_AXI_* ]]
 	puts $fp "set s_axi_addr ${offset}"
 
 	close $fp
 }
 
 # Set IP Repository and Update IP Catalogue 
-set ip_path [file dirname [file normalize [get_property XML_FILE_NAME [ipx::get_cores user.org:user:RISCV_Rocket_Core_RV64G:1.0]]]]
-set hw_test_file ${ip_path}/example_designs/debug_hw_design/RISCV_Rocket_Core_RV64G_v1_0_hw_test.tcl
+set ip_path [file dirname [file normalize [get_property XML_FILE_NAME [ipx::get_cores user.org:user:RISCV_Rocket_Core_RV64:1.0]]]]
+set hw_test_file ${ip_path}/example_designs/debug_hw_design/RISCV_Rocket_Core_RV64_v1_0_hw_test.tcl
 
 set repo_paths [get_property ip_repo_paths [current_fileset]] 
 if { [lsearch -exact -nocase $repo_paths $ip_path ] == -1 } {
@@ -219,7 +219,7 @@ lappend all_bd $bd_name
 }
 
 for { set i 1 } { 1 } { incr i } {
-	set design_name "RISCV_Rocket_Core_RV64G_v1_0_hw_${i}"
+	set design_name "RISCV_Rocket_Core_RV64_v1_0_hw_${i}"
 	if { [lsearch -exact -nocase $all_bd $design_name ] == -1 } {
 		break
 	}

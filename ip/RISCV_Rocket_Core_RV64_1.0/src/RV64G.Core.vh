@@ -78580,7 +78580,7 @@ module Queue_1(input clk, input reset,
   end
 endmodule
 
-module Top(input clk, input reset,
+module Rocket_Core_RV64G(input clk, input reset,
     output io_host_clk,
     output io_host_clk_edge,
     output io_host_in_ready,
