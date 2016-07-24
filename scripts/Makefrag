@@ -78,6 +78,7 @@ parallella_ip_package: $(parallella_ip_package)
 
 riscv_ip_package = $(fpga_dir)/riscv_rv64g/riscv_rv64g.xpr
 $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
+	sed -i "s/\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_NAME)\2/" $(RocketCoreIPDir)/RV64.Core.v
 	cd $(fpga_dir) && \
 	rm -rf riscv_rv64g && \
 	vivado -mode tcl -source $(fpga_dir)/ip_package_riscv.tcl
@@ -173,7 +174,6 @@ arm-dtb-local: arm-dtc
 # ---------------------------------
 #
 
-FPGAConfig = "DefaultFPGAConfig"
 RocketCoreIPName = "RISCV_Rocket_Core_RV64G_1.0"
 RocketCoreIPDir = $(base_dir)/ip/$(RocketCoreIPName)/src
 
@@ -187,10 +187,11 @@ riscv_rocketcore:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	# Build the Rocket Chip Verilog RTL (for FPGAs)
 	cd ${ROCKETCHIP}/fsim && \
-	make verilog CONFIG=$(FPGAConfig) && \
-	make verilog MODEL=ZynqAdapter CONFIG=$(FPGAConfig) && \
-	cp generated-src/Top.$(FPGAConfig).v $(RocketCoreIPDir)/RV64G.Core.v && \
-	cp generated-src/ZynqAdapter.$(FPGAConfig).v $(RocketCoreIPDir)/src/RV64G.HostIO.Adapter.v
+	make verilog CONFIG=$(RISCV_CONFIG) && \
+	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CONFIG) && \
+	cp generated-src/Top.$(RISCV_CONFIG).v $(RocketCoreIPDir)/$(RISCV_CORE_NAME).Core.vh && \
+	cp generated-src/ZynqAdapter.$(RISCV_CONFIG).v $(RocketCoreIPDir)/RV64.HostIO.Adapter.v && \
+	sed -i "s/\(module\) Top\(/\1 Rocket_Core_$(RISCV_CORE_NAME)\(/" $(RocketCoreIPDir)/$(RISCV_CORE_NAME).Core.v
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh

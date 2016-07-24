@@ -16,7 +16,7 @@ set boardpart ""
 
 set ip_repos [list \
               "./parallella_base" \
-              "./riscv_rv64g" \
+              "./riscv_rv64" \
              ]
 
 #All source files

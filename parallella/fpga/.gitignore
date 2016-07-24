@@ -1,5 +1,5 @@
 *.bit
 *.bit.bin
 /parallella_base/
-/riscv_rv64g/
+/riscv_rv64/
 /parallella_riscv/

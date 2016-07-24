@@ -1,6 +1,6 @@
-set design riscv_rv64g
+set design riscv_rv64
 
-set projdir ./riscv_rv64g/
+set projdir ./riscv_rv64/
 
 set root "../../parallella"
 
@@ -11,7 +11,7 @@ set partname "xc7z020clg484-1"
 set boardpart "em.avnet.com:zed:part0:1.3"
 
 set hdl_files [list \
-               $root/hdl/riscv.rv64g/ \
+               $root/hdl/riscv.rv64/ \
               ]
 
 set ip_files   []
