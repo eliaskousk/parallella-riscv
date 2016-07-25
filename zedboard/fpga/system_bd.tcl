@@ -164,21 +164,21 @@ CONFIG.NUM_MI {1} \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_slave
 
-  # Create instance: clk_wiz_0_100M_to_25M, and set properties
-  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_25M ]
+  # Create instance: clk_wiz_0_100M_to_50M, and set properties
+  set clk_wiz_0_100M_to_50M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_50M ]
   set_property -dict [ list \
 CONFIG.CLKOUT1_DRIVES {BUFG} \
-CONFIG.CLKOUT1_JITTER {181.828} \
-CONFIG.CLKOUT1_PHASE_ERROR {104.359} \
-CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {25.000} \
+CONFIG.CLKOUT1_JITTER {151.636} \
+CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
+CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {50.000} \
 CONFIG.FEEDBACK_SOURCE {FDBK_AUTO} \
-CONFIG.MMCM_CLKFBOUT_MULT_F {9.125} \
-CONFIG.MMCM_CLKOUT0_DIVIDE_F {36.500} \
+CONFIG.MMCM_CLKFBOUT_MULT_F {10.000} \
+CONFIG.MMCM_CLKOUT0_DIVIDE_F {20.000} \
 CONFIG.MMCM_DIVCLK_DIVIDE {1} \
 CONFIG.PRIM_SOURCE {No_buffer} \
 CONFIG.RESET_PORT {resetn} \
 CONFIG.RESET_TYPE {ACTIVE_LOW} \
- ] $clk_wiz_0_100M_to_25M
+ ] $clk_wiz_0_100M_to_50M
 
   # Create instance: processing_system7_0, and set properties
   set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7: processing_system7_0 ]
@@ -202,10 +202,10 @@ CONFIG.preset {ZedBoard} \
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_pins axi_mem_intercon_PS_master/S00_AXI] [get_bd_intf_pins processing_system7_0/M_AXI_GP0]
 
   # Create port connections
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_25M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
-  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0_100M_to_25M/locked] [get_bd_pins rst_processing_system7_0_25M/dcm_locked]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins clk_wiz_0_100M_to_25M/clk_in1] [get_bd_pins processing_system7_0/FCLK_CLK0]
-  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins clk_wiz_0_100M_to_25M/resetn] [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_processing_system7_0_25M/ext_reset_in]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_50M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0_100M_to_50M/locked] [get_bd_pins rst_processing_system7_0_25M/dcm_locked]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins clk_wiz_0_100M_to_50M/clk_in1] [get_bd_pins processing_system7_0/FCLK_CLK0]
+  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins clk_wiz_0_100M_to_50M/resetn] [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_processing_system7_0_25M/ext_reset_in]
   connect_bd_net -net rst_processing_system7_0_25M_interconnect_aresetn [get_bd_pins axi_mem_intercon_PS_master/ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/ARESETN] [get_bd_pins rst_processing_system7_0_25M/interconnect_aresetn]
   connect_bd_net -net rst_processing_system7_0_25M_peripheral_aresetn [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aresetn] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon_PS_master/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_master/S00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/S00_ARESETN] [get_bd_pins rst_processing_system7_0_25M/peripheral_aresetn]
 

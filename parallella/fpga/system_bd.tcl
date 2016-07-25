@@ -203,21 +203,21 @@ CONFIG.NUM_MI {1} \
 CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon_PS_slave
 
-  # Create instance: clk_wiz_0_100M_to_25M, and set properties
-  set clk_wiz_0_100M_to_25M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_25M ]
+  # Create instance: clk_wiz_0_100M_to_50M, and set properties
+  set clk_wiz_0_100M_to_50M [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz: clk_wiz_0_100M_to_50M ]
   set_property -dict [ list \
 CONFIG.CLKOUT1_DRIVES {BUFG} \
-CONFIG.CLKOUT1_JITTER {181.828} \
-CONFIG.CLKOUT1_PHASE_ERROR {104.359} \
-CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {25.000} \
+CONFIG.CLKOUT1_JITTER {151.636} \
+CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
+CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {50.000} \
 CONFIG.FEEDBACK_SOURCE {FDBK_AUTO} \
-CONFIG.MMCM_CLKFBOUT_MULT_F {9.125} \
-CONFIG.MMCM_CLKOUT0_DIVIDE_F {36.500} \
+CONFIG.MMCM_CLKFBOUT_MULT_F {10.000} \
+CONFIG.MMCM_CLKOUT0_DIVIDE_F {20.000} \
 CONFIG.MMCM_DIVCLK_DIVIDE {1} \
 CONFIG.PRIM_SOURCE {No_buffer} \
 CONFIG.RESET_PORT {resetn} \
 CONFIG.RESET_TYPE {ACTIVE_LOW} \
- ] $clk_wiz_0_100M_to_25M
+ ] $clk_wiz_0_100M_to_50M
 
   # Create instance: parallella_base_0, and set properties
   set parallella_base_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:parallella_base: parallella_base_0 ]
@@ -317,8 +317,8 @@ CONFIG.NUM_PORTS {16} \
   connect_bd_net -net Net1 [get_bd_ports gpio_p] [get_bd_pins parallella_base_0/gpio_p]
   connect_bd_net -net Net2 [get_bd_ports i2c_scl] [get_bd_pins parallella_base_0/i2c_scl]
   connect_bd_net -net Net3 [get_bd_ports i2c_sda] [get_bd_pins parallella_base_0/i2c_sda]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_25M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
-  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0_100M_to_25M/locked] [get_bd_pins rst_processing_system7_0_25M/dcm_locked]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_50M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0_100M_to_50M/locked] [get_bd_pins rst_processing_system7_0_25M/dcm_locked]
   connect_bd_net -net parallella_base_0_cclk_n [get_bd_ports cclk_n] [get_bd_pins parallella_base_0/cclk_n]
   connect_bd_net -net parallella_base_0_cclk_p [get_bd_ports cclk_p] [get_bd_pins parallella_base_0/cclk_p]
   connect_bd_net -net parallella_base_0_chip_resetb [get_bd_ports chip_nreset] [get_bd_pins parallella_base_0/chip_nreset]
@@ -340,8 +340,8 @@ CONFIG.NUM_PORTS {16} \
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins processing_system7_0_axi_periph/ARESETN]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins parallella_base_0/m_axi_aresetn] [get_bd_pins parallella_base_0/s_axi_aresetn] [get_bd_pins parallella_base_0/sys_nreset] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins processing_system7_0_axi_periph/M00_ARESETN] [get_bd_pins processing_system7_0_axi_periph/S00_ARESETN]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins parallella_base_0/sys_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP1_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP1_ACLK] [get_bd_pins processing_system7_0_axi_periph/ACLK] [get_bd_pins processing_system7_0_axi_periph/M00_ACLK] [get_bd_pins processing_system7_0_axi_periph/S00_ACLK]
-  connect_bd_net -net processing_system7_0_FCLK_CLK3 [get_bd_pins clk_wiz_0_100M_to_25M/clk_in1] [get_bd_pins processing_system7_0/FCLK_CLK3]
-  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins clk_wiz_0_100M_to_25M/resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_processing_system7_0_25M/ext_reset_in]
+  connect_bd_net -net processing_system7_0_FCLK_CLK3 [get_bd_pins clk_wiz_0_100M_to_50M/clk_in1] [get_bd_pins processing_system7_0/FCLK_CLK3]
+  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins clk_wiz_0_100M_to_50M/resetn] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_processing_system7_0_25M/ext_reset_in]
   connect_bd_net -net processing_system7_0_GPIO_O [get_bd_pins parallella_base_0/ps_gpio_o] [get_bd_pins processing_system7_0/GPIO_O]
   connect_bd_net -net processing_system7_0_GPIO_T [get_bd_pins parallella_base_0/ps_gpio_t] [get_bd_pins processing_system7_0/GPIO_T]
   connect_bd_net -net processing_system7_0_I2C0_SCL_O [get_bd_pins parallella_base_0/i2c_scl_o] [get_bd_pins processing_system7_0/I2C0_SCL_O]
