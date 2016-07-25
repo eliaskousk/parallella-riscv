@@ -185,7 +185,7 @@ riscv_emulator:
 
 riscv_rocketcore:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
-	cp ${TOP}/config/Rocket.Core.Configs.scala ${ROCKETCHIP}/src/main/scala/Configs.scala
+	cp ${TOP}/ip/config/Rocket.Core.Configs.scala ${ROCKETCHIP}/src/main/scala/Configs.scala
 	# Build the Rocket Chip Verilog RTL (for FPGAs)
 	cd ${ROCKETCHIP}/fsim && \
 	make verilog CONFIG=$(RISCV_CORE_CONFIG) && \

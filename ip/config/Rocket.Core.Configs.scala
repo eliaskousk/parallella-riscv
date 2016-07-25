@@ -376,7 +376,6 @@ class DefaultFPGAConfig extends Config(new FPGAConfig ++ new DefaultConfig)
 class NormalConfig extends Config (
     topDefinitions = { (pname,site,here) => pname match {
       case UseFPU => false
-      //case FastMulDiv => false
     }},
   knobValues = {
     case "L1D_SETS" => 64
