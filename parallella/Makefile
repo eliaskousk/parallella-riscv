@@ -22,9 +22,9 @@ UBOOT_REPO = parallella-uboot
 
 UBOOT_CONFIG = adapteva_parallella
 
-RISCV_CORE_CONFIG = DefaultFPGAConfig
+RISCV_CORE_ARCH = RV64IMA
 
-RISCV_CORE_NAME = RV64G
+RISCV_CORE_CONFIG = DefaultFPGANormalConfig
 
 RISCV_DRAM_BASE_RTL = "3\'d1"
 

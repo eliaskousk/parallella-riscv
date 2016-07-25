@@ -361,9 +361,9 @@ module RISCV_Rocket_Core_RV64_AXI #
     assign M_AXI_ARADDR = {C_DRAM_BASE, mem_araddr[C_DRAM_BITS-1:0]};
     assign M_AXI_AWADDR = {C_DRAM_BASE, mem_awaddr[C_DRAM_BITS-1:0]};
 
-`ifdef RISCV_CORE_NAME_RV64G
-    Rocket_Core_RV64G RV64G_Rocket_Core (
-`elsif RISCV_CORE_NAME_RV64IMA
+`ifdef RISCV_CORE_ARCH_RV64IMAFD
+    Rocket_Core_RV64IMAFD RV64IMAFD_Rocket_Core (
+`elsif RISCV_CORE_ARCH_RV64IMA
     Rocket_Core_RV64IMA RV64IMA_Rocket_Core (
 `endif
         .clk                     (host_clk),

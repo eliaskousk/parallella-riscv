@@ -6,7 +6,7 @@
 // RV64 Core Name
 //
 
-`define RISCV_CORE_NAME_RV64G
+`define RISCV_CORE_ARCH_RV64IMA
 
 //
 // Memory address base and width to use

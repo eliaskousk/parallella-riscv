@@ -86,10 +86,10 @@ $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
 riscv_ip_package: $(riscv_ip_package)
 
 riscv_ip_setup:
-	sed -i "s/\(\`define RISCV_CORE_NAME_\)[a-zA-Z0-9]*/\1$(RISCV_CORE_NAME)/" $(RocketCoreIPDir)/settings.vh
+	sed -i "s/\(\`define RISCV_CORE_ARCH_\)[a-zA-Z0-9]*/\1$(RISCV_CORE_ARCH)/" $(RocketCoreIPDir)/settings.vh
 	sed -i "s/\(\`define RISCV_DRAM_BASE\) [0-9]\'d[0-9]/\1 $(RISCV_DRAM_BASE_RTL)/" $(RocketCoreIPDir)/settings.vh
 	sed -i "s/\(\`define RISCV_DRAM_BITS\) [0-9]\{2\}/\1 $(RISCV_DRAM_BITS_RTL)/" $(RocketCoreIPDir)/settings.vh
-	sed -i "s/\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_NAME)\2/" $(RocketCoreIPDir)/RV64.Core.v
+	sed -i "s/\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_ARCH)\2/" $(RocketCoreIPDir)/RV64.Core.v
 
 
 #
@@ -187,11 +187,11 @@ riscv_rocketcore:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	# Build the Rocket Chip Verilog RTL (for FPGAs)
 	cd ${ROCKETCHIP}/fsim && \
-	make verilog CONFIG=$(RISCV_CONFIG) && \
-	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CONFIG) && \
-	cp generated-src/Top.$(RISCV_CONFIG).v $(RocketCoreIPDir)/$(RISCV_CORE_NAME).Core.vh && \
-	cp generated-src/ZynqAdapter.$(RISCV_CONFIG).v $(RocketCoreIPDir)/RV64.HostIO.Adapter.v && \
-	sed -i "s/\(module\) Top\(/\1 Rocket_Core_$(RISCV_CORE_NAME)\(/" $(RocketCoreIPDir)/$(RISCV_CORE_NAME).Core.v
+	make verilog CONFIG=$(RISCV_CORE_CONFIG) && \
+	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CORE_CONFIG) && \
+	cp generated-src/Top.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh && \
+	cp generated-src/ZynqAdapter.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/RV64.HostIO.Adapter.v && \
+	sed -i "s/\(module\) Top(/\1 Rocket_Core_$(RISCV_CORE_ARCH)(/" $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -204,10 +204,11 @@ riscv_toolchain:
 	git checkout -B current && \
 	git checkout master && \
 	git submodule update --init --recursive && \
+	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
 	export MAKEFLAGS=-j${JOBS} && \
 	./build.sh && \
 	cd riscv-gnu-toolchain && \
-	./configure --prefix=${RISCV} && \
+	./configure --prefix=${RISCV} --with-arch=$(RISCV_CORE_ARCH) && \
 	make linux && \
 	cd ${RISCVTOOLS} && \
 	git checkout current && \
