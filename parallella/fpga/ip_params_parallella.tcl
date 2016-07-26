@@ -28,5 +28,7 @@ set ip_files   [list \
 set constraints_files []
 
 set clk_m_axi "sys_clk"
+set clk_m0_axi ""
+set clk_m1_axi ""
 set clk_s_axi "sys_clk"
 

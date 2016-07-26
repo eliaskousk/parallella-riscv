@@ -18,6 +18,8 @@ set ip_files   []
 
 set constraints_files []
 
-set clk_m_axi "m_axi_aclk"
-set clk_s_axi "s_axi_aclk"
+set clk_m_axi ""
+set clk_m0_axi "m0_axi_aclk"
+set clk_m1_axi "m1_axi_aclk"
+set clk_s_axi  "s_axi_aclk"
 

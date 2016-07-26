@@ -23,21 +23,38 @@ proc create_ipi_design { offsetfile design_name } {
 	connect_bd_net -net aresetn_net [get_bd_ports ARESETN] [get_bd_pins master_0/M_AXI_ARESETN] [get_bd_pins RISCV_Rocket_Core_RV64_0/S_AXI_ARESETN]
 
 	# Create External ports
-	set M_AXI_INIT_AXI_TXN [ create_bd_port -dir I M_AXI_INIT_AXI_TXN ]
-	set M_AXI_ERROR [ create_bd_port -dir O M_AXI_ERROR ]
-	set M_AXI_TXN_DONE [ create_bd_port -dir O M_AXI_TXN_DONE ]
+	set M0_AXI_INIT_AXI_TXN [ create_bd_port -dir I M0_AXI_INIT_AXI_TXN ]
+	set M0_AXI_ERROR [ create_bd_port -dir O M0_AXI_ERROR ]
+	set M0_AXI_TXN_DONE [ create_bd_port -dir O M0_AXI_TXN_DONE ]
 
 	# Create instance: slave_0, and set properties
 	set slave_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:cdn_axi_bfm slave_0]
 	set_property -dict [ list CONFIG.C_PROTOCOL_SELECTION {1} CONFIG.C_MODE_SELECT {1} CONFIG.C_S_AXI4_HIGHADDR {0x4000FFFF} CONFIG.C_S_AXI4_BASEADDR {0x40000000} CONFIG.C_S_AXI4_MEMORY_MODEL_MODE {1} ] $slave_0
 
-connect_bd_intf_net [get_bd_intf_pins slave_0/S_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/M_AXI]
+connect_bd_intf_net [get_bd_intf_pins slave_0/S_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/M0_AXI]
 	# Create port connections
-	connect_bd_net -net aclk_net [get_bd_ports ACLK] [get_bd_pins slave_0/S_AXI_ACLK] [get_bd_pins RISCV_Rocket_Core_RV64_0/M_AXI_ACLK]
-	connect_bd_net -net aresetn_net [get_bd_ports ARESETN] [get_bd_pins slave_0/S_AXI_ARESETN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M_AXI_ARESETN]
-	connect_bd_net -net init_axi_txn_00 [get_bd_ports M_AXI_INIT_AXI_TXN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M_AXI_INIT_AXI_TXN]
-	connect_bd_net -net error_00 [get_bd_ports M_AXI_ERROR] [get_bd_pins RISCV_Rocket_Core_RV64_0/M_AXI_ERROR]
-	connect_bd_net -net txn_done_00 [get_bd_ports M_AXI_TXN_DONE] [get_bd_pins RISCV_Rocket_Core_RV64_0/M_AXI_TXN_DONE]
+	connect_bd_net -net aclk_net [get_bd_ports ACLK] [get_bd_pins slave_0/S_AXI_ACLK] [get_bd_pins RISCV_Rocket_Core_RV64_0/M0_AXI_ACLK]
+	connect_bd_net -net aresetn_net [get_bd_ports ARESETN] [get_bd_pins slave_0/S_AXI_ARESETN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M0_AXI_ARESETN]
+	connect_bd_net -net init_axi_txn_00 [get_bd_ports M0_AXI_INIT_AXI_TXN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M0_AXI_INIT_AXI_TXN]
+	connect_bd_net -net error_00 [get_bd_ports M0_AXI_ERROR] [get_bd_pins RISCV_Rocket_Core_RV64_0/M0_AXI_ERROR]
+	connect_bd_net -net txn_done_00 [get_bd_ports M0_AXI_TXN_DONE] [get_bd_pins RISCV_Rocket_Core_RV64_0/M0_AXI_TXN_DONE]
+
+	# Create External ports
+	set M1_AXI_INIT_AXI_TXN [ create_bd_port -dir I M1_AXI_INIT_AXI_TXN ]
+	set M1_AXI_ERROR [ create_bd_port -dir O M1_AXI_ERROR ]
+	set M1_AXI_TXN_DONE [ create_bd_port -dir O M1_AXI_TXN_DONE ]
+
+	# Create instance: slave_1, and set properties
+	set slave_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:cdn_axi_bfm slave_1]
+	set_property -dict [ list CONFIG.C_PROTOCOL_SELECTION {1} CONFIG.C_MODE_SELECT {1} CONFIG.C_S_AXI4_HIGHADDR {0x4000FFFF} CONFIG.C_S_AXI4_BASEADDR {0x40000000} CONFIG.C_S_AXI4_MEMORY_MODEL_MODE {1} ] $slave_1
+
+connect_bd_intf_net [get_bd_intf_pins slave_1/S_AXI] [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/M1_AXI]
+	# Create port connections
+	connect_bd_net -net aclk_net [get_bd_ports ACLK] [get_bd_pins slave_1/S_AXI_ACLK] [get_bd_pins RISCV_Rocket_Core_RV64_0/M1_AXI_ACLK]
+	connect_bd_net -net aresetn_net [get_bd_ports ARESETN] [get_bd_pins slave_1/S_AXI_ARESETN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M1_AXI_ARESETN]
+	connect_bd_net -net init_axi_txn_11 [get_bd_ports M1_AXI_INIT_AXI_TXN] [get_bd_pins RISCV_Rocket_Core_RV64_0/M1_AXI_INIT_AXI_TXN]
+	connect_bd_net -net error_11 [get_bd_ports M1_AXI_ERROR] [get_bd_pins RISCV_Rocket_Core_RV64_0/M1_AXI_ERROR]
+	connect_bd_net -net txn_done_11 [get_bd_ports M1_AXI_TXN_DONE] [get_bd_pins RISCV_Rocket_Core_RV64_0/M1_AXI_TXN_DONE]
 
 	# Auto assign address
 	assign_bd_address

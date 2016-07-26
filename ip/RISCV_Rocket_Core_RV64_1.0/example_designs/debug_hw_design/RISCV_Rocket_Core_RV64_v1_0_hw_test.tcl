@@ -82,21 +82,39 @@ proc get_init_data { position } {
 	return $hexdata
 }
 
-# Test: M_AXI
-set wdata_m_axi [get_init_data 0]
-create_hw_axi_txn w_m_axi_addr [get_hw_axis $jtag_axi_master] -type write -address $axi_gpio_out_addr -data ${wdata_m_axi}
-create_hw_axi_txn r_m_axi_addr [get_hw_axis $jtag_axi_master] -type read -address $axi_gpio_in_addr 
+# Test: M0_AXI
+set wdata_m0_axi [get_init_data 0]
+create_hw_axi_txn w_m0_axi_addr [get_hw_axis $jtag_axi_master] -type write -address $axi_gpio_out_addr -data ${wdata_m0_axi}
+create_hw_axi_txn r_m0_axi_addr [get_hw_axis $jtag_axi_master] -type read -address $axi_gpio_in_addr 
 # Initiate transactions
-run_hw_axi r_m_axi_addr
-run_hw_axi w_m_axi_addr
-run_hw_axi r_m_axi_addr
-set rdata_tmp [get_property DATA [get_hw_axi_txn r_m_axi_addr]]
-set DE [ get_done_and_error_bit $rdata_tmp 1 0 ]
+run_hw_axi r_m0_axi_addr
+run_hw_axi w_m0_axi_addr
+run_hw_axi r_m0_axi_addr
+set rdata_tmp [get_property DATA [get_hw_axi_txn r_m0_axi_addr]]
+set DE [ get_done_and_error_bit $rdata_tmp 2 0 ]
 # Compare read data
 if { $DE == 01 } {
-	puts "Data comparison test pass for - M_AXI"
+	puts "Data comparison test pass for - M0_AXI"
 } else {
-	puts "Data comparison test fail for - M_AXI, rdata-$rdata_tmp expected-01 actual-$DE"
+	puts "Data comparison test fail for - M0_AXI, rdata-$rdata_tmp expected-01 actual-$DE"
+	inc ec
+}
+
+# Test: M1_AXI
+set wdata_m1_axi [get_init_data 1]
+create_hw_axi_txn w_m1_axi_addr [get_hw_axis $jtag_axi_master] -type write -address $axi_gpio_out_addr -data ${wdata_m1_axi}
+create_hw_axi_txn r_m1_axi_addr [get_hw_axis $jtag_axi_master] -type read -address $axi_gpio_in_addr 
+# Initiate transactions
+run_hw_axi r_m1_axi_addr
+run_hw_axi w_m1_axi_addr
+run_hw_axi r_m1_axi_addr
+set rdata_tmp [get_property DATA [get_hw_axi_txn r_m1_axi_addr]]
+set DE [ get_done_and_error_bit $rdata_tmp 2 1 ]
+# Compare read data
+if { $DE == 01 } {
+	puts "Data comparison test pass for - M1_AXI"
+} else {
+	puts "Data comparison test fail for - M1_AXI, rdata-$rdata_tmp expected-01 actual-$DE"
 	inc ec
 }
 

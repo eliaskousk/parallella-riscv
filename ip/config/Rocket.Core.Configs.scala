@@ -376,6 +376,7 @@ class DefaultFPGAConfig extends Config(new FPGAConfig ++ new DefaultConfig)
 class NormalConfig extends Config (
     topDefinitions = { (pname,site,here) => pname match {
       case UseFPU => false
+      case NMemoryChannels => Dump("N_MEM_CHANNELS", 2)
     }},
   knobValues = {
     case "L1D_SETS" => 64

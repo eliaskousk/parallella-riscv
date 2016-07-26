@@ -28,16 +28,23 @@ module RISCV_Rocket_Core_RV64_v1_0_tb;
 	reg tb_ACLK;
 	reg tb_ARESETn;
 
-	reg M_AXI_INIT_AXI_TXN;
-	wire M_AXI_TXN_DONE;
-	wire M_AXI_ERROR;
+	reg M0_AXI_INIT_AXI_TXN;
+	wire M0_AXI_TXN_DONE;
+	wire M0_AXI_ERROR;
+
+	reg M1_AXI_INIT_AXI_TXN;
+	wire M1_AXI_TXN_DONE;
+	wire M1_AXI_ERROR;
 
 	// Create an instance of the example tb
 	`BD_WRAPPER dut (.ACLK(tb_ACLK),
 				.ARESETN(tb_ARESETn),
-				.M_AXI_TXN_DONE(M_AXI_TXN_DONE),
-				.M_AXI_ERROR(M_AXI_ERROR),
-				.M_AXI_INIT_AXI_TXN(M_AXI_INIT_AXI_TXN));
+				.M0_AXI_TXN_DONE(M0_AXI_TXN_DONE),
+				.M0_AXI_ERROR(M0_AXI_ERROR),
+				.M0_AXI_INIT_AXI_TXN(M0_AXI_INIT_AXI_TXN),
+				.M1_AXI_TXN_DONE(M1_AXI_TXN_DONE),
+				.M1_AXI_ERROR(M1_AXI_ERROR),
+				.M1_AXI_INIT_AXI_TXN(M1_AXI_INIT_AXI_TXN));
 
 	// Local Variables
 
@@ -252,13 +259,36 @@ module RISCV_Rocket_Core_RV64_v1_0_tb;
 		wait(tb_ARESETn === 1) @(posedge tb_ACLK);     
 		wait(tb_ARESETn === 1) @(posedge tb_ACLK);     
 
-		M_AXI_INIT_AXI_TXN = 1'b0;
-		#500 M_AXI_INIT_AXI_TXN = 1'b1;
+		M0_AXI_INIT_AXI_TXN = 1'b0;
+		#500 M0_AXI_INIT_AXI_TXN = 1'b1;
 
-		$display("EXAMPLE TEST M_AXI:");
-		wait( M_AXI_TXN_DONE == 1'b1);
-		$display("M_AXI: PTGEN_TEST_FINISHED!");
-		if ( M_AXI_ERROR ) begin
+		$display("EXAMPLE TEST M0_AXI:");
+		wait( M0_AXI_TXN_DONE == 1'b1);
+		$display("M0_AXI: PTGEN_TEST_FINISHED!");
+		if ( M0_AXI_ERROR ) begin
+		  $display("PTGEN_TEST: FAILED!");
+		end else begin
+		  $display("PTGEN_TEST: PASSED!");
+		end
+
+	end
+
+	// Drive the BFM
+	initial begin
+		// Wait for end of reset
+		wait(tb_ARESETn === 0) @(posedge tb_ACLK);
+		wait(tb_ARESETn === 1) @(posedge tb_ACLK);
+		wait(tb_ARESETn === 1) @(posedge tb_ACLK);     
+		wait(tb_ARESETn === 1) @(posedge tb_ACLK);     
+		wait(tb_ARESETn === 1) @(posedge tb_ACLK);     
+
+		M1_AXI_INIT_AXI_TXN = 1'b0;
+		#500 M1_AXI_INIT_AXI_TXN = 1'b1;
+
+		$display("EXAMPLE TEST M1_AXI:");
+		wait( M1_AXI_TXN_DONE == 1'b1);
+		$display("M1_AXI: PTGEN_TEST_FINISHED!");
+		if ( M1_AXI_ERROR ) begin
 		  $display("PTGEN_TEST: FAILED!");
 		end else begin
 		  $display("PTGEN_TEST: PASSED!");

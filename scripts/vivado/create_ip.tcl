@@ -69,8 +69,20 @@ if {[llength $ip_files] != 0} {
 ###########################################################
 
 ipx::package_project -import_files -force -root_dir $projdir
+
 ipx::associate_bus_interfaces -busif s_axi -clock $clk_s_axi [ipx::current_core]
+
+if {$clk_m_axi != ""} {
 ipx::associate_bus_interfaces -busif m_axi -clock $clk_m_axi [ipx::current_core]
+}
+
+if {$clk_m0_axi != ""} {
+ipx::associate_bus_interfaces -busif m0_axi -clock $clk_m0_axi [ipx::current_core]
+}
+
+if {$clk_m1_axi != ""} {
+ipx::associate_bus_interfaces -busif m1_axi -clock $clk_m1_axi [ipx::current_core]
+}
 
 ipx::remove_memory_map {s_axi} [ipx::current_core]
 ipx::add_memory_map {s_axi} [ipx::current_core]

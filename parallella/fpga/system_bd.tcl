@@ -301,7 +301,7 @@ CONFIG.NUM_PORTS {16} \
  ] $sys_concat_intc
 
   # Create interface connections
-  connect_bd_intf_net -intf_net RISCV_Rocket_Core_RV64_0_M_AXI [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/m_axi] [get_bd_intf_pins axi_mem_intercon_PS_slave/S00_AXI]
+  connect_bd_intf_net -intf_net RISCV_Rocket_Core_RV64_0_M0_AXI [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/m0_axi] [get_bd_intf_pins axi_mem_intercon_PS_slave/S00_AXI]
   connect_bd_intf_net -intf_net axi_mem_intercon_1_M00_AXI [get_bd_intf_pins axi_mem_intercon_PS_slave/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]
   connect_bd_intf_net -intf_net axi_mem_intercon_M00_AXI [get_bd_intf_pins axi_mem_intercon/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP1]
   connect_bd_intf_net -intf_net axi_mem_intercon_RV64_M00_AXI [get_bd_intf_pins RISCV_Rocket_Core_RV64_0/s_axi] [get_bd_intf_pins axi_mem_intercon_PS_master/M00_AXI]
@@ -317,7 +317,7 @@ CONFIG.NUM_PORTS {16} \
   connect_bd_net -net Net1 [get_bd_ports gpio_p] [get_bd_pins parallella_base_0/gpio_p]
   connect_bd_net -net Net2 [get_bd_ports i2c_scl] [get_bd_pins parallella_base_0/i2c_scl]
   connect_bd_net -net Net3 [get_bd_ports i2c_sda] [get_bd_pins parallella_base_0/i2c_sda]
-  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_50M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins RISCV_Rocket_Core_RV64_0/m0_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/m1_axi_aclk] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aclk] [get_bd_pins axi_mem_intercon_PS_master/ACLK] [get_bd_pins axi_mem_intercon_PS_master/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_master/S00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/ACLK] [get_bd_pins axi_mem_intercon_PS_slave/M00_ACLK] [get_bd_pins axi_mem_intercon_PS_slave/S00_ACLK] [get_bd_pins clk_wiz_0_100M_to_50M/clk_out1] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rst_processing_system7_0_25M/slowest_sync_clk]
   connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0_100M_to_50M/locked] [get_bd_pins rst_processing_system7_0_25M/dcm_locked]
   connect_bd_net -net parallella_base_0_cclk_n [get_bd_ports cclk_n] [get_bd_pins parallella_base_0/cclk_n]
   connect_bd_net -net parallella_base_0_cclk_p [get_bd_ports cclk_p] [get_bd_pins parallella_base_0/cclk_p]
@@ -349,7 +349,7 @@ CONFIG.NUM_PORTS {16} \
   connect_bd_net -net processing_system7_0_I2C0_SDA_O [get_bd_pins parallella_base_0/i2c_sda_o] [get_bd_pins processing_system7_0/I2C0_SDA_O]
   connect_bd_net -net processing_system7_0_I2C0_SDA_T [get_bd_pins parallella_base_0/i2c_sda_t] [get_bd_pins processing_system7_0/I2C0_SDA_T]
   connect_bd_net -net rst_processing_system7_0_25M_interconnect_aresetn [get_bd_pins axi_mem_intercon_PS_master/ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/ARESETN] [get_bd_pins rst_processing_system7_0_25M/interconnect_aresetn]
-  connect_bd_net -net rst_processing_system7_0_25M_peripheral_aresetn [get_bd_pins RISCV_Rocket_Core_RV64_0/m_axi_aresetn] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon_PS_master/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_master/S00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/S00_ARESETN] [get_bd_pins rst_processing_system7_0_25M/peripheral_aresetn]
+  connect_bd_net -net rst_processing_system7_0_25M_peripheral_aresetn [get_bd_pins RISCV_Rocket_Core_RV64_0/m0_axi_aresetn] [get_bd_pins RISCV_Rocket_Core_RV64_0/m1_axi_aresetn] [get_bd_pins RISCV_Rocket_Core_RV64_0/s_axi_aresetn] [get_bd_pins axi_mem_intercon_PS_master/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_master/S00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/M00_ARESETN] [get_bd_pins axi_mem_intercon_PS_slave/S00_ARESETN] [get_bd_pins rst_processing_system7_0_25M/peripheral_aresetn]
   connect_bd_net -net rxi_data_n_1 [get_bd_ports rxi_data_n] [get_bd_pins parallella_base_0/rxi_data_n]
   connect_bd_net -net rxi_data_p_1 [get_bd_ports rxi_data_p] [get_bd_pins parallella_base_0/rxi_data_p]
   connect_bd_net -net rxi_frame_n_1 [get_bd_ports rxi_frame_n] [get_bd_pins parallella_base_0/rxi_frame_n]
@@ -363,7 +363,7 @@ CONFIG.NUM_PORTS {16} \
   connect_bd_net -net txi_wr_wait_p_1 [get_bd_ports txi_wr_wait_p] [get_bd_pins parallella_base_0/txi_wr_wait_p]
 
   # Create address segments
-  create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces RISCV_Rocket_Core_RV64_0/m_axi] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
+  create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces RISCV_Rocket_Core_RV64_0/m0_axi] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x40000000 -offset 0x0 [get_bd_addr_spaces parallella_base_0/m_axi] [get_bd_addr_segs processing_system7_0/S_AXI_HP1/HP1_DDR_LOWOCM] SEG_processing_system7_0_HP1_DDR_LOWOCM
   create_bd_addr_seg -range 0x1000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs RISCV_Rocket_Core_RV64_0/s_axi/axi_lite] SEG_RISCV_Rocket_Core_RV64_0_axi_lite
   create_bd_addr_seg -range 0x40000000 -offset 0x80000000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs parallella_base_0/s_axi/axi_lite] SEG_parallella_base_0_axi_lite
