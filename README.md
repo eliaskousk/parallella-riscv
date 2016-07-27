@@ -17,11 +17,11 @@ will be created to aid inexperienced users make the most of this work and allow
 them to modify it for their own needs and purposes with custom hardware and /
 or software code.
 
-## Build and Usage Instructions
+## Instructions
 
-### Build Bitstream and Platform Software
+### Build Bitstream and Host Software
 
-In order to build a bitstream and / or the necessary platform software to boot the board you must first
+In order to build a bitstream and / or the necessary host software to boot the board you must first
 edit the `BOARD`, `JOBS`, `VIVADO_PATH` and `VIVADO_VERSION` variables in `${TOP}/scripts/settings.sh`
 if you need to change the target board (to e.g `zedboard` instead of the default `parallella`) or the
 number of jobs your machine can simultaneously handle while building (default is `8`) or the installation
