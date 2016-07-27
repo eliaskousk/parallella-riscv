@@ -73,6 +73,7 @@ zedboard_ip_deps: riscv_ip_setup riscv_ip_package
 
 parallella_ip_package = $(fpga_dir)/parallella_base/parallella_base.xpr
 $(parallella_ip_package): $(fpga_dir)/ip_params_parallella.tcl
+	${SCRIPTS}/setup.parallella.oh.submodule.sh
 	cd $(fpga_dir) && \
 	rm -rf parallella_base && \
 	vivado -mode tcl -source $(fpga_dir)/ip_package_parallella.tcl
@@ -222,9 +223,9 @@ riscv_toolchain:
 # -----------------------------
 #
 
-riscv_allsoftware: riscv_software riscv_linux
+riscv_software: riscv_baremetal riscv_linux
 
-riscv_software: riscv_fesvr riscv_bbl riscv_pk riscv_hello
+riscv_baremetal: riscv_fesvr riscv_pk riscv_hello
 
 riscv_fesvr:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -239,10 +240,6 @@ riscv_fesvr:
 	cd ${RISCVTOOLS}/riscv-fesvr && \
 	rm -rf build.arm
 
-riscv_bbl:
-	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
-	chmod 755 bbl && cp bbl $(final_output_dir)/riscv/
-
 riscv_pk:
 	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
 	chmod 755 pk && cp pk $(final_output_dir)/riscv/
@@ -254,7 +251,13 @@ riscv_hello:
 
 RISCVLinuxVersion = 4.1.17
 
-riscv_linux:
+riscv_linux: riscv_fesvr riscv_bbl riscv_kernel
+
+riscv_bbl:
+	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
+	chmod 755 bbl && cp bbl $(final_output_dir)/riscv/
+
+riscv_kernel:
 	git submodule update --init  -- ${BOOT}/riscv-linux
 	cd ${BOOT} && \
 	curl -L https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$(RISCVLinuxVersion).tar.xz | tar -xJkf - && \

@@ -7,5 +7,5 @@ source "${SCRIPTS}/set.env.sh"
 
 source ${VIVADO_PATH}/${VIVADO_VERSION}/settings64.sh
 cd ${TOP}/${BOARD}
-make riscv_software
+make riscv_baremetal
 
