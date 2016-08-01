@@ -170,12 +170,19 @@ module RISCV_Rocket_Core_RV64 #(
         .C_DRAM_BASE            (C_DRAM_BASE),
         .C_DRAM_BITS            (C_DRAM_BITS),
 
-        // ==========
-        // AXI Master
-        // ==========
+        // ============
+        // AXI Master 0
+        // ============
         .C_M0_AXI_ID_WIDTH       (C_M0_AXI_ID_WIDTH),
         .C_M0_AXI_ADDR_WIDTH     (C_M0_AXI_ADDR_WIDTH),
         .C_M0_AXI_DATA_WIDTH     (C_M0_AXI_DATA_WIDTH),
+        
+        // ============
+        // AXI Master 1
+        // ============
+        .C_M1_AXI_ID_WIDTH       (C_M1_AXI_ID_WIDTH),
+        .C_M1_AXI_ADDR_WIDTH     (C_M1_AXI_ADDR_WIDTH),
+        .C_M1_AXI_DATA_WIDTH     (C_M1_AXI_DATA_WIDTH),
         
         // =========
         // AXI Slave   
