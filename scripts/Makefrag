@@ -203,15 +203,18 @@ riscv_toolchain:
 	# Build the RISC-V Toolchain (Newlib version for use without an OS)
 	cd ${RISCVTOOLS} && \
 	git checkout -B current && \
-	git checkout master && \
-	git submodule update --init --recursive && \
-	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
-	export MAKEFLAGS=-j${JOBS} && \
+	git checkout priv-1.9 && \
+	git submodule update --init --recursive
+	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
+	sed -i "s/\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
+	cd ${RISCVTOOLS} && \
+	#export MAKEFLAGS=-j${JOBS} && \
 	./build.sh && \
 	cd riscv-gnu-toolchain && \
-	./configure --prefix=${RISCV} --with-arch=$(RISCV_CORE_ARCH) && \
-	make linux && \
+	./configure --prefix=${RISCV}/../linux && \
+	make linux
 	cd ${RISCVTOOLS} && \
+	git checkout -- ${RISCVTOOLS}/build.sh && \
 	git checkout current && \
 	git submodule update --init --recursive
 
@@ -252,19 +255,22 @@ riscv_hello:
 	riscv64-unknown-elf-gcc -o hello hello.c && \
 	cp hello $(final_output_dir)/riscv/
 
-RISCVLinuxVersion = 4.1.17
+RISCVLinuxVersion = 4.6.2
 
 riscv_linux:
 	git submodule update --init  -- ${BOOT}/riscv-linux
+	cd ${BOOT}/riscv-linux && \
+	git checkout priv-1.9 && \
+	sed -i "s/# CONFIG_CMDLINE_BOOL is not set/CONFIG_CMDLINE=\"mem=$(RISCV_DRAM_SIZE_LINUX)\"/" arch/riscv/configs/riscv64_spike
 	cd ${BOOT} && \
 	curl -L https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$(RISCVLinuxVersion).tar.xz | tar -xJkf - && \
 	rsync -a --ignore-existing linux-$(RISCVLinuxVersion)/ riscv-linux/ && \
-	rm -rf linux-$(RISCVLinuxVersion) && \
-	cd riscv-linux && \
-	sed -i "s/\(CONFIG_CMDLINE=\"root=\/dev\/htifblk0\)\"/\1 mem=$(RISCV_DRAM_SIZE_LINUX)\"/" arch/riscv/configs/riscv64_spike && \
+	rm -rf linux-$(RISCVLinuxVersion)
+	cd ${BOOT}/riscv-linux && \
 	make ARCH=riscv defconfig && \
 	make -j${JOBS} ARCH=riscv vmlinux && \
-	cp vmlinux $(final_output_dir)/riscv/
+	cp vmlinux $(final_output_dir)/riscv/ && \
+	git checkout -- arch/riscv/configs/riscv64_spike
 
 #
 # ---------------------
