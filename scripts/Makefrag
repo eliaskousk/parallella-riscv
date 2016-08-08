@@ -206,7 +206,7 @@ riscv_toolchain:
 	git checkout -B current && \
 	git checkout master && \
 	git submodule update --init --recursive && \
-	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
+	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
 	export MAKEFLAGS=-j${JOBS} && \
 	./build.sh && \
 	cd riscv-gnu-toolchain && \
