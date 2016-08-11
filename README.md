@@ -417,7 +417,7 @@ In order to build the boot images (U-Boot, Linux Kernel) for ZedBoard board targ
 
 ## Design
 
-![Vivado Block Diagram](doc/images/vivado.parallella.riscv.bd.png)
+![Vivado Block Diagram](doc/images/vivado.parallella.riscv.system.bd.png)
 
 ### Parallella Base Component
 
