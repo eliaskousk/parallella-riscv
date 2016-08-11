@@ -2,13 +2,18 @@
 # Zedboard Makefile
 # =================
 
+#
+# See ./parallella/Makefile for explanation
+# of all the variables below
+#
+
 BOARD_NAME = zedboard
 
 BOARD_EDITION = none
 
-BOARD_MODEL = em.avnet.com:zed:part0:1.0
+BOARD_PART = em.avnet.com:zed:part0:1.0
 
-BOARD_PART = xc7z020clg484-1
+BOARD_DEVICE = xc7z020clg484-1
 
 LINUX_REPO = linux-xlnx
 

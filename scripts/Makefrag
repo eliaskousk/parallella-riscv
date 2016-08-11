@@ -54,6 +54,9 @@ fpga_dir = $(base_dir)/$(BOARD_NAME)/fpga
 bitstream = $(fpga_dir)/$(BOARD_NAME).bit
 $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	cd $(fpga_dir) && \
+	export BOARD_DEVICE=$(BOARD_DEVICE) && \
+	export BOARD_PART=$(BOARD_PART) && \
+	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl && \
 	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit
 	cd $(boot_build_dir) && \
@@ -65,6 +68,9 @@ $(system_project): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	cd $(fpga_dir) && \
 	rm -rf $(BOARD_NAME)_riscv && \
 	sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
+	export BOARD_DEVICE=$(BOARD_DEVICE) && \
+	export BOARD_PART=$(BOARD_PART) && \
+	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/system_project.tcl
 system_project: $(system_project)
 
@@ -76,6 +82,9 @@ $(parallella_ip_package): $(fpga_dir)/ip_params_parallella.tcl
 	${SCRIPTS}/setup.parallella.oh.submodule.sh
 	cd $(fpga_dir) && \
 	rm -rf parallella_base && \
+	export BOARD_DEVICE=$(BOARD_DEVICE) && \
+	export BOARD_PART=$(BOARD_PART) && \
+	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/ip_package_parallella.tcl
 parallella_ip_package: $(parallella_ip_package)
 
@@ -83,6 +92,9 @@ riscv_ip_package = $(fpga_dir)/riscv_rv64g/riscv_rv64g.xpr
 $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
 	cd $(fpga_dir) && \
 	rm -rf riscv_rv64g && \
+	export BOARD_DEVICE=$(BOARD_DEVICE) && \
+	export BOARD_PART=$(BOARD_PART) && \
+	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/ip_package_riscv.tcl
 riscv_ip_package: $(riscv_ip_package)
 

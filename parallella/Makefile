@@ -16,9 +16,9 @@ BOARD_NAME = parallella
 
 BOARD_EDITION = kickstarter
 
-BOARD_MODEL = none
+BOARD_PART =
 
-BOARD_PART = xc7z020clg400-1
+BOARD_DEVICE = xc7z010clg400-1
 
 
 #

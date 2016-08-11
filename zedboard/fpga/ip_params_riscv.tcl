@@ -5,10 +5,12 @@ set projdir ./riscv_rv64/
 set root "../../parallella"
 
 # Device name
-set partname "xc7z020clg484-1"
+#set partname "xc7z020clg484-1"
+set partname $::env(BOARD_DEVICE)
 
 # Board name (Zedboard)
-set boardpart "em.avnet.com:zed:part0:1.3"
+#set boardpart "em.avnet.com:zed:part0:1.3"
+set boardpart $::env(BOARD_PART)
 
 set hdl_files [list \
                $root/hdl/riscv.rv64/ \
