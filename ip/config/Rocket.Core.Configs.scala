@@ -373,7 +373,7 @@ class FPGAConfig extends Config (
 
 class DefaultFPGAConfig extends Config(new FPGAConfig ++ new DefaultConfig)
 
-class NormalConfig extends Config (
+class NoFPUConfig extends Config (
     topDefinitions = { (pname,site,here) => pname match {
       case UseFPU => false
     }},
@@ -385,7 +385,7 @@ class NormalConfig extends Config (
   }
 )
 
-class DefaultFPGANormalConfig extends Config(new NormalConfig ++ new DefaultFPGAConfig)
+class DefaultFPGANoFPUConfig extends Config(new NoFPUConfig ++ new DefaultFPGAConfig)
 
 class SmallConfig extends Config (
     topDefinitions = { (pname,site,here) => pname match {

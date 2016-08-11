@@ -91,7 +91,7 @@ UBOOT_CONFIG = adapteva_parallella
 
 RISCV_CORE_ARCH = RV64IMA
 
-RISCV_CORE_CONFIG = DefaultFPGANormalConfig
+RISCV_CORE_CONFIG = DefaultFPGANoFPUConfig
 
 
 #
