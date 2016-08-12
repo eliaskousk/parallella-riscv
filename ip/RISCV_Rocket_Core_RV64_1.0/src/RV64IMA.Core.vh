@@ -43228,8 +43228,8 @@ module Rocket(input clk, input reset,
     input  io_imem_btb_resp_bits_mask,
     input  io_imem_btb_resp_bits_bridx,
     input [38:0] io_imem_btb_resp_bits_target,
-    input [5:0] io_imem_btb_resp_bits_entry,
-    input [6:0] io_imem_btb_resp_bits_bht_history,
+    input [2:0] io_imem_btb_resp_bits_entry,
+    input [3:0] io_imem_btb_resp_bits_bht_history,
     input [1:0] io_imem_btb_resp_bits_bht_value,
     output io_imem_btb_update_valid,
     output io_imem_btb_update_bits_prediction_valid,
@@ -43237,8 +43237,8 @@ module Rocket(input clk, input reset,
     output io_imem_btb_update_bits_prediction_bits_mask,
     output io_imem_btb_update_bits_prediction_bits_bridx,
     output[38:0] io_imem_btb_update_bits_prediction_bits_target,
-    output[5:0] io_imem_btb_update_bits_prediction_bits_entry,
-    output[6:0] io_imem_btb_update_bits_prediction_bits_bht_history,
+    output[2:0] io_imem_btb_update_bits_prediction_bits_entry,
+    output[3:0] io_imem_btb_update_bits_prediction_bits_bht_history,
     output[1:0] io_imem_btb_update_bits_prediction_bits_bht_value,
     output[38:0] io_imem_btb_update_bits_pc,
     output[38:0] io_imem_btb_update_bits_target,
@@ -43252,8 +43252,8 @@ module Rocket(input clk, input reset,
     output io_imem_bht_update_bits_prediction_bits_mask,
     output io_imem_bht_update_bits_prediction_bits_bridx,
     output[38:0] io_imem_bht_update_bits_prediction_bits_target,
-    output[5:0] io_imem_bht_update_bits_prediction_bits_entry,
-    output[6:0] io_imem_bht_update_bits_prediction_bits_bht_history,
+    output[2:0] io_imem_bht_update_bits_prediction_bits_entry,
+    output[3:0] io_imem_bht_update_bits_prediction_bits_bht_history,
     output[1:0] io_imem_bht_update_bits_prediction_bits_bht_value,
     output[38:0] io_imem_bht_update_bits_pc,
     output io_imem_bht_update_bits_taken,
@@ -43267,8 +43267,8 @@ module Rocket(input clk, input reset,
     output io_imem_ras_update_bits_prediction_bits_mask,
     output io_imem_ras_update_bits_prediction_bits_bridx,
     output[38:0] io_imem_ras_update_bits_prediction_bits_target,
-    output[5:0] io_imem_ras_update_bits_prediction_bits_entry,
-    output[6:0] io_imem_ras_update_bits_prediction_bits_bht_history,
+    output[2:0] io_imem_ras_update_bits_prediction_bits_entry,
+    output[3:0] io_imem_ras_update_bits_prediction_bits_bht_history,
     output[1:0] io_imem_ras_update_bits_prediction_bits_bht_value,
     output io_imem_invalidate,
     input [39:0] io_imem_npc,
@@ -44573,14 +44573,14 @@ module Rocket(input clk, input reset,
   wire T875;
   reg  ex_reg_btb_hit;
   wire T876;
-  reg [6:0] mem_reg_btb_resp_bht_history;
-  wire[6:0] T877;
-  reg [6:0] ex_reg_btb_resp_bht_history;
-  wire[6:0] T878;
-  reg [5:0] mem_reg_btb_resp_entry;
-  wire[5:0] T879;
-  reg [5:0] ex_reg_btb_resp_entry;
-  wire[5:0] T880;
+  reg [3:0] mem_reg_btb_resp_bht_history;
+  wire[3:0] T877;
+  reg [3:0] ex_reg_btb_resp_bht_history;
+  wire[3:0] T878;
+  reg [2:0] mem_reg_btb_resp_entry;
+  wire[2:0] T879;
+  reg [2:0] ex_reg_btb_resp_entry;
+  wire[2:0] T880;
   reg [38:0] mem_reg_btb_resp_target;
   wire[38:0] T881;
   reg [38:0] ex_reg_btb_resp_target;
@@ -46434,8 +46434,8 @@ module BTB(input clk, input reset,
     output io_resp_bits_mask,
     output io_resp_bits_bridx,
     output[38:0] io_resp_bits_target,
-    output[5:0] io_resp_bits_entry,
-    output[6:0] io_resp_bits_bht_history,
+    output[2:0] io_resp_bits_entry,
+    output[3:0] io_resp_bits_bht_history,
     output[1:0] io_resp_bits_bht_value,
     input  io_btb_update_valid,
     input  io_btb_update_bits_prediction_valid,
@@ -46443,8 +46443,8 @@ module BTB(input clk, input reset,
     input  io_btb_update_bits_prediction_bits_mask,
     input  io_btb_update_bits_prediction_bits_bridx,
     input [38:0] io_btb_update_bits_prediction_bits_target,
-    input [5:0] io_btb_update_bits_prediction_bits_entry,
-    input [6:0] io_btb_update_bits_prediction_bits_bht_history,
+    input [2:0] io_btb_update_bits_prediction_bits_entry,
+    input [3:0] io_btb_update_bits_prediction_bits_bht_history,
     input [1:0] io_btb_update_bits_prediction_bits_bht_value,
     input [38:0] io_btb_update_bits_pc,
     input [38:0] io_btb_update_bits_target,
@@ -46458,8 +46458,8 @@ module BTB(input clk, input reset,
     input  io_bht_update_bits_prediction_bits_mask,
     input  io_bht_update_bits_prediction_bits_bridx,
     input [38:0] io_bht_update_bits_prediction_bits_target,
-    input [5:0] io_bht_update_bits_prediction_bits_entry,
-    input [6:0] io_bht_update_bits_prediction_bits_bht_history,
+    input [2:0] io_bht_update_bits_prediction_bits_entry,
+    input [3:0] io_bht_update_bits_prediction_bits_bht_history,
     input [1:0] io_bht_update_bits_prediction_bits_bht_value,
     input [38:0] io_bht_update_bits_pc,
     input  io_bht_update_bits_taken,
@@ -46473,8 +46473,8 @@ module BTB(input clk, input reset,
     input  io_ras_update_bits_prediction_bits_mask,
     input  io_ras_update_bits_prediction_bits_bridx,
     input [38:0] io_ras_update_bits_prediction_bits_target,
-    input [5:0] io_ras_update_bits_prediction_bits_entry,
-    input [6:0] io_ras_update_bits_prediction_bits_bht_history,
+    input [2:0] io_ras_update_bits_prediction_bits_entry,
+    input [3:0] io_ras_update_bits_prediction_bits_bht_history,
     input [1:0] io_ras_update_bits_prediction_bits_bht_value,
     input  io_invalidate
 );
@@ -46487,10 +46487,10 @@ module BTB(input clk, input reset,
   wire[38:0] T5;
   wire T6;
   reg  R7;
-  wire T2288;
+  wire T464;
   wire[1:0] T8;
   wire[1:0] T9;
-  reg [1:0] T10 [127:0];
+  reg [1:0] T10 [15:0];
   wire[1:0] T11;
   wire[1:0] T12;
   wire T13;
@@ -46502,100 +46502,99 @@ module BTB(input clk, input reset,
   wire T19;
   wire T20;
   wire T21;
-  wire[6:0] T22;
-  wire[6:0] T23;
-  wire[6:0] T24;
-  reg [6:0] R25;
-  wire[6:0] T26;
-  wire[6:0] T27;
-  wire[6:0] T28;
-  wire[5:0] T29;
+  wire[3:0] T22;
+  wire[3:0] T23;
+  wire[3:0] T24;
+  reg [3:0] R25;
+  wire[3:0] T26;
+  wire[3:0] T27;
+  wire[3:0] T28;
+  wire[2:0] T29;
   wire T30;
   wire T31;
   wire T32;
   wire T33;
   wire T34;
-  reg  isJump_61;
+  reg  isJump_7;
   wire T35;
   reg  R36;
   wire T37;
   wire T38;
   wire T39;
-  wire[63:0] T40;
-  wire[5:0] T41;
-  wire[5:0] T42;
-  reg [5:0] nextRepl;
-  wire[5:0] T2289;
-  wire[5:0] T43;
-  wire[5:0] T44;
-  wire[5:0] T45;
+  wire[7:0] T40;
+  wire[2:0] T41;
+  wire[2:0] T42;
+  reg [2:0] nextRepl;
+  wire[2:0] T465;
+  wire[2:0] T43;
+  wire[2:0] T44;
+  wire T45;
   wire T46;
-  wire T47;
-  wire T48;
-  reg [5:0] R49;
-  wire[5:0] T50;
+  reg [2:0] R47;
+  wire[2:0] T48;
   reg  updateHit;
-  wire T51;
-  wire T52;
-  wire[61:0] hits;
-  wire[61:0] T53;
-  wire[61:0] T54;
-  wire[30:0] T55;
-  wire[15:0] T56;
-  wire[7:0] T57;
+  wire T49;
+  wire T50;
+  wire[7:0] hits;
+  wire[7:0] T51;
+  wire[7:0] T52;
+  wire[3:0] T53;
+  wire[1:0] T54;
+  wire T55;
+  wire[3:0] T56;
+  wire[3:0] pageHit;
+  reg [3:0] pageValid;
+  wire[3:0] T466;
+  wire[3:0] T57;
   wire[3:0] T58;
-  wire[1:0] T59;
-  wire T60;
-  wire[5:0] T61;
-  wire[5:0] pageHit;
-  reg [5:0] pageValid;
-  wire[5:0] T2290;
-  wire[5:0] T62;
-  wire[5:0] T63;
-  wire[5:0] T64;
-  wire[5:0] pageReplEn;
-  wire[5:0] tgtPageReplEn;
-  wire[5:0] tgtPageRepl;
-  wire[5:0] T65;
-  wire[5:0] T2291;
-  wire T66;
-  wire[5:0] T67;
-  wire[4:0] T68;
-  wire[5:0] idxPageUpdateOH;
-  wire[5:0] idxPageRepl;
-  wire[5:0] T2292;
-  wire[7:0] T69;
-  reg [2:0] R70;
-  wire[2:0] T2293;
-  wire[2:0] T71;
-  wire[2:0] T72;
-  wire[2:0] T73;
-  wire T74;
-  wire T75;
+  wire[3:0] T59;
+  wire[3:0] pageReplEn;
+  wire[3:0] tgtPageReplEn;
+  wire[3:0] tgtPageRepl;
+  wire[3:0] T60;
+  wire[3:0] T467;
+  wire T61;
+  wire[3:0] T62;
+  wire[2:0] T63;
+  wire[3:0] idxPageUpdateOH;
+  wire[3:0] idxPageRepl;
+  wire[3:0] T64;
+  reg [1:0] R65;
+  wire[1:0] T468;
+  wire[1:0] T66;
+  wire[1:0] T67;
+  wire T68;
   wire doPageRepl;
   wire doIdxPageRepl;
-  wire[5:0] updatePageHit;
-  wire[5:0] T76;
-  wire[5:0] T77;
-  wire[2:0] T78;
-  wire[1:0] T79;
-  wire T80;
-  wire[26:0] T81;
-  reg [38:0] R82;
-  wire[38:0] T83;
-  wire[26:0] T84;
-  reg [26:0] pages [5:0];
-  wire[26:0] T85;
-  wire[26:0] T86;
+  wire[3:0] updatePageHit;
+  wire[3:0] T69;
+  wire[3:0] T70;
+  wire[1:0] T71;
+  wire T72;
+  wire[26:0] T73;
+  reg [38:0] R74;
+  wire[38:0] T75;
+  wire[26:0] T76;
+  reg [26:0] pages [3:0];
+  wire[26:0] T77;
+  wire[26:0] T78;
+  wire[26:0] T79;
+  wire[26:0] T80;
+  wire T81;
+  wire[3:0] T82;
+  wire T83;
+  wire T84;
+  wire T85;
+  wire T86;
   wire[26:0] T87;
-  wire[26:0] T88;
+  wire T88;
   wire T89;
-  wire[5:0] T90;
-  wire T91;
-  wire T92;
-  wire T93;
-  wire T94;
-  wire[26:0] T95;
+  wire T90;
+  wire[26:0] T91;
+  wire[26:0] T92;
+  wire[26:0] T93;
+  wire[26:0] T94;
+  wire T95;
   wire T96;
   wire T97;
   wire T98;
@@ -46603,2504 +46602,436 @@ module BTB(input clk, input reset,
   wire T100;
   wire T101;
   wire T102;
-  wire[26:0] T103;
+  wire T103;
   wire[26:0] T104;
-  wire[26:0] T105;
-  wire[26:0] T106;
-  wire T107;
+  wire[1:0] T105;
+  wire T106;
+  wire[26:0] T107;
   wire T108;
-  wire T109;
-  wire T110;
-  wire[26:0] T111;
-  wire T112;
-  wire T113;
-  wire T114;
-  wire[26:0] T115;
-  wire T116;
-  wire T117;
-  wire T118;
-  wire T119;
-  wire[26:0] T120;
-  wire T121;
-  wire[26:0] T122;
-  wire[2:0] T123;
-  wire[1:0] T124;
-  wire T125;
-  wire[26:0] T126;
-  wire T127;
-  wire[26:0] T128;
-  wire T129;
-  wire[26:0] T130;
+  wire[26:0] T109;
   wire useUpdatePageHit;
   wire samePage;
-  wire[26:0] T131;
-  wire[26:0] T132;
+  wire[26:0] T110;
+  wire[26:0] T111;
   wire doTgtPageRepl;
-  wire T133;
+  wire T112;
   wire usePageHit;
-  wire[5:0] T134;
-  wire[5:0] T135;
-  wire T136;
-  wire[5:0] idxPageReplEn;
-  wire T137;
-  wire[5:0] T138;
-  wire[5:0] T139;
-  wire[2:0] T140;
+  wire[3:0] T113;
+  wire[3:0] T114;
+  wire T115;
+  wire[3:0] idxPageReplEn;
+  wire T116;
+  wire[3:0] T117;
+  wire[3:0] T118;
+  wire[1:0] T119;
+  wire T120;
+  wire[26:0] T121;
+  wire[26:0] T122;
+  wire T123;
+  wire[26:0] T124;
+  wire[1:0] T125;
+  wire T126;
+  wire[26:0] T127;
+  wire T128;
+  wire[26:0] T129;
+  wire[3:0] idxPagesOH_0;
+  wire[3:0] T130;
+  wire[1:0] T131;
+  reg [1:0] idxPages [7:0];
+  wire[1:0] T132;
+  wire[1:0] T469;
+  wire T470;
+  wire[1:0] T471;
+  wire[1:0] T472;
+  wire[1:0] T473;
+  wire T474;
+  wire T133;
+  wire[3:0] T134;
+  wire[3:0] idxPagesOH_1;
+  wire[3:0] T135;
+  wire[1:0] T136;
+  wire[1:0] T137;
+  wire T138;
+  wire[3:0] T139;
+  wire[3:0] idxPagesOH_2;
+  wire[3:0] T140;
   wire[1:0] T141;
   wire T142;
-  wire[26:0] T143;
-  wire[26:0] T144;
-  wire T145;
-  wire[26:0] T146;
-  wire T147;
-  wire[26:0] T148;
-  wire[2:0] T149;
-  wire[1:0] T150;
-  wire T151;
-  wire[26:0] T152;
-  wire T153;
-  wire[26:0] T154;
-  wire T155;
-  wire[26:0] T156;
-  wire[5:0] idxPagesOH_0;
-  wire[7:0] T157;
-  wire[2:0] T158;
-  reg [2:0] idxPages [61:0];
-  wire[2:0] T159;
-  wire[2:0] T2294;
-  wire[1:0] T2295;
-  wire T2296;
-  wire[1:0] T2297;
-  wire[1:0] T2298;
-  wire[3:0] T2299;
-  wire[3:0] T2300;
-  wire[1:0] T2301;
-  wire[1:0] T2302;
-  wire T2303;
-  wire T2304;
-  wire T160;
+  wire[3:0] T143;
+  wire[3:0] idxPagesOH_3;
+  wire[3:0] T144;
+  wire[1:0] T145;
+  wire[3:0] T146;
+  wire[1:0] T147;
+  wire T148;
+  wire[3:0] T149;
+  wire[3:0] idxPagesOH_4;
+  wire[3:0] T150;
+  wire[1:0] T151;
+  wire T152;
+  wire[3:0] T153;
+  wire[3:0] idxPagesOH_5;
+  wire[3:0] T154;
+  wire[1:0] T155;
+  wire[1:0] T156;
+  wire T157;
+  wire[3:0] T158;
+  wire[3:0] idxPagesOH_6;
+  wire[3:0] T159;
+  wire[1:0] T160;
   wire T161;
-  wire T162;
-  wire[5:0] T163;
-  wire[5:0] idxPagesOH_1;
-  wire[7:0] T164;
-  wire[2:0] T165;
-  wire[1:0] T166;
-  wire T167;
-  wire[5:0] T168;
-  wire[5:0] idxPagesOH_2;
-  wire[7:0] T169;
-  wire[2:0] T170;
-  wire T171;
-  wire[5:0] T172;
-  wire[5:0] idxPagesOH_3;
-  wire[7:0] T173;
-  wire[2:0] T174;
-  wire[3:0] T175;
+  wire[3:0] T162;
+  wire[3:0] idxPagesOH_7;
+  wire[3:0] T163;
+  wire[1:0] T164;
+  wire[7:0] T165;
+  wire[7:0] T166;
+  wire[7:0] T167;
+  wire[3:0] T168;
+  wire[1:0] T169;
+  wire T170;
+  wire[11:0] T171;
+  wire[11:0] T172;
+  reg [11:0] idxs [7:0];
+  wire[11:0] T173;
+  wire[11:0] T475;
+  wire T174;
+  wire[11:0] T175;
   wire[1:0] T176;
   wire T177;
-  wire[5:0] T178;
-  wire[5:0] idxPagesOH_4;
-  wire[7:0] T179;
-  wire[2:0] T180;
-  wire T181;
-  wire[5:0] T182;
-  wire[5:0] idxPagesOH_5;
-  wire[7:0] T183;
-  wire[2:0] T184;
-  wire[1:0] T185;
-  wire T186;
-  wire[5:0] T187;
-  wire[5:0] idxPagesOH_6;
-  wire[7:0] T188;
-  wire[2:0] T189;
+  wire[11:0] T178;
+  wire T179;
+  wire[11:0] T180;
+  wire[3:0] T181;
+  wire[1:0] T182;
+  wire T183;
+  wire[11:0] T184;
+  wire T185;
+  wire[11:0] T186;
+  wire[1:0] T187;
+  wire T188;
+  wire[11:0] T189;
   wire T190;
-  wire[5:0] T191;
-  wire[5:0] idxPagesOH_7;
+  wire[11:0] T191;
+  reg [7:0] idxValid;
+  wire[7:0] T476;
   wire[7:0] T192;
-  wire[2:0] T193;
+  wire[7:0] T193;
   wire[7:0] T194;
-  wire[3:0] T195;
-  wire[1:0] T196;
-  wire T197;
-  wire[5:0] T198;
-  wire[5:0] idxPagesOH_8;
+  wire[7:0] T195;
+  wire[7:0] T196;
+  wire[7:0] T197;
+  wire[7:0] T198;
   wire[7:0] T199;
-  wire[2:0] T200;
-  wire T201;
-  wire[5:0] T202;
-  wire[5:0] idxPagesOH_9;
-  wire[7:0] T203;
-  wire[2:0] T204;
-  wire[1:0] T205;
-  wire T206;
-  wire[5:0] T207;
-  wire[5:0] idxPagesOH_10;
-  wire[7:0] T208;
-  wire[2:0] T209;
-  wire T210;
-  wire[5:0] T211;
-  wire[5:0] idxPagesOH_11;
-  wire[7:0] T212;
-  wire[2:0] T213;
-  wire[3:0] T214;
-  wire[1:0] T215;
-  wire T216;
-  wire[5:0] T217;
-  wire[5:0] idxPagesOH_12;
-  wire[7:0] T218;
-  wire[2:0] T219;
-  wire T220;
-  wire[5:0] T221;
-  wire[5:0] idxPagesOH_13;
-  wire[7:0] T222;
-  wire[2:0] T223;
-  wire[1:0] T224;
-  wire T225;
-  wire[5:0] T226;
-  wire[5:0] idxPagesOH_14;
-  wire[7:0] T227;
-  wire[2:0] T228;
-  wire T229;
-  wire[5:0] T230;
-  wire[5:0] idxPagesOH_15;
-  wire[7:0] T231;
-  wire[2:0] T232;
-  wire[14:0] T233;
-  wire[7:0] T234;
-  wire[3:0] T235;
-  wire[1:0] T236;
-  wire T237;
-  wire[5:0] T238;
-  wire[5:0] idxPagesOH_16;
-  wire[7:0] T239;
-  wire[2:0] T240;
-  wire T241;
-  wire[5:0] T242;
-  wire[5:0] idxPagesOH_17;
-  wire[7:0] T243;
-  wire[2:0] T244;
-  wire[1:0] T245;
-  wire T246;
-  wire[5:0] T247;
-  wire[5:0] idxPagesOH_18;
-  wire[7:0] T248;
-  wire[2:0] T249;
-  wire T250;
-  wire[5:0] T251;
-  wire[5:0] idxPagesOH_19;
-  wire[7:0] T252;
-  wire[2:0] T253;
-  wire[3:0] T254;
-  wire[1:0] T255;
-  wire T256;
-  wire[5:0] T257;
-  wire[5:0] idxPagesOH_20;
-  wire[7:0] T258;
-  wire[2:0] T259;
-  wire T260;
-  wire[5:0] T261;
-  wire[5:0] idxPagesOH_21;
-  wire[7:0] T262;
-  wire[2:0] T263;
-  wire[1:0] T264;
-  wire T265;
-  wire[5:0] T266;
-  wire[5:0] idxPagesOH_22;
-  wire[7:0] T267;
-  wire[2:0] T268;
-  wire T269;
-  wire[5:0] T270;
-  wire[5:0] idxPagesOH_23;
-  wire[7:0] T271;
-  wire[2:0] T272;
-  wire[6:0] T273;
-  wire[3:0] T274;
-  wire[1:0] T275;
-  wire T276;
-  wire[5:0] T277;
-  wire[5:0] idxPagesOH_24;
-  wire[7:0] T278;
-  wire[2:0] T279;
-  wire T280;
-  wire[5:0] T281;
-  wire[5:0] idxPagesOH_25;
-  wire[7:0] T282;
-  wire[2:0] T283;
-  wire[1:0] T284;
-  wire T285;
-  wire[5:0] T286;
-  wire[5:0] idxPagesOH_26;
-  wire[7:0] T287;
-  wire[2:0] T288;
-  wire T289;
-  wire[5:0] T290;
-  wire[5:0] idxPagesOH_27;
-  wire[7:0] T291;
-  wire[2:0] T292;
-  wire[2:0] T293;
-  wire[1:0] T294;
-  wire T295;
-  wire[5:0] T296;
-  wire[5:0] idxPagesOH_28;
-  wire[7:0] T297;
-  wire[2:0] T298;
-  wire T299;
-  wire[5:0] T300;
-  wire[5:0] idxPagesOH_29;
-  wire[7:0] T301;
-  wire[2:0] T302;
-  wire T303;
-  wire[5:0] T304;
-  wire[5:0] idxPagesOH_30;
-  wire[7:0] T305;
-  wire[2:0] T306;
-  wire[30:0] T307;
-  wire[15:0] T308;
-  wire[7:0] T309;
-  wire[3:0] T310;
-  wire[1:0] T311;
-  wire T312;
-  wire[5:0] T313;
-  wire[5:0] idxPagesOH_31;
-  wire[7:0] T314;
-  wire[2:0] T315;
-  wire T316;
-  wire[5:0] T317;
-  wire[5:0] idxPagesOH_32;
-  wire[7:0] T318;
-  wire[2:0] T319;
-  wire[1:0] T320;
-  wire T321;
-  wire[5:0] T322;
-  wire[5:0] idxPagesOH_33;
-  wire[7:0] T323;
-  wire[2:0] T324;
-  wire T325;
-  wire[5:0] T326;
-  wire[5:0] idxPagesOH_34;
-  wire[7:0] T327;
-  wire[2:0] T328;
-  wire[3:0] T329;
-  wire[1:0] T330;
-  wire T331;
-  wire[5:0] T332;
-  wire[5:0] idxPagesOH_35;
-  wire[7:0] T333;
-  wire[2:0] T334;
-  wire T335;
-  wire[5:0] T336;
-  wire[5:0] idxPagesOH_36;
-  wire[7:0] T337;
-  wire[2:0] T338;
-  wire[1:0] T339;
-  wire T340;
-  wire[5:0] T341;
-  wire[5:0] idxPagesOH_37;
-  wire[7:0] T342;
-  wire[2:0] T343;
-  wire T344;
-  wire[5:0] T345;
-  wire[5:0] idxPagesOH_38;
-  wire[7:0] T346;
-  wire[2:0] T347;
-  wire[7:0] T348;
-  wire[3:0] T349;
-  wire[1:0] T350;
-  wire T351;
-  wire[5:0] T352;
-  wire[5:0] idxPagesOH_39;
-  wire[7:0] T353;
-  wire[2:0] T354;
-  wire T355;
-  wire[5:0] T356;
-  wire[5:0] idxPagesOH_40;
-  wire[7:0] T357;
-  wire[2:0] T358;
-  wire[1:0] T359;
-  wire T360;
-  wire[5:0] T361;
-  wire[5:0] idxPagesOH_41;
-  wire[7:0] T362;
-  wire[2:0] T363;
-  wire T364;
-  wire[5:0] T365;
-  wire[5:0] idxPagesOH_42;
-  wire[7:0] T366;
-  wire[2:0] T367;
-  wire[3:0] T368;
-  wire[1:0] T369;
-  wire T370;
-  wire[5:0] T371;
-  wire[5:0] idxPagesOH_43;
-  wire[7:0] T372;
-  wire[2:0] T373;
-  wire T374;
-  wire[5:0] T375;
-  wire[5:0] idxPagesOH_44;
-  wire[7:0] T376;
-  wire[2:0] T377;
-  wire[1:0] T378;
-  wire T379;
-  wire[5:0] T380;
-  wire[5:0] idxPagesOH_45;
-  wire[7:0] T381;
-  wire[2:0] T382;
-  wire T383;
-  wire[5:0] T384;
-  wire[5:0] idxPagesOH_46;
-  wire[7:0] T385;
-  wire[2:0] T386;
-  wire[14:0] T387;
-  wire[7:0] T388;
-  wire[3:0] T389;
-  wire[1:0] T390;
-  wire T391;
-  wire[5:0] T392;
-  wire[5:0] idxPagesOH_47;
-  wire[7:0] T393;
-  wire[2:0] T394;
-  wire T395;
-  wire[5:0] T396;
-  wire[5:0] idxPagesOH_48;
-  wire[7:0] T397;
-  wire[2:0] T398;
-  wire[1:0] T399;
-  wire T400;
-  wire[5:0] T401;
-  wire[5:0] idxPagesOH_49;
-  wire[7:0] T402;
-  wire[2:0] T403;
-  wire T404;
-  wire[5:0] T405;
-  wire[5:0] idxPagesOH_50;
-  wire[7:0] T406;
-  wire[2:0] T407;
-  wire[3:0] T408;
-  wire[1:0] T409;
-  wire T410;
-  wire[5:0] T411;
-  wire[5:0] idxPagesOH_51;
-  wire[7:0] T412;
-  wire[2:0] T413;
-  wire T414;
-  wire[5:0] T415;
-  wire[5:0] idxPagesOH_52;
-  wire[7:0] T416;
-  wire[2:0] T417;
-  wire[1:0] T418;
-  wire T419;
-  wire[5:0] T420;
-  wire[5:0] idxPagesOH_53;
-  wire[7:0] T421;
-  wire[2:0] T422;
-  wire T423;
-  wire[5:0] T424;
-  wire[5:0] idxPagesOH_54;
-  wire[7:0] T425;
-  wire[2:0] T426;
-  wire[6:0] T427;
-  wire[3:0] T428;
-  wire[1:0] T429;
-  wire T430;
-  wire[5:0] T431;
-  wire[5:0] idxPagesOH_55;
-  wire[7:0] T432;
-  wire[2:0] T433;
-  wire T434;
-  wire[5:0] T435;
-  wire[5:0] idxPagesOH_56;
-  wire[7:0] T436;
-  wire[2:0] T437;
-  wire[1:0] T438;
-  wire T439;
-  wire[5:0] T440;
-  wire[5:0] idxPagesOH_57;
-  wire[7:0] T441;
-  wire[2:0] T442;
-  wire T443;
-  wire[5:0] T444;
-  wire[5:0] idxPagesOH_58;
-  wire[7:0] T445;
-  wire[2:0] T446;
-  wire[2:0] T447;
-  wire[1:0] T448;
-  wire T449;
-  wire[5:0] T450;
-  wire[5:0] idxPagesOH_59;
-  wire[7:0] T451;
-  wire[2:0] T452;
-  wire T453;
-  wire[5:0] T454;
-  wire[5:0] idxPagesOH_60;
-  wire[7:0] T455;
-  wire[2:0] T456;
-  wire T457;
-  wire[5:0] T458;
-  wire[5:0] idxPagesOH_61;
-  wire[7:0] T459;
-  wire[2:0] T460;
-  wire[61:0] T461;
-  wire[61:0] T462;
-  wire[61:0] T463;
-  wire[30:0] T464;
-  wire[15:0] T465;
-  wire[7:0] T466;
-  wire[3:0] T467;
-  wire[1:0] T468;
-  wire T469;
-  wire[11:0] T470;
-  wire[11:0] T471;
-  reg [11:0] idxs [61:0];
-  wire[11:0] T472;
-  wire[11:0] T2305;
-  wire T473;
-  wire T474;
-  wire T475;
-  wire[11:0] T476;
+  wire[3:0] T200;
+  wire[1:0] T201;
+  wire T202;
+  wire[3:0] T203;
+  wire[3:0] T204;
+  wire[3:0] tgtPagesOH_0;
+  wire[3:0] T205;
+  wire[1:0] T206;
+  reg [1:0] tgtPages [7:0];
+  wire[1:0] T207;
   wire[1:0] T477;
   wire T478;
-  wire[11:0] T479;
-  wire T480;
-  wire[11:0] T481;
-  wire[3:0] T482;
-  wire[1:0] T483;
-  wire T484;
-  wire[11:0] T485;
-  wire T486;
-  wire[11:0] T487;
-  wire[1:0] T488;
-  wire T489;
-  wire[11:0] T490;
-  wire T491;
-  wire[11:0] T492;
-  wire[7:0] T493;
-  wire[3:0] T494;
-  wire[1:0] T495;
-  wire T496;
-  wire[11:0] T497;
-  wire T498;
-  wire[11:0] T499;
-  wire[1:0] T500;
-  wire T501;
-  wire[11:0] T502;
-  wire T503;
-  wire[11:0] T504;
-  wire[3:0] T505;
-  wire[1:0] T506;
-  wire T507;
-  wire[11:0] T508;
-  wire T509;
-  wire[11:0] T510;
-  wire[1:0] T511;
-  wire T512;
-  wire[11:0] T513;
-  wire T514;
-  wire[11:0] T515;
-  wire[14:0] T516;
-  wire[7:0] T517;
-  wire[3:0] T518;
-  wire[1:0] T519;
-  wire T520;
-  wire[11:0] T521;
-  wire T522;
-  wire[11:0] T523;
-  wire[1:0] T524;
-  wire T525;
-  wire[11:0] T526;
-  wire T527;
-  wire[11:0] T528;
-  wire[3:0] T529;
-  wire[1:0] T530;
-  wire T531;
-  wire[11:0] T532;
-  wire T533;
-  wire[11:0] T534;
-  wire[1:0] T535;
-  wire T536;
-  wire[11:0] T537;
-  wire T538;
-  wire[11:0] T539;
-  wire[6:0] T540;
-  wire[3:0] T541;
-  wire[1:0] T542;
-  wire T543;
-  wire[11:0] T544;
-  wire T545;
-  wire[11:0] T546;
-  wire[1:0] T547;
-  wire T548;
-  wire[11:0] T549;
-  wire T550;
-  wire[11:0] T551;
-  wire[2:0] T552;
-  wire[1:0] T553;
-  wire T554;
-  wire[11:0] T555;
-  wire T556;
-  wire[11:0] T557;
-  wire T558;
-  wire[11:0] T559;
-  wire[30:0] T560;
-  wire[15:0] T561;
-  wire[7:0] T562;
-  wire[3:0] T563;
-  wire[1:0] T564;
-  wire T565;
-  wire[11:0] T566;
-  wire T567;
-  wire[11:0] T568;
-  wire[1:0] T569;
-  wire T570;
-  wire[11:0] T571;
-  wire T572;
-  wire[11:0] T573;
-  wire[3:0] T574;
-  wire[1:0] T575;
-  wire T576;
-  wire[11:0] T577;
-  wire T578;
-  wire[11:0] T579;
-  wire[1:0] T580;
-  wire T581;
-  wire[11:0] T582;
-  wire T583;
-  wire[11:0] T584;
-  wire[7:0] T585;
-  wire[3:0] T586;
-  wire[1:0] T587;
-  wire T588;
-  wire[11:0] T589;
-  wire T590;
-  wire[11:0] T591;
-  wire[1:0] T592;
-  wire T593;
-  wire[11:0] T594;
-  wire T595;
-  wire[11:0] T596;
-  wire[3:0] T597;
-  wire[1:0] T598;
-  wire T599;
-  wire[11:0] T600;
-  wire T601;
-  wire[11:0] T602;
-  wire[1:0] T603;
-  wire T604;
-  wire[11:0] T605;
-  wire T606;
-  wire[11:0] T607;
-  wire[14:0] T608;
-  wire[7:0] T609;
-  wire[3:0] T610;
-  wire[1:0] T611;
-  wire T612;
-  wire[11:0] T613;
-  wire T614;
-  wire[11:0] T615;
-  wire[1:0] T616;
-  wire T617;
-  wire[11:0] T618;
-  wire T619;
-  wire[11:0] T620;
-  wire[3:0] T621;
-  wire[1:0] T622;
-  wire T623;
-  wire[11:0] T624;
-  wire T625;
-  wire[11:0] T626;
-  wire[1:0] T627;
-  wire T628;
-  wire[11:0] T629;
-  wire T630;
-  wire[11:0] T631;
-  wire[6:0] T632;
-  wire[3:0] T633;
-  wire[1:0] T634;
-  wire T635;
-  wire[11:0] T636;
-  wire T637;
-  wire[11:0] T638;
-  wire[1:0] T639;
-  wire T640;
-  wire[11:0] T641;
-  wire T642;
-  wire[11:0] T643;
-  wire[2:0] T644;
-  wire[1:0] T645;
-  wire T646;
-  wire[11:0] T647;
-  wire T648;
-  wire[11:0] T649;
-  wire T650;
-  wire[11:0] T651;
-  reg [61:0] idxValid;
-  wire[61:0] T2306;
-  wire[63:0] T2307;
-  wire[63:0] T652;
-  wire[63:0] T653;
-  wire[63:0] T2308;
-  wire[63:0] T654;
-  wire[63:0] T655;
-  wire[63:0] T2309;
-  wire[61:0] T656;
-  wire[61:0] T657;
-  wire[61:0] T658;
-  wire[61:0] T659;
-  wire[30:0] T660;
-  wire[15:0] T661;
-  wire[7:0] T662;
-  wire[3:0] T663;
-  wire[1:0] T664;
-  wire T665;
-  wire[5:0] T666;
-  wire[5:0] T667;
-  wire[5:0] tgtPagesOH_0;
-  wire[7:0] T668;
-  wire[2:0] T669;
-  reg [2:0] tgtPages [61:0];
-  wire[2:0] T670;
-  wire[2:0] T2310;
-  wire[1:0] T2311;
-  wire T2312;
-  wire[1:0] T2313;
-  wire[1:0] T2314;
-  wire[3:0] T2315;
-  wire[3:0] T2316;
-  wire[5:0] T671;
-  wire[1:0] T2317;
-  wire[1:0] T2318;
-  wire T2319;
-  wire T2320;
-  wire T672;
-  wire T673;
-  wire T674;
-  wire[5:0] T675;
-  wire[5:0] T676;
-  wire[5:0] tgtPagesOH_1;
-  wire[7:0] T677;
-  wire[2:0] T678;
-  wire[1:0] T679;
-  wire T680;
-  wire[5:0] T681;
-  wire[5:0] T682;
-  wire[5:0] tgtPagesOH_2;
-  wire[7:0] T683;
-  wire[2:0] T684;
-  wire T685;
-  wire[5:0] T686;
-  wire[5:0] T687;
-  wire[5:0] tgtPagesOH_3;
-  wire[7:0] T688;
-  wire[2:0] T689;
-  wire[3:0] T690;
-  wire[1:0] T691;
-  wire T692;
-  wire[5:0] T693;
-  wire[5:0] T694;
-  wire[5:0] tgtPagesOH_4;
-  wire[7:0] T695;
-  wire[2:0] T696;
-  wire T697;
-  wire[5:0] T698;
-  wire[5:0] T699;
-  wire[5:0] tgtPagesOH_5;
-  wire[7:0] T700;
-  wire[2:0] T701;
-  wire[1:0] T702;
-  wire T703;
-  wire[5:0] T704;
-  wire[5:0] T705;
-  wire[5:0] tgtPagesOH_6;
-  wire[7:0] T706;
-  wire[2:0] T707;
-  wire T708;
-  wire[5:0] T709;
-  wire[5:0] T710;
-  wire[5:0] tgtPagesOH_7;
-  wire[7:0] T711;
-  wire[2:0] T712;
-  wire[7:0] T713;
-  wire[3:0] T714;
-  wire[1:0] T715;
-  wire T716;
-  wire[5:0] T717;
-  wire[5:0] T718;
-  wire[5:0] tgtPagesOH_8;
-  wire[7:0] T719;
-  wire[2:0] T720;
-  wire T721;
-  wire[5:0] T722;
-  wire[5:0] T723;
-  wire[5:0] tgtPagesOH_9;
-  wire[7:0] T724;
-  wire[2:0] T725;
-  wire[1:0] T726;
-  wire T727;
-  wire[5:0] T728;
-  wire[5:0] T729;
-  wire[5:0] tgtPagesOH_10;
-  wire[7:0] T730;
-  wire[2:0] T731;
-  wire T732;
-  wire[5:0] T733;
-  wire[5:0] T734;
-  wire[5:0] tgtPagesOH_11;
-  wire[7:0] T735;
-  wire[2:0] T736;
-  wire[3:0] T737;
-  wire[1:0] T738;
-  wire T739;
-  wire[5:0] T740;
-  wire[5:0] T741;
-  wire[5:0] tgtPagesOH_12;
-  wire[7:0] T742;
-  wire[2:0] T743;
-  wire T744;
-  wire[5:0] T745;
-  wire[5:0] T746;
-  wire[5:0] tgtPagesOH_13;
-  wire[7:0] T747;
-  wire[2:0] T748;
-  wire[1:0] T749;
-  wire T750;
-  wire[5:0] T751;
-  wire[5:0] T752;
-  wire[5:0] tgtPagesOH_14;
-  wire[7:0] T753;
-  wire[2:0] T754;
-  wire T755;
-  wire[5:0] T756;
-  wire[5:0] T757;
-  wire[5:0] tgtPagesOH_15;
-  wire[7:0] T758;
-  wire[2:0] T759;
-  wire[14:0] T760;
-  wire[7:0] T761;
-  wire[3:0] T762;
-  wire[1:0] T763;
-  wire T764;
-  wire[5:0] T765;
-  wire[5:0] T766;
-  wire[5:0] tgtPagesOH_16;
-  wire[7:0] T767;
-  wire[2:0] T768;
-  wire T769;
-  wire[5:0] T770;
-  wire[5:0] T771;
-  wire[5:0] tgtPagesOH_17;
-  wire[7:0] T772;
-  wire[2:0] T773;
-  wire[1:0] T774;
-  wire T775;
-  wire[5:0] T776;
-  wire[5:0] T777;
-  wire[5:0] tgtPagesOH_18;
-  wire[7:0] T778;
-  wire[2:0] T779;
-  wire T780;
-  wire[5:0] T781;
-  wire[5:0] T782;
-  wire[5:0] tgtPagesOH_19;
-  wire[7:0] T783;
-  wire[2:0] T784;
-  wire[3:0] T785;
-  wire[1:0] T786;
-  wire T787;
-  wire[5:0] T788;
-  wire[5:0] T789;
-  wire[5:0] tgtPagesOH_20;
-  wire[7:0] T790;
-  wire[2:0] T791;
-  wire T792;
-  wire[5:0] T793;
-  wire[5:0] T794;
-  wire[5:0] tgtPagesOH_21;
-  wire[7:0] T795;
-  wire[2:0] T796;
-  wire[1:0] T797;
-  wire T798;
-  wire[5:0] T799;
-  wire[5:0] T800;
-  wire[5:0] tgtPagesOH_22;
-  wire[7:0] T801;
-  wire[2:0] T802;
-  wire T803;
-  wire[5:0] T804;
-  wire[5:0] T805;
-  wire[5:0] tgtPagesOH_23;
-  wire[7:0] T806;
-  wire[2:0] T807;
-  wire[6:0] T808;
-  wire[3:0] T809;
-  wire[1:0] T810;
-  wire T811;
-  wire[5:0] T812;
-  wire[5:0] T813;
-  wire[5:0] tgtPagesOH_24;
-  wire[7:0] T814;
-  wire[2:0] T815;
-  wire T816;
-  wire[5:0] T817;
-  wire[5:0] T818;
-  wire[5:0] tgtPagesOH_25;
-  wire[7:0] T819;
-  wire[2:0] T820;
-  wire[1:0] T821;
-  wire T822;
-  wire[5:0] T823;
-  wire[5:0] T824;
-  wire[5:0] tgtPagesOH_26;
-  wire[7:0] T825;
-  wire[2:0] T826;
-  wire T827;
-  wire[5:0] T828;
-  wire[5:0] T829;
-  wire[5:0] tgtPagesOH_27;
-  wire[7:0] T830;
-  wire[2:0] T831;
-  wire[2:0] T832;
-  wire[1:0] T833;
-  wire T834;
-  wire[5:0] T835;
-  wire[5:0] T836;
-  wire[5:0] tgtPagesOH_28;
-  wire[7:0] T837;
-  wire[2:0] T838;
-  wire T839;
-  wire[5:0] T840;
-  wire[5:0] T841;
-  wire[5:0] tgtPagesOH_29;
-  wire[7:0] T842;
-  wire[2:0] T843;
-  wire T844;
-  wire[5:0] T845;
-  wire[5:0] T846;
-  wire[5:0] tgtPagesOH_30;
-  wire[7:0] T847;
-  wire[2:0] T848;
-  wire[30:0] T849;
-  wire[15:0] T850;
-  wire[7:0] T851;
-  wire[3:0] T852;
-  wire[1:0] T853;
-  wire T854;
-  wire[5:0] T855;
-  wire[5:0] T856;
-  wire[5:0] tgtPagesOH_31;
-  wire[7:0] T857;
-  wire[2:0] T858;
-  wire T859;
-  wire[5:0] T860;
-  wire[5:0] T861;
-  wire[5:0] tgtPagesOH_32;
-  wire[7:0] T862;
-  wire[2:0] T863;
-  wire[1:0] T864;
-  wire T865;
-  wire[5:0] T866;
-  wire[5:0] T867;
-  wire[5:0] tgtPagesOH_33;
-  wire[7:0] T868;
-  wire[2:0] T869;
-  wire T870;
-  wire[5:0] T871;
-  wire[5:0] T872;
-  wire[5:0] tgtPagesOH_34;
-  wire[7:0] T873;
-  wire[2:0] T874;
-  wire[3:0] T875;
-  wire[1:0] T876;
-  wire T877;
-  wire[5:0] T878;
-  wire[5:0] T879;
-  wire[5:0] tgtPagesOH_35;
-  wire[7:0] T880;
-  wire[2:0] T881;
-  wire T882;
-  wire[5:0] T883;
-  wire[5:0] T884;
-  wire[5:0] tgtPagesOH_36;
-  wire[7:0] T885;
-  wire[2:0] T886;
-  wire[1:0] T887;
-  wire T888;
-  wire[5:0] T889;
-  wire[5:0] T890;
-  wire[5:0] tgtPagesOH_37;
-  wire[7:0] T891;
-  wire[2:0] T892;
-  wire T893;
-  wire[5:0] T894;
-  wire[5:0] T895;
-  wire[5:0] tgtPagesOH_38;
-  wire[7:0] T896;
-  wire[2:0] T897;
-  wire[7:0] T898;
-  wire[3:0] T899;
-  wire[1:0] T900;
-  wire T901;
-  wire[5:0] T902;
-  wire[5:0] T903;
-  wire[5:0] tgtPagesOH_39;
-  wire[7:0] T904;
-  wire[2:0] T905;
-  wire T906;
-  wire[5:0] T907;
-  wire[5:0] T908;
-  wire[5:0] tgtPagesOH_40;
-  wire[7:0] T909;
-  wire[2:0] T910;
-  wire[1:0] T911;
-  wire T912;
-  wire[5:0] T913;
-  wire[5:0] T914;
-  wire[5:0] tgtPagesOH_41;
-  wire[7:0] T915;
-  wire[2:0] T916;
-  wire T917;
-  wire[5:0] T918;
-  wire[5:0] T919;
-  wire[5:0] tgtPagesOH_42;
-  wire[7:0] T920;
-  wire[2:0] T921;
-  wire[3:0] T922;
-  wire[1:0] T923;
-  wire T924;
-  wire[5:0] T925;
-  wire[5:0] T926;
-  wire[5:0] tgtPagesOH_43;
-  wire[7:0] T927;
-  wire[2:0] T928;
-  wire T929;
-  wire[5:0] T930;
-  wire[5:0] T931;
-  wire[5:0] tgtPagesOH_44;
-  wire[7:0] T932;
-  wire[2:0] T933;
-  wire[1:0] T934;
-  wire T935;
-  wire[5:0] T936;
-  wire[5:0] T937;
-  wire[5:0] tgtPagesOH_45;
-  wire[7:0] T938;
-  wire[2:0] T939;
-  wire T940;
-  wire[5:0] T941;
-  wire[5:0] T942;
-  wire[5:0] tgtPagesOH_46;
-  wire[7:0] T943;
-  wire[2:0] T944;
-  wire[14:0] T945;
-  wire[7:0] T946;
-  wire[3:0] T947;
-  wire[1:0] T948;
-  wire T949;
-  wire[5:0] T950;
-  wire[5:0] T951;
-  wire[5:0] tgtPagesOH_47;
-  wire[7:0] T952;
-  wire[2:0] T953;
-  wire T954;
-  wire[5:0] T955;
-  wire[5:0] T956;
-  wire[5:0] tgtPagesOH_48;
-  wire[7:0] T957;
-  wire[2:0] T958;
-  wire[1:0] T959;
-  wire T960;
-  wire[5:0] T961;
-  wire[5:0] T962;
-  wire[5:0] tgtPagesOH_49;
-  wire[7:0] T963;
-  wire[2:0] T964;
-  wire T965;
-  wire[5:0] T966;
-  wire[5:0] T967;
-  wire[5:0] tgtPagesOH_50;
-  wire[7:0] T968;
-  wire[2:0] T969;
-  wire[3:0] T970;
-  wire[1:0] T971;
-  wire T972;
-  wire[5:0] T973;
-  wire[5:0] T974;
-  wire[5:0] tgtPagesOH_51;
-  wire[7:0] T975;
-  wire[2:0] T976;
-  wire T977;
-  wire[5:0] T978;
-  wire[5:0] T979;
-  wire[5:0] tgtPagesOH_52;
-  wire[7:0] T980;
-  wire[2:0] T981;
-  wire[1:0] T982;
-  wire T983;
-  wire[5:0] T984;
-  wire[5:0] T985;
-  wire[5:0] tgtPagesOH_53;
-  wire[7:0] T986;
-  wire[2:0] T987;
-  wire T988;
-  wire[5:0] T989;
-  wire[5:0] T990;
-  wire[5:0] tgtPagesOH_54;
-  wire[7:0] T991;
-  wire[2:0] T992;
-  wire[6:0] T993;
-  wire[3:0] T994;
-  wire[1:0] T995;
-  wire T996;
-  wire[5:0] T997;
-  wire[5:0] T998;
-  wire[5:0] tgtPagesOH_55;
-  wire[7:0] T999;
-  wire[2:0] T1000;
-  wire T1001;
-  wire[5:0] T1002;
-  wire[5:0] T1003;
-  wire[5:0] tgtPagesOH_56;
-  wire[7:0] T1004;
-  wire[2:0] T1005;
-  wire[1:0] T1006;
-  wire T1007;
-  wire[5:0] T1008;
-  wire[5:0] T1009;
-  wire[5:0] tgtPagesOH_57;
-  wire[7:0] T1010;
-  wire[2:0] T1011;
-  wire T1012;
-  wire[5:0] T1013;
-  wire[5:0] T1014;
-  wire[5:0] tgtPagesOH_58;
-  wire[7:0] T1015;
-  wire[2:0] T1016;
-  wire[2:0] T1017;
-  wire[1:0] T1018;
-  wire T1019;
-  wire[5:0] T1020;
-  wire[5:0] T1021;
-  wire[5:0] tgtPagesOH_59;
-  wire[7:0] T1022;
-  wire[2:0] T1023;
-  wire T1024;
-  wire[5:0] T1025;
-  wire[5:0] T1026;
-  wire[5:0] tgtPagesOH_60;
-  wire[7:0] T1027;
-  wire[2:0] T1028;
-  wire T1029;
-  wire[5:0] T1030;
-  wire[5:0] T1031;
-  wire[5:0] tgtPagesOH_61;
-  wire[7:0] T1032;
-  wire[2:0] T1033;
-  wire T1034;
-  wire T1035;
-  reg  isJump_60;
-  wire T1036;
-  wire T1037;
-  wire T1038;
-  wire T1039;
-  wire T1040;
-  wire T1041;
-  reg  isJump_59;
-  wire T1042;
-  wire T1043;
-  wire T1044;
-  wire T1045;
-  wire T1046;
-  wire T1047;
-  reg  isJump_58;
-  wire T1048;
-  wire T1049;
-  wire T1050;
-  wire T1051;
-  wire T1052;
-  wire T1053;
-  reg  isJump_57;
-  wire T1054;
-  wire T1055;
-  wire T1056;
-  wire T1057;
-  wire T1058;
-  wire T1059;
-  reg  isJump_56;
-  wire T1060;
-  wire T1061;
-  wire T1062;
-  wire T1063;
-  wire T1064;
-  wire T1065;
-  reg  isJump_55;
-  wire T1066;
-  wire T1067;
-  wire T1068;
-  wire T1069;
-  wire T1070;
-  wire T1071;
-  reg  isJump_54;
-  wire T1072;
-  wire T1073;
-  wire T1074;
-  wire T1075;
-  wire T1076;
-  wire T1077;
-  reg  isJump_53;
-  wire T1078;
-  wire T1079;
-  wire T1080;
-  wire T1081;
-  wire T1082;
-  wire T1083;
-  reg  isJump_52;
-  wire T1084;
-  wire T1085;
-  wire T1086;
-  wire T1087;
-  wire T1088;
-  wire T1089;
-  reg  isJump_51;
-  wire T1090;
-  wire T1091;
-  wire T1092;
-  wire T1093;
-  wire T1094;
-  wire T1095;
-  reg  isJump_50;
-  wire T1096;
-  wire T1097;
-  wire T1098;
-  wire T1099;
-  wire T1100;
-  wire T1101;
-  reg  isJump_49;
-  wire T1102;
-  wire T1103;
-  wire T1104;
-  wire T1105;
-  wire T1106;
-  wire T1107;
-  reg  isJump_48;
-  wire T1108;
-  wire T1109;
-  wire T1110;
-  wire T1111;
-  wire T1112;
-  wire T1113;
-  reg  isJump_47;
-  wire T1114;
-  wire T1115;
-  wire T1116;
-  wire T1117;
-  wire T1118;
-  wire T1119;
-  reg  isJump_46;
-  wire T1120;
-  wire T1121;
-  wire T1122;
-  wire T1123;
-  wire T1124;
-  wire T1125;
-  reg  isJump_45;
-  wire T1126;
-  wire T1127;
-  wire T1128;
-  wire T1129;
-  wire T1130;
-  wire T1131;
-  reg  isJump_44;
-  wire T1132;
-  wire T1133;
-  wire T1134;
-  wire T1135;
-  wire T1136;
-  wire T1137;
-  reg  isJump_43;
-  wire T1138;
-  wire T1139;
-  wire T1140;
-  wire T1141;
-  wire T1142;
-  wire T1143;
-  reg  isJump_42;
-  wire T1144;
-  wire T1145;
-  wire T1146;
-  wire T1147;
-  wire T1148;
-  wire T1149;
-  reg  isJump_41;
-  wire T1150;
-  wire T1151;
-  wire T1152;
-  wire T1153;
-  wire T1154;
-  wire T1155;
-  reg  isJump_40;
-  wire T1156;
-  wire T1157;
-  wire T1158;
-  wire T1159;
-  wire T1160;
-  wire T1161;
-  reg  isJump_39;
-  wire T1162;
-  wire T1163;
-  wire T1164;
-  wire T1165;
-  wire T1166;
-  wire T1167;
-  reg  isJump_38;
-  wire T1168;
-  wire T1169;
-  wire T1170;
-  wire T1171;
-  wire T1172;
-  wire T1173;
-  reg  isJump_37;
-  wire T1174;
-  wire T1175;
-  wire T1176;
-  wire T1177;
-  wire T1178;
-  wire T1179;
-  reg  isJump_36;
-  wire T1180;
-  wire T1181;
-  wire T1182;
-  wire T1183;
-  wire T1184;
-  wire T1185;
-  reg  isJump_35;
-  wire T1186;
-  wire T1187;
-  wire T1188;
-  wire T1189;
-  wire T1190;
-  wire T1191;
-  reg  isJump_34;
-  wire T1192;
-  wire T1193;
-  wire T1194;
-  wire T1195;
-  wire T1196;
-  wire T1197;
-  reg  isJump_33;
-  wire T1198;
-  wire T1199;
-  wire T1200;
-  wire T1201;
-  wire T1202;
-  wire T1203;
-  reg  isJump_32;
-  wire T1204;
-  wire T1205;
-  wire T1206;
-  wire T1207;
-  wire T1208;
-  wire T1209;
-  reg  isJump_31;
-  wire T1210;
-  wire T1211;
-  wire T1212;
-  wire T1213;
-  wire T1214;
-  wire T1215;
-  reg  isJump_30;
-  wire T1216;
-  wire T1217;
-  wire T1218;
-  wire T1219;
-  wire T1220;
-  wire T1221;
-  reg  isJump_29;
-  wire T1222;
-  wire T1223;
-  wire T1224;
-  wire T1225;
-  wire T1226;
-  wire T1227;
-  reg  isJump_28;
-  wire T1228;
-  wire T1229;
-  wire T1230;
-  wire T1231;
-  wire T1232;
-  wire T1233;
-  reg  isJump_27;
-  wire T1234;
-  wire T1235;
-  wire T1236;
-  wire T1237;
-  wire T1238;
-  wire T1239;
-  reg  isJump_26;
-  wire T1240;
-  wire T1241;
-  wire T1242;
-  wire T1243;
-  wire T1244;
-  wire T1245;
-  reg  isJump_25;
-  wire T1246;
-  wire T1247;
-  wire T1248;
-  wire T1249;
-  wire T1250;
-  wire T1251;
-  reg  isJump_24;
-  wire T1252;
-  wire T1253;
-  wire T1254;
-  wire T1255;
-  wire T1256;
-  wire T1257;
-  reg  isJump_23;
-  wire T1258;
-  wire T1259;
-  wire T1260;
-  wire T1261;
-  wire T1262;
-  wire T1263;
-  reg  isJump_22;
-  wire T1264;
-  wire T1265;
-  wire T1266;
-  wire T1267;
-  wire T1268;
-  wire T1269;
-  reg  isJump_21;
-  wire T1270;
-  wire T1271;
-  wire T1272;
-  wire T1273;
-  wire T1274;
-  wire T1275;
-  reg  isJump_20;
-  wire T1276;
-  wire T1277;
-  wire T1278;
-  wire T1279;
-  wire T1280;
-  wire T1281;
-  reg  isJump_19;
-  wire T1282;
-  wire T1283;
-  wire T1284;
-  wire T1285;
-  wire T1286;
-  wire T1287;
-  reg  isJump_18;
-  wire T1288;
-  wire T1289;
-  wire T1290;
-  wire T1291;
-  wire T1292;
-  wire T1293;
-  reg  isJump_17;
-  wire T1294;
-  wire T1295;
-  wire T1296;
-  wire T1297;
-  wire T1298;
-  wire T1299;
-  reg  isJump_16;
-  wire T1300;
-  wire T1301;
-  wire T1302;
-  wire T1303;
-  wire T1304;
-  wire T1305;
-  reg  isJump_15;
-  wire T1306;
-  wire T1307;
-  wire T1308;
-  wire T1309;
-  wire T1310;
-  wire T1311;
-  reg  isJump_14;
-  wire T1312;
-  wire T1313;
-  wire T1314;
-  wire T1315;
-  wire T1316;
-  wire T1317;
-  reg  isJump_13;
-  wire T1318;
-  wire T1319;
-  wire T1320;
-  wire T1321;
-  wire T1322;
-  wire T1323;
-  reg  isJump_12;
-  wire T1324;
-  wire T1325;
-  wire T1326;
-  wire T1327;
-  wire T1328;
-  wire T1329;
-  reg  isJump_11;
-  wire T1330;
-  wire T1331;
-  wire T1332;
-  wire T1333;
-  wire T1334;
-  wire T1335;
-  reg  isJump_10;
-  wire T1336;
-  wire T1337;
-  wire T1338;
-  wire T1339;
-  wire T1340;
-  wire T1341;
-  reg  isJump_9;
-  wire T1342;
-  wire T1343;
-  wire T1344;
-  wire T1345;
-  wire T1346;
-  wire T1347;
-  reg  isJump_8;
-  wire T1348;
-  wire T1349;
-  wire T1350;
-  wire T1351;
-  wire T1352;
-  wire T1353;
-  reg  isJump_7;
-  wire T1354;
-  wire T1355;
-  wire T1356;
-  wire T1357;
-  wire T1358;
-  wire T1359;
+  wire[1:0] T479;
+  wire[1:0] T480;
+  wire[3:0] T208;
+  wire[1:0] T481;
+  wire T482;
+  wire T209;
+  wire[3:0] T210;
+  wire[3:0] T211;
+  wire[3:0] tgtPagesOH_1;
+  wire[3:0] T212;
+  wire[1:0] T213;
+  wire[1:0] T214;
+  wire T215;
+  wire[3:0] T216;
+  wire[3:0] T217;
+  wire[3:0] tgtPagesOH_2;
+  wire[3:0] T218;
+  wire[1:0] T219;
+  wire T220;
+  wire[3:0] T221;
+  wire[3:0] T222;
+  wire[3:0] tgtPagesOH_3;
+  wire[3:0] T223;
+  wire[1:0] T224;
+  wire[3:0] T225;
+  wire[1:0] T226;
+  wire T227;
+  wire[3:0] T228;
+  wire[3:0] T229;
+  wire[3:0] tgtPagesOH_4;
+  wire[3:0] T230;
+  wire[1:0] T231;
+  wire T232;
+  wire[3:0] T233;
+  wire[3:0] T234;
+  wire[3:0] tgtPagesOH_5;
+  wire[3:0] T235;
+  wire[1:0] T236;
+  wire[1:0] T237;
+  wire T238;
+  wire[3:0] T239;
+  wire[3:0] T240;
+  wire[3:0] tgtPagesOH_6;
+  wire[3:0] T241;
+  wire[1:0] T242;
+  wire T243;
+  wire[3:0] T244;
+  wire[3:0] T245;
+  wire[3:0] tgtPagesOH_7;
+  wire[3:0] T246;
+  wire[1:0] T247;
+  wire T248;
+  wire T249;
   reg  isJump_6;
-  wire T1360;
-  wire T1361;
-  wire T1362;
-  wire T1363;
-  wire T1364;
-  wire T1365;
+  wire T250;
+  wire T251;
+  wire T252;
+  wire T253;
+  wire T254;
+  wire T255;
   reg  isJump_5;
-  wire T1366;
-  wire T1367;
-  wire T1368;
-  wire T1369;
-  wire T1370;
-  wire T1371;
+  wire T256;
+  wire T257;
+  wire T258;
+  wire T259;
+  wire T260;
+  wire T261;
   reg  isJump_4;
-  wire T1372;
-  wire T1373;
-  wire T1374;
-  wire T1375;
-  wire T1376;
-  wire T1377;
+  wire T262;
+  wire T263;
+  wire T264;
+  wire T265;
+  wire T266;
+  wire T267;
   reg  isJump_3;
-  wire T1378;
-  wire T1379;
-  wire T1380;
-  wire T1381;
-  wire T1382;
-  wire T1383;
+  wire T268;
+  wire T269;
+  wire T270;
+  wire T271;
+  wire T272;
+  wire T273;
   reg  isJump_2;
-  wire T1384;
-  wire T1385;
-  wire T1386;
-  wire T1387;
-  wire T1388;
-  wire T1389;
+  wire T274;
+  wire T275;
+  wire T276;
+  wire T277;
+  wire T278;
+  wire T279;
   reg  isJump_1;
-  wire T1390;
-  wire T1391;
-  wire T1392;
-  wire T1393;
-  wire T1394;
+  wire T280;
+  wire T281;
+  wire T282;
+  wire T283;
+  wire T284;
   reg  isJump_0;
-  wire T1395;
-  wire T1396;
-  wire T1397;
-  wire T1398;
-  wire T1399;
-  wire[6:0] T1400;
-  wire[5:0] T1401;
-  wire T1402;
-  wire[6:0] T1403;
-  wire[6:0] T1404;
-  wire[5:0] T2321;
-  wire[4:0] T2322;
-  wire[3:0] T2323;
-  wire[2:0] T2324;
-  wire[1:0] T2325;
-  wire T2326;
-  wire[1:0] T2327;
-  wire[1:0] T2328;
-  wire[3:0] T2329;
-  wire[3:0] T2330;
-  wire[7:0] T2331;
-  wire[7:0] T2332;
-  wire[15:0] T2333;
-  wire[15:0] T2334;
-  wire[31:0] T2335;
-  wire[31:0] T2336;
-  wire[29:0] T2337;
-  wire[15:0] T2338;
-  wire[7:0] T2339;
-  wire[3:0] T2340;
-  wire[1:0] T2341;
-  wire T2342;
-  wire T2343;
-  wire T2344;
-  wire T2345;
-  wire T2346;
-  wire[38:0] T1406;
-  wire[38:0] T1407;
-  wire[38:0] T1408;
-  wire[11:0] T1409;
-  wire[11:0] T1410;
-  wire[11:0] T1411;
-  reg [11:0] tgts [61:0];
-  wire[11:0] T1412;
-  wire[11:0] T2347;
-  wire T1413;
-  wire T1414;
-  wire T1415;
-  wire[11:0] T1416;
-  wire[11:0] T1417;
-  wire[11:0] T1418;
-  wire T1419;
-  wire[11:0] T1420;
-  wire[11:0] T1421;
-  wire[11:0] T1422;
-  wire T1423;
-  wire[11:0] T1424;
-  wire[11:0] T1425;
-  wire[11:0] T1426;
-  wire T1427;
-  wire[11:0] T1428;
-  wire[11:0] T1429;
-  wire[11:0] T1430;
-  wire T1431;
-  wire[11:0] T1432;
-  wire[11:0] T1433;
-  wire[11:0] T1434;
-  wire T1435;
-  wire[11:0] T1436;
-  wire[11:0] T1437;
-  wire[11:0] T1438;
-  wire T1439;
-  wire[11:0] T1440;
-  wire[11:0] T1441;
-  wire[11:0] T1442;
-  wire T1443;
-  wire[11:0] T1444;
-  wire[11:0] T1445;
-  wire[11:0] T1446;
-  wire T1447;
-  wire[11:0] T1448;
-  wire[11:0] T1449;
-  wire[11:0] T1450;
-  wire T1451;
-  wire[11:0] T1452;
-  wire[11:0] T1453;
-  wire[11:0] T1454;
-  wire T1455;
-  wire[11:0] T1456;
-  wire[11:0] T1457;
-  wire[11:0] T1458;
-  wire T1459;
-  wire[11:0] T1460;
-  wire[11:0] T1461;
-  wire[11:0] T1462;
-  wire T1463;
-  wire[11:0] T1464;
-  wire[11:0] T1465;
-  wire[11:0] T1466;
-  wire T1467;
-  wire[11:0] T1468;
-  wire[11:0] T1469;
-  wire[11:0] T1470;
-  wire T1471;
-  wire[11:0] T1472;
-  wire[11:0] T1473;
-  wire[11:0] T1474;
-  wire T1475;
-  wire[11:0] T1476;
-  wire[11:0] T1477;
-  wire[11:0] T1478;
-  wire T1479;
-  wire[11:0] T1480;
-  wire[11:0] T1481;
-  wire[11:0] T1482;
-  wire T1483;
-  wire[11:0] T1484;
-  wire[11:0] T1485;
-  wire[11:0] T1486;
-  wire T1487;
-  wire[11:0] T1488;
-  wire[11:0] T1489;
-  wire[11:0] T1490;
-  wire T1491;
-  wire[11:0] T1492;
-  wire[11:0] T1493;
-  wire[11:0] T1494;
-  wire T1495;
-  wire[11:0] T1496;
-  wire[11:0] T1497;
-  wire[11:0] T1498;
-  wire T1499;
-  wire[11:0] T1500;
-  wire[11:0] T1501;
-  wire[11:0] T1502;
-  wire T1503;
-  wire[11:0] T1504;
-  wire[11:0] T1505;
-  wire[11:0] T1506;
-  wire T1507;
-  wire[11:0] T1508;
-  wire[11:0] T1509;
-  wire[11:0] T1510;
-  wire T1511;
-  wire[11:0] T1512;
-  wire[11:0] T1513;
-  wire[11:0] T1514;
-  wire T1515;
-  wire[11:0] T1516;
-  wire[11:0] T1517;
-  wire[11:0] T1518;
-  wire T1519;
-  wire[11:0] T1520;
-  wire[11:0] T1521;
-  wire[11:0] T1522;
-  wire T1523;
-  wire[11:0] T1524;
-  wire[11:0] T1525;
-  wire[11:0] T1526;
-  wire T1527;
-  wire[11:0] T1528;
-  wire[11:0] T1529;
-  wire[11:0] T1530;
-  wire T1531;
-  wire[11:0] T1532;
-  wire[11:0] T1533;
-  wire[11:0] T1534;
-  wire T1535;
-  wire[11:0] T1536;
-  wire[11:0] T1537;
-  wire[11:0] T1538;
-  wire T1539;
-  wire[11:0] T1540;
-  wire[11:0] T1541;
-  wire[11:0] T1542;
-  wire T1543;
-  wire[11:0] T1544;
-  wire[11:0] T1545;
-  wire[11:0] T1546;
-  wire T1547;
-  wire[11:0] T1548;
-  wire[11:0] T1549;
-  wire[11:0] T1550;
-  wire T1551;
-  wire[11:0] T1552;
-  wire[11:0] T1553;
-  wire[11:0] T1554;
-  wire T1555;
-  wire[11:0] T1556;
-  wire[11:0] T1557;
-  wire[11:0] T1558;
-  wire T1559;
-  wire[11:0] T1560;
-  wire[11:0] T1561;
-  wire[11:0] T1562;
-  wire T1563;
-  wire[11:0] T1564;
-  wire[11:0] T1565;
-  wire[11:0] T1566;
-  wire T1567;
-  wire[11:0] T1568;
-  wire[11:0] T1569;
-  wire[11:0] T1570;
-  wire T1571;
-  wire[11:0] T1572;
-  wire[11:0] T1573;
-  wire[11:0] T1574;
-  wire T1575;
-  wire[11:0] T1576;
-  wire[11:0] T1577;
-  wire[11:0] T1578;
-  wire T1579;
-  wire[11:0] T1580;
-  wire[11:0] T1581;
-  wire[11:0] T1582;
-  wire T1583;
-  wire[11:0] T1584;
-  wire[11:0] T1585;
-  wire[11:0] T1586;
-  wire T1587;
-  wire[11:0] T1588;
-  wire[11:0] T1589;
-  wire[11:0] T1590;
-  wire T1591;
-  wire[11:0] T1592;
-  wire[11:0] T1593;
-  wire[11:0] T1594;
-  wire T1595;
-  wire[11:0] T1596;
-  wire[11:0] T1597;
-  wire[11:0] T1598;
-  wire T1599;
-  wire[11:0] T1600;
-  wire[11:0] T1601;
-  wire[11:0] T1602;
-  wire T1603;
-  wire[11:0] T1604;
-  wire[11:0] T1605;
-  wire[11:0] T1606;
-  wire T1607;
-  wire[11:0] T1608;
-  wire[11:0] T1609;
-  wire[11:0] T1610;
-  wire T1611;
-  wire[11:0] T1612;
-  wire[11:0] T1613;
-  wire[11:0] T1614;
-  wire T1615;
-  wire[11:0] T1616;
-  wire[11:0] T1617;
-  wire[11:0] T1618;
-  wire T1619;
-  wire[11:0] T1620;
-  wire[11:0] T1621;
-  wire[11:0] T1622;
-  wire T1623;
-  wire[11:0] T1624;
-  wire[11:0] T1625;
-  wire[11:0] T1626;
-  wire T1627;
-  wire[11:0] T1628;
-  wire[11:0] T1629;
-  wire[11:0] T1630;
-  wire T1631;
-  wire[11:0] T1632;
-  wire[11:0] T1633;
-  wire[11:0] T1634;
-  wire T1635;
-  wire[11:0] T1636;
-  wire[11:0] T1637;
-  wire[11:0] T1638;
-  wire T1639;
-  wire[11:0] T1640;
-  wire[11:0] T1641;
-  wire[11:0] T1642;
-  wire T1643;
-  wire[11:0] T1644;
-  wire[11:0] T1645;
-  wire[11:0] T1646;
-  wire T1647;
-  wire[11:0] T1648;
-  wire[11:0] T1649;
-  wire[11:0] T1650;
-  wire T1651;
-  wire[11:0] T1652;
-  wire[11:0] T1653;
-  wire[11:0] T1654;
-  wire T1655;
-  wire[11:0] T1656;
-  wire[11:0] T1657;
-  wire T1658;
-  wire[26:0] T1659;
-  wire[26:0] T1660;
-  wire[26:0] T1661;
-  wire T1662;
-  wire[5:0] T1663;
-  wire[5:0] T1664;
-  wire T1665;
-  wire[5:0] T1666;
-  wire[5:0] T1667;
-  wire T1668;
-  wire[5:0] T1669;
-  wire[5:0] T1670;
-  wire T1671;
-  wire[5:0] T1672;
-  wire[5:0] T1673;
-  wire T1674;
-  wire[5:0] T1675;
-  wire[5:0] T1676;
-  wire T1677;
-  wire[5:0] T1678;
-  wire[5:0] T1679;
-  wire T1680;
-  wire[5:0] T1681;
-  wire[5:0] T1682;
-  wire T1683;
-  wire[5:0] T1684;
-  wire[5:0] T1685;
-  wire T1686;
-  wire[5:0] T1687;
-  wire[5:0] T1688;
-  wire T1689;
-  wire[5:0] T1690;
-  wire[5:0] T1691;
-  wire T1692;
-  wire[5:0] T1693;
-  wire[5:0] T1694;
-  wire T1695;
-  wire[5:0] T1696;
-  wire[5:0] T1697;
-  wire T1698;
-  wire[5:0] T1699;
-  wire[5:0] T1700;
-  wire T1701;
-  wire[5:0] T1702;
-  wire[5:0] T1703;
-  wire T1704;
-  wire[5:0] T1705;
-  wire[5:0] T1706;
-  wire T1707;
-  wire[5:0] T1708;
-  wire[5:0] T1709;
-  wire T1710;
-  wire[5:0] T1711;
-  wire[5:0] T1712;
-  wire T1713;
-  wire[5:0] T1714;
-  wire[5:0] T1715;
-  wire T1716;
-  wire[5:0] T1717;
-  wire[5:0] T1718;
-  wire T1719;
-  wire[5:0] T1720;
-  wire[5:0] T1721;
-  wire T1722;
-  wire[5:0] T1723;
-  wire[5:0] T1724;
-  wire T1725;
-  wire[5:0] T1726;
-  wire[5:0] T1727;
-  wire T1728;
-  wire[5:0] T1729;
-  wire[5:0] T1730;
-  wire T1731;
-  wire[5:0] T1732;
-  wire[5:0] T1733;
-  wire T1734;
-  wire[5:0] T1735;
-  wire[5:0] T1736;
-  wire T1737;
-  wire[5:0] T1738;
-  wire[5:0] T1739;
-  wire T1740;
-  wire[5:0] T1741;
-  wire[5:0] T1742;
-  wire T1743;
-  wire[5:0] T1744;
-  wire[5:0] T1745;
-  wire T1746;
-  wire[5:0] T1747;
-  wire[5:0] T1748;
-  wire T1749;
-  wire[5:0] T1750;
-  wire[5:0] T1751;
-  wire T1752;
-  wire[5:0] T1753;
-  wire[5:0] T1754;
-  wire T1755;
-  wire[5:0] T1756;
-  wire[5:0] T1757;
-  wire T1758;
-  wire[5:0] T1759;
-  wire[5:0] T1760;
-  wire T1761;
-  wire[5:0] T1762;
-  wire[5:0] T1763;
-  wire T1764;
-  wire[5:0] T1765;
-  wire[5:0] T1766;
-  wire T1767;
-  wire[5:0] T1768;
-  wire[5:0] T1769;
-  wire T1770;
-  wire[5:0] T1771;
-  wire[5:0] T1772;
-  wire T1773;
-  wire[5:0] T1774;
-  wire[5:0] T1775;
-  wire T1776;
-  wire[5:0] T1777;
-  wire[5:0] T1778;
-  wire T1779;
-  wire[5:0] T1780;
-  wire[5:0] T1781;
-  wire T1782;
-  wire[5:0] T1783;
-  wire[5:0] T1784;
-  wire T1785;
-  wire[5:0] T1786;
-  wire[5:0] T1787;
-  wire T1788;
-  wire[5:0] T1789;
-  wire[5:0] T1790;
-  wire T1791;
-  wire[5:0] T1792;
-  wire[5:0] T1793;
-  wire T1794;
-  wire[5:0] T1795;
-  wire[5:0] T1796;
-  wire T1797;
-  wire[5:0] T1798;
-  wire[5:0] T1799;
-  wire T1800;
-  wire[5:0] T1801;
-  wire[5:0] T1802;
-  wire T1803;
-  wire[5:0] T1804;
-  wire[5:0] T1805;
-  wire T1806;
-  wire[5:0] T1807;
-  wire[5:0] T1808;
-  wire T1809;
-  wire[5:0] T1810;
-  wire[5:0] T1811;
-  wire T1812;
-  wire[5:0] T1813;
-  wire[5:0] T1814;
-  wire T1815;
-  wire[5:0] T1816;
-  wire[5:0] T1817;
-  wire T1818;
-  wire[5:0] T1819;
-  wire[5:0] T1820;
-  wire T1821;
-  wire[5:0] T1822;
-  wire[5:0] T1823;
-  wire T1824;
-  wire[5:0] T1825;
-  wire[5:0] T1826;
-  wire T1827;
-  wire[5:0] T1828;
-  wire[5:0] T1829;
-  wire T1830;
-  wire[5:0] T1831;
-  wire[5:0] T1832;
-  wire T1833;
-  wire[5:0] T1834;
-  wire[5:0] T1835;
-  wire T1836;
-  wire[5:0] T1837;
-  wire[5:0] T1838;
-  wire T1839;
-  wire[5:0] T1840;
-  wire[5:0] T1841;
-  wire T1842;
-  wire[5:0] T1843;
-  wire[5:0] T1844;
-  wire T1845;
-  wire[5:0] T1846;
-  wire T1847;
-  wire[26:0] T1848;
-  wire[26:0] T1849;
-  wire[26:0] T1850;
-  wire T1851;
-  wire[26:0] T1852;
-  wire[26:0] T1853;
-  wire[26:0] T1854;
-  wire T1855;
-  wire[26:0] T1856;
-  wire[26:0] T1857;
-  wire[26:0] T1858;
-  wire T1859;
-  wire[26:0] T1860;
-  wire[26:0] T1861;
-  wire[26:0] T1862;
-  wire T1863;
-  wire[26:0] T1864;
-  wire[26:0] T1865;
-  wire T1866;
-  wire[38:0] T1867;
-  reg [38:0] R1868;
-  wire[38:0] T1869;
-  wire T1870;
-  wire T1871;
-  wire[1:0] T1872;
-  wire T1873;
-  wire T1874;
-  reg  R1875;
-  wire T2348;
-  wire T1876;
-  wire T1877;
-  wire T1878;
-  wire T1879;
-  wire T1880;
-  wire T1881;
-  reg [1:0] R1882;
-  wire[1:0] T2349;
-  wire[1:0] T1883;
-  wire[1:0] T1884;
-  wire[1:0] T1885;
-  wire[1:0] T1886;
-  wire T1887;
-  wire T1888;
-  wire[1:0] T1889;
-  wire T1890;
-  wire T1891;
-  wire T1892;
-  wire T1893;
-  wire T1894;
-  reg [38:0] R1895;
-  wire[38:0] T1896;
-  wire T1897;
-  wire T1898;
-  wire T1899;
-  wire T1900;
-  wire T1901;
-  wire T1902;
-  reg  useRAS_61;
-  wire T1903;
-  reg  R1904;
-  wire T1905;
-  wire T1906;
-  wire T1907;
-  wire[63:0] T1908;
-  wire[5:0] T1909;
-  wire T1910;
-  wire T1911;
-  wire T1912;
-  reg  useRAS_60;
-  wire T1913;
-  wire T1914;
-  wire T1915;
-  wire T1916;
-  wire T1917;
-  wire T1918;
-  reg  useRAS_59;
-  wire T1919;
-  wire T1920;
-  wire T1921;
-  wire T1922;
-  wire T1923;
-  wire T1924;
-  reg  useRAS_58;
-  wire T1925;
-  wire T1926;
-  wire T1927;
-  wire T1928;
-  wire T1929;
-  wire T1930;
-  reg  useRAS_57;
-  wire T1931;
-  wire T1932;
-  wire T1933;
-  wire T1934;
-  wire T1935;
-  wire T1936;
-  reg  useRAS_56;
-  wire T1937;
-  wire T1938;
-  wire T1939;
-  wire T1940;
-  wire T1941;
-  wire T1942;
-  reg  useRAS_55;
-  wire T1943;
-  wire T1944;
-  wire T1945;
-  wire T1946;
-  wire T1947;
-  wire T1948;
-  reg  useRAS_54;
-  wire T1949;
-  wire T1950;
-  wire T1951;
-  wire T1952;
-  wire T1953;
-  wire T1954;
-  reg  useRAS_53;
-  wire T1955;
-  wire T1956;
-  wire T1957;
-  wire T1958;
-  wire T1959;
-  wire T1960;
-  reg  useRAS_52;
-  wire T1961;
-  wire T1962;
-  wire T1963;
-  wire T1964;
-  wire T1965;
-  wire T1966;
-  reg  useRAS_51;
-  wire T1967;
-  wire T1968;
-  wire T1969;
-  wire T1970;
-  wire T1971;
-  wire T1972;
-  reg  useRAS_50;
-  wire T1973;
-  wire T1974;
-  wire T1975;
-  wire T1976;
-  wire T1977;
-  wire T1978;
-  reg  useRAS_49;
-  wire T1979;
-  wire T1980;
-  wire T1981;
-  wire T1982;
-  wire T1983;
-  wire T1984;
-  reg  useRAS_48;
-  wire T1985;
-  wire T1986;
-  wire T1987;
-  wire T1988;
-  wire T1989;
-  wire T1990;
-  reg  useRAS_47;
-  wire T1991;
-  wire T1992;
-  wire T1993;
-  wire T1994;
-  wire T1995;
-  wire T1996;
-  reg  useRAS_46;
-  wire T1997;
-  wire T1998;
-  wire T1999;
-  wire T2000;
-  wire T2001;
-  wire T2002;
-  reg  useRAS_45;
-  wire T2003;
-  wire T2004;
-  wire T2005;
-  wire T2006;
-  wire T2007;
-  wire T2008;
-  reg  useRAS_44;
-  wire T2009;
-  wire T2010;
-  wire T2011;
-  wire T2012;
-  wire T2013;
-  wire T2014;
-  reg  useRAS_43;
-  wire T2015;
-  wire T2016;
-  wire T2017;
-  wire T2018;
-  wire T2019;
-  wire T2020;
-  reg  useRAS_42;
-  wire T2021;
-  wire T2022;
-  wire T2023;
-  wire T2024;
-  wire T2025;
-  wire T2026;
-  reg  useRAS_41;
-  wire T2027;
-  wire T2028;
-  wire T2029;
-  wire T2030;
-  wire T2031;
-  wire T2032;
-  reg  useRAS_40;
-  wire T2033;
-  wire T2034;
-  wire T2035;
-  wire T2036;
-  wire T2037;
-  wire T2038;
-  reg  useRAS_39;
-  wire T2039;
-  wire T2040;
-  wire T2041;
-  wire T2042;
-  wire T2043;
-  wire T2044;
-  reg  useRAS_38;
-  wire T2045;
-  wire T2046;
-  wire T2047;
-  wire T2048;
-  wire T2049;
-  wire T2050;
-  reg  useRAS_37;
-  wire T2051;
-  wire T2052;
-  wire T2053;
-  wire T2054;
-  wire T2055;
-  wire T2056;
-  reg  useRAS_36;
-  wire T2057;
-  wire T2058;
-  wire T2059;
-  wire T2060;
-  wire T2061;
-  wire T2062;
-  reg  useRAS_35;
-  wire T2063;
-  wire T2064;
-  wire T2065;
-  wire T2066;
-  wire T2067;
-  wire T2068;
-  reg  useRAS_34;
-  wire T2069;
-  wire T2070;
-  wire T2071;
-  wire T2072;
-  wire T2073;
-  wire T2074;
-  reg  useRAS_33;
-  wire T2075;
-  wire T2076;
-  wire T2077;
-  wire T2078;
-  wire T2079;
-  wire T2080;
-  reg  useRAS_32;
-  wire T2081;
-  wire T2082;
-  wire T2083;
-  wire T2084;
-  wire T2085;
-  wire T2086;
-  reg  useRAS_31;
-  wire T2087;
-  wire T2088;
-  wire T2089;
-  wire T2090;
-  wire T2091;
-  wire T2092;
-  reg  useRAS_30;
-  wire T2093;
-  wire T2094;
-  wire T2095;
-  wire T2096;
-  wire T2097;
-  wire T2098;
-  reg  useRAS_29;
-  wire T2099;
-  wire T2100;
-  wire T2101;
-  wire T2102;
-  wire T2103;
-  wire T2104;
-  reg  useRAS_28;
-  wire T2105;
-  wire T2106;
-  wire T2107;
-  wire T2108;
-  wire T2109;
-  wire T2110;
-  reg  useRAS_27;
-  wire T2111;
-  wire T2112;
-  wire T2113;
-  wire T2114;
-  wire T2115;
-  wire T2116;
-  reg  useRAS_26;
-  wire T2117;
-  wire T2118;
-  wire T2119;
-  wire T2120;
-  wire T2121;
-  wire T2122;
-  reg  useRAS_25;
-  wire T2123;
-  wire T2124;
-  wire T2125;
-  wire T2126;
-  wire T2127;
-  wire T2128;
-  reg  useRAS_24;
-  wire T2129;
-  wire T2130;
-  wire T2131;
-  wire T2132;
-  wire T2133;
-  wire T2134;
-  reg  useRAS_23;
-  wire T2135;
-  wire T2136;
-  wire T2137;
-  wire T2138;
-  wire T2139;
-  wire T2140;
-  reg  useRAS_22;
-  wire T2141;
-  wire T2142;
-  wire T2143;
-  wire T2144;
-  wire T2145;
-  wire T2146;
-  reg  useRAS_21;
-  wire T2147;
-  wire T2148;
-  wire T2149;
-  wire T2150;
-  wire T2151;
-  wire T2152;
-  reg  useRAS_20;
-  wire T2153;
-  wire T2154;
-  wire T2155;
-  wire T2156;
-  wire T2157;
-  wire T2158;
-  reg  useRAS_19;
-  wire T2159;
-  wire T2160;
-  wire T2161;
-  wire T2162;
-  wire T2163;
-  wire T2164;
-  reg  useRAS_18;
-  wire T2165;
-  wire T2166;
-  wire T2167;
-  wire T2168;
-  wire T2169;
-  wire T2170;
-  reg  useRAS_17;
-  wire T2171;
-  wire T2172;
-  wire T2173;
-  wire T2174;
-  wire T2175;
-  wire T2176;
-  reg  useRAS_16;
-  wire T2177;
-  wire T2178;
-  wire T2179;
-  wire T2180;
-  wire T2181;
-  wire T2182;
-  reg  useRAS_15;
-  wire T2183;
-  wire T2184;
-  wire T2185;
-  wire T2186;
-  wire T2187;
-  wire T2188;
-  reg  useRAS_14;
-  wire T2189;
-  wire T2190;
-  wire T2191;
-  wire T2192;
-  wire T2193;
-  wire T2194;
-  reg  useRAS_13;
-  wire T2195;
-  wire T2196;
-  wire T2197;
-  wire T2198;
-  wire T2199;
-  wire T2200;
-  reg  useRAS_12;
-  wire T2201;
-  wire T2202;
-  wire T2203;
-  wire T2204;
-  wire T2205;
-  wire T2206;
-  reg  useRAS_11;
-  wire T2207;
-  wire T2208;
-  wire T2209;
-  wire T2210;
-  wire T2211;
-  wire T2212;
-  reg  useRAS_10;
-  wire T2213;
-  wire T2214;
-  wire T2215;
-  wire T2216;
-  wire T2217;
-  wire T2218;
-  reg  useRAS_9;
-  wire T2219;
-  wire T2220;
-  wire T2221;
-  wire T2222;
-  wire T2223;
-  wire T2224;
-  reg  useRAS_8;
-  wire T2225;
-  wire T2226;
-  wire T2227;
-  wire T2228;
-  wire T2229;
-  wire T2230;
+  wire T285;
+  wire T286;
+  wire T287;
+  wire T288;
+  wire T289;
+  wire[3:0] T290;
+  wire[2:0] T291;
+  wire T292;
+  wire[3:0] T293;
+  wire[3:0] T294;
+  wire[2:0] T483;
+  wire[1:0] T484;
+  wire T485;
+  wire[1:0] T486;
+  wire[1:0] T487;
+  wire[3:0] T488;
+  wire[3:0] T489;
+  wire[3:0] T490;
+  wire[1:0] T491;
+  wire T492;
+  wire T493;
+  wire[38:0] T296;
+  wire[38:0] T297;
+  wire[38:0] T298;
+  wire[11:0] T299;
+  wire[11:0] T300;
+  wire[11:0] T301;
+  reg [11:0] tgts [7:0];
+  wire[11:0] T302;
+  wire[11:0] T494;
+  wire T303;
+  wire[11:0] T304;
+  wire[11:0] T305;
+  wire[11:0] T306;
+  wire T307;
+  wire[11:0] T308;
+  wire[11:0] T309;
+  wire[11:0] T310;
+  wire T311;
+  wire[11:0] T312;
+  wire[11:0] T313;
+  wire[11:0] T314;
+  wire T315;
+  wire[11:0] T316;
+  wire[11:0] T317;
+  wire[11:0] T318;
+  wire T319;
+  wire[11:0] T320;
+  wire[11:0] T321;
+  wire[11:0] T322;
+  wire T323;
+  wire[11:0] T324;
+  wire[11:0] T325;
+  wire[11:0] T326;
+  wire T327;
+  wire[11:0] T328;
+  wire[11:0] T329;
+  wire T330;
+  wire[26:0] T331;
+  wire[26:0] T332;
+  wire[26:0] T333;
+  wire T334;
+  wire[3:0] T335;
+  wire[3:0] T336;
+  wire T337;
+  wire[3:0] T338;
+  wire[3:0] T339;
+  wire T340;
+  wire[3:0] T341;
+  wire[3:0] T342;
+  wire T343;
+  wire[3:0] T344;
+  wire[3:0] T345;
+  wire T346;
+  wire[3:0] T347;
+  wire[3:0] T348;
+  wire T349;
+  wire[3:0] T350;
+  wire[3:0] T351;
+  wire T352;
+  wire[3:0] T353;
+  wire[3:0] T354;
+  wire T355;
+  wire[3:0] T356;
+  wire T357;
+  wire[26:0] T358;
+  wire[26:0] T359;
+  wire[26:0] T360;
+  wire T361;
+  wire[26:0] T362;
+  wire[26:0] T363;
+  wire[26:0] T364;
+  wire T365;
+  wire[26:0] T366;
+  wire[26:0] T367;
+  wire T368;
+  wire[38:0] T369;
+  reg [38:0] R370;
+  wire[38:0] T371;
+  wire T372;
+  wire T373;
+  wire[1:0] T374;
+  wire T375;
+  wire T376;
+  reg  R377;
+  wire T495;
+  wire T378;
+  wire T379;
+  wire T380;
+  wire T381;
+  wire T382;
+  wire T383;
+  reg [1:0] R384;
+  wire[1:0] T496;
+  wire[1:0] T385;
+  wire[1:0] T386;
+  wire[1:0] T387;
+  wire[1:0] T388;
+  wire T389;
+  wire T390;
+  wire[1:0] T391;
+  wire T392;
+  wire T393;
+  wire T394;
+  wire T395;
+  wire T396;
+  reg [38:0] R397;
+  wire[38:0] T398;
+  wire T399;
+  wire T400;
+  wire T401;
+  wire T402;
+  wire T403;
+  wire T404;
   reg  useRAS_7;
-  wire T2231;
-  wire T2232;
-  wire T2233;
-  wire T2234;
-  wire T2235;
-  wire T2236;
+  wire T405;
+  reg  R406;
+  wire T407;
+  wire T408;
+  wire T409;
+  wire[7:0] T410;
+  wire[2:0] T411;
+  wire T412;
+  wire T413;
+  wire T414;
   reg  useRAS_6;
-  wire T2237;
-  wire T2238;
-  wire T2239;
-  wire T2240;
-  wire T2241;
-  wire T2242;
+  wire T415;
+  wire T416;
+  wire T417;
+  wire T418;
+  wire T419;
+  wire T420;
   reg  useRAS_5;
-  wire T2243;
-  wire T2244;
-  wire T2245;
-  wire T2246;
-  wire T2247;
-  wire T2248;
+  wire T421;
+  wire T422;
+  wire T423;
+  wire T424;
+  wire T425;
+  wire T426;
   reg  useRAS_4;
-  wire T2249;
-  wire T2250;
-  wire T2251;
-  wire T2252;
-  wire T2253;
-  wire T2254;
+  wire T427;
+  wire T428;
+  wire T429;
+  wire T430;
+  wire T431;
+  wire T432;
   reg  useRAS_3;
-  wire T2255;
-  wire T2256;
-  wire T2257;
-  wire T2258;
-  wire T2259;
-  wire T2260;
+  wire T433;
+  wire T434;
+  wire T435;
+  wire T436;
+  wire T437;
+  wire T438;
   reg  useRAS_2;
-  wire T2261;
-  wire T2262;
-  wire T2263;
-  wire T2264;
-  wire T2265;
-  wire T2266;
+  wire T439;
+  wire T440;
+  wire T441;
+  wire T442;
+  wire T443;
+  wire T444;
   reg  useRAS_1;
-  wire T2267;
-  wire T2268;
-  wire T2269;
-  wire T2270;
-  wire T2271;
+  wire T445;
+  wire T446;
+  wire T447;
+  wire T448;
+  wire T449;
   reg  useRAS_0;
-  wire T2272;
-  wire T2273;
-  wire T2274;
-  wire T2275;
-  wire T2276;
-  wire T2277;
-  wire T2278;
-  wire T2279;
-  reg  brIdx [61:0];
-  wire T2280;
-  wire T2281;
-  wire T2282;
-  wire T2283;
-  wire T2284;
-  wire T2285;
-  wire T2286;
-  wire T2287;
+  wire T450;
+  wire T451;
+  wire T452;
+  wire T453;
+  wire T454;
+  wire T455;
+  wire T456;
+  wire T457;
+  reg  brIdx [7:0];
+  wire T458;
+  wire T459;
+  wire T460;
+  wire T461;
+  wire T462;
+  wire T463;
 
 `ifndef SYNTHESIS
 // synthesis translate_off
@@ -49110,80 +47041,26 @@ module BTB(input clk, input reset,
     T0 = 1'b0;
     R4 = {2{$random}};
     R7 = {1{$random}};
-    for (initvar = 0; initvar < 128; initvar = initvar+1)
+    for (initvar = 0; initvar < 16; initvar = initvar+1)
       T10[initvar] = {1{$random}};
     R25 = {1{$random}};
-    isJump_61 = {1{$random}};
+    isJump_7 = {1{$random}};
     R36 = {1{$random}};
     nextRepl = {1{$random}};
-    R49 = {1{$random}};
+    R47 = {1{$random}};
     updateHit = {1{$random}};
     pageValid = {1{$random}};
-    R70 = {1{$random}};
-    R82 = {2{$random}};
-    for (initvar = 0; initvar < 6; initvar = initvar+1)
+    R65 = {1{$random}};
+    R74 = {2{$random}};
+    for (initvar = 0; initvar < 4; initvar = initvar+1)
       pages[initvar] = {1{$random}};
-    for (initvar = 0; initvar < 62; initvar = initvar+1)
+    for (initvar = 0; initvar < 8; initvar = initvar+1)
       idxPages[initvar] = {1{$random}};
-    for (initvar = 0; initvar < 62; initvar = initvar+1)
+    for (initvar = 0; initvar < 8; initvar = initvar+1)
       idxs[initvar] = {1{$random}};
-    idxValid = {2{$random}};
-    for (initvar = 0; initvar < 62; initvar = initvar+1)
+    idxValid = {1{$random}};
+    for (initvar = 0; initvar < 8; initvar = initvar+1)
       tgtPages[initvar] = {1{$random}};
-    isJump_60 = {1{$random}};
-    isJump_59 = {1{$random}};
-    isJump_58 = {1{$random}};
-    isJump_57 = {1{$random}};
-    isJump_56 = {1{$random}};
-    isJump_55 = {1{$random}};
-    isJump_54 = {1{$random}};
-    isJump_53 = {1{$random}};
-    isJump_52 = {1{$random}};
-    isJump_51 = {1{$random}};
-    isJump_50 = {1{$random}};
-    isJump_49 = {1{$random}};
-    isJump_48 = {1{$random}};
-    isJump_47 = {1{$random}};
-    isJump_46 = {1{$random}};
-    isJump_45 = {1{$random}};
-    isJump_44 = {1{$random}};
-    isJump_43 = {1{$random}};
-    isJump_42 = {1{$random}};
-    isJump_41 = {1{$random}};
-    isJump_40 = {1{$random}};
-    isJump_39 = {1{$random}};
-    isJump_38 = {1{$random}};
-    isJump_37 = {1{$random}};
-    isJump_36 = {1{$random}};
-    isJump_35 = {1{$random}};
-    isJump_34 = {1{$random}};
-    isJump_33 = {1{$random}};
-    isJump_32 = {1{$random}};
-    isJump_31 = {1{$random}};
-    isJump_30 = {1{$random}};
-    isJump_29 = {1{$random}};
-    isJump_28 = {1{$random}};
-    isJump_27 = {1{$random}};
-    isJump_26 = {1{$random}};
-    isJump_25 = {1{$random}};
-    isJump_24 = {1{$random}};
-    isJump_23 = {1{$random}};
-    isJump_22 = {1{$random}};
-    isJump_21 = {1{$random}};
-    isJump_20 = {1{$random}};
-    isJump_19 = {1{$random}};
-    isJump_18 = {1{$random}};
-    isJump_17 = {1{$random}};
-    isJump_16 = {1{$random}};
-    isJump_15 = {1{$random}};
-    isJump_14 = {1{$random}};
-    isJump_13 = {1{$random}};
-    isJump_12 = {1{$random}};
-    isJump_11 = {1{$random}};
-    isJump_10 = {1{$random}};
-    isJump_9 = {1{$random}};
-    isJump_8 = {1{$random}};
-    isJump_7 = {1{$random}};
     isJump_6 = {1{$random}};
     isJump_5 = {1{$random}};
     isJump_4 = {1{$random}};
@@ -49191,68 +47068,14 @@ module BTB(input clk, input reset,
     isJump_2 = {1{$random}};
     isJump_1 = {1{$random}};
     isJump_0 = {1{$random}};
-    for (initvar = 0; initvar < 62; initvar = initvar+1)
+    for (initvar = 0; initvar < 8; initvar = initvar+1)
       tgts[initvar] = {1{$random}};
-    R1868 = {2{$random}};
-    R1875 = {1{$random}};
-    R1882 = {1{$random}};
-    R1895 = {2{$random}};
-    useRAS_61 = {1{$random}};
-    R1904 = {1{$random}};
-    useRAS_60 = {1{$random}};
-    useRAS_59 = {1{$random}};
-    useRAS_58 = {1{$random}};
-    useRAS_57 = {1{$random}};
-    useRAS_56 = {1{$random}};
-    useRAS_55 = {1{$random}};
-    useRAS_54 = {1{$random}};
-    useRAS_53 = {1{$random}};
-    useRAS_52 = {1{$random}};
-    useRAS_51 = {1{$random}};
-    useRAS_50 = {1{$random}};
-    useRAS_49 = {1{$random}};
-    useRAS_48 = {1{$random}};
-    useRAS_47 = {1{$random}};
-    useRAS_46 = {1{$random}};
-    useRAS_45 = {1{$random}};
-    useRAS_44 = {1{$random}};
-    useRAS_43 = {1{$random}};
-    useRAS_42 = {1{$random}};
-    useRAS_41 = {1{$random}};
-    useRAS_40 = {1{$random}};
-    useRAS_39 = {1{$random}};
-    useRAS_38 = {1{$random}};
-    useRAS_37 = {1{$random}};
-    useRAS_36 = {1{$random}};
-    useRAS_35 = {1{$random}};
-    useRAS_34 = {1{$random}};
-    useRAS_33 = {1{$random}};
-    useRAS_32 = {1{$random}};
-    useRAS_31 = {1{$random}};
-    useRAS_30 = {1{$random}};
-    useRAS_29 = {1{$random}};
-    useRAS_28 = {1{$random}};
-    useRAS_27 = {1{$random}};
-    useRAS_26 = {1{$random}};
-    useRAS_25 = {1{$random}};
-    useRAS_24 = {1{$random}};
-    useRAS_23 = {1{$random}};
-    useRAS_22 = {1{$random}};
-    useRAS_21 = {1{$random}};
-    useRAS_20 = {1{$random}};
-    useRAS_19 = {1{$random}};
-    useRAS_18 = {1{$random}};
-    useRAS_17 = {1{$random}};
-    useRAS_16 = {1{$random}};
-    useRAS_15 = {1{$random}};
-    useRAS_14 = {1{$random}};
-    useRAS_13 = {1{$random}};
-    useRAS_12 = {1{$random}};
-    useRAS_11 = {1{$random}};
-    useRAS_10 = {1{$random}};
-    useRAS_9 = {1{$random}};
-    useRAS_8 = {1{$random}};
+    R370 = {2{$random}};
+    R377 = {1{$random}};
+    R384 = {1{$random}};
+    R397 = {2{$random}};
     useRAS_7 = {1{$random}};
+    R406 = {1{$random}};
     useRAS_6 = {1{$random}};
     useRAS_5 = {1{$random}};
     useRAS_4 = {1{$random}};
@@ -49260,7 +47083,7 @@ module BTB(input clk, input reset,
     useRAS_2 = {1{$random}};
     useRAS_1 = {1{$random}};
     useRAS_0 = {1{$random}};
-    for (initvar = 0; initvar < 62; initvar = initvar+1)
+    for (initvar = 0; initvar < 8; initvar = initvar+1)
       brIdx[initvar] = {1{$random}};
   end
 // synthesis translate_on
@@ -49271,7 +47094,7 @@ module BTB(input clk, input reset,
   assign T3 = io_req_bits_addr == R4;
   assign T5 = io_btb_update_valid ? io_btb_update_bits_target : R4;
   assign T6 = R7 ^ 1'h1;
-  assign T2288 = reset ? 1'h0 : io_btb_update_valid;
+  assign T464 = reset ? 1'h0 : io_btb_update_valid;
   assign io_resp_bits_bht_value = T8;
   assign T8 = T9;
   assign T9 = T10[T24];
@@ -49286,2456 +47109,497 @@ module BTB(input clk, input reset,
   assign T20 = io_bht_update_bits_prediction_bits_bht_value[1'h1];
   assign T21 = io_bht_update_valid & io_bht_update_bits_prediction_valid;
   assign T22 = T23 ^ io_bht_update_bits_prediction_bits_bht_history;
-  assign T23 = io_bht_update_bits_pc[4'h8:2'h2];
-  assign T24 = T1403 ^ R25;
-  assign T26 = T1402 ? T1400 : T27;
+  assign T23 = io_bht_update_bits_pc[3'h5:2'h2];
+  assign T24 = T293 ^ R25;
+  assign T26 = T292 ? T290 : T27;
   assign T27 = T31 ? T28 : R25;
   assign T28 = {T30, T29};
-  assign T29 = R25[3'h6:1'h1];
+  assign T29 = R25[2'h3:1'h1];
   assign T30 = T8[1'h0];
-  assign T31 = T1399 & T32;
+  assign T31 = T289 & T32;
   assign T32 = T33 ^ 1'h1;
-  assign T33 = T1034 | T34;
-  assign T34 = T52 ? isJump_61 : 1'h0;
-  assign T35 = T38 ? R36 : isJump_61;
+  assign T33 = T248 | T34;
+  assign T34 = T50 ? isJump_7 : 1'h0;
+  assign T35 = T38 ? R36 : isJump_7;
   assign T37 = io_btb_update_valid ? io_btb_update_bits_isJump : R36;
   assign T38 = R7 & T39;
-  assign T39 = T40[6'h3d];
+  assign T39 = T40[3'h7];
   assign T40 = 1'h1 << T41;
   assign T41 = T42;
-  assign T42 = updateHit ? R49 : nextRepl;
-  assign T2289 = reset ? 6'h0 : T43;
-  assign T43 = T47 ? T44 : nextRepl;
-  assign T44 = T46 ? 6'h0 : T45;
-  assign T45 = nextRepl + 6'h1;
-  assign T46 = nextRepl == 6'h3d;
-  assign T47 = R7 & T48;
-  assign T48 = updateHit ^ 1'h1;
-  assign T50 = io_btb_update_valid ? io_btb_update_bits_prediction_bits_entry : R49;
-  assign T51 = io_btb_update_valid ? io_btb_update_bits_prediction_valid : updateHit;
-  assign T52 = hits[6'h3d];
-  assign hits = T461 & T53;
-  assign T53 = T54;
-  assign T54 = {T307, T55};
-  assign T55 = {T233, T56};
-  assign T56 = {T194, T57};
-  assign T57 = {T175, T58};
-  assign T58 = {T166, T59};
-  assign T59 = {T162, T60};
-  assign T60 = T61 != 6'h0;
-  assign T61 = idxPagesOH_0 & pageHit;
-  assign pageHit = T138 & pageValid;
-  assign T2290 = reset ? 6'h0 : T62;
-  assign T62 = io_invalidate ? 6'h0 : T63;
-  assign T63 = T137 ? T64 : pageValid;
-  assign T64 = pageValid | pageReplEn;
+  assign T42 = updateHit ? R47 : nextRepl;
+  assign T465 = reset ? 3'h0 : T43;
+  assign T43 = T45 ? T44 : nextRepl;
+  assign T44 = nextRepl + 3'h1;
+  assign T45 = R7 & T46;
+  assign T46 = updateHit ^ 1'h1;
+  assign T48 = io_btb_update_valid ? io_btb_update_bits_prediction_bits_entry : R47;
+  assign T49 = io_btb_update_valid ? io_btb_update_bits_prediction_valid : updateHit;
+  assign T50 = hits[3'h7];
+  assign hits = T165 & T51;
+  assign T51 = T52;
+  assign T52 = {T146, T53};
+  assign T53 = {T137, T54};
+  assign T54 = {T133, T55};
+  assign T55 = T56 != 4'h0;
+  assign T56 = idxPagesOH_0 & pageHit;
+  assign pageHit = T117 & pageValid;
+  assign T466 = reset ? 4'h0 : T57;
+  assign T57 = io_invalidate ? 4'h0 : T58;
+  assign T58 = T116 ? T59 : pageValid;
+  assign T59 = pageValid | pageReplEn;
   assign pageReplEn = idxPageReplEn | tgtPageReplEn;
-  assign tgtPageReplEn = doTgtPageRepl ? tgtPageRepl : 6'h0;
-  assign tgtPageRepl = samePage ? idxPageUpdateOH : T65;
-  assign T65 = T67 | T2291;
-  assign T2291 = {5'h0, T66};
-  assign T66 = idxPageUpdateOH[3'h5];
-  assign T67 = T68 << 1'h1;
-  assign T68 = idxPageUpdateOH[3'h4:1'h0];
+  assign tgtPageReplEn = doTgtPageRepl ? tgtPageRepl : 4'h0;
+  assign tgtPageRepl = samePage ? idxPageUpdateOH : T60;
+  assign T60 = T62 | T467;
+  assign T467 = {3'h0, T61};
+  assign T61 = idxPageUpdateOH[2'h3];
+  assign T62 = T63 << 1'h1;
+  assign T63 = idxPageUpdateOH[2'h2:1'h0];
   assign idxPageUpdateOH = useUpdatePageHit ? updatePageHit : idxPageRepl;
-  assign idxPageRepl = T2292;
-  assign T2292 = T69[3'h5:1'h0];
-  assign T69 = 1'h1 << R70;
-  assign T2293 = reset ? 3'h0 : T71;
-  assign T71 = T75 ? T72 : R70;
-  assign T72 = T74 ? 3'h0 : T73;
-  assign T73 = R70 + 3'h1;
-  assign T74 = R70 == 3'h5;
-  assign T75 = R7 & doPageRepl;
+  assign idxPageRepl = T64;
+  assign T64 = 1'h1 << R65;
+  assign T468 = reset ? 2'h0 : T66;
+  assign T66 = T68 ? T67 : R65;
+  assign T67 = R65 + 2'h1;
+  assign T68 = R7 & doPageRepl;
   assign doPageRepl = doIdxPageRepl | doTgtPageRepl;
   assign doIdxPageRepl = useUpdatePageHit ^ 1'h1;
-  assign updatePageHit = T76 & pageValid;
-  assign T76 = T77;
-  assign T77 = {T123, T78};
-  assign T78 = {T121, T79};
-  assign T79 = {T119, T80};
-  assign T80 = T84 == T81;
-  assign T81 = R82 >> 4'hc;
-  assign T83 = io_btb_update_valid ? io_btb_update_bits_pc : R82;
-  assign T84 = pages[3'h0];
-  assign T86 = T89 ? T88 : T87;
-  assign T87 = R82 >> 4'hc;
-  assign T88 = io_req_bits_addr >> 4'hc;
-  assign T89 = T90 != 6'h0;
-  assign T90 = idxPageUpdateOH & 6'h15;
-  assign T91 = R7 & T92;
-  assign T92 = T94 & T93;
-  assign T93 = pageReplEn[3'h5];
-  assign T94 = T89 ? doTgtPageRepl : doIdxPageRepl;
-  assign T96 = R7 & T97;
-  assign T97 = T94 & T98;
-  assign T98 = pageReplEn[2'h3];
+  assign updatePageHit = T69 & pageValid;
+  assign T69 = T70;
+  assign T70 = {T105, T71};
+  assign T71 = {T103, T72};
+  assign T72 = T76 == T73;
+  assign T73 = R74 >> 4'hc;
+  assign T75 = io_btb_update_valid ? io_btb_update_bits_pc : R74;
+  assign T76 = pages[2'h0];
+  assign T78 = T81 ? T80 : T79;
+  assign T79 = R74 >> 4'hc;
+  assign T80 = io_req_bits_addr >> 4'hc;
+  assign T81 = T82 != 4'h0;
+  assign T82 = idxPageUpdateOH & 4'h5;
+  assign T83 = R7 & T84;
+  assign T84 = T86 & T85;
+  assign T85 = pageReplEn[2'h3];
+  assign T86 = T81 ? doTgtPageRepl : doIdxPageRepl;
+  assign T88 = R7 & T89;
+  assign T89 = T86 & T90;
+  assign T90 = pageReplEn[1'h1];
+  assign T92 = T81 ? T94 : T93;
+  assign T93 = io_req_bits_addr >> 4'hc;
+  assign T94 = R74 >> 4'hc;
+  assign T95 = R7 & T96;
+  assign T96 = T98 & T97;
+  assign T97 = pageReplEn[2'h2];
+  assign T98 = T81 ? doIdxPageRepl : doTgtPageRepl;
   assign T100 = R7 & T101;
-  assign T101 = T94 & T102;
-  assign T102 = pageReplEn[1'h1];
-  assign T104 = T89 ? T106 : T105;
-  assign T105 = io_req_bits_addr >> 4'hc;
-  assign T106 = R82 >> 4'hc;
-  assign T107 = R7 & T108;
-  assign T108 = T110 & T109;
-  assign T109 = pageReplEn[3'h4];
-  assign T110 = T89 ? doIdxPageRepl : doTgtPageRepl;
-  assign T112 = R7 & T113;
-  assign T113 = T110 & T114;
-  assign T114 = pageReplEn[2'h2];
-  assign T116 = R7 & T117;
-  assign T117 = T110 & T118;
-  assign T118 = pageReplEn[1'h0];
-  assign T119 = T120 == T81;
-  assign T120 = pages[3'h1];
-  assign T121 = T122 == T81;
-  assign T122 = pages[3'h2];
-  assign T123 = {T129, T124};
-  assign T124 = {T127, T125};
-  assign T125 = T126 == T81;
-  assign T126 = pages[3'h3];
-  assign T127 = T128 == T81;
-  assign T128 = pages[3'h4];
-  assign T129 = T130 == T81;
-  assign T130 = pages[3'h5];
-  assign useUpdatePageHit = updatePageHit != 6'h0;
-  assign samePage = T132 == T131;
-  assign T131 = io_req_bits_addr >> 4'hc;
-  assign T132 = R82 >> 4'hc;
-  assign doTgtPageRepl = T136 & T133;
-  assign T133 = usePageHit ^ 1'h1;
-  assign usePageHit = T134 != 6'h0;
-  assign T134 = pageHit & T135;
-  assign T135 = ~ idxPageReplEn;
-  assign T136 = samePage ^ 1'h1;
-  assign idxPageReplEn = doIdxPageRepl ? idxPageRepl : 6'h0;
-  assign T137 = R7 & doPageRepl;
-  assign T138 = T139;
-  assign T139 = {T149, T140};
-  assign T140 = {T147, T141};
-  assign T141 = {T145, T142};
-  assign T142 = T144 == T143;
-  assign T143 = io_req_bits_addr >> 4'hc;
-  assign T144 = pages[3'h0];
-  assign T145 = T146 == T143;
-  assign T146 = pages[3'h1];
-  assign T147 = T148 == T143;
-  assign T148 = pages[3'h2];
-  assign T149 = {T155, T150};
-  assign T150 = {T153, T151};
-  assign T151 = T152 == T143;
-  assign T152 = pages[3'h3];
-  assign T153 = T154 == T143;
-  assign T154 = pages[3'h4];
-  assign T155 = T156 == T143;
-  assign T156 = pages[3'h5];
-  assign idxPagesOH_0 = T157[3'h5:1'h0];
-  assign T157 = 1'h1 << T158;
-  assign T158 = idxPages[6'h0];
-  assign T2294 = {T2304, T2295};
-  assign T2295 = {T2303, T2296};
-  assign T2296 = T2297[1'h1];
-  assign T2297 = T2302 | T2298;
-  assign T2298 = T2299[1'h1:1'h0];
-  assign T2299 = T2301 | T2300;
-  assign T2300 = idxPageUpdateOH[2'h3:1'h0];
-  assign T2301 = idxPageUpdateOH[3'h5:3'h4];
-  assign T2302 = T2299[2'h3:2'h2];
-  assign T2303 = T2302 != 2'h0;
-  assign T2304 = T2301 != 2'h0;
-  assign T160 = R7 & T161;
-  assign T161 = T42 < 6'h3e;
-  assign T162 = T163 != 6'h0;
-  assign T163 = idxPagesOH_1 & pageHit;
-  assign idxPagesOH_1 = T164[3'h5:1'h0];
-  assign T164 = 1'h1 << T165;
-  assign T165 = idxPages[6'h1];
-  assign T166 = {T171, T167};
-  assign T167 = T168 != 6'h0;
-  assign T168 = idxPagesOH_2 & pageHit;
-  assign idxPagesOH_2 = T169[3'h5:1'h0];
-  assign T169 = 1'h1 << T170;
-  assign T170 = idxPages[6'h2];
-  assign T171 = T172 != 6'h0;
-  assign T172 = idxPagesOH_3 & pageHit;
-  assign idxPagesOH_3 = T173[3'h5:1'h0];
-  assign T173 = 1'h1 << T174;
-  assign T174 = idxPages[6'h3];
-  assign T175 = {T185, T176};
-  assign T176 = {T181, T177};
-  assign T177 = T178 != 6'h0;
-  assign T178 = idxPagesOH_4 & pageHit;
-  assign idxPagesOH_4 = T179[3'h5:1'h0];
-  assign T179 = 1'h1 << T180;
-  assign T180 = idxPages[6'h4];
-  assign T181 = T182 != 6'h0;
-  assign T182 = idxPagesOH_5 & pageHit;
-  assign idxPagesOH_5 = T183[3'h5:1'h0];
-  assign T183 = 1'h1 << T184;
-  assign T184 = idxPages[6'h5];
-  assign T185 = {T190, T186};
-  assign T186 = T187 != 6'h0;
-  assign T187 = idxPagesOH_6 & pageHit;
-  assign idxPagesOH_6 = T188[3'h5:1'h0];
-  assign T188 = 1'h1 << T189;
-  assign T189 = idxPages[6'h6];
-  assign T190 = T191 != 6'h0;
-  assign T191 = idxPagesOH_7 & pageHit;
-  assign idxPagesOH_7 = T192[3'h5:1'h0];
-  assign T192 = 1'h1 << T193;
-  assign T193 = idxPages[6'h7];
-  assign T194 = {T214, T195};
-  assign T195 = {T205, T196};
-  assign T196 = {T201, T197};
-  assign T197 = T198 != 6'h0;
-  assign T198 = idxPagesOH_8 & pageHit;
-  assign idxPagesOH_8 = T199[3'h5:1'h0];
-  assign T199 = 1'h1 << T200;
-  assign T200 = idxPages[6'h8];
-  assign T201 = T202 != 6'h0;
-  assign T202 = idxPagesOH_9 & pageHit;
-  assign idxPagesOH_9 = T203[3'h5:1'h0];
-  assign T203 = 1'h1 << T204;
-  assign T204 = idxPages[6'h9];
-  assign T205 = {T210, T206};
-  assign T206 = T207 != 6'h0;
-  assign T207 = idxPagesOH_10 & pageHit;
-  assign idxPagesOH_10 = T208[3'h5:1'h0];
-  assign T208 = 1'h1 << T209;
-  assign T209 = idxPages[6'ha];
-  assign T210 = T211 != 6'h0;
-  assign T211 = idxPagesOH_11 & pageHit;
-  assign idxPagesOH_11 = T212[3'h5:1'h0];
+  assign T101 = T98 & T102;
+  assign T102 = pageReplEn[1'h0];
+  assign T103 = T104 == T73;
+  assign T104 = pages[2'h1];
+  assign T105 = {T108, T106};
+  assign T106 = T107 == T73;
+  assign T107 = pages[2'h2];
+  assign T108 = T109 == T73;
+  assign T109 = pages[2'h3];
+  assign useUpdatePageHit = updatePageHit != 4'h0;
+  assign samePage = T111 == T110;
+  assign T110 = io_req_bits_addr >> 4'hc;
+  assign T111 = R74 >> 4'hc;
+  assign doTgtPageRepl = T115 & T112;
+  assign T112 = usePageHit ^ 1'h1;
+  assign usePageHit = T113 != 4'h0;
+  assign T113 = pageHit & T114;
+  assign T114 = ~ idxPageReplEn;
+  assign T115 = samePage ^ 1'h1;
+  assign idxPageReplEn = doIdxPageRepl ? idxPageRepl : 4'h0;
+  assign T116 = R7 & doPageRepl;
+  assign T117 = T118;
+  assign T118 = {T125, T119};
+  assign T119 = {T123, T120};
+  assign T120 = T122 == T121;
+  assign T121 = io_req_bits_addr >> 4'hc;
+  assign T122 = pages[2'h0];
+  assign T123 = T124 == T121;
+  assign T124 = pages[2'h1];
+  assign T125 = {T128, T126};
+  assign T126 = T127 == T121;
+  assign T127 = pages[2'h2];
+  assign T128 = T129 == T121;
+  assign T129 = pages[2'h3];
+  assign idxPagesOH_0 = T130;
+  assign T130 = 1'h1 << T131;
+  assign T131 = idxPages[3'h0];
+  assign T469 = {T474, T470};
+  assign T470 = T471[1'h1];
+  assign T471 = T473 | T472;
+  assign T472 = idxPageUpdateOH[1'h1:1'h0];
+  assign T473 = idxPageUpdateOH[2'h3:2'h2];
+  assign T474 = T473 != 2'h0;
+  assign T133 = T134 != 4'h0;
+  assign T134 = idxPagesOH_1 & pageHit;
+  assign idxPagesOH_1 = T135;
+  assign T135 = 1'h1 << T136;
+  assign T136 = idxPages[3'h1];
+  assign T137 = {T142, T138};
+  assign T138 = T139 != 4'h0;
+  assign T139 = idxPagesOH_2 & pageHit;
+  assign idxPagesOH_2 = T140;
+  assign T140 = 1'h1 << T141;
+  assign T141 = idxPages[3'h2];
+  assign T142 = T143 != 4'h0;
+  assign T143 = idxPagesOH_3 & pageHit;
+  assign idxPagesOH_3 = T144;
+  assign T144 = 1'h1 << T145;
+  assign T145 = idxPages[3'h3];
+  assign T146 = {T156, T147};
+  assign T147 = {T152, T148};
+  assign T148 = T149 != 4'h0;
+  assign T149 = idxPagesOH_4 & pageHit;
+  assign idxPagesOH_4 = T150;
+  assign T150 = 1'h1 << T151;
+  assign T151 = idxPages[3'h4];
+  assign T152 = T153 != 4'h0;
+  assign T153 = idxPagesOH_5 & pageHit;
+  assign idxPagesOH_5 = T154;
+  assign T154 = 1'h1 << T155;
+  assign T155 = idxPages[3'h5];
+  assign T156 = {T161, T157};
+  assign T157 = T158 != 4'h0;
+  assign T158 = idxPagesOH_6 & pageHit;
+  assign idxPagesOH_6 = T159;
+  assign T159 = 1'h1 << T160;
+  assign T160 = idxPages[3'h6];
+  assign T161 = T162 != 4'h0;
+  assign T162 = idxPagesOH_7 & pageHit;
+  assign idxPagesOH_7 = T163;
+  assign T163 = 1'h1 << T164;
+  assign T164 = idxPages[3'h7];
+  assign T165 = idxValid & T166;
+  assign T166 = T167;
+  assign T167 = {T181, T168};
+  assign T168 = {T176, T169};
+  assign T169 = {T174, T170};
+  assign T170 = T172 == T171;
+  assign T171 = io_req_bits_addr[4'hb:1'h0];
+  assign T172 = idxs[3'h0];
+  assign T475 = R74[4'hb:1'h0];
+  assign T174 = T175 == T171;
+  assign T175 = idxs[3'h1];
+  assign T176 = {T179, T177};
+  assign T177 = T178 == T171;
+  assign T178 = idxs[3'h2];
+  assign T179 = T180 == T171;
+  assign T180 = idxs[3'h3];
+  assign T181 = {T187, T182};
+  assign T182 = {T185, T183};
+  assign T183 = T184 == T171;
+  assign T184 = idxs[3'h4];
+  assign T185 = T186 == T171;
+  assign T186 = idxs[3'h5];
+  assign T187 = {T190, T188};
+  assign T188 = T189 == T171;
+  assign T189 = idxs[3'h6];
+  assign T190 = T191 == T171;
+  assign T191 = idxs[3'h7];
+  assign T476 = reset ? 8'h0 : T192;
+  assign T192 = io_invalidate ? 8'h0 : T193;
+  assign T193 = R7 ? T194 : idxValid;
+  assign T194 = T196 | T195;
+  assign T195 = 1'h1 << T42;
+  assign T196 = idxValid & T197;
+  assign T197 = ~ T198;
+  assign T198 = T199;
+  assign T199 = {T225, T200};
+  assign T200 = {T214, T201};
+  assign T201 = {T209, T202};
+  assign T202 = T203 != 4'h0;
+  assign T203 = pageReplEn & T204;
+  assign T204 = idxPagesOH_0 | tgtPagesOH_0;
+  assign tgtPagesOH_0 = T205;
+  assign T205 = 1'h1 << T206;
+  assign T206 = tgtPages[3'h0];
+  assign T477 = {T482, T478};
+  assign T478 = T479[1'h1];
+  assign T479 = T481 | T480;
+  assign T480 = T208[1'h1:1'h0];
+  assign T208 = usePageHit ? pageHit : tgtPageRepl;
+  assign T481 = T208[2'h3:2'h2];
+  assign T482 = T481 != 2'h0;
+  assign T209 = T210 != 4'h0;
+  assign T210 = pageReplEn & T211;
+  assign T211 = idxPagesOH_1 | tgtPagesOH_1;
+  assign tgtPagesOH_1 = T212;
   assign T212 = 1'h1 << T213;
-  assign T213 = idxPages[6'hb];
-  assign T214 = {T224, T215};
-  assign T215 = {T220, T216};
-  assign T216 = T217 != 6'h0;
-  assign T217 = idxPagesOH_12 & pageHit;
-  assign idxPagesOH_12 = T218[3'h5:1'h0];
+  assign T213 = tgtPages[3'h1];
+  assign T214 = {T220, T215};
+  assign T215 = T216 != 4'h0;
+  assign T216 = pageReplEn & T217;
+  assign T217 = idxPagesOH_2 | tgtPagesOH_2;
+  assign tgtPagesOH_2 = T218;
   assign T218 = 1'h1 << T219;
-  assign T219 = idxPages[6'hc];
-  assign T220 = T221 != 6'h0;
-  assign T221 = idxPagesOH_13 & pageHit;
-  assign idxPagesOH_13 = T222[3'h5:1'h0];
-  assign T222 = 1'h1 << T223;
-  assign T223 = idxPages[6'hd];
-  assign T224 = {T229, T225};
-  assign T225 = T226 != 6'h0;
-  assign T226 = idxPagesOH_14 & pageHit;
-  assign idxPagesOH_14 = T227[3'h5:1'h0];
-  assign T227 = 1'h1 << T228;
-  assign T228 = idxPages[6'he];
-  assign T229 = T230 != 6'h0;
-  assign T230 = idxPagesOH_15 & pageHit;
-  assign idxPagesOH_15 = T231[3'h5:1'h0];
-  assign T231 = 1'h1 << T232;
-  assign T232 = idxPages[6'hf];
-  assign T233 = {T273, T234};
-  assign T234 = {T254, T235};
-  assign T235 = {T245, T236};
-  assign T236 = {T241, T237};
-  assign T237 = T238 != 6'h0;
-  assign T238 = idxPagesOH_16 & pageHit;
-  assign idxPagesOH_16 = T239[3'h5:1'h0];
-  assign T239 = 1'h1 << T240;
-  assign T240 = idxPages[6'h10];
-  assign T241 = T242 != 6'h0;
-  assign T242 = idxPagesOH_17 & pageHit;
-  assign idxPagesOH_17 = T243[3'h5:1'h0];
-  assign T243 = 1'h1 << T244;
-  assign T244 = idxPages[6'h11];
-  assign T245 = {T250, T246};
-  assign T246 = T247 != 6'h0;
-  assign T247 = idxPagesOH_18 & pageHit;
-  assign idxPagesOH_18 = T248[3'h5:1'h0];
-  assign T248 = 1'h1 << T249;
-  assign T249 = idxPages[6'h12];
-  assign T250 = T251 != 6'h0;
-  assign T251 = idxPagesOH_19 & pageHit;
-  assign idxPagesOH_19 = T252[3'h5:1'h0];
-  assign T252 = 1'h1 << T253;
-  assign T253 = idxPages[6'h13];
-  assign T254 = {T264, T255};
-  assign T255 = {T260, T256};
-  assign T256 = T257 != 6'h0;
-  assign T257 = idxPagesOH_20 & pageHit;
-  assign idxPagesOH_20 = T258[3'h5:1'h0];
-  assign T258 = 1'h1 << T259;
-  assign T259 = idxPages[6'h14];
-  assign T260 = T261 != 6'h0;
-  assign T261 = idxPagesOH_21 & pageHit;
-  assign idxPagesOH_21 = T262[3'h5:1'h0];
-  assign T262 = 1'h1 << T263;
-  assign T263 = idxPages[6'h15];
-  assign T264 = {T269, T265};
-  assign T265 = T266 != 6'h0;
-  assign T266 = idxPagesOH_22 & pageHit;
-  assign idxPagesOH_22 = T267[3'h5:1'h0];
-  assign T267 = 1'h1 << T268;
-  assign T268 = idxPages[6'h16];
-  assign T269 = T270 != 6'h0;
-  assign T270 = idxPagesOH_23 & pageHit;
-  assign idxPagesOH_23 = T271[3'h5:1'h0];
-  assign T271 = 1'h1 << T272;
-  assign T272 = idxPages[6'h17];
-  assign T273 = {T293, T274};
-  assign T274 = {T284, T275};
-  assign T275 = {T280, T276};
-  assign T276 = T277 != 6'h0;
-  assign T277 = idxPagesOH_24 & pageHit;
-  assign idxPagesOH_24 = T278[3'h5:1'h0];
-  assign T278 = 1'h1 << T279;
-  assign T279 = idxPages[6'h18];
-  assign T280 = T281 != 6'h0;
-  assign T281 = idxPagesOH_25 & pageHit;
-  assign idxPagesOH_25 = T282[3'h5:1'h0];
-  assign T282 = 1'h1 << T283;
-  assign T283 = idxPages[6'h19];
-  assign T284 = {T289, T285};
-  assign T285 = T286 != 6'h0;
-  assign T286 = idxPagesOH_26 & pageHit;
-  assign idxPagesOH_26 = T287[3'h5:1'h0];
-  assign T287 = 1'h1 << T288;
-  assign T288 = idxPages[6'h1a];
-  assign T289 = T290 != 6'h0;
-  assign T290 = idxPagesOH_27 & pageHit;
-  assign idxPagesOH_27 = T291[3'h5:1'h0];
-  assign T291 = 1'h1 << T292;
-  assign T292 = idxPages[6'h1b];
-  assign T293 = {T303, T294};
-  assign T294 = {T299, T295};
-  assign T295 = T296 != 6'h0;
-  assign T296 = idxPagesOH_28 & pageHit;
-  assign idxPagesOH_28 = T297[3'h5:1'h0];
-  assign T297 = 1'h1 << T298;
-  assign T298 = idxPages[6'h1c];
-  assign T299 = T300 != 6'h0;
-  assign T300 = idxPagesOH_29 & pageHit;
-  assign idxPagesOH_29 = T301[3'h5:1'h0];
-  assign T301 = 1'h1 << T302;
-  assign T302 = idxPages[6'h1d];
-  assign T303 = T304 != 6'h0;
-  assign T304 = idxPagesOH_30 & pageHit;
-  assign idxPagesOH_30 = T305[3'h5:1'h0];
-  assign T305 = 1'h1 << T306;
-  assign T306 = idxPages[6'h1e];
-  assign T307 = {T387, T308};
-  assign T308 = {T348, T309};
-  assign T309 = {T329, T310};
-  assign T310 = {T320, T311};
-  assign T311 = {T316, T312};
-  assign T312 = T313 != 6'h0;
-  assign T313 = idxPagesOH_31 & pageHit;
-  assign idxPagesOH_31 = T314[3'h5:1'h0];
-  assign T314 = 1'h1 << T315;
-  assign T315 = idxPages[6'h1f];
-  assign T316 = T317 != 6'h0;
-  assign T317 = idxPagesOH_32 & pageHit;
-  assign idxPagesOH_32 = T318[3'h5:1'h0];
-  assign T318 = 1'h1 << T319;
-  assign T319 = idxPages[6'h20];
-  assign T320 = {T325, T321};
-  assign T321 = T322 != 6'h0;
-  assign T322 = idxPagesOH_33 & pageHit;
-  assign idxPagesOH_33 = T323[3'h5:1'h0];
-  assign T323 = 1'h1 << T324;
-  assign T324 = idxPages[6'h21];
-  assign T325 = T326 != 6'h0;
-  assign T326 = idxPagesOH_34 & pageHit;
-  assign idxPagesOH_34 = T327[3'h5:1'h0];
-  assign T327 = 1'h1 << T328;
-  assign T328 = idxPages[6'h22];
-  assign T329 = {T339, T330};
-  assign T330 = {T335, T331};
-  assign T331 = T332 != 6'h0;
-  assign T332 = idxPagesOH_35 & pageHit;
-  assign idxPagesOH_35 = T333[3'h5:1'h0];
-  assign T333 = 1'h1 << T334;
-  assign T334 = idxPages[6'h23];
-  assign T335 = T336 != 6'h0;
-  assign T336 = idxPagesOH_36 & pageHit;
-  assign idxPagesOH_36 = T337[3'h5:1'h0];
-  assign T337 = 1'h1 << T338;
-  assign T338 = idxPages[6'h24];
-  assign T339 = {T344, T340};
-  assign T340 = T341 != 6'h0;
-  assign T341 = idxPagesOH_37 & pageHit;
-  assign idxPagesOH_37 = T342[3'h5:1'h0];
-  assign T342 = 1'h1 << T343;
-  assign T343 = idxPages[6'h25];
-  assign T344 = T345 != 6'h0;
-  assign T345 = idxPagesOH_38 & pageHit;
-  assign idxPagesOH_38 = T346[3'h5:1'h0];
-  assign T346 = 1'h1 << T347;
-  assign T347 = idxPages[6'h26];
-  assign T348 = {T368, T349};
-  assign T349 = {T359, T350};
-  assign T350 = {T355, T351};
-  assign T351 = T352 != 6'h0;
-  assign T352 = idxPagesOH_39 & pageHit;
-  assign idxPagesOH_39 = T353[3'h5:1'h0];
-  assign T353 = 1'h1 << T354;
-  assign T354 = idxPages[6'h27];
-  assign T355 = T356 != 6'h0;
-  assign T356 = idxPagesOH_40 & pageHit;
-  assign idxPagesOH_40 = T357[3'h5:1'h0];
-  assign T357 = 1'h1 << T358;
-  assign T358 = idxPages[6'h28];
-  assign T359 = {T364, T360};
-  assign T360 = T361 != 6'h0;
-  assign T361 = idxPagesOH_41 & pageHit;
-  assign idxPagesOH_41 = T362[3'h5:1'h0];
-  assign T362 = 1'h1 << T363;
-  assign T363 = idxPages[6'h29];
-  assign T364 = T365 != 6'h0;
-  assign T365 = idxPagesOH_42 & pageHit;
-  assign idxPagesOH_42 = T366[3'h5:1'h0];
-  assign T366 = 1'h1 << T367;
-  assign T367 = idxPages[6'h2a];
-  assign T368 = {T378, T369};
-  assign T369 = {T374, T370};
-  assign T370 = T371 != 6'h0;
-  assign T371 = idxPagesOH_43 & pageHit;
-  assign idxPagesOH_43 = T372[3'h5:1'h0];
-  assign T372 = 1'h1 << T373;
-  assign T373 = idxPages[6'h2b];
-  assign T374 = T375 != 6'h0;
-  assign T375 = idxPagesOH_44 & pageHit;
-  assign idxPagesOH_44 = T376[3'h5:1'h0];
-  assign T376 = 1'h1 << T377;
-  assign T377 = idxPages[6'h2c];
-  assign T378 = {T383, T379};
-  assign T379 = T380 != 6'h0;
-  assign T380 = idxPagesOH_45 & pageHit;
-  assign idxPagesOH_45 = T381[3'h5:1'h0];
-  assign T381 = 1'h1 << T382;
-  assign T382 = idxPages[6'h2d];
-  assign T383 = T384 != 6'h0;
-  assign T384 = idxPagesOH_46 & pageHit;
-  assign idxPagesOH_46 = T385[3'h5:1'h0];
-  assign T385 = 1'h1 << T386;
-  assign T386 = idxPages[6'h2e];
-  assign T387 = {T427, T388};
-  assign T388 = {T408, T389};
-  assign T389 = {T399, T390};
-  assign T390 = {T395, T391};
-  assign T391 = T392 != 6'h0;
-  assign T392 = idxPagesOH_47 & pageHit;
-  assign idxPagesOH_47 = T393[3'h5:1'h0];
-  assign T393 = 1'h1 << T394;
-  assign T394 = idxPages[6'h2f];
-  assign T395 = T396 != 6'h0;
-  assign T396 = idxPagesOH_48 & pageHit;
-  assign idxPagesOH_48 = T397[3'h5:1'h0];
-  assign T397 = 1'h1 << T398;
-  assign T398 = idxPages[6'h30];
-  assign T399 = {T404, T400};
-  assign T400 = T401 != 6'h0;
-  assign T401 = idxPagesOH_49 & pageHit;
-  assign idxPagesOH_49 = T402[3'h5:1'h0];
-  assign T402 = 1'h1 << T403;
-  assign T403 = idxPages[6'h31];
-  assign T404 = T405 != 6'h0;
-  assign T405 = idxPagesOH_50 & pageHit;
-  assign idxPagesOH_50 = T406[3'h5:1'h0];
-  assign T406 = 1'h1 << T407;
-  assign T407 = idxPages[6'h32];
-  assign T408 = {T418, T409};
-  assign T409 = {T414, T410};
-  assign T410 = T411 != 6'h0;
-  assign T411 = idxPagesOH_51 & pageHit;
-  assign idxPagesOH_51 = T412[3'h5:1'h0];
-  assign T412 = 1'h1 << T413;
-  assign T413 = idxPages[6'h33];
-  assign T414 = T415 != 6'h0;
-  assign T415 = idxPagesOH_52 & pageHit;
-  assign idxPagesOH_52 = T416[3'h5:1'h0];
-  assign T416 = 1'h1 << T417;
-  assign T417 = idxPages[6'h34];
-  assign T418 = {T423, T419};
-  assign T419 = T420 != 6'h0;
-  assign T420 = idxPagesOH_53 & pageHit;
-  assign idxPagesOH_53 = T421[3'h5:1'h0];
-  assign T421 = 1'h1 << T422;
-  assign T422 = idxPages[6'h35];
-  assign T423 = T424 != 6'h0;
-  assign T424 = idxPagesOH_54 & pageHit;
-  assign idxPagesOH_54 = T425[3'h5:1'h0];
-  assign T425 = 1'h1 << T426;
-  assign T426 = idxPages[6'h36];
-  assign T427 = {T447, T428};
-  assign T428 = {T438, T429};
-  assign T429 = {T434, T430};
-  assign T430 = T431 != 6'h0;
-  assign T431 = idxPagesOH_55 & pageHit;
-  assign idxPagesOH_55 = T432[3'h5:1'h0];
-  assign T432 = 1'h1 << T433;
-  assign T433 = idxPages[6'h37];
-  assign T434 = T435 != 6'h0;
-  assign T435 = idxPagesOH_56 & pageHit;
-  assign idxPagesOH_56 = T436[3'h5:1'h0];
-  assign T436 = 1'h1 << T437;
-  assign T437 = idxPages[6'h38];
-  assign T438 = {T443, T439};
-  assign T439 = T440 != 6'h0;
-  assign T440 = idxPagesOH_57 & pageHit;
-  assign idxPagesOH_57 = T441[3'h5:1'h0];
-  assign T441 = 1'h1 << T442;
-  assign T442 = idxPages[6'h39];
-  assign T443 = T444 != 6'h0;
-  assign T444 = idxPagesOH_58 & pageHit;
-  assign idxPagesOH_58 = T445[3'h5:1'h0];
-  assign T445 = 1'h1 << T446;
-  assign T446 = idxPages[6'h3a];
-  assign T447 = {T457, T448};
-  assign T448 = {T453, T449};
-  assign T449 = T450 != 6'h0;
-  assign T450 = idxPagesOH_59 & pageHit;
-  assign idxPagesOH_59 = T451[3'h5:1'h0];
-  assign T451 = 1'h1 << T452;
-  assign T452 = idxPages[6'h3b];
-  assign T453 = T454 != 6'h0;
-  assign T454 = idxPagesOH_60 & pageHit;
-  assign idxPagesOH_60 = T455[3'h5:1'h0];
-  assign T455 = 1'h1 << T456;
-  assign T456 = idxPages[6'h3c];
-  assign T457 = T458 != 6'h0;
-  assign T458 = idxPagesOH_61 & pageHit;
-  assign idxPagesOH_61 = T459[3'h5:1'h0];
-  assign T459 = 1'h1 << T460;
-  assign T460 = idxPages[6'h3d];
-  assign T461 = idxValid & T462;
-  assign T462 = T463;
-  assign T463 = {T560, T464};
-  assign T464 = {T516, T465};
-  assign T465 = {T493, T466};
-  assign T466 = {T482, T467};
-  assign T467 = {T477, T468};
-  assign T468 = {T475, T469};
-  assign T469 = T471 == T470;
-  assign T470 = io_req_bits_addr[4'hb:1'h0];
-  assign T471 = idxs[6'h0];
-  assign T2305 = R82[4'hb:1'h0];
-  assign T473 = R7 & T474;
-  assign T474 = T42 < 6'h3e;
-  assign T475 = T476 == T470;
-  assign T476 = idxs[6'h1];
-  assign T477 = {T480, T478};
-  assign T478 = T479 == T470;
-  assign T479 = idxs[6'h2];
-  assign T480 = T481 == T470;
-  assign T481 = idxs[6'h3];
-  assign T482 = {T488, T483};
-  assign T483 = {T486, T484};
-  assign T484 = T485 == T470;
-  assign T485 = idxs[6'h4];
-  assign T486 = T487 == T470;
-  assign T487 = idxs[6'h5];
-  assign T488 = {T491, T489};
-  assign T489 = T490 == T470;
-  assign T490 = idxs[6'h6];
-  assign T491 = T492 == T470;
-  assign T492 = idxs[6'h7];
-  assign T493 = {T505, T494};
-  assign T494 = {T500, T495};
-  assign T495 = {T498, T496};
-  assign T496 = T497 == T470;
-  assign T497 = idxs[6'h8];
-  assign T498 = T499 == T470;
-  assign T499 = idxs[6'h9];
-  assign T500 = {T503, T501};
-  assign T501 = T502 == T470;
-  assign T502 = idxs[6'ha];
-  assign T503 = T504 == T470;
-  assign T504 = idxs[6'hb];
-  assign T505 = {T511, T506};
-  assign T506 = {T509, T507};
-  assign T507 = T508 == T470;
-  assign T508 = idxs[6'hc];
-  assign T509 = T510 == T470;
-  assign T510 = idxs[6'hd];
-  assign T511 = {T514, T512};
-  assign T512 = T513 == T470;
-  assign T513 = idxs[6'he];
-  assign T514 = T515 == T470;
-  assign T515 = idxs[6'hf];
-  assign T516 = {T540, T517};
-  assign T517 = {T529, T518};
-  assign T518 = {T524, T519};
-  assign T519 = {T522, T520};
-  assign T520 = T521 == T470;
-  assign T521 = idxs[6'h10];
-  assign T522 = T523 == T470;
-  assign T523 = idxs[6'h11];
-  assign T524 = {T527, T525};
-  assign T525 = T526 == T470;
-  assign T526 = idxs[6'h12];
-  assign T527 = T528 == T470;
-  assign T528 = idxs[6'h13];
-  assign T529 = {T535, T530};
-  assign T530 = {T533, T531};
-  assign T531 = T532 == T470;
-  assign T532 = idxs[6'h14];
-  assign T533 = T534 == T470;
-  assign T534 = idxs[6'h15];
-  assign T535 = {T538, T536};
-  assign T536 = T537 == T470;
-  assign T537 = idxs[6'h16];
-  assign T538 = T539 == T470;
-  assign T539 = idxs[6'h17];
-  assign T540 = {T552, T541};
-  assign T541 = {T547, T542};
-  assign T542 = {T545, T543};
-  assign T543 = T544 == T470;
-  assign T544 = idxs[6'h18];
-  assign T545 = T546 == T470;
-  assign T546 = idxs[6'h19];
-  assign T547 = {T550, T548};
-  assign T548 = T549 == T470;
-  assign T549 = idxs[6'h1a];
-  assign T550 = T551 == T470;
-  assign T551 = idxs[6'h1b];
-  assign T552 = {T558, T553};
-  assign T553 = {T556, T554};
-  assign T554 = T555 == T470;
-  assign T555 = idxs[6'h1c];
-  assign T556 = T557 == T470;
-  assign T557 = idxs[6'h1d];
-  assign T558 = T559 == T470;
-  assign T559 = idxs[6'h1e];
-  assign T560 = {T608, T561};
-  assign T561 = {T585, T562};
-  assign T562 = {T574, T563};
-  assign T563 = {T569, T564};
-  assign T564 = {T567, T565};
-  assign T565 = T566 == T470;
-  assign T566 = idxs[6'h1f];
-  assign T567 = T568 == T470;
-  assign T568 = idxs[6'h20];
-  assign T569 = {T572, T570};
-  assign T570 = T571 == T470;
-  assign T571 = idxs[6'h21];
-  assign T572 = T573 == T470;
-  assign T573 = idxs[6'h22];
-  assign T574 = {T580, T575};
-  assign T575 = {T578, T576};
-  assign T576 = T577 == T470;
-  assign T577 = idxs[6'h23];
-  assign T578 = T579 == T470;
-  assign T579 = idxs[6'h24];
-  assign T580 = {T583, T581};
-  assign T581 = T582 == T470;
-  assign T582 = idxs[6'h25];
-  assign T583 = T584 == T470;
-  assign T584 = idxs[6'h26];
-  assign T585 = {T597, T586};
-  assign T586 = {T592, T587};
-  assign T587 = {T590, T588};
-  assign T588 = T589 == T470;
-  assign T589 = idxs[6'h27];
-  assign T590 = T591 == T470;
-  assign T591 = idxs[6'h28];
-  assign T592 = {T595, T593};
-  assign T593 = T594 == T470;
-  assign T594 = idxs[6'h29];
-  assign T595 = T596 == T470;
-  assign T596 = idxs[6'h2a];
-  assign T597 = {T603, T598};
-  assign T598 = {T601, T599};
-  assign T599 = T600 == T470;
-  assign T600 = idxs[6'h2b];
-  assign T601 = T602 == T470;
-  assign T602 = idxs[6'h2c];
-  assign T603 = {T606, T604};
-  assign T604 = T605 == T470;
-  assign T605 = idxs[6'h2d];
-  assign T606 = T607 == T470;
-  assign T607 = idxs[6'h2e];
-  assign T608 = {T632, T609};
-  assign T609 = {T621, T610};
-  assign T610 = {T616, T611};
-  assign T611 = {T614, T612};
-  assign T612 = T613 == T470;
-  assign T613 = idxs[6'h2f];
-  assign T614 = T615 == T470;
-  assign T615 = idxs[6'h30];
-  assign T616 = {T619, T617};
-  assign T617 = T618 == T470;
-  assign T618 = idxs[6'h31];
-  assign T619 = T620 == T470;
-  assign T620 = idxs[6'h32];
-  assign T621 = {T627, T622};
-  assign T622 = {T625, T623};
-  assign T623 = T624 == T470;
-  assign T624 = idxs[6'h33];
-  assign T625 = T626 == T470;
-  assign T626 = idxs[6'h34];
-  assign T627 = {T630, T628};
-  assign T628 = T629 == T470;
-  assign T629 = idxs[6'h35];
-  assign T630 = T631 == T470;
-  assign T631 = idxs[6'h36];
-  assign T632 = {T644, T633};
-  assign T633 = {T639, T634};
-  assign T634 = {T637, T635};
-  assign T635 = T636 == T470;
-  assign T636 = idxs[6'h37];
-  assign T637 = T638 == T470;
-  assign T638 = idxs[6'h38];
-  assign T639 = {T642, T640};
-  assign T640 = T641 == T470;
-  assign T641 = idxs[6'h39];
-  assign T642 = T643 == T470;
-  assign T643 = idxs[6'h3a];
-  assign T644 = {T650, T645};
-  assign T645 = {T648, T646};
-  assign T646 = T647 == T470;
-  assign T647 = idxs[6'h3b];
-  assign T648 = T649 == T470;
-  assign T649 = idxs[6'h3c];
-  assign T650 = T651 == T470;
-  assign T651 = idxs[6'h3d];
-  assign T2306 = T2307[6'h3d:1'h0];
-  assign T2307 = reset ? 64'h0 : T652;
-  assign T652 = io_invalidate ? 64'h0 : T653;
-  assign T653 = R7 ? T654 : T2308;
-  assign T2308 = {2'h0, idxValid};
-  assign T654 = T2309 | T655;
-  assign T655 = 1'h1 << T42;
-  assign T2309 = {2'h0, T656};
-  assign T656 = idxValid & T657;
-  assign T657 = ~ T658;
-  assign T658 = T659;
-  assign T659 = {T849, T660};
-  assign T660 = {T760, T661};
-  assign T661 = {T713, T662};
-  assign T662 = {T690, T663};
-  assign T663 = {T679, T664};
-  assign T664 = {T674, T665};
-  assign T665 = T666 != 6'h0;
-  assign T666 = pageReplEn & T667;
-  assign T667 = idxPagesOH_0 | tgtPagesOH_0;
-  assign tgtPagesOH_0 = T668[3'h5:1'h0];
-  assign T668 = 1'h1 << T669;
-  assign T669 = tgtPages[6'h0];
-  assign T2310 = {T2320, T2311};
-  assign T2311 = {T2319, T2312};
-  assign T2312 = T2313[1'h1];
-  assign T2313 = T2318 | T2314;
-  assign T2314 = T2315[1'h1:1'h0];
-  assign T2315 = T2317 | T2316;
-  assign T2316 = T671[2'h3:1'h0];
-  assign T671 = usePageHit ? pageHit : tgtPageRepl;
-  assign T2317 = T671[3'h5:3'h4];
-  assign T2318 = T2315[2'h3:2'h2];
-  assign T2319 = T2318 != 2'h0;
-  assign T2320 = T2317 != 2'h0;
-  assign T672 = R7 & T673;
-  assign T673 = T42 < 6'h3e;
-  assign T674 = T675 != 6'h0;
-  assign T675 = pageReplEn & T676;
-  assign T676 = idxPagesOH_1 | tgtPagesOH_1;
-  assign tgtPagesOH_1 = T677[3'h5:1'h0];
-  assign T677 = 1'h1 << T678;
-  assign T678 = tgtPages[6'h1];
-  assign T679 = {T685, T680};
-  assign T680 = T681 != 6'h0;
-  assign T681 = pageReplEn & T682;
-  assign T682 = idxPagesOH_2 | tgtPagesOH_2;
-  assign tgtPagesOH_2 = T683[3'h5:1'h0];
-  assign T683 = 1'h1 << T684;
-  assign T684 = tgtPages[6'h2];
-  assign T685 = T686 != 6'h0;
-  assign T686 = pageReplEn & T687;
-  assign T687 = idxPagesOH_3 | tgtPagesOH_3;
-  assign tgtPagesOH_3 = T688[3'h5:1'h0];
-  assign T688 = 1'h1 << T689;
-  assign T689 = tgtPages[6'h3];
-  assign T690 = {T702, T691};
-  assign T691 = {T697, T692};
-  assign T692 = T693 != 6'h0;
-  assign T693 = pageReplEn & T694;
-  assign T694 = idxPagesOH_4 | tgtPagesOH_4;
-  assign tgtPagesOH_4 = T695[3'h5:1'h0];
-  assign T695 = 1'h1 << T696;
-  assign T696 = tgtPages[6'h4];
-  assign T697 = T698 != 6'h0;
-  assign T698 = pageReplEn & T699;
-  assign T699 = idxPagesOH_5 | tgtPagesOH_5;
-  assign tgtPagesOH_5 = T700[3'h5:1'h0];
-  assign T700 = 1'h1 << T701;
-  assign T701 = tgtPages[6'h5];
-  assign T702 = {T708, T703};
-  assign T703 = T704 != 6'h0;
-  assign T704 = pageReplEn & T705;
-  assign T705 = idxPagesOH_6 | tgtPagesOH_6;
-  assign tgtPagesOH_6 = T706[3'h5:1'h0];
-  assign T706 = 1'h1 << T707;
-  assign T707 = tgtPages[6'h6];
-  assign T708 = T709 != 6'h0;
-  assign T709 = pageReplEn & T710;
-  assign T710 = idxPagesOH_7 | tgtPagesOH_7;
-  assign tgtPagesOH_7 = T711[3'h5:1'h0];
-  assign T711 = 1'h1 << T712;
-  assign T712 = tgtPages[6'h7];
-  assign T713 = {T737, T714};
-  assign T714 = {T726, T715};
-  assign T715 = {T721, T716};
-  assign T716 = T717 != 6'h0;
-  assign T717 = pageReplEn & T718;
-  assign T718 = idxPagesOH_8 | tgtPagesOH_8;
-  assign tgtPagesOH_8 = T719[3'h5:1'h0];
-  assign T719 = 1'h1 << T720;
-  assign T720 = tgtPages[6'h8];
-  assign T721 = T722 != 6'h0;
-  assign T722 = pageReplEn & T723;
-  assign T723 = idxPagesOH_9 | tgtPagesOH_9;
-  assign tgtPagesOH_9 = T724[3'h5:1'h0];
-  assign T724 = 1'h1 << T725;
-  assign T725 = tgtPages[6'h9];
-  assign T726 = {T732, T727};
-  assign T727 = T728 != 6'h0;
-  assign T728 = pageReplEn & T729;
-  assign T729 = idxPagesOH_10 | tgtPagesOH_10;
-  assign tgtPagesOH_10 = T730[3'h5:1'h0];
-  assign T730 = 1'h1 << T731;
-  assign T731 = tgtPages[6'ha];
-  assign T732 = T733 != 6'h0;
-  assign T733 = pageReplEn & T734;
-  assign T734 = idxPagesOH_11 | tgtPagesOH_11;
-  assign tgtPagesOH_11 = T735[3'h5:1'h0];
-  assign T735 = 1'h1 << T736;
-  assign T736 = tgtPages[6'hb];
-  assign T737 = {T749, T738};
-  assign T738 = {T744, T739};
-  assign T739 = T740 != 6'h0;
-  assign T740 = pageReplEn & T741;
-  assign T741 = idxPagesOH_12 | tgtPagesOH_12;
-  assign tgtPagesOH_12 = T742[3'h5:1'h0];
-  assign T742 = 1'h1 << T743;
-  assign T743 = tgtPages[6'hc];
-  assign T744 = T745 != 6'h0;
-  assign T745 = pageReplEn & T746;
-  assign T746 = idxPagesOH_13 | tgtPagesOH_13;
-  assign tgtPagesOH_13 = T747[3'h5:1'h0];
-  assign T747 = 1'h1 << T748;
-  assign T748 = tgtPages[6'hd];
-  assign T749 = {T755, T750};
-  assign T750 = T751 != 6'h0;
-  assign T751 = pageReplEn & T752;
-  assign T752 = idxPagesOH_14 | tgtPagesOH_14;
-  assign tgtPagesOH_14 = T753[3'h5:1'h0];
-  assign T753 = 1'h1 << T754;
-  assign T754 = tgtPages[6'he];
-  assign T755 = T756 != 6'h0;
-  assign T756 = pageReplEn & T757;
-  assign T757 = idxPagesOH_15 | tgtPagesOH_15;
-  assign tgtPagesOH_15 = T758[3'h5:1'h0];
-  assign T758 = 1'h1 << T759;
-  assign T759 = tgtPages[6'hf];
-  assign T760 = {T808, T761};
-  assign T761 = {T785, T762};
-  assign T762 = {T774, T763};
-  assign T763 = {T769, T764};
-  assign T764 = T765 != 6'h0;
-  assign T765 = pageReplEn & T766;
-  assign T766 = idxPagesOH_16 | tgtPagesOH_16;
-  assign tgtPagesOH_16 = T767[3'h5:1'h0];
-  assign T767 = 1'h1 << T768;
-  assign T768 = tgtPages[6'h10];
-  assign T769 = T770 != 6'h0;
-  assign T770 = pageReplEn & T771;
-  assign T771 = idxPagesOH_17 | tgtPagesOH_17;
-  assign tgtPagesOH_17 = T772[3'h5:1'h0];
-  assign T772 = 1'h1 << T773;
-  assign T773 = tgtPages[6'h11];
-  assign T774 = {T780, T775};
-  assign T775 = T776 != 6'h0;
-  assign T776 = pageReplEn & T777;
-  assign T777 = idxPagesOH_18 | tgtPagesOH_18;
-  assign tgtPagesOH_18 = T778[3'h5:1'h0];
-  assign T778 = 1'h1 << T779;
-  assign T779 = tgtPages[6'h12];
-  assign T780 = T781 != 6'h0;
-  assign T781 = pageReplEn & T782;
-  assign T782 = idxPagesOH_19 | tgtPagesOH_19;
-  assign tgtPagesOH_19 = T783[3'h5:1'h0];
-  assign T783 = 1'h1 << T784;
-  assign T784 = tgtPages[6'h13];
-  assign T785 = {T797, T786};
-  assign T786 = {T792, T787};
-  assign T787 = T788 != 6'h0;
-  assign T788 = pageReplEn & T789;
-  assign T789 = idxPagesOH_20 | tgtPagesOH_20;
-  assign tgtPagesOH_20 = T790[3'h5:1'h0];
-  assign T790 = 1'h1 << T791;
-  assign T791 = tgtPages[6'h14];
-  assign T792 = T793 != 6'h0;
-  assign T793 = pageReplEn & T794;
-  assign T794 = idxPagesOH_21 | tgtPagesOH_21;
-  assign tgtPagesOH_21 = T795[3'h5:1'h0];
-  assign T795 = 1'h1 << T796;
-  assign T796 = tgtPages[6'h15];
-  assign T797 = {T803, T798};
-  assign T798 = T799 != 6'h0;
-  assign T799 = pageReplEn & T800;
-  assign T800 = idxPagesOH_22 | tgtPagesOH_22;
-  assign tgtPagesOH_22 = T801[3'h5:1'h0];
-  assign T801 = 1'h1 << T802;
-  assign T802 = tgtPages[6'h16];
-  assign T803 = T804 != 6'h0;
-  assign T804 = pageReplEn & T805;
-  assign T805 = idxPagesOH_23 | tgtPagesOH_23;
-  assign tgtPagesOH_23 = T806[3'h5:1'h0];
-  assign T806 = 1'h1 << T807;
-  assign T807 = tgtPages[6'h17];
-  assign T808 = {T832, T809};
-  assign T809 = {T821, T810};
-  assign T810 = {T816, T811};
-  assign T811 = T812 != 6'h0;
-  assign T812 = pageReplEn & T813;
-  assign T813 = idxPagesOH_24 | tgtPagesOH_24;
-  assign tgtPagesOH_24 = T814[3'h5:1'h0];
-  assign T814 = 1'h1 << T815;
-  assign T815 = tgtPages[6'h18];
-  assign T816 = T817 != 6'h0;
-  assign T817 = pageReplEn & T818;
-  assign T818 = idxPagesOH_25 | tgtPagesOH_25;
-  assign tgtPagesOH_25 = T819[3'h5:1'h0];
-  assign T819 = 1'h1 << T820;
-  assign T820 = tgtPages[6'h19];
-  assign T821 = {T827, T822};
-  assign T822 = T823 != 6'h0;
-  assign T823 = pageReplEn & T824;
-  assign T824 = idxPagesOH_26 | tgtPagesOH_26;
-  assign tgtPagesOH_26 = T825[3'h5:1'h0];
-  assign T825 = 1'h1 << T826;
-  assign T826 = tgtPages[6'h1a];
-  assign T827 = T828 != 6'h0;
-  assign T828 = pageReplEn & T829;
-  assign T829 = idxPagesOH_27 | tgtPagesOH_27;
-  assign tgtPagesOH_27 = T830[3'h5:1'h0];
-  assign T830 = 1'h1 << T831;
-  assign T831 = tgtPages[6'h1b];
-  assign T832 = {T844, T833};
-  assign T833 = {T839, T834};
-  assign T834 = T835 != 6'h0;
-  assign T835 = pageReplEn & T836;
-  assign T836 = idxPagesOH_28 | tgtPagesOH_28;
-  assign tgtPagesOH_28 = T837[3'h5:1'h0];
-  assign T837 = 1'h1 << T838;
-  assign T838 = tgtPages[6'h1c];
-  assign T839 = T840 != 6'h0;
-  assign T840 = pageReplEn & T841;
-  assign T841 = idxPagesOH_29 | tgtPagesOH_29;
-  assign tgtPagesOH_29 = T842[3'h5:1'h0];
-  assign T842 = 1'h1 << T843;
-  assign T843 = tgtPages[6'h1d];
-  assign T844 = T845 != 6'h0;
-  assign T845 = pageReplEn & T846;
-  assign T846 = idxPagesOH_30 | tgtPagesOH_30;
-  assign tgtPagesOH_30 = T847[3'h5:1'h0];
-  assign T847 = 1'h1 << T848;
-  assign T848 = tgtPages[6'h1e];
-  assign T849 = {T945, T850};
-  assign T850 = {T898, T851};
-  assign T851 = {T875, T852};
-  assign T852 = {T864, T853};
-  assign T853 = {T859, T854};
-  assign T854 = T855 != 6'h0;
-  assign T855 = pageReplEn & T856;
-  assign T856 = idxPagesOH_31 | tgtPagesOH_31;
-  assign tgtPagesOH_31 = T857[3'h5:1'h0];
-  assign T857 = 1'h1 << T858;
-  assign T858 = tgtPages[6'h1f];
-  assign T859 = T860 != 6'h0;
-  assign T860 = pageReplEn & T861;
-  assign T861 = idxPagesOH_32 | tgtPagesOH_32;
-  assign tgtPagesOH_32 = T862[3'h5:1'h0];
-  assign T862 = 1'h1 << T863;
-  assign T863 = tgtPages[6'h20];
-  assign T864 = {T870, T865};
-  assign T865 = T866 != 6'h0;
-  assign T866 = pageReplEn & T867;
-  assign T867 = idxPagesOH_33 | tgtPagesOH_33;
-  assign tgtPagesOH_33 = T868[3'h5:1'h0];
-  assign T868 = 1'h1 << T869;
-  assign T869 = tgtPages[6'h21];
-  assign T870 = T871 != 6'h0;
-  assign T871 = pageReplEn & T872;
-  assign T872 = idxPagesOH_34 | tgtPagesOH_34;
-  assign tgtPagesOH_34 = T873[3'h5:1'h0];
-  assign T873 = 1'h1 << T874;
-  assign T874 = tgtPages[6'h22];
-  assign T875 = {T887, T876};
-  assign T876 = {T882, T877};
-  assign T877 = T878 != 6'h0;
-  assign T878 = pageReplEn & T879;
-  assign T879 = idxPagesOH_35 | tgtPagesOH_35;
-  assign tgtPagesOH_35 = T880[3'h5:1'h0];
-  assign T880 = 1'h1 << T881;
-  assign T881 = tgtPages[6'h23];
-  assign T882 = T883 != 6'h0;
-  assign T883 = pageReplEn & T884;
-  assign T884 = idxPagesOH_36 | tgtPagesOH_36;
-  assign tgtPagesOH_36 = T885[3'h5:1'h0];
-  assign T885 = 1'h1 << T886;
-  assign T886 = tgtPages[6'h24];
-  assign T887 = {T893, T888};
-  assign T888 = T889 != 6'h0;
-  assign T889 = pageReplEn & T890;
-  assign T890 = idxPagesOH_37 | tgtPagesOH_37;
-  assign tgtPagesOH_37 = T891[3'h5:1'h0];
-  assign T891 = 1'h1 << T892;
-  assign T892 = tgtPages[6'h25];
-  assign T893 = T894 != 6'h0;
-  assign T894 = pageReplEn & T895;
-  assign T895 = idxPagesOH_38 | tgtPagesOH_38;
-  assign tgtPagesOH_38 = T896[3'h5:1'h0];
-  assign T896 = 1'h1 << T897;
-  assign T897 = tgtPages[6'h26];
-  assign T898 = {T922, T899};
-  assign T899 = {T911, T900};
-  assign T900 = {T906, T901};
-  assign T901 = T902 != 6'h0;
-  assign T902 = pageReplEn & T903;
-  assign T903 = idxPagesOH_39 | tgtPagesOH_39;
-  assign tgtPagesOH_39 = T904[3'h5:1'h0];
-  assign T904 = 1'h1 << T905;
-  assign T905 = tgtPages[6'h27];
-  assign T906 = T907 != 6'h0;
-  assign T907 = pageReplEn & T908;
-  assign T908 = idxPagesOH_40 | tgtPagesOH_40;
-  assign tgtPagesOH_40 = T909[3'h5:1'h0];
-  assign T909 = 1'h1 << T910;
-  assign T910 = tgtPages[6'h28];
-  assign T911 = {T917, T912};
-  assign T912 = T913 != 6'h0;
-  assign T913 = pageReplEn & T914;
-  assign T914 = idxPagesOH_41 | tgtPagesOH_41;
-  assign tgtPagesOH_41 = T915[3'h5:1'h0];
-  assign T915 = 1'h1 << T916;
-  assign T916 = tgtPages[6'h29];
-  assign T917 = T918 != 6'h0;
-  assign T918 = pageReplEn & T919;
-  assign T919 = idxPagesOH_42 | tgtPagesOH_42;
-  assign tgtPagesOH_42 = T920[3'h5:1'h0];
-  assign T920 = 1'h1 << T921;
-  assign T921 = tgtPages[6'h2a];
-  assign T922 = {T934, T923};
-  assign T923 = {T929, T924};
-  assign T924 = T925 != 6'h0;
-  assign T925 = pageReplEn & T926;
-  assign T926 = idxPagesOH_43 | tgtPagesOH_43;
-  assign tgtPagesOH_43 = T927[3'h5:1'h0];
-  assign T927 = 1'h1 << T928;
-  assign T928 = tgtPages[6'h2b];
-  assign T929 = T930 != 6'h0;
-  assign T930 = pageReplEn & T931;
-  assign T931 = idxPagesOH_44 | tgtPagesOH_44;
-  assign tgtPagesOH_44 = T932[3'h5:1'h0];
-  assign T932 = 1'h1 << T933;
-  assign T933 = tgtPages[6'h2c];
-  assign T934 = {T940, T935};
-  assign T935 = T936 != 6'h0;
-  assign T936 = pageReplEn & T937;
-  assign T937 = idxPagesOH_45 | tgtPagesOH_45;
-  assign tgtPagesOH_45 = T938[3'h5:1'h0];
-  assign T938 = 1'h1 << T939;
-  assign T939 = tgtPages[6'h2d];
-  assign T940 = T941 != 6'h0;
-  assign T941 = pageReplEn & T942;
-  assign T942 = idxPagesOH_46 | tgtPagesOH_46;
-  assign tgtPagesOH_46 = T943[3'h5:1'h0];
-  assign T943 = 1'h1 << T944;
-  assign T944 = tgtPages[6'h2e];
-  assign T945 = {T993, T946};
-  assign T946 = {T970, T947};
-  assign T947 = {T959, T948};
-  assign T948 = {T954, T949};
-  assign T949 = T950 != 6'h0;
-  assign T950 = pageReplEn & T951;
-  assign T951 = idxPagesOH_47 | tgtPagesOH_47;
-  assign tgtPagesOH_47 = T952[3'h5:1'h0];
-  assign T952 = 1'h1 << T953;
-  assign T953 = tgtPages[6'h2f];
-  assign T954 = T955 != 6'h0;
-  assign T955 = pageReplEn & T956;
-  assign T956 = idxPagesOH_48 | tgtPagesOH_48;
-  assign tgtPagesOH_48 = T957[3'h5:1'h0];
-  assign T957 = 1'h1 << T958;
-  assign T958 = tgtPages[6'h30];
-  assign T959 = {T965, T960};
-  assign T960 = T961 != 6'h0;
-  assign T961 = pageReplEn & T962;
-  assign T962 = idxPagesOH_49 | tgtPagesOH_49;
-  assign tgtPagesOH_49 = T963[3'h5:1'h0];
-  assign T963 = 1'h1 << T964;
-  assign T964 = tgtPages[6'h31];
-  assign T965 = T966 != 6'h0;
-  assign T966 = pageReplEn & T967;
-  assign T967 = idxPagesOH_50 | tgtPagesOH_50;
-  assign tgtPagesOH_50 = T968[3'h5:1'h0];
-  assign T968 = 1'h1 << T969;
-  assign T969 = tgtPages[6'h32];
-  assign T970 = {T982, T971};
-  assign T971 = {T977, T972};
-  assign T972 = T973 != 6'h0;
-  assign T973 = pageReplEn & T974;
-  assign T974 = idxPagesOH_51 | tgtPagesOH_51;
-  assign tgtPagesOH_51 = T975[3'h5:1'h0];
-  assign T975 = 1'h1 << T976;
-  assign T976 = tgtPages[6'h33];
-  assign T977 = T978 != 6'h0;
-  assign T978 = pageReplEn & T979;
-  assign T979 = idxPagesOH_52 | tgtPagesOH_52;
-  assign tgtPagesOH_52 = T980[3'h5:1'h0];
-  assign T980 = 1'h1 << T981;
-  assign T981 = tgtPages[6'h34];
-  assign T982 = {T988, T983};
-  assign T983 = T984 != 6'h0;
-  assign T984 = pageReplEn & T985;
-  assign T985 = idxPagesOH_53 | tgtPagesOH_53;
-  assign tgtPagesOH_53 = T986[3'h5:1'h0];
-  assign T986 = 1'h1 << T987;
-  assign T987 = tgtPages[6'h35];
-  assign T988 = T989 != 6'h0;
-  assign T989 = pageReplEn & T990;
-  assign T990 = idxPagesOH_54 | tgtPagesOH_54;
-  assign tgtPagesOH_54 = T991[3'h5:1'h0];
-  assign T991 = 1'h1 << T992;
-  assign T992 = tgtPages[6'h36];
-  assign T993 = {T1017, T994};
-  assign T994 = {T1006, T995};
-  assign T995 = {T1001, T996};
-  assign T996 = T997 != 6'h0;
-  assign T997 = pageReplEn & T998;
-  assign T998 = idxPagesOH_55 | tgtPagesOH_55;
-  assign tgtPagesOH_55 = T999[3'h5:1'h0];
-  assign T999 = 1'h1 << T1000;
-  assign T1000 = tgtPages[6'h37];
-  assign T1001 = T1002 != 6'h0;
-  assign T1002 = pageReplEn & T1003;
-  assign T1003 = idxPagesOH_56 | tgtPagesOH_56;
-  assign tgtPagesOH_56 = T1004[3'h5:1'h0];
-  assign T1004 = 1'h1 << T1005;
-  assign T1005 = tgtPages[6'h38];
-  assign T1006 = {T1012, T1007};
-  assign T1007 = T1008 != 6'h0;
-  assign T1008 = pageReplEn & T1009;
-  assign T1009 = idxPagesOH_57 | tgtPagesOH_57;
-  assign tgtPagesOH_57 = T1010[3'h5:1'h0];
-  assign T1010 = 1'h1 << T1011;
-  assign T1011 = tgtPages[6'h39];
-  assign T1012 = T1013 != 6'h0;
-  assign T1013 = pageReplEn & T1014;
-  assign T1014 = idxPagesOH_58 | tgtPagesOH_58;
-  assign tgtPagesOH_58 = T1015[3'h5:1'h0];
-  assign T1015 = 1'h1 << T1016;
-  assign T1016 = tgtPages[6'h3a];
-  assign T1017 = {T1029, T1018};
-  assign T1018 = {T1024, T1019};
-  assign T1019 = T1020 != 6'h0;
-  assign T1020 = pageReplEn & T1021;
-  assign T1021 = idxPagesOH_59 | tgtPagesOH_59;
-  assign tgtPagesOH_59 = T1022[3'h5:1'h0];
-  assign T1022 = 1'h1 << T1023;
-  assign T1023 = tgtPages[6'h3b];
-  assign T1024 = T1025 != 6'h0;
-  assign T1025 = pageReplEn & T1026;
-  assign T1026 = idxPagesOH_60 | tgtPagesOH_60;
-  assign tgtPagesOH_60 = T1027[3'h5:1'h0];
-  assign T1027 = 1'h1 << T1028;
-  assign T1028 = tgtPages[6'h3c];
-  assign T1029 = T1030 != 6'h0;
-  assign T1030 = pageReplEn & T1031;
-  assign T1031 = idxPagesOH_61 | tgtPagesOH_61;
-  assign tgtPagesOH_61 = T1032[3'h5:1'h0];
-  assign T1032 = 1'h1 << T1033;
-  assign T1033 = tgtPages[6'h3d];
-  assign T1034 = T1040 | T1035;
-  assign T1035 = T1039 ? isJump_60 : 1'h0;
-  assign T1036 = T1037 ? R36 : isJump_60;
-  assign T1037 = R7 & T1038;
-  assign T1038 = T40[6'h3c];
-  assign T1039 = hits[6'h3c];
-  assign T1040 = T1046 | T1041;
-  assign T1041 = T1045 ? isJump_59 : 1'h0;
-  assign T1042 = T1043 ? R36 : isJump_59;
-  assign T1043 = R7 & T1044;
-  assign T1044 = T40[6'h3b];
-  assign T1045 = hits[6'h3b];
-  assign T1046 = T1052 | T1047;
-  assign T1047 = T1051 ? isJump_58 : 1'h0;
-  assign T1048 = T1049 ? R36 : isJump_58;
-  assign T1049 = R7 & T1050;
-  assign T1050 = T40[6'h3a];
-  assign T1051 = hits[6'h3a];
-  assign T1052 = T1058 | T1053;
-  assign T1053 = T1057 ? isJump_57 : 1'h0;
-  assign T1054 = T1055 ? R36 : isJump_57;
-  assign T1055 = R7 & T1056;
-  assign T1056 = T40[6'h39];
-  assign T1057 = hits[6'h39];
-  assign T1058 = T1064 | T1059;
-  assign T1059 = T1063 ? isJump_56 : 1'h0;
-  assign T1060 = T1061 ? R36 : isJump_56;
-  assign T1061 = R7 & T1062;
-  assign T1062 = T40[6'h38];
-  assign T1063 = hits[6'h38];
-  assign T1064 = T1070 | T1065;
-  assign T1065 = T1069 ? isJump_55 : 1'h0;
-  assign T1066 = T1067 ? R36 : isJump_55;
-  assign T1067 = R7 & T1068;
-  assign T1068 = T40[6'h37];
-  assign T1069 = hits[6'h37];
-  assign T1070 = T1076 | T1071;
-  assign T1071 = T1075 ? isJump_54 : 1'h0;
-  assign T1072 = T1073 ? R36 : isJump_54;
-  assign T1073 = R7 & T1074;
-  assign T1074 = T40[6'h36];
-  assign T1075 = hits[6'h36];
-  assign T1076 = T1082 | T1077;
-  assign T1077 = T1081 ? isJump_53 : 1'h0;
-  assign T1078 = T1079 ? R36 : isJump_53;
-  assign T1079 = R7 & T1080;
-  assign T1080 = T40[6'h35];
-  assign T1081 = hits[6'h35];
-  assign T1082 = T1088 | T1083;
-  assign T1083 = T1087 ? isJump_52 : 1'h0;
-  assign T1084 = T1085 ? R36 : isJump_52;
-  assign T1085 = R7 & T1086;
-  assign T1086 = T40[6'h34];
-  assign T1087 = hits[6'h34];
-  assign T1088 = T1094 | T1089;
-  assign T1089 = T1093 ? isJump_51 : 1'h0;
-  assign T1090 = T1091 ? R36 : isJump_51;
-  assign T1091 = R7 & T1092;
-  assign T1092 = T40[6'h33];
-  assign T1093 = hits[6'h33];
-  assign T1094 = T1100 | T1095;
-  assign T1095 = T1099 ? isJump_50 : 1'h0;
-  assign T1096 = T1097 ? R36 : isJump_50;
-  assign T1097 = R7 & T1098;
-  assign T1098 = T40[6'h32];
-  assign T1099 = hits[6'h32];
-  assign T1100 = T1106 | T1101;
-  assign T1101 = T1105 ? isJump_49 : 1'h0;
-  assign T1102 = T1103 ? R36 : isJump_49;
-  assign T1103 = R7 & T1104;
-  assign T1104 = T40[6'h31];
-  assign T1105 = hits[6'h31];
-  assign T1106 = T1112 | T1107;
-  assign T1107 = T1111 ? isJump_48 : 1'h0;
-  assign T1108 = T1109 ? R36 : isJump_48;
-  assign T1109 = R7 & T1110;
-  assign T1110 = T40[6'h30];
-  assign T1111 = hits[6'h30];
-  assign T1112 = T1118 | T1113;
-  assign T1113 = T1117 ? isJump_47 : 1'h0;
-  assign T1114 = T1115 ? R36 : isJump_47;
-  assign T1115 = R7 & T1116;
-  assign T1116 = T40[6'h2f];
-  assign T1117 = hits[6'h2f];
-  assign T1118 = T1124 | T1119;
-  assign T1119 = T1123 ? isJump_46 : 1'h0;
-  assign T1120 = T1121 ? R36 : isJump_46;
-  assign T1121 = R7 & T1122;
-  assign T1122 = T40[6'h2e];
-  assign T1123 = hits[6'h2e];
-  assign T1124 = T1130 | T1125;
-  assign T1125 = T1129 ? isJump_45 : 1'h0;
-  assign T1126 = T1127 ? R36 : isJump_45;
-  assign T1127 = R7 & T1128;
-  assign T1128 = T40[6'h2d];
-  assign T1129 = hits[6'h2d];
-  assign T1130 = T1136 | T1131;
-  assign T1131 = T1135 ? isJump_44 : 1'h0;
-  assign T1132 = T1133 ? R36 : isJump_44;
-  assign T1133 = R7 & T1134;
-  assign T1134 = T40[6'h2c];
-  assign T1135 = hits[6'h2c];
-  assign T1136 = T1142 | T1137;
-  assign T1137 = T1141 ? isJump_43 : 1'h0;
-  assign T1138 = T1139 ? R36 : isJump_43;
-  assign T1139 = R7 & T1140;
-  assign T1140 = T40[6'h2b];
-  assign T1141 = hits[6'h2b];
-  assign T1142 = T1148 | T1143;
-  assign T1143 = T1147 ? isJump_42 : 1'h0;
-  assign T1144 = T1145 ? R36 : isJump_42;
-  assign T1145 = R7 & T1146;
-  assign T1146 = T40[6'h2a];
-  assign T1147 = hits[6'h2a];
-  assign T1148 = T1154 | T1149;
-  assign T1149 = T1153 ? isJump_41 : 1'h0;
-  assign T1150 = T1151 ? R36 : isJump_41;
-  assign T1151 = R7 & T1152;
-  assign T1152 = T40[6'h29];
-  assign T1153 = hits[6'h29];
-  assign T1154 = T1160 | T1155;
-  assign T1155 = T1159 ? isJump_40 : 1'h0;
-  assign T1156 = T1157 ? R36 : isJump_40;
-  assign T1157 = R7 & T1158;
-  assign T1158 = T40[6'h28];
-  assign T1159 = hits[6'h28];
-  assign T1160 = T1166 | T1161;
-  assign T1161 = T1165 ? isJump_39 : 1'h0;
-  assign T1162 = T1163 ? R36 : isJump_39;
-  assign T1163 = R7 & T1164;
-  assign T1164 = T40[6'h27];
-  assign T1165 = hits[6'h27];
-  assign T1166 = T1172 | T1167;
-  assign T1167 = T1171 ? isJump_38 : 1'h0;
-  assign T1168 = T1169 ? R36 : isJump_38;
-  assign T1169 = R7 & T1170;
-  assign T1170 = T40[6'h26];
-  assign T1171 = hits[6'h26];
-  assign T1172 = T1178 | T1173;
-  assign T1173 = T1177 ? isJump_37 : 1'h0;
-  assign T1174 = T1175 ? R36 : isJump_37;
-  assign T1175 = R7 & T1176;
-  assign T1176 = T40[6'h25];
-  assign T1177 = hits[6'h25];
-  assign T1178 = T1184 | T1179;
-  assign T1179 = T1183 ? isJump_36 : 1'h0;
-  assign T1180 = T1181 ? R36 : isJump_36;
-  assign T1181 = R7 & T1182;
-  assign T1182 = T40[6'h24];
-  assign T1183 = hits[6'h24];
-  assign T1184 = T1190 | T1185;
-  assign T1185 = T1189 ? isJump_35 : 1'h0;
-  assign T1186 = T1187 ? R36 : isJump_35;
-  assign T1187 = R7 & T1188;
-  assign T1188 = T40[6'h23];
-  assign T1189 = hits[6'h23];
-  assign T1190 = T1196 | T1191;
-  assign T1191 = T1195 ? isJump_34 : 1'h0;
-  assign T1192 = T1193 ? R36 : isJump_34;
-  assign T1193 = R7 & T1194;
-  assign T1194 = T40[6'h22];
-  assign T1195 = hits[6'h22];
-  assign T1196 = T1202 | T1197;
-  assign T1197 = T1201 ? isJump_33 : 1'h0;
-  assign T1198 = T1199 ? R36 : isJump_33;
-  assign T1199 = R7 & T1200;
-  assign T1200 = T40[6'h21];
-  assign T1201 = hits[6'h21];
-  assign T1202 = T1208 | T1203;
-  assign T1203 = T1207 ? isJump_32 : 1'h0;
-  assign T1204 = T1205 ? R36 : isJump_32;
-  assign T1205 = R7 & T1206;
-  assign T1206 = T40[6'h20];
-  assign T1207 = hits[6'h20];
-  assign T1208 = T1214 | T1209;
-  assign T1209 = T1213 ? isJump_31 : 1'h0;
-  assign T1210 = T1211 ? R36 : isJump_31;
-  assign T1211 = R7 & T1212;
-  assign T1212 = T40[5'h1f];
-  assign T1213 = hits[5'h1f];
-  assign T1214 = T1220 | T1215;
-  assign T1215 = T1219 ? isJump_30 : 1'h0;
-  assign T1216 = T1217 ? R36 : isJump_30;
-  assign T1217 = R7 & T1218;
-  assign T1218 = T40[5'h1e];
-  assign T1219 = hits[5'h1e];
-  assign T1220 = T1226 | T1221;
-  assign T1221 = T1225 ? isJump_29 : 1'h0;
-  assign T1222 = T1223 ? R36 : isJump_29;
-  assign T1223 = R7 & T1224;
-  assign T1224 = T40[5'h1d];
-  assign T1225 = hits[5'h1d];
-  assign T1226 = T1232 | T1227;
-  assign T1227 = T1231 ? isJump_28 : 1'h0;
-  assign T1228 = T1229 ? R36 : isJump_28;
-  assign T1229 = R7 & T1230;
-  assign T1230 = T40[5'h1c];
-  assign T1231 = hits[5'h1c];
-  assign T1232 = T1238 | T1233;
-  assign T1233 = T1237 ? isJump_27 : 1'h0;
-  assign T1234 = T1235 ? R36 : isJump_27;
-  assign T1235 = R7 & T1236;
-  assign T1236 = T40[5'h1b];
-  assign T1237 = hits[5'h1b];
-  assign T1238 = T1244 | T1239;
-  assign T1239 = T1243 ? isJump_26 : 1'h0;
-  assign T1240 = T1241 ? R36 : isJump_26;
-  assign T1241 = R7 & T1242;
-  assign T1242 = T40[5'h1a];
-  assign T1243 = hits[5'h1a];
-  assign T1244 = T1250 | T1245;
-  assign T1245 = T1249 ? isJump_25 : 1'h0;
-  assign T1246 = T1247 ? R36 : isJump_25;
-  assign T1247 = R7 & T1248;
-  assign T1248 = T40[5'h19];
-  assign T1249 = hits[5'h19];
-  assign T1250 = T1256 | T1251;
-  assign T1251 = T1255 ? isJump_24 : 1'h0;
-  assign T1252 = T1253 ? R36 : isJump_24;
-  assign T1253 = R7 & T1254;
-  assign T1254 = T40[5'h18];
-  assign T1255 = hits[5'h18];
-  assign T1256 = T1262 | T1257;
-  assign T1257 = T1261 ? isJump_23 : 1'h0;
-  assign T1258 = T1259 ? R36 : isJump_23;
-  assign T1259 = R7 & T1260;
-  assign T1260 = T40[5'h17];
-  assign T1261 = hits[5'h17];
-  assign T1262 = T1268 | T1263;
-  assign T1263 = T1267 ? isJump_22 : 1'h0;
-  assign T1264 = T1265 ? R36 : isJump_22;
-  assign T1265 = R7 & T1266;
-  assign T1266 = T40[5'h16];
-  assign T1267 = hits[5'h16];
-  assign T1268 = T1274 | T1269;
-  assign T1269 = T1273 ? isJump_21 : 1'h0;
-  assign T1270 = T1271 ? R36 : isJump_21;
-  assign T1271 = R7 & T1272;
-  assign T1272 = T40[5'h15];
-  assign T1273 = hits[5'h15];
-  assign T1274 = T1280 | T1275;
-  assign T1275 = T1279 ? isJump_20 : 1'h0;
-  assign T1276 = T1277 ? R36 : isJump_20;
-  assign T1277 = R7 & T1278;
-  assign T1278 = T40[5'h14];
-  assign T1279 = hits[5'h14];
-  assign T1280 = T1286 | T1281;
-  assign T1281 = T1285 ? isJump_19 : 1'h0;
-  assign T1282 = T1283 ? R36 : isJump_19;
-  assign T1283 = R7 & T1284;
-  assign T1284 = T40[5'h13];
-  assign T1285 = hits[5'h13];
-  assign T1286 = T1292 | T1287;
-  assign T1287 = T1291 ? isJump_18 : 1'h0;
-  assign T1288 = T1289 ? R36 : isJump_18;
-  assign T1289 = R7 & T1290;
-  assign T1290 = T40[5'h12];
-  assign T1291 = hits[5'h12];
-  assign T1292 = T1298 | T1293;
-  assign T1293 = T1297 ? isJump_17 : 1'h0;
-  assign T1294 = T1295 ? R36 : isJump_17;
-  assign T1295 = R7 & T1296;
-  assign T1296 = T40[5'h11];
-  assign T1297 = hits[5'h11];
-  assign T1298 = T1304 | T1299;
-  assign T1299 = T1303 ? isJump_16 : 1'h0;
-  assign T1300 = T1301 ? R36 : isJump_16;
-  assign T1301 = R7 & T1302;
-  assign T1302 = T40[5'h10];
-  assign T1303 = hits[5'h10];
-  assign T1304 = T1310 | T1305;
-  assign T1305 = T1309 ? isJump_15 : 1'h0;
-  assign T1306 = T1307 ? R36 : isJump_15;
-  assign T1307 = R7 & T1308;
-  assign T1308 = T40[4'hf];
-  assign T1309 = hits[4'hf];
-  assign T1310 = T1316 | T1311;
-  assign T1311 = T1315 ? isJump_14 : 1'h0;
-  assign T1312 = T1313 ? R36 : isJump_14;
-  assign T1313 = R7 & T1314;
-  assign T1314 = T40[4'he];
-  assign T1315 = hits[4'he];
-  assign T1316 = T1322 | T1317;
-  assign T1317 = T1321 ? isJump_13 : 1'h0;
-  assign T1318 = T1319 ? R36 : isJump_13;
-  assign T1319 = R7 & T1320;
-  assign T1320 = T40[4'hd];
-  assign T1321 = hits[4'hd];
-  assign T1322 = T1328 | T1323;
-  assign T1323 = T1327 ? isJump_12 : 1'h0;
-  assign T1324 = T1325 ? R36 : isJump_12;
-  assign T1325 = R7 & T1326;
-  assign T1326 = T40[4'hc];
-  assign T1327 = hits[4'hc];
-  assign T1328 = T1334 | T1329;
-  assign T1329 = T1333 ? isJump_11 : 1'h0;
-  assign T1330 = T1331 ? R36 : isJump_11;
-  assign T1331 = R7 & T1332;
-  assign T1332 = T40[4'hb];
-  assign T1333 = hits[4'hb];
-  assign T1334 = T1340 | T1335;
-  assign T1335 = T1339 ? isJump_10 : 1'h0;
-  assign T1336 = T1337 ? R36 : isJump_10;
-  assign T1337 = R7 & T1338;
-  assign T1338 = T40[4'ha];
-  assign T1339 = hits[4'ha];
-  assign T1340 = T1346 | T1341;
-  assign T1341 = T1345 ? isJump_9 : 1'h0;
-  assign T1342 = T1343 ? R36 : isJump_9;
-  assign T1343 = R7 & T1344;
-  assign T1344 = T40[4'h9];
-  assign T1345 = hits[4'h9];
-  assign T1346 = T1352 | T1347;
-  assign T1347 = T1351 ? isJump_8 : 1'h0;
-  assign T1348 = T1349 ? R36 : isJump_8;
-  assign T1349 = R7 & T1350;
-  assign T1350 = T40[4'h8];
-  assign T1351 = hits[4'h8];
-  assign T1352 = T1358 | T1353;
-  assign T1353 = T1357 ? isJump_7 : 1'h0;
-  assign T1354 = T1355 ? R36 : isJump_7;
-  assign T1355 = R7 & T1356;
-  assign T1356 = T40[3'h7];
-  assign T1357 = hits[3'h7];
-  assign T1358 = T1364 | T1359;
-  assign T1359 = T1363 ? isJump_6 : 1'h0;
-  assign T1360 = T1361 ? R36 : isJump_6;
-  assign T1361 = R7 & T1362;
-  assign T1362 = T40[3'h6];
-  assign T1363 = hits[3'h6];
-  assign T1364 = T1370 | T1365;
-  assign T1365 = T1369 ? isJump_5 : 1'h0;
-  assign T1366 = T1367 ? R36 : isJump_5;
-  assign T1367 = R7 & T1368;
-  assign T1368 = T40[3'h5];
-  assign T1369 = hits[3'h5];
-  assign T1370 = T1376 | T1371;
-  assign T1371 = T1375 ? isJump_4 : 1'h0;
-  assign T1372 = T1373 ? R36 : isJump_4;
-  assign T1373 = R7 & T1374;
-  assign T1374 = T40[3'h4];
-  assign T1375 = hits[3'h4];
-  assign T1376 = T1382 | T1377;
-  assign T1377 = T1381 ? isJump_3 : 1'h0;
-  assign T1378 = T1379 ? R36 : isJump_3;
-  assign T1379 = R7 & T1380;
-  assign T1380 = T40[2'h3];
-  assign T1381 = hits[2'h3];
-  assign T1382 = T1388 | T1383;
-  assign T1383 = T1387 ? isJump_2 : 1'h0;
-  assign T1384 = T1385 ? R36 : isJump_2;
-  assign T1385 = R7 & T1386;
-  assign T1386 = T40[2'h2];
-  assign T1387 = hits[2'h2];
-  assign T1388 = T1394 | T1389;
-  assign T1389 = T1393 ? isJump_1 : 1'h0;
-  assign T1390 = T1391 ? R36 : isJump_1;
-  assign T1391 = R7 & T1392;
-  assign T1392 = T40[1'h1];
-  assign T1393 = hits[1'h1];
-  assign T1394 = T1398 ? isJump_0 : 1'h0;
-  assign T1395 = T1396 ? R36 : isJump_0;
-  assign T1396 = R7 & T1397;
-  assign T1397 = T40[1'h0];
-  assign T1398 = hits[1'h0];
-  assign T1399 = io_req_valid & io_resp_valid;
-  assign T1400 = {io_bht_update_bits_taken, T1401};
-  assign T1401 = io_bht_update_bits_prediction_bits_bht_history[3'h6:1'h1];
-  assign T1402 = T21 & io_bht_update_bits_mispredict;
-  assign T1403 = io_req_bits_addr[4'h8:2'h2];
-  assign io_resp_bits_bht_history = T1404;
-  assign T1404 = R25;
-  assign io_resp_bits_entry = T2321;
-  assign T2321 = {T2346, T2322};
-  assign T2322 = {T2345, T2323};
-  assign T2323 = {T2344, T2324};
-  assign T2324 = {T2343, T2325};
-  assign T2325 = {T2342, T2326};
-  assign T2326 = T2327[1'h1];
-  assign T2327 = T2341 | T2328;
-  assign T2328 = T2329[1'h1:1'h0];
-  assign T2329 = T2340 | T2330;
-  assign T2330 = T2331[2'h3:1'h0];
-  assign T2331 = T2339 | T2332;
-  assign T2332 = T2333[3'h7:1'h0];
-  assign T2333 = T2338 | T2334;
-  assign T2334 = T2335[4'hf:1'h0];
-  assign T2335 = T2337 | T2336;
-  assign T2336 = hits[5'h1f:1'h0];
-  assign T2337 = hits[6'h3d:6'h20];
-  assign T2338 = T2335[5'h1f:5'h10];
-  assign T2339 = T2333[4'hf:4'h8];
-  assign T2340 = T2331[3'h7:3'h4];
-  assign T2341 = T2329[2'h3:2'h2];
-  assign T2342 = T2341 != 2'h0;
-  assign T2343 = T2340 != 4'h0;
-  assign T2344 = T2339 != 8'h0;
-  assign T2345 = T2338 != 16'h0;
-  assign T2346 = T2337 != 30'h0;
-  assign io_resp_bits_target = T1406;
-  assign T1406 = T2278 ? io_ras_update_bits_returnAddr : T1407;
-  assign T1407 = T1900 ? T1867 : T1408;
-  assign T1408 = {T1659, T1409};
-  assign T1409 = T1416 | T1410;
-  assign T1410 = T1415 ? T1411 : 12'h0;
-  assign T1411 = tgts[6'h3d];
-  assign T2347 = io_req_bits_addr[4'hb:1'h0];
-  assign T1413 = R7 & T1414;
-  assign T1414 = T42 < 6'h3e;
-  assign T1415 = hits[6'h3d];
-  assign T1416 = T1420 | T1417;
-  assign T1417 = T1419 ? T1418 : 12'h0;
-  assign T1418 = tgts[6'h3c];
-  assign T1419 = hits[6'h3c];
-  assign T1420 = T1424 | T1421;
-  assign T1421 = T1423 ? T1422 : 12'h0;
-  assign T1422 = tgts[6'h3b];
-  assign T1423 = hits[6'h3b];
-  assign T1424 = T1428 | T1425;
-  assign T1425 = T1427 ? T1426 : 12'h0;
-  assign T1426 = tgts[6'h3a];
-  assign T1427 = hits[6'h3a];
-  assign T1428 = T1432 | T1429;
-  assign T1429 = T1431 ? T1430 : 12'h0;
-  assign T1430 = tgts[6'h39];
-  assign T1431 = hits[6'h39];
-  assign T1432 = T1436 | T1433;
-  assign T1433 = T1435 ? T1434 : 12'h0;
-  assign T1434 = tgts[6'h38];
-  assign T1435 = hits[6'h38];
-  assign T1436 = T1440 | T1437;
-  assign T1437 = T1439 ? T1438 : 12'h0;
-  assign T1438 = tgts[6'h37];
-  assign T1439 = hits[6'h37];
-  assign T1440 = T1444 | T1441;
-  assign T1441 = T1443 ? T1442 : 12'h0;
-  assign T1442 = tgts[6'h36];
-  assign T1443 = hits[6'h36];
-  assign T1444 = T1448 | T1445;
-  assign T1445 = T1447 ? T1446 : 12'h0;
-  assign T1446 = tgts[6'h35];
-  assign T1447 = hits[6'h35];
-  assign T1448 = T1452 | T1449;
-  assign T1449 = T1451 ? T1450 : 12'h0;
-  assign T1450 = tgts[6'h34];
-  assign T1451 = hits[6'h34];
-  assign T1452 = T1456 | T1453;
-  assign T1453 = T1455 ? T1454 : 12'h0;
-  assign T1454 = tgts[6'h33];
-  assign T1455 = hits[6'h33];
-  assign T1456 = T1460 | T1457;
-  assign T1457 = T1459 ? T1458 : 12'h0;
-  assign T1458 = tgts[6'h32];
-  assign T1459 = hits[6'h32];
-  assign T1460 = T1464 | T1461;
-  assign T1461 = T1463 ? T1462 : 12'h0;
-  assign T1462 = tgts[6'h31];
-  assign T1463 = hits[6'h31];
-  assign T1464 = T1468 | T1465;
-  assign T1465 = T1467 ? T1466 : 12'h0;
-  assign T1466 = tgts[6'h30];
-  assign T1467 = hits[6'h30];
-  assign T1468 = T1472 | T1469;
-  assign T1469 = T1471 ? T1470 : 12'h0;
-  assign T1470 = tgts[6'h2f];
-  assign T1471 = hits[6'h2f];
-  assign T1472 = T1476 | T1473;
-  assign T1473 = T1475 ? T1474 : 12'h0;
-  assign T1474 = tgts[6'h2e];
-  assign T1475 = hits[6'h2e];
-  assign T1476 = T1480 | T1477;
-  assign T1477 = T1479 ? T1478 : 12'h0;
-  assign T1478 = tgts[6'h2d];
-  assign T1479 = hits[6'h2d];
-  assign T1480 = T1484 | T1481;
-  assign T1481 = T1483 ? T1482 : 12'h0;
-  assign T1482 = tgts[6'h2c];
-  assign T1483 = hits[6'h2c];
-  assign T1484 = T1488 | T1485;
-  assign T1485 = T1487 ? T1486 : 12'h0;
-  assign T1486 = tgts[6'h2b];
-  assign T1487 = hits[6'h2b];
-  assign T1488 = T1492 | T1489;
-  assign T1489 = T1491 ? T1490 : 12'h0;
-  assign T1490 = tgts[6'h2a];
-  assign T1491 = hits[6'h2a];
-  assign T1492 = T1496 | T1493;
-  assign T1493 = T1495 ? T1494 : 12'h0;
-  assign T1494 = tgts[6'h29];
-  assign T1495 = hits[6'h29];
-  assign T1496 = T1500 | T1497;
-  assign T1497 = T1499 ? T1498 : 12'h0;
-  assign T1498 = tgts[6'h28];
-  assign T1499 = hits[6'h28];
-  assign T1500 = T1504 | T1501;
-  assign T1501 = T1503 ? T1502 : 12'h0;
-  assign T1502 = tgts[6'h27];
-  assign T1503 = hits[6'h27];
-  assign T1504 = T1508 | T1505;
-  assign T1505 = T1507 ? T1506 : 12'h0;
-  assign T1506 = tgts[6'h26];
-  assign T1507 = hits[6'h26];
-  assign T1508 = T1512 | T1509;
-  assign T1509 = T1511 ? T1510 : 12'h0;
-  assign T1510 = tgts[6'h25];
-  assign T1511 = hits[6'h25];
-  assign T1512 = T1516 | T1513;
-  assign T1513 = T1515 ? T1514 : 12'h0;
-  assign T1514 = tgts[6'h24];
-  assign T1515 = hits[6'h24];
-  assign T1516 = T1520 | T1517;
-  assign T1517 = T1519 ? T1518 : 12'h0;
-  assign T1518 = tgts[6'h23];
-  assign T1519 = hits[6'h23];
-  assign T1520 = T1524 | T1521;
-  assign T1521 = T1523 ? T1522 : 12'h0;
-  assign T1522 = tgts[6'h22];
-  assign T1523 = hits[6'h22];
-  assign T1524 = T1528 | T1525;
-  assign T1525 = T1527 ? T1526 : 12'h0;
-  assign T1526 = tgts[6'h21];
-  assign T1527 = hits[6'h21];
-  assign T1528 = T1532 | T1529;
-  assign T1529 = T1531 ? T1530 : 12'h0;
-  assign T1530 = tgts[6'h20];
-  assign T1531 = hits[6'h20];
-  assign T1532 = T1536 | T1533;
-  assign T1533 = T1535 ? T1534 : 12'h0;
-  assign T1534 = tgts[6'h1f];
-  assign T1535 = hits[5'h1f];
-  assign T1536 = T1540 | T1537;
-  assign T1537 = T1539 ? T1538 : 12'h0;
-  assign T1538 = tgts[6'h1e];
-  assign T1539 = hits[5'h1e];
-  assign T1540 = T1544 | T1541;
-  assign T1541 = T1543 ? T1542 : 12'h0;
-  assign T1542 = tgts[6'h1d];
-  assign T1543 = hits[5'h1d];
-  assign T1544 = T1548 | T1545;
-  assign T1545 = T1547 ? T1546 : 12'h0;
-  assign T1546 = tgts[6'h1c];
-  assign T1547 = hits[5'h1c];
-  assign T1548 = T1552 | T1549;
-  assign T1549 = T1551 ? T1550 : 12'h0;
-  assign T1550 = tgts[6'h1b];
-  assign T1551 = hits[5'h1b];
-  assign T1552 = T1556 | T1553;
-  assign T1553 = T1555 ? T1554 : 12'h0;
-  assign T1554 = tgts[6'h1a];
-  assign T1555 = hits[5'h1a];
-  assign T1556 = T1560 | T1557;
-  assign T1557 = T1559 ? T1558 : 12'h0;
-  assign T1558 = tgts[6'h19];
-  assign T1559 = hits[5'h19];
-  assign T1560 = T1564 | T1561;
-  assign T1561 = T1563 ? T1562 : 12'h0;
-  assign T1562 = tgts[6'h18];
-  assign T1563 = hits[5'h18];
-  assign T1564 = T1568 | T1565;
-  assign T1565 = T1567 ? T1566 : 12'h0;
-  assign T1566 = tgts[6'h17];
-  assign T1567 = hits[5'h17];
-  assign T1568 = T1572 | T1569;
-  assign T1569 = T1571 ? T1570 : 12'h0;
-  assign T1570 = tgts[6'h16];
-  assign T1571 = hits[5'h16];
-  assign T1572 = T1576 | T1573;
-  assign T1573 = T1575 ? T1574 : 12'h0;
-  assign T1574 = tgts[6'h15];
-  assign T1575 = hits[5'h15];
-  assign T1576 = T1580 | T1577;
-  assign T1577 = T1579 ? T1578 : 12'h0;
-  assign T1578 = tgts[6'h14];
-  assign T1579 = hits[5'h14];
-  assign T1580 = T1584 | T1581;
-  assign T1581 = T1583 ? T1582 : 12'h0;
-  assign T1582 = tgts[6'h13];
-  assign T1583 = hits[5'h13];
-  assign T1584 = T1588 | T1585;
-  assign T1585 = T1587 ? T1586 : 12'h0;
-  assign T1586 = tgts[6'h12];
-  assign T1587 = hits[5'h12];
-  assign T1588 = T1592 | T1589;
-  assign T1589 = T1591 ? T1590 : 12'h0;
-  assign T1590 = tgts[6'h11];
-  assign T1591 = hits[5'h11];
-  assign T1592 = T1596 | T1593;
-  assign T1593 = T1595 ? T1594 : 12'h0;
-  assign T1594 = tgts[6'h10];
-  assign T1595 = hits[5'h10];
-  assign T1596 = T1600 | T1597;
-  assign T1597 = T1599 ? T1598 : 12'h0;
-  assign T1598 = tgts[6'hf];
-  assign T1599 = hits[4'hf];
-  assign T1600 = T1604 | T1601;
-  assign T1601 = T1603 ? T1602 : 12'h0;
-  assign T1602 = tgts[6'he];
-  assign T1603 = hits[4'he];
-  assign T1604 = T1608 | T1605;
-  assign T1605 = T1607 ? T1606 : 12'h0;
-  assign T1606 = tgts[6'hd];
-  assign T1607 = hits[4'hd];
-  assign T1608 = T1612 | T1609;
-  assign T1609 = T1611 ? T1610 : 12'h0;
-  assign T1610 = tgts[6'hc];
-  assign T1611 = hits[4'hc];
-  assign T1612 = T1616 | T1613;
-  assign T1613 = T1615 ? T1614 : 12'h0;
-  assign T1614 = tgts[6'hb];
-  assign T1615 = hits[4'hb];
-  assign T1616 = T1620 | T1617;
-  assign T1617 = T1619 ? T1618 : 12'h0;
-  assign T1618 = tgts[6'ha];
-  assign T1619 = hits[4'ha];
-  assign T1620 = T1624 | T1621;
-  assign T1621 = T1623 ? T1622 : 12'h0;
-  assign T1622 = tgts[6'h9];
-  assign T1623 = hits[4'h9];
-  assign T1624 = T1628 | T1625;
-  assign T1625 = T1627 ? T1626 : 12'h0;
-  assign T1626 = tgts[6'h8];
-  assign T1627 = hits[4'h8];
-  assign T1628 = T1632 | T1629;
-  assign T1629 = T1631 ? T1630 : 12'h0;
-  assign T1630 = tgts[6'h7];
-  assign T1631 = hits[3'h7];
-  assign T1632 = T1636 | T1633;
-  assign T1633 = T1635 ? T1634 : 12'h0;
-  assign T1634 = tgts[6'h6];
-  assign T1635 = hits[3'h6];
-  assign T1636 = T1640 | T1637;
-  assign T1637 = T1639 ? T1638 : 12'h0;
-  assign T1638 = tgts[6'h5];
-  assign T1639 = hits[3'h5];
-  assign T1640 = T1644 | T1641;
-  assign T1641 = T1643 ? T1642 : 12'h0;
-  assign T1642 = tgts[6'h4];
-  assign T1643 = hits[3'h4];
-  assign T1644 = T1648 | T1645;
-  assign T1645 = T1647 ? T1646 : 12'h0;
-  assign T1646 = tgts[6'h3];
-  assign T1647 = hits[2'h3];
-  assign T1648 = T1652 | T1649;
-  assign T1649 = T1651 ? T1650 : 12'h0;
-  assign T1650 = tgts[6'h2];
-  assign T1651 = hits[2'h2];
-  assign T1652 = T1656 | T1653;
-  assign T1653 = T1655 ? T1654 : 12'h0;
-  assign T1654 = tgts[6'h1];
-  assign T1655 = hits[1'h1];
-  assign T1656 = T1658 ? T1657 : 12'h0;
-  assign T1657 = tgts[6'h0];
-  assign T1658 = hits[1'h0];
-  assign T1659 = T1848 | T1660;
-  assign T1660 = T1662 ? T1661 : 27'h0;
-  assign T1661 = pages[3'h5];
-  assign T1662 = T1663[3'h5];
-  assign T1663 = T1666 | T1664;
-  assign T1664 = T1665 ? tgtPagesOH_61 : 6'h0;
-  assign T1665 = hits[6'h3d];
-  assign T1666 = T1669 | T1667;
-  assign T1667 = T1668 ? tgtPagesOH_60 : 6'h0;
-  assign T1668 = hits[6'h3c];
-  assign T1669 = T1672 | T1670;
-  assign T1670 = T1671 ? tgtPagesOH_59 : 6'h0;
-  assign T1671 = hits[6'h3b];
-  assign T1672 = T1675 | T1673;
-  assign T1673 = T1674 ? tgtPagesOH_58 : 6'h0;
-  assign T1674 = hits[6'h3a];
-  assign T1675 = T1678 | T1676;
-  assign T1676 = T1677 ? tgtPagesOH_57 : 6'h0;
-  assign T1677 = hits[6'h39];
-  assign T1678 = T1681 | T1679;
-  assign T1679 = T1680 ? tgtPagesOH_56 : 6'h0;
-  assign T1680 = hits[6'h38];
-  assign T1681 = T1684 | T1682;
-  assign T1682 = T1683 ? tgtPagesOH_55 : 6'h0;
-  assign T1683 = hits[6'h37];
-  assign T1684 = T1687 | T1685;
-  assign T1685 = T1686 ? tgtPagesOH_54 : 6'h0;
-  assign T1686 = hits[6'h36];
-  assign T1687 = T1690 | T1688;
-  assign T1688 = T1689 ? tgtPagesOH_53 : 6'h0;
-  assign T1689 = hits[6'h35];
-  assign T1690 = T1693 | T1691;
-  assign T1691 = T1692 ? tgtPagesOH_52 : 6'h0;
-  assign T1692 = hits[6'h34];
-  assign T1693 = T1696 | T1694;
-  assign T1694 = T1695 ? tgtPagesOH_51 : 6'h0;
-  assign T1695 = hits[6'h33];
-  assign T1696 = T1699 | T1697;
-  assign T1697 = T1698 ? tgtPagesOH_50 : 6'h0;
-  assign T1698 = hits[6'h32];
-  assign T1699 = T1702 | T1700;
-  assign T1700 = T1701 ? tgtPagesOH_49 : 6'h0;
-  assign T1701 = hits[6'h31];
-  assign T1702 = T1705 | T1703;
-  assign T1703 = T1704 ? tgtPagesOH_48 : 6'h0;
-  assign T1704 = hits[6'h30];
-  assign T1705 = T1708 | T1706;
-  assign T1706 = T1707 ? tgtPagesOH_47 : 6'h0;
-  assign T1707 = hits[6'h2f];
-  assign T1708 = T1711 | T1709;
-  assign T1709 = T1710 ? tgtPagesOH_46 : 6'h0;
-  assign T1710 = hits[6'h2e];
-  assign T1711 = T1714 | T1712;
-  assign T1712 = T1713 ? tgtPagesOH_45 : 6'h0;
-  assign T1713 = hits[6'h2d];
-  assign T1714 = T1717 | T1715;
-  assign T1715 = T1716 ? tgtPagesOH_44 : 6'h0;
-  assign T1716 = hits[6'h2c];
-  assign T1717 = T1720 | T1718;
-  assign T1718 = T1719 ? tgtPagesOH_43 : 6'h0;
-  assign T1719 = hits[6'h2b];
-  assign T1720 = T1723 | T1721;
-  assign T1721 = T1722 ? tgtPagesOH_42 : 6'h0;
-  assign T1722 = hits[6'h2a];
-  assign T1723 = T1726 | T1724;
-  assign T1724 = T1725 ? tgtPagesOH_41 : 6'h0;
-  assign T1725 = hits[6'h29];
-  assign T1726 = T1729 | T1727;
-  assign T1727 = T1728 ? tgtPagesOH_40 : 6'h0;
-  assign T1728 = hits[6'h28];
-  assign T1729 = T1732 | T1730;
-  assign T1730 = T1731 ? tgtPagesOH_39 : 6'h0;
-  assign T1731 = hits[6'h27];
-  assign T1732 = T1735 | T1733;
-  assign T1733 = T1734 ? tgtPagesOH_38 : 6'h0;
-  assign T1734 = hits[6'h26];
-  assign T1735 = T1738 | T1736;
-  assign T1736 = T1737 ? tgtPagesOH_37 : 6'h0;
-  assign T1737 = hits[6'h25];
-  assign T1738 = T1741 | T1739;
-  assign T1739 = T1740 ? tgtPagesOH_36 : 6'h0;
-  assign T1740 = hits[6'h24];
-  assign T1741 = T1744 | T1742;
-  assign T1742 = T1743 ? tgtPagesOH_35 : 6'h0;
-  assign T1743 = hits[6'h23];
-  assign T1744 = T1747 | T1745;
-  assign T1745 = T1746 ? tgtPagesOH_34 : 6'h0;
-  assign T1746 = hits[6'h22];
-  assign T1747 = T1750 | T1748;
-  assign T1748 = T1749 ? tgtPagesOH_33 : 6'h0;
-  assign T1749 = hits[6'h21];
-  assign T1750 = T1753 | T1751;
-  assign T1751 = T1752 ? tgtPagesOH_32 : 6'h0;
-  assign T1752 = hits[6'h20];
-  assign T1753 = T1756 | T1754;
-  assign T1754 = T1755 ? tgtPagesOH_31 : 6'h0;
-  assign T1755 = hits[5'h1f];
-  assign T1756 = T1759 | T1757;
-  assign T1757 = T1758 ? tgtPagesOH_30 : 6'h0;
-  assign T1758 = hits[5'h1e];
-  assign T1759 = T1762 | T1760;
-  assign T1760 = T1761 ? tgtPagesOH_29 : 6'h0;
-  assign T1761 = hits[5'h1d];
-  assign T1762 = T1765 | T1763;
-  assign T1763 = T1764 ? tgtPagesOH_28 : 6'h0;
-  assign T1764 = hits[5'h1c];
-  assign T1765 = T1768 | T1766;
-  assign T1766 = T1767 ? tgtPagesOH_27 : 6'h0;
-  assign T1767 = hits[5'h1b];
-  assign T1768 = T1771 | T1769;
-  assign T1769 = T1770 ? tgtPagesOH_26 : 6'h0;
-  assign T1770 = hits[5'h1a];
-  assign T1771 = T1774 | T1772;
-  assign T1772 = T1773 ? tgtPagesOH_25 : 6'h0;
-  assign T1773 = hits[5'h19];
-  assign T1774 = T1777 | T1775;
-  assign T1775 = T1776 ? tgtPagesOH_24 : 6'h0;
-  assign T1776 = hits[5'h18];
-  assign T1777 = T1780 | T1778;
-  assign T1778 = T1779 ? tgtPagesOH_23 : 6'h0;
-  assign T1779 = hits[5'h17];
-  assign T1780 = T1783 | T1781;
-  assign T1781 = T1782 ? tgtPagesOH_22 : 6'h0;
-  assign T1782 = hits[5'h16];
-  assign T1783 = T1786 | T1784;
-  assign T1784 = T1785 ? tgtPagesOH_21 : 6'h0;
-  assign T1785 = hits[5'h15];
-  assign T1786 = T1789 | T1787;
-  assign T1787 = T1788 ? tgtPagesOH_20 : 6'h0;
-  assign T1788 = hits[5'h14];
-  assign T1789 = T1792 | T1790;
-  assign T1790 = T1791 ? tgtPagesOH_19 : 6'h0;
-  assign T1791 = hits[5'h13];
-  assign T1792 = T1795 | T1793;
-  assign T1793 = T1794 ? tgtPagesOH_18 : 6'h0;
-  assign T1794 = hits[5'h12];
-  assign T1795 = T1798 | T1796;
-  assign T1796 = T1797 ? tgtPagesOH_17 : 6'h0;
-  assign T1797 = hits[5'h11];
-  assign T1798 = T1801 | T1799;
-  assign T1799 = T1800 ? tgtPagesOH_16 : 6'h0;
-  assign T1800 = hits[5'h10];
-  assign T1801 = T1804 | T1802;
-  assign T1802 = T1803 ? tgtPagesOH_15 : 6'h0;
-  assign T1803 = hits[4'hf];
-  assign T1804 = T1807 | T1805;
-  assign T1805 = T1806 ? tgtPagesOH_14 : 6'h0;
-  assign T1806 = hits[4'he];
-  assign T1807 = T1810 | T1808;
-  assign T1808 = T1809 ? tgtPagesOH_13 : 6'h0;
-  assign T1809 = hits[4'hd];
-  assign T1810 = T1813 | T1811;
-  assign T1811 = T1812 ? tgtPagesOH_12 : 6'h0;
-  assign T1812 = hits[4'hc];
-  assign T1813 = T1816 | T1814;
-  assign T1814 = T1815 ? tgtPagesOH_11 : 6'h0;
-  assign T1815 = hits[4'hb];
-  assign T1816 = T1819 | T1817;
-  assign T1817 = T1818 ? tgtPagesOH_10 : 6'h0;
-  assign T1818 = hits[4'ha];
-  assign T1819 = T1822 | T1820;
-  assign T1820 = T1821 ? tgtPagesOH_9 : 6'h0;
-  assign T1821 = hits[4'h9];
-  assign T1822 = T1825 | T1823;
-  assign T1823 = T1824 ? tgtPagesOH_8 : 6'h0;
-  assign T1824 = hits[4'h8];
-  assign T1825 = T1828 | T1826;
-  assign T1826 = T1827 ? tgtPagesOH_7 : 6'h0;
-  assign T1827 = hits[3'h7];
-  assign T1828 = T1831 | T1829;
-  assign T1829 = T1830 ? tgtPagesOH_6 : 6'h0;
-  assign T1830 = hits[3'h6];
-  assign T1831 = T1834 | T1832;
-  assign T1832 = T1833 ? tgtPagesOH_5 : 6'h0;
-  assign T1833 = hits[3'h5];
-  assign T1834 = T1837 | T1835;
-  assign T1835 = T1836 ? tgtPagesOH_4 : 6'h0;
-  assign T1836 = hits[3'h4];
-  assign T1837 = T1840 | T1838;
-  assign T1838 = T1839 ? tgtPagesOH_3 : 6'h0;
-  assign T1839 = hits[2'h3];
-  assign T1840 = T1843 | T1841;
-  assign T1841 = T1842 ? tgtPagesOH_2 : 6'h0;
-  assign T1842 = hits[2'h2];
-  assign T1843 = T1846 | T1844;
-  assign T1844 = T1845 ? tgtPagesOH_1 : 6'h0;
-  assign T1845 = hits[1'h1];
-  assign T1846 = T1847 ? tgtPagesOH_0 : 6'h0;
-  assign T1847 = hits[1'h0];
-  assign T1848 = T1852 | T1849;
-  assign T1849 = T1851 ? T1850 : 27'h0;
-  assign T1850 = pages[3'h4];
-  assign T1851 = T1663[3'h4];
-  assign T1852 = T1856 | T1853;
-  assign T1853 = T1855 ? T1854 : 27'h0;
-  assign T1854 = pages[3'h3];
-  assign T1855 = T1663[2'h3];
-  assign T1856 = T1860 | T1857;
-  assign T1857 = T1859 ? T1858 : 27'h0;
-  assign T1858 = pages[3'h2];
-  assign T1859 = T1663[2'h2];
-  assign T1860 = T1864 | T1861;
-  assign T1861 = T1863 ? T1862 : 27'h0;
-  assign T1862 = pages[3'h1];
-  assign T1863 = T1663[1'h1];
-  assign T1864 = T1866 ? T1865 : 27'h0;
-  assign T1865 = pages[3'h0];
-  assign T1866 = T1663[1'h0];
-  assign T1867 = T1899 ? R1895 : R1868;
-  assign T1869 = T1870 ? io_ras_update_bits_returnAddr : R1868;
-  assign T1870 = T1894 & T1871;
-  assign T1871 = T1872[1'h0];
-  assign T1872 = 1'h1 << T1873;
-  assign T1873 = T1874;
-  assign T1874 = R1875 + 1'h1;
-  assign T2348 = reset ? 1'h0 : T1876;
-  assign T1876 = T1879 ? T1878 : T1877;
-  assign T1877 = T1894 ? T1874 : R1875;
-  assign T1878 = R1875 - 1'h1;
-  assign T1879 = T1890 & T1880;
-  assign T1880 = T1881 ^ 1'h1;
-  assign T1881 = R1882 == 2'h0;
-  assign T2349 = reset ? 2'h0 : T1883;
-  assign T1883 = io_invalidate ? 2'h0 : T1884;
-  assign T1884 = T1879 ? T1889 : T1885;
-  assign T1885 = T1887 ? T1886 : R1882;
-  assign T1886 = R1882 + 2'h1;
-  assign T1887 = T1894 & T1888;
-  assign T1888 = R1882 < 2'h2;
-  assign T1889 = R1882 - 2'h1;
-  assign T1890 = io_ras_update_valid & T1891;
-  assign T1891 = T1893 & T1892;
-  assign T1892 = io_ras_update_bits_isReturn & io_ras_update_bits_prediction_valid;
-  assign T1893 = io_ras_update_bits_isCall ^ 1'h1;
-  assign T1894 = io_ras_update_valid & io_ras_update_bits_isCall;
-  assign T1896 = T1897 ? io_ras_update_bits_returnAddr : R1895;
-  assign T1897 = T1894 & T1898;
-  assign T1898 = T1872[1'h1];
-  assign T1899 = R1875;
-  assign T1900 = T2276 & T1901;
-  assign T1901 = T1911 | T1902;
-  assign T1902 = T1910 ? useRAS_61 : 1'h0;
-  assign T1903 = T1906 ? R1904 : useRAS_61;
-  assign T1905 = io_btb_update_valid ? io_btb_update_bits_isReturn : R1904;
-  assign T1906 = R7 & T1907;
-  assign T1907 = T1908[6'h3d];
-  assign T1908 = 1'h1 << T1909;
-  assign T1909 = T42;
-  assign T1910 = hits[6'h3d];
-  assign T1911 = T1917 | T1912;
-  assign T1912 = T1916 ? useRAS_60 : 1'h0;
-  assign T1913 = T1914 ? R1904 : useRAS_60;
-  assign T1914 = R7 & T1915;
-  assign T1915 = T1908[6'h3c];
-  assign T1916 = hits[6'h3c];
-  assign T1917 = T1923 | T1918;
-  assign T1918 = T1922 ? useRAS_59 : 1'h0;
-  assign T1919 = T1920 ? R1904 : useRAS_59;
-  assign T1920 = R7 & T1921;
-  assign T1921 = T1908[6'h3b];
-  assign T1922 = hits[6'h3b];
-  assign T1923 = T1929 | T1924;
-  assign T1924 = T1928 ? useRAS_58 : 1'h0;
-  assign T1925 = T1926 ? R1904 : useRAS_58;
-  assign T1926 = R7 & T1927;
-  assign T1927 = T1908[6'h3a];
-  assign T1928 = hits[6'h3a];
-  assign T1929 = T1935 | T1930;
-  assign T1930 = T1934 ? useRAS_57 : 1'h0;
-  assign T1931 = T1932 ? R1904 : useRAS_57;
-  assign T1932 = R7 & T1933;
-  assign T1933 = T1908[6'h39];
-  assign T1934 = hits[6'h39];
-  assign T1935 = T1941 | T1936;
-  assign T1936 = T1940 ? useRAS_56 : 1'h0;
-  assign T1937 = T1938 ? R1904 : useRAS_56;
-  assign T1938 = R7 & T1939;
-  assign T1939 = T1908[6'h38];
-  assign T1940 = hits[6'h38];
-  assign T1941 = T1947 | T1942;
-  assign T1942 = T1946 ? useRAS_55 : 1'h0;
-  assign T1943 = T1944 ? R1904 : useRAS_55;
-  assign T1944 = R7 & T1945;
-  assign T1945 = T1908[6'h37];
-  assign T1946 = hits[6'h37];
-  assign T1947 = T1953 | T1948;
-  assign T1948 = T1952 ? useRAS_54 : 1'h0;
-  assign T1949 = T1950 ? R1904 : useRAS_54;
-  assign T1950 = R7 & T1951;
-  assign T1951 = T1908[6'h36];
-  assign T1952 = hits[6'h36];
-  assign T1953 = T1959 | T1954;
-  assign T1954 = T1958 ? useRAS_53 : 1'h0;
-  assign T1955 = T1956 ? R1904 : useRAS_53;
-  assign T1956 = R7 & T1957;
-  assign T1957 = T1908[6'h35];
-  assign T1958 = hits[6'h35];
-  assign T1959 = T1965 | T1960;
-  assign T1960 = T1964 ? useRAS_52 : 1'h0;
-  assign T1961 = T1962 ? R1904 : useRAS_52;
-  assign T1962 = R7 & T1963;
-  assign T1963 = T1908[6'h34];
-  assign T1964 = hits[6'h34];
-  assign T1965 = T1971 | T1966;
-  assign T1966 = T1970 ? useRAS_51 : 1'h0;
-  assign T1967 = T1968 ? R1904 : useRAS_51;
-  assign T1968 = R7 & T1969;
-  assign T1969 = T1908[6'h33];
-  assign T1970 = hits[6'h33];
-  assign T1971 = T1977 | T1972;
-  assign T1972 = T1976 ? useRAS_50 : 1'h0;
-  assign T1973 = T1974 ? R1904 : useRAS_50;
-  assign T1974 = R7 & T1975;
-  assign T1975 = T1908[6'h32];
-  assign T1976 = hits[6'h32];
-  assign T1977 = T1983 | T1978;
-  assign T1978 = T1982 ? useRAS_49 : 1'h0;
-  assign T1979 = T1980 ? R1904 : useRAS_49;
-  assign T1980 = R7 & T1981;
-  assign T1981 = T1908[6'h31];
-  assign T1982 = hits[6'h31];
-  assign T1983 = T1989 | T1984;
-  assign T1984 = T1988 ? useRAS_48 : 1'h0;
-  assign T1985 = T1986 ? R1904 : useRAS_48;
-  assign T1986 = R7 & T1987;
-  assign T1987 = T1908[6'h30];
-  assign T1988 = hits[6'h30];
-  assign T1989 = T1995 | T1990;
-  assign T1990 = T1994 ? useRAS_47 : 1'h0;
-  assign T1991 = T1992 ? R1904 : useRAS_47;
-  assign T1992 = R7 & T1993;
-  assign T1993 = T1908[6'h2f];
-  assign T1994 = hits[6'h2f];
-  assign T1995 = T2001 | T1996;
-  assign T1996 = T2000 ? useRAS_46 : 1'h0;
-  assign T1997 = T1998 ? R1904 : useRAS_46;
-  assign T1998 = R7 & T1999;
-  assign T1999 = T1908[6'h2e];
-  assign T2000 = hits[6'h2e];
-  assign T2001 = T2007 | T2002;
-  assign T2002 = T2006 ? useRAS_45 : 1'h0;
-  assign T2003 = T2004 ? R1904 : useRAS_45;
-  assign T2004 = R7 & T2005;
-  assign T2005 = T1908[6'h2d];
-  assign T2006 = hits[6'h2d];
-  assign T2007 = T2013 | T2008;
-  assign T2008 = T2012 ? useRAS_44 : 1'h0;
-  assign T2009 = T2010 ? R1904 : useRAS_44;
-  assign T2010 = R7 & T2011;
-  assign T2011 = T1908[6'h2c];
-  assign T2012 = hits[6'h2c];
-  assign T2013 = T2019 | T2014;
-  assign T2014 = T2018 ? useRAS_43 : 1'h0;
-  assign T2015 = T2016 ? R1904 : useRAS_43;
-  assign T2016 = R7 & T2017;
-  assign T2017 = T1908[6'h2b];
-  assign T2018 = hits[6'h2b];
-  assign T2019 = T2025 | T2020;
-  assign T2020 = T2024 ? useRAS_42 : 1'h0;
-  assign T2021 = T2022 ? R1904 : useRAS_42;
-  assign T2022 = R7 & T2023;
-  assign T2023 = T1908[6'h2a];
-  assign T2024 = hits[6'h2a];
-  assign T2025 = T2031 | T2026;
-  assign T2026 = T2030 ? useRAS_41 : 1'h0;
-  assign T2027 = T2028 ? R1904 : useRAS_41;
-  assign T2028 = R7 & T2029;
-  assign T2029 = T1908[6'h29];
-  assign T2030 = hits[6'h29];
-  assign T2031 = T2037 | T2032;
-  assign T2032 = T2036 ? useRAS_40 : 1'h0;
-  assign T2033 = T2034 ? R1904 : useRAS_40;
-  assign T2034 = R7 & T2035;
-  assign T2035 = T1908[6'h28];
-  assign T2036 = hits[6'h28];
-  assign T2037 = T2043 | T2038;
-  assign T2038 = T2042 ? useRAS_39 : 1'h0;
-  assign T2039 = T2040 ? R1904 : useRAS_39;
-  assign T2040 = R7 & T2041;
-  assign T2041 = T1908[6'h27];
-  assign T2042 = hits[6'h27];
-  assign T2043 = T2049 | T2044;
-  assign T2044 = T2048 ? useRAS_38 : 1'h0;
-  assign T2045 = T2046 ? R1904 : useRAS_38;
-  assign T2046 = R7 & T2047;
-  assign T2047 = T1908[6'h26];
-  assign T2048 = hits[6'h26];
-  assign T2049 = T2055 | T2050;
-  assign T2050 = T2054 ? useRAS_37 : 1'h0;
-  assign T2051 = T2052 ? R1904 : useRAS_37;
-  assign T2052 = R7 & T2053;
-  assign T2053 = T1908[6'h25];
-  assign T2054 = hits[6'h25];
-  assign T2055 = T2061 | T2056;
-  assign T2056 = T2060 ? useRAS_36 : 1'h0;
-  assign T2057 = T2058 ? R1904 : useRAS_36;
-  assign T2058 = R7 & T2059;
-  assign T2059 = T1908[6'h24];
-  assign T2060 = hits[6'h24];
-  assign T2061 = T2067 | T2062;
-  assign T2062 = T2066 ? useRAS_35 : 1'h0;
-  assign T2063 = T2064 ? R1904 : useRAS_35;
-  assign T2064 = R7 & T2065;
-  assign T2065 = T1908[6'h23];
-  assign T2066 = hits[6'h23];
-  assign T2067 = T2073 | T2068;
-  assign T2068 = T2072 ? useRAS_34 : 1'h0;
-  assign T2069 = T2070 ? R1904 : useRAS_34;
-  assign T2070 = R7 & T2071;
-  assign T2071 = T1908[6'h22];
-  assign T2072 = hits[6'h22];
-  assign T2073 = T2079 | T2074;
-  assign T2074 = T2078 ? useRAS_33 : 1'h0;
-  assign T2075 = T2076 ? R1904 : useRAS_33;
-  assign T2076 = R7 & T2077;
-  assign T2077 = T1908[6'h21];
-  assign T2078 = hits[6'h21];
-  assign T2079 = T2085 | T2080;
-  assign T2080 = T2084 ? useRAS_32 : 1'h0;
-  assign T2081 = T2082 ? R1904 : useRAS_32;
-  assign T2082 = R7 & T2083;
-  assign T2083 = T1908[6'h20];
-  assign T2084 = hits[6'h20];
-  assign T2085 = T2091 | T2086;
-  assign T2086 = T2090 ? useRAS_31 : 1'h0;
-  assign T2087 = T2088 ? R1904 : useRAS_31;
-  assign T2088 = R7 & T2089;
-  assign T2089 = T1908[5'h1f];
-  assign T2090 = hits[5'h1f];
-  assign T2091 = T2097 | T2092;
-  assign T2092 = T2096 ? useRAS_30 : 1'h0;
-  assign T2093 = T2094 ? R1904 : useRAS_30;
-  assign T2094 = R7 & T2095;
-  assign T2095 = T1908[5'h1e];
-  assign T2096 = hits[5'h1e];
-  assign T2097 = T2103 | T2098;
-  assign T2098 = T2102 ? useRAS_29 : 1'h0;
-  assign T2099 = T2100 ? R1904 : useRAS_29;
-  assign T2100 = R7 & T2101;
-  assign T2101 = T1908[5'h1d];
-  assign T2102 = hits[5'h1d];
-  assign T2103 = T2109 | T2104;
-  assign T2104 = T2108 ? useRAS_28 : 1'h0;
-  assign T2105 = T2106 ? R1904 : useRAS_28;
-  assign T2106 = R7 & T2107;
-  assign T2107 = T1908[5'h1c];
-  assign T2108 = hits[5'h1c];
-  assign T2109 = T2115 | T2110;
-  assign T2110 = T2114 ? useRAS_27 : 1'h0;
-  assign T2111 = T2112 ? R1904 : useRAS_27;
-  assign T2112 = R7 & T2113;
-  assign T2113 = T1908[5'h1b];
-  assign T2114 = hits[5'h1b];
-  assign T2115 = T2121 | T2116;
-  assign T2116 = T2120 ? useRAS_26 : 1'h0;
-  assign T2117 = T2118 ? R1904 : useRAS_26;
-  assign T2118 = R7 & T2119;
-  assign T2119 = T1908[5'h1a];
-  assign T2120 = hits[5'h1a];
-  assign T2121 = T2127 | T2122;
-  assign T2122 = T2126 ? useRAS_25 : 1'h0;
-  assign T2123 = T2124 ? R1904 : useRAS_25;
-  assign T2124 = R7 & T2125;
-  assign T2125 = T1908[5'h19];
-  assign T2126 = hits[5'h19];
-  assign T2127 = T2133 | T2128;
-  assign T2128 = T2132 ? useRAS_24 : 1'h0;
-  assign T2129 = T2130 ? R1904 : useRAS_24;
-  assign T2130 = R7 & T2131;
-  assign T2131 = T1908[5'h18];
-  assign T2132 = hits[5'h18];
-  assign T2133 = T2139 | T2134;
-  assign T2134 = T2138 ? useRAS_23 : 1'h0;
-  assign T2135 = T2136 ? R1904 : useRAS_23;
-  assign T2136 = R7 & T2137;
-  assign T2137 = T1908[5'h17];
-  assign T2138 = hits[5'h17];
-  assign T2139 = T2145 | T2140;
-  assign T2140 = T2144 ? useRAS_22 : 1'h0;
-  assign T2141 = T2142 ? R1904 : useRAS_22;
-  assign T2142 = R7 & T2143;
-  assign T2143 = T1908[5'h16];
-  assign T2144 = hits[5'h16];
-  assign T2145 = T2151 | T2146;
-  assign T2146 = T2150 ? useRAS_21 : 1'h0;
-  assign T2147 = T2148 ? R1904 : useRAS_21;
-  assign T2148 = R7 & T2149;
-  assign T2149 = T1908[5'h15];
-  assign T2150 = hits[5'h15];
-  assign T2151 = T2157 | T2152;
-  assign T2152 = T2156 ? useRAS_20 : 1'h0;
-  assign T2153 = T2154 ? R1904 : useRAS_20;
-  assign T2154 = R7 & T2155;
-  assign T2155 = T1908[5'h14];
-  assign T2156 = hits[5'h14];
-  assign T2157 = T2163 | T2158;
-  assign T2158 = T2162 ? useRAS_19 : 1'h0;
-  assign T2159 = T2160 ? R1904 : useRAS_19;
-  assign T2160 = R7 & T2161;
-  assign T2161 = T1908[5'h13];
-  assign T2162 = hits[5'h13];
-  assign T2163 = T2169 | T2164;
-  assign T2164 = T2168 ? useRAS_18 : 1'h0;
-  assign T2165 = T2166 ? R1904 : useRAS_18;
-  assign T2166 = R7 & T2167;
-  assign T2167 = T1908[5'h12];
-  assign T2168 = hits[5'h12];
-  assign T2169 = T2175 | T2170;
-  assign T2170 = T2174 ? useRAS_17 : 1'h0;
-  assign T2171 = T2172 ? R1904 : useRAS_17;
-  assign T2172 = R7 & T2173;
-  assign T2173 = T1908[5'h11];
-  assign T2174 = hits[5'h11];
-  assign T2175 = T2181 | T2176;
-  assign T2176 = T2180 ? useRAS_16 : 1'h0;
-  assign T2177 = T2178 ? R1904 : useRAS_16;
-  assign T2178 = R7 & T2179;
-  assign T2179 = T1908[5'h10];
-  assign T2180 = hits[5'h10];
-  assign T2181 = T2187 | T2182;
-  assign T2182 = T2186 ? useRAS_15 : 1'h0;
-  assign T2183 = T2184 ? R1904 : useRAS_15;
-  assign T2184 = R7 & T2185;
-  assign T2185 = T1908[4'hf];
-  assign T2186 = hits[4'hf];
-  assign T2187 = T2193 | T2188;
-  assign T2188 = T2192 ? useRAS_14 : 1'h0;
-  assign T2189 = T2190 ? R1904 : useRAS_14;
-  assign T2190 = R7 & T2191;
-  assign T2191 = T1908[4'he];
-  assign T2192 = hits[4'he];
-  assign T2193 = T2199 | T2194;
-  assign T2194 = T2198 ? useRAS_13 : 1'h0;
-  assign T2195 = T2196 ? R1904 : useRAS_13;
-  assign T2196 = R7 & T2197;
-  assign T2197 = T1908[4'hd];
-  assign T2198 = hits[4'hd];
-  assign T2199 = T2205 | T2200;
-  assign T2200 = T2204 ? useRAS_12 : 1'h0;
-  assign T2201 = T2202 ? R1904 : useRAS_12;
-  assign T2202 = R7 & T2203;
-  assign T2203 = T1908[4'hc];
-  assign T2204 = hits[4'hc];
-  assign T2205 = T2211 | T2206;
-  assign T2206 = T2210 ? useRAS_11 : 1'h0;
-  assign T2207 = T2208 ? R1904 : useRAS_11;
-  assign T2208 = R7 & T2209;
-  assign T2209 = T1908[4'hb];
-  assign T2210 = hits[4'hb];
-  assign T2211 = T2217 | T2212;
-  assign T2212 = T2216 ? useRAS_10 : 1'h0;
-  assign T2213 = T2214 ? R1904 : useRAS_10;
-  assign T2214 = R7 & T2215;
-  assign T2215 = T1908[4'ha];
-  assign T2216 = hits[4'ha];
-  assign T2217 = T2223 | T2218;
-  assign T2218 = T2222 ? useRAS_9 : 1'h0;
-  assign T2219 = T2220 ? R1904 : useRAS_9;
-  assign T2220 = R7 & T2221;
-  assign T2221 = T1908[4'h9];
-  assign T2222 = hits[4'h9];
-  assign T2223 = T2229 | T2224;
-  assign T2224 = T2228 ? useRAS_8 : 1'h0;
-  assign T2225 = T2226 ? R1904 : useRAS_8;
-  assign T2226 = R7 & T2227;
-  assign T2227 = T1908[4'h8];
-  assign T2228 = hits[4'h8];
-  assign T2229 = T2235 | T2230;
-  assign T2230 = T2234 ? useRAS_7 : 1'h0;
-  assign T2231 = T2232 ? R1904 : useRAS_7;
-  assign T2232 = R7 & T2233;
-  assign T2233 = T1908[3'h7];
-  assign T2234 = hits[3'h7];
-  assign T2235 = T2241 | T2236;
-  assign T2236 = T2240 ? useRAS_6 : 1'h0;
-  assign T2237 = T2238 ? R1904 : useRAS_6;
-  assign T2238 = R7 & T2239;
-  assign T2239 = T1908[3'h6];
-  assign T2240 = hits[3'h6];
-  assign T2241 = T2247 | T2242;
-  assign T2242 = T2246 ? useRAS_5 : 1'h0;
-  assign T2243 = T2244 ? R1904 : useRAS_5;
-  assign T2244 = R7 & T2245;
-  assign T2245 = T1908[3'h5];
-  assign T2246 = hits[3'h5];
-  assign T2247 = T2253 | T2248;
-  assign T2248 = T2252 ? useRAS_4 : 1'h0;
-  assign T2249 = T2250 ? R1904 : useRAS_4;
-  assign T2250 = R7 & T2251;
-  assign T2251 = T1908[3'h4];
-  assign T2252 = hits[3'h4];
-  assign T2253 = T2259 | T2254;
-  assign T2254 = T2258 ? useRAS_3 : 1'h0;
-  assign T2255 = T2256 ? R1904 : useRAS_3;
-  assign T2256 = R7 & T2257;
-  assign T2257 = T1908[2'h3];
-  assign T2258 = hits[2'h3];
-  assign T2259 = T2265 | T2260;
-  assign T2260 = T2264 ? useRAS_2 : 1'h0;
-  assign T2261 = T2262 ? R1904 : useRAS_2;
-  assign T2262 = R7 & T2263;
-  assign T2263 = T1908[2'h2];
-  assign T2264 = hits[2'h2];
-  assign T2265 = T2271 | T2266;
-  assign T2266 = T2270 ? useRAS_1 : 1'h0;
-  assign T2267 = T2268 ? R1904 : useRAS_1;
-  assign T2268 = R7 & T2269;
-  assign T2269 = T1908[1'h1];
-  assign T2270 = hits[1'h1];
-  assign T2271 = T2275 ? useRAS_0 : 1'h0;
-  assign T2272 = T2273 ? R1904 : useRAS_0;
-  assign T2273 = R7 & T2274;
-  assign T2274 = T1908[1'h0];
-  assign T2275 = hits[1'h0];
-  assign T2276 = T2277 ^ 1'h1;
-  assign T2277 = R1882 == 2'h0;
-  assign T2278 = T1894 & T1901;
-  assign io_resp_bits_bridx = T2279;
-  assign T2279 = brIdx[io_resp_bits_entry];
-  assign T2281 = R7 & T2282;
-  assign T2282 = T42 < 6'h3e;
+  assign T219 = tgtPages[3'h2];
+  assign T220 = T221 != 4'h0;
+  assign T221 = pageReplEn & T222;
+  assign T222 = idxPagesOH_3 | tgtPagesOH_3;
+  assign tgtPagesOH_3 = T223;
+  assign T223 = 1'h1 << T224;
+  assign T224 = tgtPages[3'h3];
+  assign T225 = {T237, T226};
+  assign T226 = {T232, T227};
+  assign T227 = T228 != 4'h0;
+  assign T228 = pageReplEn & T229;
+  assign T229 = idxPagesOH_4 | tgtPagesOH_4;
+  assign tgtPagesOH_4 = T230;
+  assign T230 = 1'h1 << T231;
+  assign T231 = tgtPages[3'h4];
+  assign T232 = T233 != 4'h0;
+  assign T233 = pageReplEn & T234;
+  assign T234 = idxPagesOH_5 | tgtPagesOH_5;
+  assign tgtPagesOH_5 = T235;
+  assign T235 = 1'h1 << T236;
+  assign T236 = tgtPages[3'h5];
+  assign T237 = {T243, T238};
+  assign T238 = T239 != 4'h0;
+  assign T239 = pageReplEn & T240;
+  assign T240 = idxPagesOH_6 | tgtPagesOH_6;
+  assign tgtPagesOH_6 = T241;
+  assign T241 = 1'h1 << T242;
+  assign T242 = tgtPages[3'h6];
+  assign T243 = T244 != 4'h0;
+  assign T244 = pageReplEn & T245;
+  assign T245 = idxPagesOH_7 | tgtPagesOH_7;
+  assign tgtPagesOH_7 = T246;
+  assign T246 = 1'h1 << T247;
+  assign T247 = tgtPages[3'h7];
+  assign T248 = T254 | T249;
+  assign T249 = T253 ? isJump_6 : 1'h0;
+  assign T250 = T251 ? R36 : isJump_6;
+  assign T251 = R7 & T252;
+  assign T252 = T40[3'h6];
+  assign T253 = hits[3'h6];
+  assign T254 = T260 | T255;
+  assign T255 = T259 ? isJump_5 : 1'h0;
+  assign T256 = T257 ? R36 : isJump_5;
+  assign T257 = R7 & T258;
+  assign T258 = T40[3'h5];
+  assign T259 = hits[3'h5];
+  assign T260 = T266 | T261;
+  assign T261 = T265 ? isJump_4 : 1'h0;
+  assign T262 = T263 ? R36 : isJump_4;
+  assign T263 = R7 & T264;
+  assign T264 = T40[3'h4];
+  assign T265 = hits[3'h4];
+  assign T266 = T272 | T267;
+  assign T267 = T271 ? isJump_3 : 1'h0;
+  assign T268 = T269 ? R36 : isJump_3;
+  assign T269 = R7 & T270;
+  assign T270 = T40[2'h3];
+  assign T271 = hits[2'h3];
+  assign T272 = T278 | T273;
+  assign T273 = T277 ? isJump_2 : 1'h0;
+  assign T274 = T275 ? R36 : isJump_2;
+  assign T275 = R7 & T276;
+  assign T276 = T40[2'h2];
+  assign T277 = hits[2'h2];
+  assign T278 = T284 | T279;
+  assign T279 = T283 ? isJump_1 : 1'h0;
+  assign T280 = T281 ? R36 : isJump_1;
+  assign T281 = R7 & T282;
+  assign T282 = T40[1'h1];
+  assign T283 = hits[1'h1];
+  assign T284 = T288 ? isJump_0 : 1'h0;
+  assign T285 = T286 ? R36 : isJump_0;
+  assign T286 = R7 & T287;
+  assign T287 = T40[1'h0];
+  assign T288 = hits[1'h0];
+  assign T289 = io_req_valid & io_resp_valid;
+  assign T290 = {io_bht_update_bits_taken, T291};
+  assign T291 = io_bht_update_bits_prediction_bits_bht_history[2'h3:1'h1];
+  assign T292 = T21 & io_bht_update_bits_mispredict;
+  assign T293 = io_req_bits_addr[3'h5:2'h2];
+  assign io_resp_bits_bht_history = T294;
+  assign T294 = R25;
+  assign io_resp_bits_entry = T483;
+  assign T483 = {T493, T484};
+  assign T484 = {T492, T485};
+  assign T485 = T486[1'h1];
+  assign T486 = T491 | T487;
+  assign T487 = T488[1'h1:1'h0];
+  assign T488 = T490 | T489;
+  assign T489 = hits[2'h3:1'h0];
+  assign T490 = hits[3'h7:3'h4];
+  assign T491 = T488[2'h3:2'h2];
+  assign T492 = T491 != 2'h0;
+  assign T493 = T490 != 4'h0;
+  assign io_resp_bits_target = T296;
+  assign T296 = T456 ? io_ras_update_bits_returnAddr : T297;
+  assign T297 = T402 ? T369 : T298;
+  assign T298 = {T331, T299};
+  assign T299 = T304 | T300;
+  assign T300 = T303 ? T301 : 12'h0;
+  assign T301 = tgts[3'h7];
+  assign T494 = io_req_bits_addr[4'hb:1'h0];
+  assign T303 = hits[3'h7];
+  assign T304 = T308 | T305;
+  assign T305 = T307 ? T306 : 12'h0;
+  assign T306 = tgts[3'h6];
+  assign T307 = hits[3'h6];
+  assign T308 = T312 | T309;
+  assign T309 = T311 ? T310 : 12'h0;
+  assign T310 = tgts[3'h5];
+  assign T311 = hits[3'h5];
+  assign T312 = T316 | T313;
+  assign T313 = T315 ? T314 : 12'h0;
+  assign T314 = tgts[3'h4];
+  assign T315 = hits[3'h4];
+  assign T316 = T320 | T317;
+  assign T317 = T319 ? T318 : 12'h0;
+  assign T318 = tgts[3'h3];
+  assign T319 = hits[2'h3];
+  assign T320 = T324 | T321;
+  assign T321 = T323 ? T322 : 12'h0;
+  assign T322 = tgts[3'h2];
+  assign T323 = hits[2'h2];
+  assign T324 = T328 | T325;
+  assign T325 = T327 ? T326 : 12'h0;
+  assign T326 = tgts[3'h1];
+  assign T327 = hits[1'h1];
+  assign T328 = T330 ? T329 : 12'h0;
+  assign T329 = tgts[3'h0];
+  assign T330 = hits[1'h0];
+  assign T331 = T358 | T332;
+  assign T332 = T334 ? T333 : 27'h0;
+  assign T333 = pages[2'h3];
+  assign T334 = T335[2'h3];
+  assign T335 = T338 | T336;
+  assign T336 = T337 ? tgtPagesOH_7 : 4'h0;
+  assign T337 = hits[3'h7];
+  assign T338 = T341 | T339;
+  assign T339 = T340 ? tgtPagesOH_6 : 4'h0;
+  assign T340 = hits[3'h6];
+  assign T341 = T344 | T342;
+  assign T342 = T343 ? tgtPagesOH_5 : 4'h0;
+  assign T343 = hits[3'h5];
+  assign T344 = T347 | T345;
+  assign T345 = T346 ? tgtPagesOH_4 : 4'h0;
+  assign T346 = hits[3'h4];
+  assign T347 = T350 | T348;
+  assign T348 = T349 ? tgtPagesOH_3 : 4'h0;
+  assign T349 = hits[2'h3];
+  assign T350 = T353 | T351;
+  assign T351 = T352 ? tgtPagesOH_2 : 4'h0;
+  assign T352 = hits[2'h2];
+  assign T353 = T356 | T354;
+  assign T354 = T355 ? tgtPagesOH_1 : 4'h0;
+  assign T355 = hits[1'h1];
+  assign T356 = T357 ? tgtPagesOH_0 : 4'h0;
+  assign T357 = hits[1'h0];
+  assign T358 = T362 | T359;
+  assign T359 = T361 ? T360 : 27'h0;
+  assign T360 = pages[2'h2];
+  assign T361 = T335[2'h2];
+  assign T362 = T366 | T363;
+  assign T363 = T365 ? T364 : 27'h0;
+  assign T364 = pages[2'h1];
+  assign T365 = T335[1'h1];
+  assign T366 = T368 ? T367 : 27'h0;
+  assign T367 = pages[2'h0];
+  assign T368 = T335[1'h0];
+  assign T369 = T401 ? R397 : R370;
+  assign T371 = T372 ? io_ras_update_bits_returnAddr : R370;
+  assign T372 = T396 & T373;
+  assign T373 = T374[1'h0];
+  assign T374 = 1'h1 << T375;
+  assign T375 = T376;
+  assign T376 = R377 + 1'h1;
+  assign T495 = reset ? 1'h0 : T378;
+  assign T378 = T381 ? T380 : T379;
+  assign T379 = T396 ? T376 : R377;
+  assign T380 = R377 - 1'h1;
+  assign T381 = T392 & T382;
+  assign T382 = T383 ^ 1'h1;
+  assign T383 = R384 == 2'h0;
+  assign T496 = reset ? 2'h0 : T385;
+  assign T385 = io_invalidate ? 2'h0 : T386;
+  assign T386 = T381 ? T391 : T387;
+  assign T387 = T389 ? T388 : R384;
+  assign T388 = R384 + 2'h1;
+  assign T389 = T396 & T390;
+  assign T390 = R384 < 2'h2;
+  assign T391 = R384 - 2'h1;
+  assign T392 = io_ras_update_valid & T393;
+  assign T393 = T395 & T394;
+  assign T394 = io_ras_update_bits_isReturn & io_ras_update_bits_prediction_valid;
+  assign T395 = io_ras_update_bits_isCall ^ 1'h1;
+  assign T396 = io_ras_update_valid & io_ras_update_bits_isCall;
+  assign T398 = T399 ? io_ras_update_bits_returnAddr : R397;
+  assign T399 = T396 & T400;
+  assign T400 = T374[1'h1];
+  assign T401 = R377;
+  assign T402 = T454 & T403;
+  assign T403 = T413 | T404;
+  assign T404 = T412 ? useRAS_7 : 1'h0;
+  assign T405 = T408 ? R406 : useRAS_7;
+  assign T407 = io_btb_update_valid ? io_btb_update_bits_isReturn : R406;
+  assign T408 = R7 & T409;
+  assign T409 = T410[3'h7];
+  assign T410 = 1'h1 << T411;
+  assign T411 = T42;
+  assign T412 = hits[3'h7];
+  assign T413 = T419 | T414;
+  assign T414 = T418 ? useRAS_6 : 1'h0;
+  assign T415 = T416 ? R406 : useRAS_6;
+  assign T416 = R7 & T417;
+  assign T417 = T410[3'h6];
+  assign T418 = hits[3'h6];
+  assign T419 = T425 | T420;
+  assign T420 = T424 ? useRAS_5 : 1'h0;
+  assign T421 = T422 ? R406 : useRAS_5;
+  assign T422 = R7 & T423;
+  assign T423 = T410[3'h5];
+  assign T424 = hits[3'h5];
+  assign T425 = T431 | T426;
+  assign T426 = T430 ? useRAS_4 : 1'h0;
+  assign T427 = T428 ? R406 : useRAS_4;
+  assign T428 = R7 & T429;
+  assign T429 = T410[3'h4];
+  assign T430 = hits[3'h4];
+  assign T431 = T437 | T432;
+  assign T432 = T436 ? useRAS_3 : 1'h0;
+  assign T433 = T434 ? R406 : useRAS_3;
+  assign T434 = R7 & T435;
+  assign T435 = T410[2'h3];
+  assign T436 = hits[2'h3];
+  assign T437 = T443 | T438;
+  assign T438 = T442 ? useRAS_2 : 1'h0;
+  assign T439 = T440 ? R406 : useRAS_2;
+  assign T440 = R7 & T441;
+  assign T441 = T410[2'h2];
+  assign T442 = hits[2'h2];
+  assign T443 = T449 | T444;
+  assign T444 = T448 ? useRAS_1 : 1'h0;
+  assign T445 = T446 ? R406 : useRAS_1;
+  assign T446 = R7 & T447;
+  assign T447 = T410[1'h1];
+  assign T448 = hits[1'h1];
+  assign T449 = T453 ? useRAS_0 : 1'h0;
+  assign T450 = T451 ? R406 : useRAS_0;
+  assign T451 = R7 & T452;
+  assign T452 = T410[1'h0];
+  assign T453 = hits[1'h0];
+  assign T454 = T455 ^ 1'h1;
+  assign T455 = R384 == 2'h0;
+  assign T456 = T396 & T403;
+  assign io_resp_bits_bridx = T457;
+  assign T457 = brIdx[io_resp_bits_entry];
   assign io_resp_bits_mask = 1'h1;
-  assign io_resp_bits_taken = T2283;
-  assign T2283 = T2284 ? 1'h0 : io_resp_valid;
-  assign T2284 = T2285 & T32;
-  assign T2285 = T2286 ^ 1'h1;
-  assign T2286 = T8[1'h0];
-  assign io_resp_valid = T2287;
-  assign T2287 = hits != 62'h0;
+  assign io_resp_bits_taken = T459;
+  assign T459 = T460 ? 1'h0 : io_resp_valid;
+  assign T460 = T461 & T32;
+  assign T461 = T462 ^ 1'h1;
+  assign T462 = T8[1'h0];
+  assign io_resp_valid = T463;
+  assign T463 = hits != 8'h0;
 
   always @(posedge clk) begin
 `ifndef SYNTHESIS
@@ -51757,459 +47621,137 @@ module BTB(input clk, input reset,
     end
     if (T21)
       T10[T22] <= T12;
-    if(T1402) begin
-      R25 <= T1400;
+    if(T292) begin
+      R25 <= T290;
     end else if(T31) begin
       R25 <= T28;
     end
     if(T38) begin
-      isJump_61 <= R36;
+      isJump_7 <= R36;
     end
     if(io_btb_update_valid) begin
       R36 <= io_btb_update_bits_isJump;
     end
     if(reset) begin
-      nextRepl <= 6'h0;
-    end else if(T47) begin
+      nextRepl <= 3'h0;
+    end else if(T45) begin
       nextRepl <= T44;
     end
     if(io_btb_update_valid) begin
-      R49 <= io_btb_update_bits_prediction_bits_entry;
+      R47 <= io_btb_update_bits_prediction_bits_entry;
     end
     if(io_btb_update_valid) begin
       updateHit <= io_btb_update_bits_prediction_valid;
     end
     if(reset) begin
-      pageValid <= 6'h0;
+      pageValid <= 4'h0;
     end else if(io_invalidate) begin
-      pageValid <= 6'h0;
-    end else if(T137) begin
-      pageValid <= T64;
+      pageValid <= 4'h0;
+    end else if(T116) begin
+      pageValid <= T59;
     end
     if(reset) begin
-      R70 <= 3'h0;
-    end else if(T75) begin
-      R70 <= T72;
+      R65 <= 2'h0;
+    end else if(T68) begin
+      R65 <= T67;
     end
     if(io_btb_update_valid) begin
-      R82 <= io_btb_update_bits_pc;
+      R74 <= io_btb_update_bits_pc;
     end
-    if (T91)
-      pages[3'h5] <= T86;
-    if (T96)
-      pages[3'h3] <= T86;
+    if (T83)
+      pages[2'h3] <= T78;
+    if (T88)
+      pages[2'h1] <= T78;
+    if (T95)
+      pages[2'h2] <= T92;
     if (T100)
-      pages[3'h1] <= T86;
-    if (T107)
-      pages[3'h4] <= T104;
-    if (T112)
-      pages[3'h2] <= T104;
-    if (T116)
-      pages[3'h0] <= T104;
-    if (T160)
-      idxPages[T42] <= T2294;
-    if (T473)
-      idxs[T42] <= T2305;
-    idxValid <= T2306;
-    if (T672)
-      tgtPages[T42] <= T2310;
-    if(T1037) begin
-      isJump_60 <= R36;
+      pages[2'h0] <= T92;
+    if (R7)
+      idxPages[T42] <= T469;
+    if (R7)
+      idxs[T42] <= T475;
+    if(reset) begin
+      idxValid <= 8'h0;
+    end else if(io_invalidate) begin
+      idxValid <= 8'h0;
+    end else if(R7) begin
+      idxValid <= T194;
     end
-    if(T1043) begin
-      isJump_59 <= R36;
-    end
-    if(T1049) begin
-      isJump_58 <= R36;
-    end
-    if(T1055) begin
-      isJump_57 <= R36;
-    end
-    if(T1061) begin
-      isJump_56 <= R36;
-    end
-    if(T1067) begin
-      isJump_55 <= R36;
-    end
-    if(T1073) begin
-      isJump_54 <= R36;
-    end
-    if(T1079) begin
-      isJump_53 <= R36;
-    end
-    if(T1085) begin
-      isJump_52 <= R36;
-    end
-    if(T1091) begin
-      isJump_51 <= R36;
-    end
-    if(T1097) begin
-      isJump_50 <= R36;
-    end
-    if(T1103) begin
-      isJump_49 <= R36;
-    end
-    if(T1109) begin
-      isJump_48 <= R36;
-    end
-    if(T1115) begin
-      isJump_47 <= R36;
-    end
-    if(T1121) begin
-      isJump_46 <= R36;
-    end
-    if(T1127) begin
-      isJump_45 <= R36;
-    end
-    if(T1133) begin
-      isJump_44 <= R36;
-    end
-    if(T1139) begin
-      isJump_43 <= R36;
-    end
-    if(T1145) begin
-      isJump_42 <= R36;
-    end
-    if(T1151) begin
-      isJump_41 <= R36;
-    end
-    if(T1157) begin
-      isJump_40 <= R36;
-    end
-    if(T1163) begin
-      isJump_39 <= R36;
-    end
-    if(T1169) begin
-      isJump_38 <= R36;
-    end
-    if(T1175) begin
-      isJump_37 <= R36;
-    end
-    if(T1181) begin
-      isJump_36 <= R36;
-    end
-    if(T1187) begin
-      isJump_35 <= R36;
-    end
-    if(T1193) begin
-      isJump_34 <= R36;
-    end
-    if(T1199) begin
-      isJump_33 <= R36;
-    end
-    if(T1205) begin
-      isJump_32 <= R36;
-    end
-    if(T1211) begin
-      isJump_31 <= R36;
-    end
-    if(T1217) begin
-      isJump_30 <= R36;
-    end
-    if(T1223) begin
-      isJump_29 <= R36;
-    end
-    if(T1229) begin
-      isJump_28 <= R36;
-    end
-    if(T1235) begin
-      isJump_27 <= R36;
-    end
-    if(T1241) begin
-      isJump_26 <= R36;
-    end
-    if(T1247) begin
-      isJump_25 <= R36;
-    end
-    if(T1253) begin
-      isJump_24 <= R36;
-    end
-    if(T1259) begin
-      isJump_23 <= R36;
-    end
-    if(T1265) begin
-      isJump_22 <= R36;
-    end
-    if(T1271) begin
-      isJump_21 <= R36;
-    end
-    if(T1277) begin
-      isJump_20 <= R36;
-    end
-    if(T1283) begin
-      isJump_19 <= R36;
-    end
-    if(T1289) begin
-      isJump_18 <= R36;
-    end
-    if(T1295) begin
-      isJump_17 <= R36;
-    end
-    if(T1301) begin
-      isJump_16 <= R36;
-    end
-    if(T1307) begin
-      isJump_15 <= R36;
-    end
-    if(T1313) begin
-      isJump_14 <= R36;
-    end
-    if(T1319) begin
-      isJump_13 <= R36;
-    end
-    if(T1325) begin
-      isJump_12 <= R36;
-    end
-    if(T1331) begin
-      isJump_11 <= R36;
-    end
-    if(T1337) begin
-      isJump_10 <= R36;
-    end
-    if(T1343) begin
-      isJump_9 <= R36;
-    end
-    if(T1349) begin
-      isJump_8 <= R36;
-    end
-    if(T1355) begin
-      isJump_7 <= R36;
-    end
-    if(T1361) begin
+    if (R7)
+      tgtPages[T42] <= T477;
+    if(T251) begin
       isJump_6 <= R36;
     end
-    if(T1367) begin
+    if(T257) begin
       isJump_5 <= R36;
     end
-    if(T1373) begin
+    if(T263) begin
       isJump_4 <= R36;
     end
-    if(T1379) begin
+    if(T269) begin
       isJump_3 <= R36;
     end
-    if(T1385) begin
+    if(T275) begin
       isJump_2 <= R36;
     end
-    if(T1391) begin
+    if(T281) begin
       isJump_1 <= R36;
     end
-    if(T1396) begin
+    if(T286) begin
       isJump_0 <= R36;
     end
-    if (T1413)
-      tgts[T42] <= T2347;
-    if(T1870) begin
-      R1868 <= io_ras_update_bits_returnAddr;
+    if (R7)
+      tgts[T42] <= T494;
+    if(T372) begin
+      R370 <= io_ras_update_bits_returnAddr;
     end
     if(reset) begin
-      R1875 <= 1'h0;
-    end else if(T1879) begin
-      R1875 <= T1878;
-    end else if(T1894) begin
-      R1875 <= T1874;
+      R377 <= 1'h0;
+    end else if(T381) begin
+      R377 <= T380;
+    end else if(T396) begin
+      R377 <= T376;
     end
     if(reset) begin
-      R1882 <= 2'h0;
+      R384 <= 2'h0;
     end else if(io_invalidate) begin
-      R1882 <= 2'h0;
-    end else if(T1879) begin
-      R1882 <= T1889;
-    end else if(T1887) begin
-      R1882 <= T1886;
+      R384 <= 2'h0;
+    end else if(T381) begin
+      R384 <= T391;
+    end else if(T389) begin
+      R384 <= T388;
     end
-    if(T1897) begin
-      R1895 <= io_ras_update_bits_returnAddr;
+    if(T399) begin
+      R397 <= io_ras_update_bits_returnAddr;
     end
-    if(T1906) begin
-      useRAS_61 <= R1904;
+    if(T408) begin
+      useRAS_7 <= R406;
     end
     if(io_btb_update_valid) begin
-      R1904 <= io_btb_update_bits_isReturn;
+      R406 <= io_btb_update_bits_isReturn;
     end
-    if(T1914) begin
-      useRAS_60 <= R1904;
+    if(T416) begin
+      useRAS_6 <= R406;
     end
-    if(T1920) begin
-      useRAS_59 <= R1904;
+    if(T422) begin
+      useRAS_5 <= R406;
     end
-    if(T1926) begin
-      useRAS_58 <= R1904;
+    if(T428) begin
+      useRAS_4 <= R406;
     end
-    if(T1932) begin
-      useRAS_57 <= R1904;
+    if(T434) begin
+      useRAS_3 <= R406;
     end
-    if(T1938) begin
-      useRAS_56 <= R1904;
+    if(T440) begin
+      useRAS_2 <= R406;
     end
-    if(T1944) begin
-      useRAS_55 <= R1904;
+    if(T446) begin
+      useRAS_1 <= R406;
     end
-    if(T1950) begin
-      useRAS_54 <= R1904;
+    if(T451) begin
+      useRAS_0 <= R406;
     end
-    if(T1956) begin
-      useRAS_53 <= R1904;
-    end
-    if(T1962) begin
-      useRAS_52 <= R1904;
-    end
-    if(T1968) begin
-      useRAS_51 <= R1904;
-    end
-    if(T1974) begin
-      useRAS_50 <= R1904;
-    end
-    if(T1980) begin
-      useRAS_49 <= R1904;
-    end
-    if(T1986) begin
-      useRAS_48 <= R1904;
-    end
-    if(T1992) begin
-      useRAS_47 <= R1904;
-    end
-    if(T1998) begin
-      useRAS_46 <= R1904;
-    end
-    if(T2004) begin
-      useRAS_45 <= R1904;
-    end
-    if(T2010) begin
-      useRAS_44 <= R1904;
-    end
-    if(T2016) begin
-      useRAS_43 <= R1904;
-    end
-    if(T2022) begin
-      useRAS_42 <= R1904;
-    end
-    if(T2028) begin
-      useRAS_41 <= R1904;
-    end
-    if(T2034) begin
-      useRAS_40 <= R1904;
-    end
-    if(T2040) begin
-      useRAS_39 <= R1904;
-    end
-    if(T2046) begin
-      useRAS_38 <= R1904;
-    end
-    if(T2052) begin
-      useRAS_37 <= R1904;
-    end
-    if(T2058) begin
-      useRAS_36 <= R1904;
-    end
-    if(T2064) begin
-      useRAS_35 <= R1904;
-    end
-    if(T2070) begin
-      useRAS_34 <= R1904;
-    end
-    if(T2076) begin
-      useRAS_33 <= R1904;
-    end
-    if(T2082) begin
-      useRAS_32 <= R1904;
-    end
-    if(T2088) begin
-      useRAS_31 <= R1904;
-    end
-    if(T2094) begin
-      useRAS_30 <= R1904;
-    end
-    if(T2100) begin
-      useRAS_29 <= R1904;
-    end
-    if(T2106) begin
-      useRAS_28 <= R1904;
-    end
-    if(T2112) begin
-      useRAS_27 <= R1904;
-    end
-    if(T2118) begin
-      useRAS_26 <= R1904;
-    end
-    if(T2124) begin
-      useRAS_25 <= R1904;
-    end
-    if(T2130) begin
-      useRAS_24 <= R1904;
-    end
-    if(T2136) begin
-      useRAS_23 <= R1904;
-    end
-    if(T2142) begin
-      useRAS_22 <= R1904;
-    end
-    if(T2148) begin
-      useRAS_21 <= R1904;
-    end
-    if(T2154) begin
-      useRAS_20 <= R1904;
-    end
-    if(T2160) begin
-      useRAS_19 <= R1904;
-    end
-    if(T2166) begin
-      useRAS_18 <= R1904;
-    end
-    if(T2172) begin
-      useRAS_17 <= R1904;
-    end
-    if(T2178) begin
-      useRAS_16 <= R1904;
-    end
-    if(T2184) begin
-      useRAS_15 <= R1904;
-    end
-    if(T2190) begin
-      useRAS_14 <= R1904;
-    end
-    if(T2196) begin
-      useRAS_13 <= R1904;
-    end
-    if(T2202) begin
-      useRAS_12 <= R1904;
-    end
-    if(T2208) begin
-      useRAS_11 <= R1904;
-    end
-    if(T2214) begin
-      useRAS_10 <= R1904;
-    end
-    if(T2220) begin
-      useRAS_9 <= R1904;
-    end
-    if(T2226) begin
-      useRAS_8 <= R1904;
-    end
-    if(T2232) begin
-      useRAS_7 <= R1904;
-    end
-    if(T2238) begin
-      useRAS_6 <= R1904;
-    end
-    if(T2244) begin
-      useRAS_5 <= R1904;
-    end
-    if(T2250) begin
-      useRAS_4 <= R1904;
-    end
-    if(T2256) begin
-      useRAS_3 <= R1904;
-    end
-    if(T2262) begin
-      useRAS_2 <= R1904;
-    end
-    if(T2268) begin
-      useRAS_1 <= R1904;
-    end
-    if(T2273) begin
-      useRAS_0 <= R1904;
-    end
-    if (T2281)
+    if (R7)
       brIdx[T42] <= 1'h0;
   end
 endmodule
@@ -52301,72 +47843,42 @@ module ICache(input clk, input reset,
   wire s1_any_tag_hit;
   wire T15;
   wire T16;
-  wire T17;
-  wire s1_disparity_3;
-  wire T18;
-  wire s1_disparity_2;
-  wire T19;
-  wire s1_disparity_1;
   wire s1_disparity_0;
-  wire T20;
-  wire s1_tag_hit_3;
-  wire T21;
-  wire s1_tag_match_3;
-  wire T22;
+  wire s1_tag_hit_0;
+  wire T17;
+  wire s1_tag_match_0;
+  wire T18;
   wire[19:0] s1_tag;
-  wire[19:0] T23;
-  wire[79:0] T24;
-  wire T80;
+  wire[19:0] T19;
+  wire[19:0] T20;
+  wire T51;
   wire s0_valid;
-  wire T81;
+  wire T52;
   wire stall;
   reg  s1_valid;
-  wire T230;
-  wire T75;
-  wire T76;
-  wire T77;
-  wire T78;
-  wire T79;
-  wire T82;
+  wire T100;
+  wire T46;
+  wire T47;
+  wire T48;
+  wire T49;
+  wire T50;
+  wire T53;
   wire refill_done;
   wire refill_wrap;
-  wire T54;
+  wire T25;
   reg [1:0] refill_cnt;
-  wire[1:0] T231;
-  wire[1:0] T55;
-  wire[1:0] T56;
-  wire T57;
-  wire T58;
+  wire[1:0] T101;
+  wire[1:0] T26;
+  wire[1:0] T27;
+  wire T28;
+  wire T29;
   reg [1:0] state;
-  wire[1:0] T232;
-  wire[1:0] T59;
-  wire[1:0] T60;
-  wire[1:0] T61;
-  wire[1:0] T62;
-  wire T63;
-  wire T64;
-  wire T65;
-  wire T66;
-  wire T67;
-  wire T68;
-  wire T69;
-  wire T70;
-  wire[5:0] T73;
-  wire[11:0] s0_pgoff;
-  wire T74;
-  wire[79:0] T25;
-  wire[79:0] T26;
-  wire[79:0] T27;
-  wire[39:0] T28;
-  wire[19:0] T29;
-  wire[19:0] T233;
-  wire T30;
-  wire[1:0] repl_way;
-  reg [15:0] R31;
-  wire[15:0] T234;
-  wire[15:0] T32;
-  wire[15:0] T33;
-  wire[14:0] T34;
+  wire[1:0] T102;
+  wire[1:0] T30;
+  wire[1:0] T31;
+  wire[1:0] T32;
+  wire[1:0] T33;
+  wire T34;
   wire T35;
   wire T36;
   wire T37;
@@ -52374,195 +47886,73 @@ module ICache(input clk, input reset,
   wire T39;
   wire T40;
   wire T41;
-  wire[19:0] T42;
-  wire[19:0] T235;
-  wire T43;
-  wire[39:0] T44;
-  wire[19:0] T45;
-  wire[19:0] T236;
-  wire T46;
-  wire[19:0] T47;
-  wire[19:0] T237;
-  wire T48;
-  wire[79:0] T49;
-  wire[79:0] T50;
-  wire[39:0] T51;
-  wire[19:0] T52;
+  wire[5:0] T44;
+  wire[11:0] s0_pgoff;
+  wire T45;
+  wire[19:0] T21;
+  wire[19:0] T22;
+  wire[19:0] T23;
+  wire[19:0] T24;
   wire[19:0] refill_tag;
-  wire[39:0] T53;
   wire[5:0] s1_idx;
-  reg [5:0] R71;
-  wire[5:0] T72;
+  reg [5:0] R42;
+  wire[5:0] T43;
+  wire T54;
+  wire T55;
+  wire T56;
+  wire[6:0] T57;
+  wire[5:0] T58;
+  reg [63:0] vb_array;
+  wire[63:0] T103;
+  wire[127:0] T104;
+  wire[127:0] T59;
+  wire[127:0] T60;
+  wire[127:0] T61;
+  wire[127:0] T105;
+  wire[127:0] T62;
+  wire[127:0] T63;
+  wire[127:0] T64;
+  wire[6:0] T65;
+  wire[127:0] T106;
+  wire T66;
+  wire[127:0] T67;
+  wire[127:0] T68;
+  wire[127:0] T107;
+  wire T69;
+  wire T70;
+  reg  invalidated;
+  wire T71;
+  wire T72;
+  wire[127:0] T73;
+  wire[127:0] T74;
+  wire[127:0] T75;
+  wire[6:0] T76;
+  wire[127:0] T108;
+  wire T77;
+  wire[127:0] T78;
+  wire[127:0] T79;
+  wire[127:0] T109;
+  wire T80;
+  wire T81;
+  wire out_valid;
+  wire T82;
   wire T83;
   wire T84;
   wire T85;
-  wire[7:0] T86;
-  wire[5:0] T87;
-  reg [255:0] vb_array;
-  wire[255:0] T238;
-  wire[255:0] T88;
-  wire[255:0] T89;
-  wire[255:0] T90;
-  wire[255:0] T91;
-  wire[255:0] T92;
-  wire[255:0] T93;
-  wire[255:0] T94;
-  wire[255:0] T95;
-  wire[255:0] T96;
-  wire[7:0] T97;
-  wire[255:0] T239;
-  wire T98;
-  wire[255:0] T99;
-  wire[255:0] T100;
-  wire T101;
-  wire T102;
-  reg  invalidated;
-  wire T103;
-  wire T104;
-  wire[255:0] T105;
-  wire[255:0] T240;
-  wire[127:0] T106;
-  wire[127:0] T107;
-  wire[6:0] T108;
-  wire[127:0] T241;
-  wire T109;
-  wire[127:0] T242;
-  wire T243;
-  wire[255:0] T110;
-  wire[255:0] T244;
-  wire[127:0] T111;
-  wire T112;
-  wire[255:0] T113;
-  wire[255:0] T245;
-  wire[127:0] T114;
-  wire[127:0] T115;
-  wire[6:0] T116;
-  wire[127:0] T246;
-  wire T117;
-  wire[127:0] T247;
-  wire T248;
-  wire[255:0] T118;
-  wire[255:0] T249;
-  wire[127:0] T119;
-  wire T120;
-  wire[255:0] T121;
-  wire[255:0] T122;
-  wire[255:0] T123;
-  wire[7:0] T124;
-  wire[255:0] T250;
-  wire T125;
-  wire[255:0] T126;
-  wire[255:0] T127;
-  wire T128;
-  wire[255:0] T129;
-  wire[255:0] T130;
-  wire[255:0] T131;
-  wire[7:0] T132;
-  wire[255:0] T251;
-  wire T133;
-  wire[255:0] T134;
-  wire[255:0] T135;
-  wire T136;
-  wire T137;
-  wire T138;
-  wire s1_tag_hit_2;
-  wire T139;
-  wire s1_tag_match_2;
-  wire T140;
-  wire[19:0] T141;
-  wire T142;
-  wire T143;
-  wire T144;
-  wire[7:0] T145;
-  wire[5:0] T146;
-  wire T147;
-  wire T148;
-  wire s1_tag_hit_1;
-  wire T149;
-  wire s1_tag_match_1;
-  wire T150;
-  wire[19:0] T151;
-  wire T152;
-  wire T153;
-  wire T154;
-  wire[6:0] T155;
-  wire[5:0] T156;
-  wire T157;
-  wire s1_tag_hit_0;
-  wire T158;
-  wire s1_tag_match_0;
-  wire T159;
-  wire[19:0] T160;
-  wire T161;
-  wire T162;
-  wire T163;
-  wire[6:0] T164;
-  wire[5:0] T165;
-  wire T166;
-  wire out_valid;
-  wire T167;
-  wire T168;
-  wire T169;
-  wire T170;
-  wire T171;
-  wire T172;
-  wire T173;
-  wire T174;
-  wire[127:0] T175;
-  wire[127:0] T176;
-  wire[127:0] s1_dout_3;
-  wire[127:0] T177;
-  wire T187;
-  wire T188;
-  wire T181;
-  wire T182;
-  wire[7:0] T186;
-  wire[127:0] T179;
-  wire[127:0] T180;
-  wire[7:0] T183;
-  reg [7:0] R184;
-  wire[7:0] T185;
-  wire[127:0] T189;
-  wire[127:0] T190;
-  wire[127:0] s1_dout_2;
-  wire[127:0] T191;
-  wire T201;
-  wire T202;
-  wire T195;
-  wire T196;
-  wire[7:0] T200;
-  wire[127:0] T193;
-  wire[127:0] T194;
-  wire[7:0] T197;
-  reg [7:0] R198;
-  wire[7:0] T199;
-  wire[127:0] T203;
-  wire[127:0] T204;
-  wire[127:0] s1_dout_1;
-  wire[127:0] T205;
-  wire T215;
-  wire T216;
-  wire T209;
-  wire T210;
-  wire[7:0] T214;
-  wire[127:0] T207;
-  wire[127:0] T208;
-  wire[7:0] T211;
-  reg [7:0] R212;
-  wire[7:0] T213;
-  wire[127:0] T217;
+  wire T86;
+  wire T87;
+  wire T88;
+  wire T89;
   wire[127:0] s1_dout_0;
-  wire[127:0] T218;
-  wire T228;
-  wire T229;
-  wire T222;
-  wire T223;
-  wire[7:0] T227;
-  wire[127:0] T220;
-  wire[127:0] T221;
-  wire[7:0] T224;
-  reg [7:0] R225;
-  wire[7:0] T226;
+  wire[127:0] T90;
+  wire T98;
+  wire T99;
+  wire[7:0] T97;
+  wire[127:0] T92;
+  wire[127:0] T93;
+  wire[7:0] T94;
+  reg [7:0] R95;
+  wire[7:0] T96;
   wire s1_hit;
   wire FlowThroughSerializer_io_in_ready;
   wire FlowThroughSerializer_io_out_valid;
@@ -52578,14 +47968,10 @@ module ICache(input clk, input reset,
     s1_valid = {1{$random}};
     refill_cnt = {1{$random}};
     state = {1{$random}};
-    R31 = {1{$random}};
-    R71 = {1{$random}};
-    vb_array = {8{$random}};
+    R42 = {1{$random}};
+    vb_array = {2{$random}};
     invalidated = {1{$random}};
-    R184 = {1{$random}};
-    R198 = {1{$random}};
-    R212 = {1{$random}};
-    R225 = {1{$random}};
+    R95 = {1{$random}};
   end
 // synthesis translate_on
 `endif
@@ -52611,303 +47997,137 @@ module ICache(input clk, input reset,
   assign io_mem_acquire_bits_addr_block = T6;
   assign T6 = T7;
   assign T7 = refill_addr >> 3'h6;
-  assign T8 = T171 ? s1_addr : refill_addr;
+  assign T8 = T86 ? s1_addr : refill_addr;
   assign s1_addr = T9;
   assign T9 = {io_req_bits_ppn, s1_pgoff};
   assign T10 = T11 ? io_req_bits_idx : s1_pgoff;
   assign T11 = io_req_valid & rdy;
   assign rdy = T12;
-  assign T12 = T170 & T13;
+  assign T12 = T85 & T13;
   assign T13 = s1_miss ^ 1'h1;
   assign s1_miss = out_valid & T14;
   assign T14 = s1_any_tag_hit ^ 1'h1;
   assign s1_any_tag_hit = T15;
-  assign T15 = T20 & T16;
-  assign T16 = T17 ^ 1'h1;
-  assign T17 = T18 | s1_disparity_3;
-  assign s1_disparity_3 = 1'h0;
-  assign T18 = T19 | s1_disparity_2;
-  assign s1_disparity_2 = 1'h0;
-  assign T19 = s1_disparity_0 | s1_disparity_1;
-  assign s1_disparity_1 = 1'h0;
+  assign T15 = s1_tag_hit_0 & T16;
+  assign T16 = s1_disparity_0 ^ 1'h1;
   assign s1_disparity_0 = 1'h0;
-  assign T20 = T138 | s1_tag_hit_3;
-  assign s1_tag_hit_3 = T21;
-  assign T21 = T83 & s1_tag_match_3;
-  assign s1_tag_match_3 = T22;
-  assign T22 = T23 == s1_tag;
+  assign s1_tag_hit_0 = T17;
+  assign T17 = T54 & s1_tag_match_0;
+  assign s1_tag_match_0 = T18;
+  assign T18 = T19 == s1_tag;
   assign s1_tag = s1_addr[5'h1f:4'hc];
-  assign T23 = T24[7'h4f:6'h3c];
-  assign T80 = T82 & s0_valid;
-  assign s0_valid = io_req_valid | T81;
-  assign T81 = s1_valid & stall;
+  assign T19 = T20;
+  assign T51 = T53 & s0_valid;
+  assign s0_valid = io_req_valid | T52;
+  assign T52 = s1_valid & stall;
   assign stall = io_resp_ready ^ 1'h1;
-  assign T230 = reset ? 1'h0 : T75;
-  assign T75 = T79 | T76;
-  assign T76 = T78 & T77;
-  assign T77 = io_req_bits_kill ^ 1'h1;
-  assign T78 = s1_valid & stall;
-  assign T79 = io_req_valid & rdy;
-  assign T82 = refill_done ^ 1'h1;
-  assign refill_done = T58 & refill_wrap;
-  assign refill_wrap = T57 & T54;
-  assign T54 = refill_cnt == 2'h3;
-  assign T231 = reset ? 2'h0 : T55;
-  assign T55 = T57 ? T56 : refill_cnt;
-  assign T56 = refill_cnt + 2'h1;
-  assign T57 = 1'h1 & FlowThroughSerializer_io_out_valid;
-  assign T58 = state == 2'h3;
-  assign T232 = reset ? 2'h0 : T59;
-  assign T59 = T69 ? 2'h0 : T60;
-  assign T60 = T67 ? 2'h3 : T61;
-  assign T61 = T65 ? 2'h2 : T62;
-  assign T62 = T63 ? 2'h1 : state;
-  assign T63 = T64 & s1_miss;
-  assign T64 = 2'h0 == state;
-  assign T65 = T66 & io_mem_acquire_ready;
-  assign T66 = 2'h1 == state;
-  assign T67 = T68 & io_mem_grant_valid;
-  assign T68 = 2'h2 == state;
-  assign T69 = T70 & refill_done;
-  assign T70 = 2'h3 == state;
-  assign T73 = s0_pgoff[4'hb:3'h6];
-  assign s0_pgoff = T74 ? s1_pgoff : io_req_bits_idx;
-  assign T74 = s1_valid & stall;
+  assign T100 = reset ? 1'h0 : T46;
+  assign T46 = T50 | T47;
+  assign T47 = T49 & T48;
+  assign T48 = io_req_bits_kill ^ 1'h1;
+  assign T49 = s1_valid & stall;
+  assign T50 = io_req_valid & rdy;
+  assign T53 = refill_done ^ 1'h1;
+  assign refill_done = T29 & refill_wrap;
+  assign refill_wrap = T28 & T25;
+  assign T25 = refill_cnt == 2'h3;
+  assign T101 = reset ? 2'h0 : T26;
+  assign T26 = T28 ? T27 : refill_cnt;
+  assign T27 = refill_cnt + 2'h1;
+  assign T28 = 1'h1 & FlowThroughSerializer_io_out_valid;
+  assign T29 = state == 2'h3;
+  assign T102 = reset ? 2'h0 : T30;
+  assign T30 = T40 ? 2'h0 : T31;
+  assign T31 = T38 ? 2'h3 : T32;
+  assign T32 = T36 ? 2'h2 : T33;
+  assign T33 = T34 ? 2'h1 : state;
+  assign T34 = T35 & s1_miss;
+  assign T35 = 2'h0 == state;
+  assign T36 = T37 & io_mem_acquire_ready;
+  assign T37 = 2'h1 == state;
+  assign T38 = T39 & io_mem_grant_valid;
+  assign T39 = 2'h2 == state;
+  assign T40 = T41 & refill_done;
+  assign T41 = 2'h3 == state;
+  assign T44 = s0_pgoff[4'hb:3'h6];
+  assign s0_pgoff = T45 ? s1_pgoff : io_req_bits_idx;
+  assign T45 = s1_valid & stall;
   ICache_tag_array tag_array (
     .CLK(clk),
-    .RW0A(refill_done ? s1_idx : T73),
-    .RW0E(T80 || refill_done),
+    .RW0A(refill_done ? s1_idx : T44),
+    .RW0E(T51 || refill_done),
     .RW0W(refill_done),
-    .RW0I(T49),
-    .RW0M(T26),
-    .RW0O(T24)
+    .RW0I(T23),
+    .RW0M(T22),
+    .RW0O(T20)
   );
-  assign T26 = T27;
-  assign T27 = {T44, T28};
-  assign T28 = {T42, T29};
-  assign T29 = 20'h0 - T233;
-  assign T233 = {19'h0, T30};
-  assign T30 = repl_way == 2'h0;
-  assign repl_way = R31[1'h1:1'h0];
-  assign T234 = reset ? 16'h1 : T32;
-  assign T32 = s1_miss ? T33 : R31;
-  assign T33 = {T35, T34};
-  assign T34 = R31[4'hf:1'h1];
-  assign T35 = T37 ^ T36;
-  assign T36 = R31[3'h5];
-  assign T37 = T39 ^ T38;
-  assign T38 = R31[2'h3];
-  assign T39 = T41 ^ T40;
-  assign T40 = R31[2'h2];
-  assign T41 = R31[1'h0];
-  assign T42 = 20'h0 - T235;
-  assign T235 = {19'h0, T43};
-  assign T43 = repl_way == 2'h1;
-  assign T44 = {T47, T45};
-  assign T45 = 20'h0 - T236;
-  assign T236 = {19'h0, T46};
-  assign T46 = repl_way == 2'h2;
-  assign T47 = 20'h0 - T237;
-  assign T237 = {19'h0, T48};
-  assign T48 = repl_way == 2'h3;
-  assign T49 = T50;
-  assign T50 = {T53, T51};
-  assign T51 = {T52, T52};
-  assign T52 = refill_tag;
+  assign T22 = 20'hfffff;
+  assign T23 = T24;
+  assign T24 = refill_tag;
   assign refill_tag = refill_addr[5'h1f:4'hc];
-  assign T53 = {T52, T52};
   assign s1_idx = s1_addr[4'hb:3'h6];
-  assign T72 = T80 ? T73 : R71;
-  assign T83 = T137 & T84;
-  assign T84 = T85;
-  assign T85 = vb_array[T86];
-  assign T86 = {2'h3, T87};
-  assign T87 = s1_pgoff[4'hb:3'h6];
-  assign T238 = reset ? 256'h0 : T88;
-  assign T88 = T136 ? T129 : T89;
-  assign T89 = T128 ? T121 : T90;
-  assign T90 = T120 ? T113 : T91;
-  assign T91 = T112 ? T105 : T92;
-  assign T92 = io_invalidate ? 256'h0 : T93;
-  assign T93 = T101 ? T94 : vb_array;
-  assign T94 = T99 | T95;
-  assign T95 = T239 & T96;
-  assign T96 = 1'h1 << T97;
-  assign T97 = {repl_way, s1_idx};
-  assign T239 = T98 ? 256'hffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff : 256'h0;
-  assign T98 = 1'h1;
-  assign T99 = vb_array & T100;
-  assign T100 = ~ T96;
-  assign T101 = refill_done & T102;
-  assign T102 = invalidated ^ 1'h1;
-  assign T103 = T64 ? 1'h0 : T104;
-  assign T104 = io_invalidate ? 1'h1 : invalidated;
-  assign T105 = T110 | T240;
-  assign T240 = {T242, T106};
-  assign T106 = T241 & T107;
-  assign T107 = 1'h1 << T108;
-  assign T108 = {1'h0, s1_idx};
-  assign T241 = T109 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
-  assign T109 = 1'h0;
-  assign T242 = T243 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
-  assign T243 = T106[7'h7f];
-  assign T110 = vb_array & T244;
-  assign T244 = {128'h0, T111};
-  assign T111 = ~ T107;
-  assign T112 = s1_valid & s1_disparity_0;
-  assign T113 = T118 | T245;
-  assign T245 = {T247, T114};
-  assign T114 = T246 & T115;
-  assign T115 = 1'h1 << T116;
-  assign T116 = {1'h1, s1_idx};
-  assign T246 = T117 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
-  assign T117 = 1'h0;
-  assign T247 = T248 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
-  assign T248 = T114[7'h7f];
-  assign T118 = vb_array & T249;
-  assign T249 = {128'h0, T119};
-  assign T119 = ~ T115;
-  assign T120 = s1_valid & s1_disparity_1;
-  assign T121 = T126 | T122;
-  assign T122 = T250 & T123;
-  assign T123 = 1'h1 << T124;
-  assign T124 = {2'h2, s1_idx};
-  assign T250 = T125 ? 256'hffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff : 256'h0;
-  assign T125 = 1'h0;
-  assign T126 = vb_array & T127;
-  assign T127 = ~ T123;
-  assign T128 = s1_valid & s1_disparity_2;
-  assign T129 = T134 | T130;
-  assign T130 = T251 & T131;
-  assign T131 = 1'h1 << T132;
-  assign T132 = {2'h3, s1_idx};
-  assign T251 = T133 ? 256'hffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff : 256'h0;
-  assign T133 = 1'h0;
-  assign T134 = vb_array & T135;
-  assign T135 = ~ T131;
-  assign T136 = s1_valid & s1_disparity_3;
-  assign T137 = io_invalidate ^ 1'h1;
-  assign T138 = T148 | s1_tag_hit_2;
-  assign s1_tag_hit_2 = T139;
-  assign T139 = T142 & s1_tag_match_2;
-  assign s1_tag_match_2 = T140;
-  assign T140 = T141 == s1_tag;
-  assign T141 = T24[6'h3b:6'h28];
-  assign T142 = T147 & T143;
-  assign T143 = T144;
-  assign T144 = vb_array[T145];
-  assign T145 = {2'h2, T146};
-  assign T146 = s1_pgoff[4'hb:3'h6];
-  assign T147 = io_invalidate ^ 1'h1;
-  assign T148 = s1_tag_hit_0 | s1_tag_hit_1;
-  assign s1_tag_hit_1 = T149;
-  assign T149 = T152 & s1_tag_match_1;
-  assign s1_tag_match_1 = T150;
-  assign T150 = T151 == s1_tag;
-  assign T151 = T24[6'h27:5'h14];
-  assign T152 = T157 & T153;
-  assign T153 = T154;
-  assign T154 = vb_array[T155];
-  assign T155 = {1'h1, T156};
-  assign T156 = s1_pgoff[4'hb:3'h6];
-  assign T157 = io_invalidate ^ 1'h1;
-  assign s1_tag_hit_0 = T158;
-  assign T158 = T161 & s1_tag_match_0;
-  assign s1_tag_match_0 = T159;
-  assign T159 = T160 == s1_tag;
-  assign T160 = T24[5'h13:1'h0];
-  assign T161 = T166 & T162;
-  assign T162 = T163;
-  assign T163 = vb_array[T164];
-  assign T164 = {1'h0, T165};
-  assign T165 = s1_pgoff[4'hb:3'h6];
-  assign T166 = io_invalidate ^ 1'h1;
-  assign out_valid = T168 & T167;
-  assign T167 = state == 2'h0;
-  assign T168 = s1_valid & T169;
-  assign T169 = io_req_bits_kill ^ 1'h1;
-  assign T170 = state == 2'h0;
-  assign T171 = T172 & s1_miss;
-  assign T172 = s1_valid & T173;
-  assign T173 = state == 2'h0;
-  assign io_mem_acquire_valid = T174;
-  assign T174 = state == 2'h1;
-  assign io_resp_bits_datablock = T175;
-  assign T175 = T189 | T176;
-  assign T176 = s1_tag_hit_3 ? s1_dout_3 : 128'h0;
-  assign s1_dout_3 = T177;
-  assign T187 = T188 & s0_valid;
-  assign T188 = T181 ^ 1'h1;
-  assign T181 = FlowThroughSerializer_io_out_valid & T182;
-  assign T182 = repl_way == 2'h3;
-  assign T186 = s0_pgoff[4'hb:3'h4];
-  ICache_T178 T178 (
+  assign T43 = T51 ? T44 : R42;
+  assign T54 = T81 & T55;
+  assign T55 = T56;
+  assign T56 = vb_array[T57];
+  assign T57 = {1'h0, T58};
+  assign T58 = s1_pgoff[4'hb:3'h6];
+  assign T103 = T104[6'h3f:1'h0];
+  assign T104 = reset ? 128'h0 : T59;
+  assign T59 = T80 ? T73 : T60;
+  assign T60 = io_invalidate ? 128'h0 : T61;
+  assign T61 = T69 ? T62 : T105;
+  assign T105 = {64'h0, vb_array};
+  assign T62 = T67 | T63;
+  assign T63 = T106 & T64;
+  assign T64 = 1'h1 << T65;
+  assign T65 = {1'h0, s1_idx};
+  assign T106 = T66 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
+  assign T66 = 1'h1;
+  assign T67 = T107 & T68;
+  assign T68 = ~ T64;
+  assign T107 = {64'h0, vb_array};
+  assign T69 = refill_done & T70;
+  assign T70 = invalidated ^ 1'h1;
+  assign T71 = T35 ? 1'h0 : T72;
+  assign T72 = io_invalidate ? 1'h1 : invalidated;
+  assign T73 = T78 | T74;
+  assign T74 = T108 & T75;
+  assign T75 = 1'h1 << T76;
+  assign T76 = {1'h0, s1_idx};
+  assign T108 = T77 ? 128'hffffffffffffffffffffffffffffffff : 128'h0;
+  assign T77 = 1'h0;
+  assign T78 = T109 & T79;
+  assign T79 = ~ T75;
+  assign T109 = {64'h0, vb_array};
+  assign T80 = s1_valid & s1_disparity_0;
+  assign T81 = io_invalidate ^ 1'h1;
+  assign out_valid = T83 & T82;
+  assign T82 = state == 2'h0;
+  assign T83 = s1_valid & T84;
+  assign T84 = io_req_bits_kill ^ 1'h1;
+  assign T85 = state == 2'h0;
+  assign T86 = T87 & s1_miss;
+  assign T87 = s1_valid & T88;
+  assign T88 = state == 2'h0;
+  assign io_mem_acquire_valid = T89;
+  assign T89 = state == 2'h1;
+  assign io_resp_bits_datablock = s1_dout_0;
+  assign s1_dout_0 = T90;
+  assign T98 = T99 & s0_valid;
+  assign T99 = FlowThroughSerializer_io_out_valid ^ 1'h1;
+  assign T97 = s0_pgoff[4'hb:3'h4];
+  ICache_T91 T91 (
     .CLK(clk),
-    .RW0A(T181 ? T183 : T186),
-    .RW0E(T187 || T181),
-    .RW0W(T181),
-    .RW0I(T180),
-    .RW0O(T177)
+    .RW0A(FlowThroughSerializer_io_out_valid ? T94 : T97),
+    .RW0E(T98 || FlowThroughSerializer_io_out_valid),
+    .RW0W(FlowThroughSerializer_io_out_valid),
+    .RW0I(T93),
+    .RW0O(T90)
   );
-  assign T180 = FlowThroughSerializer_io_out_bits_data;
-  assign T183 = {s1_idx, refill_cnt};
-  assign T185 = T187 ? T186 : R184;
-  assign T189 = T203 | T190;
-  assign T190 = s1_tag_hit_2 ? s1_dout_2 : 128'h0;
-  assign s1_dout_2 = T191;
-  assign T201 = T202 & s0_valid;
-  assign T202 = T195 ^ 1'h1;
-  assign T195 = FlowThroughSerializer_io_out_valid & T196;
-  assign T196 = repl_way == 2'h2;
-  assign T200 = s0_pgoff[4'hb:3'h4];
-  ICache_T178 T192 (
-    .CLK(clk),
-    .RW0A(T195 ? T197 : T200),
-    .RW0E(T201 || T195),
-    .RW0W(T195),
-    .RW0I(T194),
-    .RW0O(T191)
-  );
-  assign T194 = FlowThroughSerializer_io_out_bits_data;
-  assign T197 = {s1_idx, refill_cnt};
-  assign T199 = T201 ? T200 : R198;
-  assign T203 = T217 | T204;
-  assign T204 = s1_tag_hit_1 ? s1_dout_1 : 128'h0;
-  assign s1_dout_1 = T205;
-  assign T215 = T216 & s0_valid;
-  assign T216 = T209 ^ 1'h1;
-  assign T209 = FlowThroughSerializer_io_out_valid & T210;
-  assign T210 = repl_way == 2'h1;
-  assign T214 = s0_pgoff[4'hb:3'h4];
-  ICache_T178 T206 (
-    .CLK(clk),
-    .RW0A(T209 ? T211 : T214),
-    .RW0E(T215 || T209),
-    .RW0W(T209),
-    .RW0I(T208),
-    .RW0O(T205)
-  );
-  assign T208 = FlowThroughSerializer_io_out_bits_data;
-  assign T211 = {s1_idx, refill_cnt};
-  assign T213 = T215 ? T214 : R212;
-  assign T217 = s1_tag_hit_0 ? s1_dout_0 : 128'h0;
-  assign s1_dout_0 = T218;
-  assign T228 = T229 & s0_valid;
-  assign T229 = T222 ^ 1'h1;
-  assign T222 = FlowThroughSerializer_io_out_valid & T223;
-  assign T223 = repl_way == 2'h0;
-  assign T227 = s0_pgoff[4'hb:3'h4];
-  ICache_T178 T219 (
-    .CLK(clk),
-    .RW0A(T222 ? T224 : T227),
-    .RW0E(T228 || T222),
-    .RW0W(T222),
-    .RW0I(T221),
-    .RW0O(T218)
-  );
-  assign T221 = FlowThroughSerializer_io_out_bits_data;
-  assign T224 = {s1_idx, refill_cnt};
-  assign T226 = T228 ? T227 : R225;
+  assign T93 = FlowThroughSerializer_io_out_bits_data;
+  assign T94 = {s1_idx, refill_cnt};
+  assign T96 = T98 ? T97 : R95;
   assign io_resp_valid = s1_hit;
   assign s1_hit = out_valid & s1_any_tag_hit;
   FlowThroughSerializer FlowThroughSerializer(
@@ -52932,7 +48152,7 @@ module ICache(input clk, input reset,
   );
 
   always @(posedge clk) begin
-    if(T171) begin
+    if(T86) begin
       refill_addr <= s1_addr;
     end
     if(T11) begin
@@ -52941,135 +48161,87 @@ module ICache(input clk, input reset,
     if(reset) begin
       s1_valid <= 1'h0;
     end else begin
-      s1_valid <= T75;
+      s1_valid <= T46;
     end
     if(reset) begin
       refill_cnt <= 2'h0;
-    end else if(T57) begin
-      refill_cnt <= T56;
+    end else if(T28) begin
+      refill_cnt <= T27;
     end
     if(reset) begin
       state <= 2'h0;
-    end else if(T69) begin
+    end else if(T40) begin
       state <= 2'h0;
-    end else if(T67) begin
+    end else if(T38) begin
       state <= 2'h3;
-    end else if(T65) begin
+    end else if(T36) begin
       state <= 2'h2;
-    end else if(T63) begin
+    end else if(T34) begin
       state <= 2'h1;
     end
-    if(reset) begin
-      R31 <= 16'h1;
-    end else if(s1_miss) begin
-      R31 <= T33;
+    if(T51) begin
+      R42 <= T44;
     end
-    if(T80) begin
-      R71 <= T73;
-    end
-    if(reset) begin
-      vb_array <= 256'h0;
-    end else if(T136) begin
-      vb_array <= T129;
-    end else if(T128) begin
-      vb_array <= T121;
-    end else if(T120) begin
-      vb_array <= T113;
-    end else if(T112) begin
-      vb_array <= T105;
-    end else if(io_invalidate) begin
-      vb_array <= 256'h0;
-    end else if(T101) begin
-      vb_array <= T94;
-    end
-    if(T64) begin
+    vb_array <= T103;
+    if(T35) begin
       invalidated <= 1'h0;
     end else if(io_invalidate) begin
       invalidated <= 1'h1;
     end
-    if(T187) begin
-      R184 <= T186;
-    end
-    if(T201) begin
-      R198 <= T200;
-    end
-    if(T215) begin
-      R212 <= T214;
-    end
-    if(T228) begin
-      R225 <= T227;
+    if(T98) begin
+      R95 <= T97;
     end
   end
 endmodule
 
 module RocketCAM(input clk, input reset,
     input  io_clear,
-    input [7:0] io_clear_mask,
+    input [3:0] io_clear_mask,
     input [33:0] io_tag,
     output io_hit,
-    output[7:0] io_hits,
-    output[7:0] io_valid_bits,
+    output[3:0] io_hits,
+    output[3:0] io_valid_bits,
     input  io_write,
     input [33:0] io_write_tag,
-    input [2:0] io_write_addr
+    input [1:0] io_write_addr
 );
 
-  reg [7:0] vb_array;
-  wire[7:0] T44;
-  wire[7:0] T0;
-  wire[7:0] T1;
-  wire[7:0] T2;
-  wire[7:0] T3;
-  wire[7:0] T4;
-  wire[7:0] T45;
-  wire T5;
-  wire[7:0] T6;
-  wire[7:0] T7;
-  wire[7:0] T8;
-  wire[7:0] T9;
-  wire[7:0] T10;
-  wire[7:0] T11;
-  wire[3:0] T12;
-  wire[1:0] T13;
-  wire hits_0;
-  wire T14;
-  wire[33:0] T15;
-  reg [33:0] cam_tags [7:0];
-  wire[33:0] T16;
-  wire T17;
-  wire hits_1;
-  wire T18;
-  wire[33:0] T19;
-  wire T20;
-  wire[1:0] T21;
-  wire hits_2;
-  wire T22;
-  wire[33:0] T23;
-  wire T24;
-  wire hits_3;
-  wire T25;
-  wire[33:0] T26;
-  wire T27;
+  reg [3:0] vb_array;
   wire[3:0] T28;
-  wire[1:0] T29;
-  wire hits_4;
-  wire T30;
-  wire[33:0] T31;
-  wire T32;
-  wire hits_5;
-  wire T33;
-  wire[33:0] T34;
-  wire T35;
-  wire[1:0] T36;
-  wire hits_6;
-  wire T37;
-  wire[33:0] T38;
-  wire T39;
-  wire hits_7;
-  wire T40;
-  wire[33:0] T41;
-  wire T42;
-  wire T43;
+  wire[3:0] T0;
+  wire[3:0] T1;
+  wire[3:0] T2;
+  wire[3:0] T3;
+  wire[3:0] T4;
+  wire[3:0] T29;
+  wire T5;
+  wire[3:0] T6;
+  wire[3:0] T7;
+  wire[3:0] T8;
+  wire[3:0] T9;
+  wire[3:0] T10;
+  wire[3:0] T11;
+  wire[1:0] T12;
+  wire hits_0;
+  wire T13;
+  wire[33:0] T14;
+  reg [33:0] cam_tags [3:0];
+  wire[33:0] T15;
+  wire T16;
+  wire hits_1;
+  wire T17;
+  wire[33:0] T18;
+  wire T19;
+  wire[1:0] T20;
+  wire hits_2;
+  wire T21;
+  wire[33:0] T22;
+  wire T23;
+  wire hits_3;
+  wire T24;
+  wire[33:0] T25;
+  wire T26;
+  wire T27;
 
 `ifndef SYNTHESIS
 // synthesis translate_off
@@ -53077,20 +48249,20 @@ module RocketCAM(input clk, input reset,
   initial begin
     #0.002;
     vb_array = {1{$random}};
-    for (initvar = 0; initvar < 8; initvar = initvar+1)
+    for (initvar = 0; initvar < 4; initvar = initvar+1)
       cam_tags[initvar] = {2{$random}};
   end
 // synthesis translate_on
 `endif
 
   assign io_valid_bits = vb_array;
-  assign T44 = reset ? 8'h0 : T0;
+  assign T28 = reset ? 4'h0 : T0;
   assign T0 = io_clear ? T8 : T1;
   assign T1 = io_write ? T2 : vb_array;
   assign T2 = T6 | T3;
-  assign T3 = T45 & T4;
+  assign T3 = T29 & T4;
   assign T4 = 1'h1 << io_write_addr;
-  assign T45 = T5 ? 8'hff : 8'h0;
+  assign T29 = T5 ? 4'hf : 4'h0;
   assign T5 = 1'h1;
   assign T6 = vb_array & T7;
   assign T7 = ~ T4;
@@ -53098,51 +48270,31 @@ module RocketCAM(input clk, input reset,
   assign T9 = ~ io_clear_mask;
   assign io_hits = T10;
   assign T10 = T11;
-  assign T11 = {T28, T12};
-  assign T12 = {T21, T13};
-  assign T13 = {hits_1, hits_0};
-  assign hits_0 = T17 & T14;
-  assign T14 = T15 == io_tag;
-  assign T15 = cam_tags[3'h0];
-  assign T17 = vb_array[1'h0];
-  assign hits_1 = T20 & T18;
-  assign T18 = T19 == io_tag;
-  assign T19 = cam_tags[3'h1];
-  assign T20 = vb_array[1'h1];
-  assign T21 = {hits_3, hits_2};
-  assign hits_2 = T24 & T22;
-  assign T22 = T23 == io_tag;
-  assign T23 = cam_tags[3'h2];
-  assign T24 = vb_array[2'h2];
-  assign hits_3 = T27 & T25;
-  assign T25 = T26 == io_tag;
-  assign T26 = cam_tags[3'h3];
-  assign T27 = vb_array[2'h3];
-  assign T28 = {T36, T29};
-  assign T29 = {hits_5, hits_4};
-  assign hits_4 = T32 & T30;
-  assign T30 = T31 == io_tag;
-  assign T31 = cam_tags[3'h4];
-  assign T32 = vb_array[3'h4];
-  assign hits_5 = T35 & T33;
-  assign T33 = T34 == io_tag;
-  assign T34 = cam_tags[3'h5];
-  assign T35 = vb_array[3'h5];
-  assign T36 = {hits_7, hits_6};
-  assign hits_6 = T39 & T37;
-  assign T37 = T38 == io_tag;
-  assign T38 = cam_tags[3'h6];
-  assign T39 = vb_array[3'h6];
-  assign hits_7 = T42 & T40;
-  assign T40 = T41 == io_tag;
-  assign T41 = cam_tags[3'h7];
-  assign T42 = vb_array[3'h7];
-  assign io_hit = T43;
-  assign T43 = io_hits != 8'h0;
+  assign T11 = {T20, T12};
+  assign T12 = {hits_1, hits_0};
+  assign hits_0 = T16 & T13;
+  assign T13 = T14 == io_tag;
+  assign T14 = cam_tags[2'h0];
+  assign T16 = vb_array[1'h0];
+  assign hits_1 = T19 & T17;
+  assign T17 = T18 == io_tag;
+  assign T18 = cam_tags[2'h1];
+  assign T19 = vb_array[1'h1];
+  assign T20 = {hits_3, hits_2};
+  assign hits_2 = T23 & T21;
+  assign T21 = T22 == io_tag;
+  assign T22 = cam_tags[2'h2];
+  assign T23 = vb_array[2'h2];
+  assign hits_3 = T26 & T24;
+  assign T24 = T25 == io_tag;
+  assign T25 = cam_tags[2'h3];
+  assign T26 = vb_array[2'h3];
+  assign io_hit = T27;
+  assign T27 = io_hits != 4'h0;
 
   always @(posedge clk) begin
     if(reset) begin
-      vb_array <= 8'h0;
+      vb_array <= 4'h0;
     end else if(io_clear) begin
       vb_array <= T8;
     end else if(io_write) begin
@@ -53166,7 +48318,7 @@ module TLB(input clk, input reset,
     output io_resp_xcpt_ld,
     output io_resp_xcpt_st,
     output io_resp_xcpt_if,
-    output[7:0] io_resp_hit_idx,
+    output[3:0] io_resp_hit_idx,
     input  io_ptw_req_ready,
     output io_ptw_req_valid,
     output[26:0] io_ptw_req_bits_addr,
@@ -53200,321 +48352,301 @@ module TLB(input clk, input reset,
     input  io_ptw_invalidate
 );
 
-  reg [2:0] r_refill_waddr;
-  wire[2:0] T0;
-  wire[2:0] repl_waddr;
-  wire[2:0] T1;
-  wire[3:0] T2;
+  reg [1:0] r_refill_waddr;
+  wire[1:0] T0;
+  wire[1:0] repl_waddr;
+  wire[1:0] T1;
+  wire[2:0] T2;
   wire T3;
-  reg [7:0] R4;
-  wire[7:0] T5;
-  wire[7:0] T6;
-  wire[7:0] T7;
-  wire[7:0] T8;
-  wire[14:0] T9;
-  wire[2:0] T10;
+  reg [3:0] R4;
+  wire[3:0] T5;
+  wire[3:0] T6;
+  wire[3:0] T7;
+  wire[3:0] T8;
+  wire[6:0] T9;
+  wire[1:0] T10;
   wire T11;
-  wire[2:0] T479;
-  wire[1:0] T480;
-  wire T481;
-  wire[1:0] T482;
-  wire[1:0] T483;
-  wire[3:0] T484;
-  wire[3:0] T485;
-  wire[3:0] T486;
-  wire[1:0] T487;
-  wire T488;
-  wire T489;
-  wire[1:0] T13;
-  wire T14;
-  wire T15;
-  wire[7:0] T16;
-  wire[7:0] T17;
-  wire[7:0] T18;
-  wire[7:0] T19;
-  wire[7:0] T20;
-  wire[10:0] T21;
-  wire[7:0] T22;
-  wire[7:0] T23;
-  wire[7:0] T24;
-  wire[7:0] T25;
-  wire[7:0] T26;
-  wire T27;
+  wire[1:0] T325;
+  wire T326;
+  wire[1:0] T327;
+  wire[1:0] T328;
+  wire[1:0] T329;
+  wire T330;
+  wire T13;
+  wire[3:0] T14;
+  wire[3:0] T15;
+  wire[3:0] T16;
+  wire[3:0] T17;
+  wire[3:0] T18;
+  wire T19;
   wire tlb_hit;
   wire tag_hit;
-  wire[7:0] tag_hits;
-  wire[7:0] T28;
-  wire[7:0] T29;
-  wire[7:0] T30;
-  wire[7:0] w_array;
-  wire[7:0] T31;
-  wire[7:0] T32;
-  wire[3:0] T33;
-  wire[1:0] T34;
+  wire[3:0] tag_hits;
+  wire[3:0] T20;
+  wire[3:0] T21;
+  wire[3:0] T22;
+  wire[3:0] w_array;
+  wire[3:0] T23;
+  wire[3:0] T24;
+  wire[1:0] T25;
   reg  uw_array_0;
+  wire T26;
+  wire T27;
+  wire T28;
+  wire T29;
+  wire T30;
+  wire T31;
+  wire T32;
+  wire T33;
+  wire T34;
   wire T35;
   wire T36;
-  wire T37;
-  wire T38;
+  wire[3:0] T37;
+  wire[1:0] T38;
+  reg  uw_array_1;
   wire T39;
   wire T40;
   wire T41;
-  wire T42;
+  wire[1:0] T42;
+  reg  uw_array_2;
   wire T43;
   wire T44;
   wire T45;
-  wire[7:0] T46;
-  wire[2:0] T47;
-  reg  uw_array_1;
+  reg  uw_array_3;
+  wire T46;
+  wire T47;
   wire T48;
-  wire T49;
-  wire T50;
+  wire[3:0] T49;
+  wire[3:0] T50;
   wire[1:0] T51;
-  reg  uw_array_2;
+  reg  sw_array_0;
   wire T52;
   wire T53;
   wire T54;
-  reg  uw_array_3;
   wire T55;
   wire T56;
   wire T57;
-  wire[3:0] T58;
-  wire[1:0] T59;
-  reg  uw_array_4;
+  wire T58;
+  wire T59;
   wire T60;
-  wire T61;
-  wire T62;
-  reg  uw_array_5;
+  wire[3:0] T61;
+  wire[1:0] T62;
+  reg  sw_array_1;
   wire T63;
   wire T64;
   wire T65;
   wire[1:0] T66;
-  reg  uw_array_6;
+  reg  sw_array_2;
   wire T67;
   wire T68;
   wire T69;
-  reg  uw_array_7;
+  reg  sw_array_3;
   wire T70;
   wire T71;
   wire T72;
-  wire[7:0] T73;
-  wire[7:0] T74;
+  wire priv_s;
+  wire[1:0] priv;
+  wire T73;
+  wire T74;
   wire[3:0] T75;
-  wire[1:0] T76;
-  reg  sw_array_0;
-  wire T77;
+  wire[3:0] T76;
+  wire[1:0] T77;
+  reg  dirty_array_0;
   wire T78;
   wire T79;
   wire T80;
-  wire T81;
-  wire T82;
+  wire[3:0] T81;
+  wire[1:0] T82;
+  reg  dirty_array_1;
   wire T83;
   wire T84;
   wire T85;
-  wire[7:0] T86;
-  wire[2:0] T87;
-  reg  sw_array_1;
+  wire[1:0] T86;
+  reg  dirty_array_2;
+  wire T87;
   wire T88;
   wire T89;
+  reg  dirty_array_3;
   wire T90;
-  wire[1:0] T91;
-  reg  sw_array_2;
+  wire T91;
   wire T92;
+  wire vm_enabled;
   wire T93;
   wire T94;
-  reg  sw_array_3;
+  wire priv_uses_vm;
   wire T95;
-  wire T96;
+  wire[1:0] T96;
   wire T97;
+  wire[1:0] T331;
+  wire[1:0] T332;
+  wire[1:0] T333;
+  wire T334;
   wire[3:0] T98;
-  wire[1:0] T99;
-  reg  sw_array_4;
+  wire T335;
+  wire T336;
+  wire has_invalid_entry;
+  wire T99;
   wire T100;
+  wire tlb_miss;
   wire T101;
+  wire bad_va;
   wire T102;
-  reg  sw_array_5;
   wire T103;
   wire T104;
   wire T105;
-  wire[1:0] T106;
-  reg  sw_array_6;
-  wire T107;
-  wire T108;
+  wire T106;
+  wire[33:0] T337;
+  reg [34:0] r_refill_tag;
+  wire[34:0] T107;
+  wire[34:0] lookup_tag;
+  wire[34:0] T108;
   wire T109;
-  reg  sw_array_7;
   wire T110;
-  wire T111;
-  wire T112;
-  wire priv_s;
-  wire[1:0] priv;
-  wire T113;
-  wire T114;
-  wire[7:0] T115;
-  wire[7:0] T116;
-  wire[3:0] T117;
-  wire[1:0] T118;
-  reg  dirty_array_0;
+  reg [1:0] state;
+  wire[1:0] T338;
+  wire[1:0] T111;
+  wire[1:0] T112;
+  wire[1:0] T113;
+  wire[1:0] T114;
+  wire[1:0] T115;
+  wire[1:0] T116;
+  wire T117;
+  wire T118;
   wire T119;
   wire T120;
   wire T121;
-  wire[7:0] T122;
-  wire[2:0] T123;
-  reg  dirty_array_1;
-  wire T124;
-  wire T125;
-  wire T126;
-  wire[1:0] T127;
-  reg  dirty_array_2;
-  wire T128;
-  wire T129;
-  wire T130;
-  reg  dirty_array_3;
+  wire T122;
+  wire[33:0] T339;
+  wire[3:0] T123;
+  wire[3:0] T124;
+  wire[3:0] T125;
+  wire[3:0] T126;
+  wire[3:0] T127;
+  wire[3:0] T128;
+  wire[3:0] T129;
+  wire[1:0] T130;
+  reg  valid_array_0;
   wire T131;
   wire T132;
   wire T133;
-  wire[3:0] T134;
-  wire[1:0] T135;
-  reg  dirty_array_4;
-  wire T136;
+  wire T134;
+  wire[3:0] T135;
+  wire[1:0] T136;
+  reg  valid_array_1;
   wire T137;
   wire T138;
-  reg  dirty_array_5;
   wire T139;
-  wire T140;
+  wire[1:0] T140;
+  reg  valid_array_2;
   wire T141;
-  wire[1:0] T142;
-  reg  dirty_array_6;
+  wire T142;
   wire T143;
+  reg  valid_array_3;
   wire T144;
   wire T145;
-  reg  dirty_array_7;
   wire T146;
   wire T147;
   wire T148;
-  wire vm_enabled;
+  reg  r_req_instruction;
   wire T149;
+  reg  r_req_store;
   wire T150;
-  wire priv_uses_vm;
+  wire[26:0] T340;
   wire T151;
-  wire[2:0] T152;
+  wire T152;
   wire T153;
-  wire[1:0] T154;
+  wire T154;
   wire T155;
-  wire[2:0] T490;
-  wire[2:0] T491;
-  wire[2:0] T492;
-  wire[2:0] T493;
-  wire[2:0] T494;
-  wire[2:0] T495;
-  wire[2:0] T496;
-  wire T497;
-  wire[7:0] T156;
-  wire T498;
-  wire T499;
-  wire T500;
-  wire T501;
-  wire T502;
-  wire T503;
-  wire has_invalid_entry;
-  wire T157;
-  wire T158;
-  wire tlb_miss;
-  wire T159;
-  wire bad_va;
+  wire[3:0] T156;
+  wire[3:0] x_array;
+  wire[3:0] T157;
+  wire[3:0] T158;
+  wire[1:0] T159;
+  reg  ux_array_0;
   wire T160;
   wire T161;
   wire T162;
   wire T163;
   wire T164;
-  wire[33:0] T504;
-  reg [34:0] r_refill_tag;
-  wire[34:0] T165;
-  wire[34:0] lookup_tag;
-  wire[34:0] T166;
+  wire T165;
+  wire T166;
   wire T167;
   wire T168;
-  reg [1:0] state;
-  wire[1:0] T505;
-  wire[1:0] T169;
-  wire[1:0] T170;
-  wire[1:0] T171;
+  wire T169;
+  wire T170;
+  wire[3:0] T171;
   wire[1:0] T172;
-  wire[1:0] T173;
-  wire[1:0] T174;
+  reg  ux_array_1;
+  wire T173;
+  wire T174;
   wire T175;
-  wire T176;
+  wire[1:0] T176;
+  reg  ux_array_2;
   wire T177;
   wire T178;
   wire T179;
+  reg  ux_array_3;
   wire T180;
-  wire[33:0] T506;
-  wire[7:0] T181;
-  wire[7:0] T182;
-  wire[7:0] T183;
-  wire[7:0] T184;
-  wire[7:0] T185;
-  wire[7:0] T186;
-  wire[7:0] T187;
-  wire[3:0] T188;
-  wire[1:0] T189;
-  reg  valid_array_0;
+  wire T181;
+  wire T182;
+  wire[3:0] T183;
+  wire[3:0] T184;
+  wire[1:0] T185;
+  reg  sx_array_0;
+  wire T186;
+  wire T187;
+  wire T188;
+  wire T189;
   wire T190;
   wire T191;
   wire T192;
   wire T193;
-  wire[7:0] T194;
-  wire[2:0] T195;
-  reg  valid_array_1;
-  wire T196;
+  wire T194;
+  wire[3:0] T195;
+  wire[1:0] T196;
+  reg  sx_array_1;
   wire T197;
   wire T198;
-  wire[1:0] T199;
-  reg  valid_array_2;
-  wire T200;
+  wire T199;
+  wire[1:0] T200;
+  reg  sx_array_2;
   wire T201;
   wire T202;
-  reg  valid_array_3;
   wire T203;
+  reg  sx_array_3;
   wire T204;
   wire T205;
-  wire[3:0] T206;
-  wire[1:0] T207;
-  reg  valid_array_4;
+  wire T206;
+  wire T207;
   wire T208;
   wire T209;
   wire T210;
-  reg  valid_array_5;
-  wire T211;
-  wire T212;
-  wire T213;
-  wire[1:0] T214;
-  reg  valid_array_6;
+  wire[2:0] T211;
+  wire[2:0] T212;
+  wire[2:0] T213;
+  wire T214;
   wire T215;
+  wire[31:0] paddr;
   wire T216;
-  wire T217;
-  reg  valid_array_7;
-  wire T218;
+  wire[2:0] T217;
+  wire[2:0] T218;
   wire T219;
   wire T220;
   wire T221;
-  wire T222;
-  reg  r_req_instruction;
+  wire[2:0] T222;
   wire T223;
-  reg  r_req_store;
   wire T224;
-  wire[26:0] T507;
   wire T225;
   wire T226;
   wire T227;
+  wire addr_ok;
   wire T228;
   wire T229;
-  wire[7:0] T230;
-  wire[7:0] x_array;
-  wire[7:0] T231;
-  wire[7:0] T232;
-  wire[3:0] T233;
-  wire[1:0] T234;
-  reg  ux_array_0;
+  wire T230;
+  wire T231;
+  wire T232;
+  wire T233;
+  wire T234;
   wire T235;
   wire T236;
   wire T237;
@@ -53524,278 +48656,99 @@ module TLB(input clk, input reset,
   wire T241;
   wire T242;
   wire T243;
-  wire T244;
+  wire[3:0] T244;
   wire T245;
-  wire[7:0] T246;
-  wire[2:0] T247;
-  reg  ux_array_1;
+  wire T246;
+  wire T247;
   wire T248;
   wire T249;
   wire T250;
-  wire[1:0] T251;
-  reg  ux_array_2;
+  wire T251;
   wire T252;
   wire T253;
-  wire T254;
-  reg  ux_array_3;
-  wire T255;
-  wire T256;
-  wire T257;
-  wire[3:0] T258;
-  wire[1:0] T259;
-  reg  ux_array_4;
+  wire[3:0] T254;
+  wire[3:0] r_array;
+  wire[3:0] T255;
+  wire[3:0] T256;
+  wire[1:0] T257;
+  reg  ur_array_0;
+  wire T258;
+  wire T259;
   wire T260;
   wire T261;
   wire T262;
-  reg  ux_array_5;
   wire T263;
   wire T264;
   wire T265;
-  wire[1:0] T266;
-  reg  ux_array_6;
-  wire T267;
-  wire T268;
+  wire T266;
+  wire[3:0] T267;
+  wire[1:0] T268;
+  reg  ur_array_1;
   wire T269;
-  reg  ux_array_7;
   wire T270;
   wire T271;
-  wire T272;
-  wire[7:0] T273;
-  wire[7:0] T274;
-  wire[3:0] T275;
-  wire[1:0] T276;
-  reg  sx_array_0;
+  wire[1:0] T272;
+  reg  ur_array_2;
+  wire T273;
+  wire T274;
+  wire T275;
+  reg  ur_array_3;
+  wire T276;
   wire T277;
   wire T278;
-  wire T279;
-  wire T280;
-  wire T281;
+  wire[3:0] T279;
+  wire[3:0] T280;
+  wire[1:0] T281;
+  reg  sr_array_0;
   wire T282;
   wire T283;
   wire T284;
   wire T285;
-  wire[7:0] T286;
-  wire[2:0] T287;
-  reg  sx_array_1;
+  wire T286;
+  wire T287;
   wire T288;
-  wire T289;
-  wire T290;
-  wire[1:0] T291;
-  reg  sx_array_2;
+  wire[3:0] T289;
+  wire[1:0] T290;
+  reg  sr_array_1;
+  wire T291;
   wire T292;
   wire T293;
-  wire T294;
-  reg  sx_array_3;
+  wire[1:0] T294;
+  reg  sr_array_2;
   wire T295;
   wire T296;
   wire T297;
-  wire[3:0] T298;
-  wire[1:0] T299;
-  reg  sx_array_4;
+  reg  sr_array_3;
+  wire T298;
+  wire T299;
   wire T300;
   wire T301;
   wire T302;
-  reg  sx_array_5;
   wire T303;
   wire T304;
   wire T305;
-  wire[1:0] T306;
-  reg  sx_array_6;
-  wire T307;
-  wire T308;
-  wire T309;
-  reg  sx_array_7;
-  wire T310;
-  wire T311;
+  wire[19:0] T306;
+  wire[19:0] T307;
+  wire[19:0] T308;
+  wire[19:0] T309;
+  wire[19:0] T310;
+  reg [19:0] tag_ram [3:0];
+  wire[19:0] T311;
   wire T312;
-  wire T313;
-  wire T314;
-  wire T315;
+  wire[19:0] T313;
+  wire[19:0] T314;
+  wire[19:0] T315;
   wire T316;
-  wire[2:0] T317;
-  wire[2:0] T318;
-  wire[2:0] T319;
+  wire[19:0] T317;
+  wire[19:0] T318;
+  wire[19:0] T319;
   wire T320;
-  wire T321;
-  wire[31:0] paddr;
-  wire T322;
-  wire[2:0] T323;
-  wire[2:0] T324;
-  wire T325;
-  wire T326;
-  wire T327;
-  wire[2:0] T328;
-  wire T329;
-  wire T330;
-  wire T331;
-  wire T332;
-  wire T333;
-  wire addr_ok;
-  wire T334;
-  wire T335;
-  wire T336;
-  wire T337;
-  wire T338;
-  wire T339;
-  wire T340;
-  wire T341;
-  wire T342;
-  wire T343;
-  wire T344;
-  wire T345;
-  wire T346;
-  wire T347;
-  wire T348;
-  wire T349;
-  wire[7:0] T350;
-  wire T351;
-  wire T352;
-  wire T353;
-  wire T354;
-  wire T355;
-  wire T356;
-  wire T357;
-  wire T358;
-  wire T359;
-  wire[7:0] T360;
-  wire[7:0] r_array;
-  wire[7:0] T361;
-  wire[7:0] T362;
-  wire[3:0] T363;
-  wire[1:0] T364;
-  reg  ur_array_0;
-  wire T365;
-  wire T366;
-  wire T367;
-  wire T368;
-  wire T369;
-  wire T370;
-  wire T371;
-  wire T372;
-  wire T373;
-  wire[7:0] T374;
-  wire[2:0] T375;
-  reg  ur_array_1;
-  wire T376;
-  wire T377;
-  wire T378;
-  wire[1:0] T379;
-  reg  ur_array_2;
-  wire T380;
-  wire T381;
-  wire T382;
-  reg  ur_array_3;
-  wire T383;
-  wire T384;
-  wire T385;
-  wire[3:0] T386;
-  wire[1:0] T387;
-  reg  ur_array_4;
-  wire T388;
-  wire T389;
-  wire T390;
-  reg  ur_array_5;
-  wire T391;
-  wire T392;
-  wire T393;
-  wire[1:0] T394;
-  reg  ur_array_6;
-  wire T395;
-  wire T396;
-  wire T397;
-  reg  ur_array_7;
-  wire T398;
-  wire T399;
-  wire T400;
-  wire[7:0] T401;
-  wire[7:0] T402;
-  wire[3:0] T403;
-  wire[1:0] T404;
-  reg  sr_array_0;
-  wire T405;
-  wire T406;
-  wire T407;
-  wire T408;
-  wire T409;
-  wire T410;
-  wire T411;
-  wire[7:0] T412;
-  wire[2:0] T413;
-  reg  sr_array_1;
-  wire T414;
-  wire T415;
-  wire T416;
-  wire[1:0] T417;
-  reg  sr_array_2;
-  wire T418;
-  wire T419;
-  wire T420;
-  reg  sr_array_3;
-  wire T421;
-  wire T422;
-  wire T423;
-  wire[3:0] T424;
-  wire[1:0] T425;
-  reg  sr_array_4;
-  wire T426;
-  wire T427;
-  wire T428;
-  reg  sr_array_5;
-  wire T429;
-  wire T430;
-  wire T431;
-  wire[1:0] T432;
-  reg  sr_array_6;
-  wire T433;
-  wire T434;
-  wire T435;
-  reg  sr_array_7;
-  wire T436;
-  wire T437;
-  wire T438;
-  wire T439;
-  wire T440;
-  wire T441;
-  wire T442;
-  wire T443;
-  wire[19:0] T444;
-  wire[19:0] T445;
-  wire[19:0] T446;
-  wire[19:0] T447;
-  wire[19:0] T448;
-  reg [19:0] tag_ram [7:0];
-  wire[19:0] T449;
-  wire T450;
-  wire[19:0] T451;
-  wire[19:0] T452;
-  wire[19:0] T453;
-  wire T454;
-  wire[19:0] T455;
-  wire[19:0] T456;
-  wire[19:0] T457;
-  wire T458;
-  wire[19:0] T459;
-  wire[19:0] T460;
-  wire[19:0] T461;
-  wire T462;
-  wire[19:0] T463;
-  wire[19:0] T464;
-  wire[19:0] T465;
-  wire T466;
-  wire[19:0] T467;
-  wire[19:0] T468;
-  wire[19:0] T469;
-  wire T470;
-  wire[19:0] T471;
-  wire[19:0] T472;
-  wire[19:0] T473;
-  wire T474;
-  wire[19:0] T475;
-  wire[19:0] T476;
-  wire T477;
-  wire T478;
-  wire[7:0] tag_cam_io_hits;
-  wire[7:0] tag_cam_io_valid_bits;
+  wire[19:0] T321;
+  wire[19:0] T322;
+  wire T323;
+  wire T324;
+  wire[3:0] tag_cam_io_hits;
+  wire[3:0] tag_cam_io_valid_bits;
 
 `ifndef SYNTHESIS
 // synthesis translate_off
@@ -53808,844 +48761,549 @@ module TLB(input clk, input reset,
     uw_array_1 = {1{$random}};
     uw_array_2 = {1{$random}};
     uw_array_3 = {1{$random}};
-    uw_array_4 = {1{$random}};
-    uw_array_5 = {1{$random}};
-    uw_array_6 = {1{$random}};
-    uw_array_7 = {1{$random}};
     sw_array_0 = {1{$random}};
     sw_array_1 = {1{$random}};
     sw_array_2 = {1{$random}};
     sw_array_3 = {1{$random}};
-    sw_array_4 = {1{$random}};
-    sw_array_5 = {1{$random}};
-    sw_array_6 = {1{$random}};
-    sw_array_7 = {1{$random}};
     dirty_array_0 = {1{$random}};
     dirty_array_1 = {1{$random}};
     dirty_array_2 = {1{$random}};
     dirty_array_3 = {1{$random}};
-    dirty_array_4 = {1{$random}};
-    dirty_array_5 = {1{$random}};
-    dirty_array_6 = {1{$random}};
-    dirty_array_7 = {1{$random}};
     r_refill_tag = {2{$random}};
     state = {1{$random}};
     valid_array_0 = {1{$random}};
     valid_array_1 = {1{$random}};
     valid_array_2 = {1{$random}};
     valid_array_3 = {1{$random}};
-    valid_array_4 = {1{$random}};
-    valid_array_5 = {1{$random}};
-    valid_array_6 = {1{$random}};
-    valid_array_7 = {1{$random}};
     r_req_instruction = {1{$random}};
     r_req_store = {1{$random}};
     ux_array_0 = {1{$random}};
     ux_array_1 = {1{$random}};
     ux_array_2 = {1{$random}};
     ux_array_3 = {1{$random}};
-    ux_array_4 = {1{$random}};
-    ux_array_5 = {1{$random}};
-    ux_array_6 = {1{$random}};
-    ux_array_7 = {1{$random}};
     sx_array_0 = {1{$random}};
     sx_array_1 = {1{$random}};
     sx_array_2 = {1{$random}};
     sx_array_3 = {1{$random}};
-    sx_array_4 = {1{$random}};
-    sx_array_5 = {1{$random}};
-    sx_array_6 = {1{$random}};
-    sx_array_7 = {1{$random}};
     ur_array_0 = {1{$random}};
     ur_array_1 = {1{$random}};
     ur_array_2 = {1{$random}};
     ur_array_3 = {1{$random}};
-    ur_array_4 = {1{$random}};
-    ur_array_5 = {1{$random}};
-    ur_array_6 = {1{$random}};
-    ur_array_7 = {1{$random}};
     sr_array_0 = {1{$random}};
     sr_array_1 = {1{$random}};
     sr_array_2 = {1{$random}};
     sr_array_3 = {1{$random}};
-    sr_array_4 = {1{$random}};
-    sr_array_5 = {1{$random}};
-    sr_array_6 = {1{$random}};
-    sr_array_7 = {1{$random}};
-    for (initvar = 0; initvar < 8; initvar = initvar+1)
+    for (initvar = 0; initvar < 4; initvar = initvar+1)
       tag_ram[initvar] = {1{$random}};
   end
 // synthesis translate_on
 `endif
 
-  assign T0 = T158 ? repl_waddr : r_refill_waddr;
-  assign repl_waddr = has_invalid_entry ? T490 : T1;
-  assign T1 = T2[2'h2:1'h0];
-  assign T2 = {T152, T3};
-  assign T3 = R4[T152];
-  assign T5 = T27 ? T6 : R4;
-  assign T6 = T16 | T7;
-  assign T7 = T15 ? 8'h0 : T8;
-  assign T8 = T9[3'h7:1'h0];
-  assign T9 = 8'h1 << T10;
-  assign T10 = {T13, T11};
-  assign T11 = T479[1'h1];
-  assign T479 = {T489, T480};
-  assign T480 = {T488, T481};
-  assign T481 = T482[1'h1];
-  assign T482 = T487 | T483;
-  assign T483 = T484[1'h1:1'h0];
-  assign T484 = T486 | T485;
-  assign T485 = tag_cam_io_hits[2'h3:1'h0];
-  assign T486 = tag_cam_io_hits[3'h7:3'h4];
-  assign T487 = T484[2'h3:2'h2];
-  assign T488 = T487 != 2'h0;
-  assign T489 = T486 != 4'h0;
-  assign T13 = {1'h1, T14};
-  assign T14 = T479[2'h2];
-  assign T15 = T479[1'h0];
-  assign T16 = T18 & T17;
-  assign T17 = ~ T8;
-  assign T18 = T22 | T19;
-  assign T19 = T11 ? 8'h0 : T20;
-  assign T20 = T21[3'h7:1'h0];
-  assign T21 = 8'h1 << T13;
-  assign T22 = T24 & T23;
-  assign T23 = ~ T20;
-  assign T24 = T26 | T25;
-  assign T25 = T14 ? 8'h0 : 8'h2;
-  assign T26 = R4 & 8'hfd;
-  assign T27 = io_req_valid & tlb_hit;
+  assign T0 = T100 ? repl_waddr : r_refill_waddr;
+  assign repl_waddr = has_invalid_entry ? T331 : T1;
+  assign T1 = T2[1'h1:1'h0];
+  assign T2 = {T96, T3};
+  assign T3 = R4[T96];
+  assign T5 = T19 ? T6 : R4;
+  assign T6 = T14 | T7;
+  assign T7 = T13 ? 4'h0 : T8;
+  assign T8 = T9[2'h3:1'h0];
+  assign T9 = 4'h1 << T10;
+  assign T10 = {1'h1, T11};
+  assign T11 = T325[1'h1];
+  assign T325 = {T330, T326};
+  assign T326 = T327[1'h1];
+  assign T327 = T329 | T328;
+  assign T328 = tag_cam_io_hits[1'h1:1'h0];
+  assign T329 = tag_cam_io_hits[2'h3:2'h2];
+  assign T330 = T329 != 2'h0;
+  assign T13 = T325[1'h0];
+  assign T14 = T16 & T15;
+  assign T15 = ~ T8;
+  assign T16 = T18 | T17;
+  assign T17 = T11 ? 4'h0 : 4'h2;
+  assign T18 = R4 & 4'hd;
+  assign T19 = io_req_valid & tlb_hit;
   assign tlb_hit = vm_enabled & tag_hit;
-  assign tag_hit = tag_hits != 8'h0;
-  assign tag_hits = tag_cam_io_hits & T28;
-  assign T28 = T115 | T29;
-  assign T29 = ~ T30;
-  assign T30 = io_req_bits_store ? w_array : 8'h0;
-  assign w_array = priv_s ? T73 : T31;
-  assign T31 = T32;
-  assign T32 = {T58, T33};
-  assign T33 = {T51, T34};
-  assign T34 = {uw_array_1, uw_array_0};
-  assign T35 = T44 ? T36 : uw_array_0;
-  assign T36 = T38 & T37;
-  assign T37 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T38 = T40 & T39;
-  assign T39 = io_ptw_resp_bits_pte_typ[1'h0];
-  assign T40 = T42 & T41;
-  assign T41 = io_ptw_resp_bits_pte_typ < 4'h8;
-  assign T42 = io_ptw_resp_bits_pte_v & T43;
-  assign T43 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign tag_hit = tag_hits != 4'h0;
+  assign tag_hits = tag_cam_io_hits & T20;
+  assign T20 = T75 | T21;
+  assign T21 = ~ T22;
+  assign T22 = io_req_bits_store ? w_array : 4'h0;
+  assign w_array = priv_s ? T49 : T23;
+  assign T23 = T24;
+  assign T24 = {T42, T25};
+  assign T25 = {uw_array_1, uw_array_0};
+  assign T26 = T35 ? T27 : uw_array_0;
+  assign T27 = T29 & T28;
+  assign T28 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T29 = T31 & T30;
+  assign T30 = io_ptw_resp_bits_pte_typ[1'h0];
+  assign T31 = T33 & T32;
+  assign T32 = io_ptw_resp_bits_pte_typ < 4'h8;
+  assign T33 = io_ptw_resp_bits_pte_v & T34;
+  assign T34 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign T35 = io_ptw_resp_valid & T36;
+  assign T36 = T37[1'h0];
+  assign T37 = 1'h1 << T38;
+  assign T38 = r_refill_waddr;
+  assign T39 = T40 ? T27 : uw_array_1;
+  assign T40 = io_ptw_resp_valid & T41;
+  assign T41 = T37[1'h1];
+  assign T42 = {uw_array_3, uw_array_2};
+  assign T43 = T44 ? T27 : uw_array_2;
   assign T44 = io_ptw_resp_valid & T45;
-  assign T45 = T46[1'h0];
-  assign T46 = 1'h1 << T47;
-  assign T47 = r_refill_waddr;
-  assign T48 = T49 ? T36 : uw_array_1;
-  assign T49 = io_ptw_resp_valid & T50;
-  assign T50 = T46[1'h1];
-  assign T51 = {uw_array_3, uw_array_2};
-  assign T52 = T53 ? T36 : uw_array_2;
-  assign T53 = io_ptw_resp_valid & T54;
-  assign T54 = T46[2'h2];
-  assign T55 = T56 ? T36 : uw_array_3;
-  assign T56 = io_ptw_resp_valid & T57;
-  assign T57 = T46[2'h3];
-  assign T58 = {T66, T59};
-  assign T59 = {uw_array_5, uw_array_4};
-  assign T60 = T61 ? T36 : uw_array_4;
-  assign T61 = io_ptw_resp_valid & T62;
-  assign T62 = T46[3'h4];
-  assign T63 = T64 ? T36 : uw_array_5;
+  assign T45 = T37[2'h2];
+  assign T46 = T47 ? T27 : uw_array_3;
+  assign T47 = io_ptw_resp_valid & T48;
+  assign T48 = T37[2'h3];
+  assign T49 = T50;
+  assign T50 = {T66, T51};
+  assign T51 = {sw_array_1, sw_array_0};
+  assign T52 = T59 ? T53 : sw_array_0;
+  assign T53 = T55 & T54;
+  assign T54 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T55 = T57 & T56;
+  assign T56 = io_ptw_resp_bits_pte_typ[1'h0];
+  assign T57 = io_ptw_resp_bits_pte_v & T58;
+  assign T58 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign T59 = io_ptw_resp_valid & T60;
+  assign T60 = T61[1'h0];
+  assign T61 = 1'h1 << T62;
+  assign T62 = r_refill_waddr;
+  assign T63 = T64 ? T53 : sw_array_1;
   assign T64 = io_ptw_resp_valid & T65;
-  assign T65 = T46[3'h5];
-  assign T66 = {uw_array_7, uw_array_6};
-  assign T67 = T68 ? T36 : uw_array_6;
+  assign T65 = T61[1'h1];
+  assign T66 = {sw_array_3, sw_array_2};
+  assign T67 = T68 ? T53 : sw_array_2;
   assign T68 = io_ptw_resp_valid & T69;
-  assign T69 = T46[3'h6];
-  assign T70 = T71 ? T36 : uw_array_7;
+  assign T69 = T61[2'h2];
+  assign T70 = T71 ? T53 : sw_array_3;
   assign T71 = io_ptw_resp_valid & T72;
-  assign T72 = T46[3'h7];
-  assign T73 = T74;
-  assign T74 = {T98, T75};
-  assign T75 = {T91, T76};
-  assign T76 = {sw_array_1, sw_array_0};
-  assign T77 = T84 ? T78 : sw_array_0;
-  assign T78 = T80 & T79;
-  assign T79 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T80 = T82 & T81;
-  assign T81 = io_ptw_resp_bits_pte_typ[1'h0];
-  assign T82 = io_ptw_resp_bits_pte_v & T83;
-  assign T83 = 4'h2 <= io_ptw_resp_bits_pte_typ;
-  assign T84 = io_ptw_resp_valid & T85;
-  assign T85 = T86[1'h0];
-  assign T86 = 1'h1 << T87;
-  assign T87 = r_refill_waddr;
-  assign T88 = T89 ? T78 : sw_array_1;
-  assign T89 = io_ptw_resp_valid & T90;
-  assign T90 = T86[1'h1];
-  assign T91 = {sw_array_3, sw_array_2};
-  assign T92 = T93 ? T78 : sw_array_2;
-  assign T93 = io_ptw_resp_valid & T94;
-  assign T94 = T86[2'h2];
-  assign T95 = T96 ? T78 : sw_array_3;
-  assign T96 = io_ptw_resp_valid & T97;
-  assign T97 = T86[2'h3];
-  assign T98 = {T106, T99};
-  assign T99 = {sw_array_5, sw_array_4};
-  assign T100 = T101 ? T78 : sw_array_4;
-  assign T101 = io_ptw_resp_valid & T102;
-  assign T102 = T86[3'h4];
-  assign T103 = T104 ? T78 : sw_array_5;
-  assign T104 = io_ptw_resp_valid & T105;
-  assign T105 = T86[3'h5];
-  assign T106 = {sw_array_7, sw_array_6};
-  assign T107 = T108 ? T78 : sw_array_6;
-  assign T108 = io_ptw_resp_valid & T109;
-  assign T109 = T86[3'h6];
-  assign T110 = T111 ? T78 : sw_array_7;
-  assign T111 = io_ptw_resp_valid & T112;
-  assign T112 = T86[3'h7];
+  assign T72 = T61[2'h3];
   assign priv_s = priv == 2'h1;
-  assign priv = T113 ? io_ptw_status_prv1 : io_ptw_status_prv;
-  assign T113 = io_ptw_status_mprv & T114;
-  assign T114 = io_req_bits_instruction ^ 1'h1;
-  assign T115 = T116;
-  assign T116 = {T134, T117};
-  assign T117 = {T127, T118};
-  assign T118 = {dirty_array_1, dirty_array_0};
-  assign T119 = T120 ? io_ptw_resp_bits_pte_d : dirty_array_0;
-  assign T120 = io_ptw_resp_valid & T121;
-  assign T121 = T122[1'h0];
-  assign T122 = 1'h1 << T123;
-  assign T123 = r_refill_waddr;
-  assign T124 = T125 ? io_ptw_resp_bits_pte_d : dirty_array_1;
-  assign T125 = io_ptw_resp_valid & T126;
-  assign T126 = T122[1'h1];
-  assign T127 = {dirty_array_3, dirty_array_2};
-  assign T128 = T129 ? io_ptw_resp_bits_pte_d : dirty_array_2;
-  assign T129 = io_ptw_resp_valid & T130;
-  assign T130 = T122[2'h2];
-  assign T131 = T132 ? io_ptw_resp_bits_pte_d : dirty_array_3;
-  assign T132 = io_ptw_resp_valid & T133;
-  assign T133 = T122[2'h3];
-  assign T134 = {T142, T135};
-  assign T135 = {dirty_array_5, dirty_array_4};
-  assign T136 = T137 ? io_ptw_resp_bits_pte_d : dirty_array_4;
-  assign T137 = io_ptw_resp_valid & T138;
-  assign T138 = T122[3'h4];
-  assign T139 = T140 ? io_ptw_resp_bits_pte_d : dirty_array_5;
-  assign T140 = io_ptw_resp_valid & T141;
-  assign T141 = T122[3'h5];
-  assign T142 = {dirty_array_7, dirty_array_6};
-  assign T143 = T144 ? io_ptw_resp_bits_pte_d : dirty_array_6;
-  assign T144 = io_ptw_resp_valid & T145;
-  assign T145 = T122[3'h6];
-  assign T146 = T147 ? io_ptw_resp_bits_pte_d : dirty_array_7;
-  assign T147 = io_ptw_resp_valid & T148;
-  assign T148 = T122[3'h7];
-  assign vm_enabled = T150 & T149;
-  assign T149 = io_req_bits_passthrough ^ 1'h1;
-  assign T150 = T151 & priv_uses_vm;
+  assign priv = T73 ? io_ptw_status_prv1 : io_ptw_status_prv;
+  assign T73 = io_ptw_status_mprv & T74;
+  assign T74 = io_req_bits_instruction ^ 1'h1;
+  assign T75 = T76;
+  assign T76 = {T86, T77};
+  assign T77 = {dirty_array_1, dirty_array_0};
+  assign T78 = T79 ? io_ptw_resp_bits_pte_d : dirty_array_0;
+  assign T79 = io_ptw_resp_valid & T80;
+  assign T80 = T81[1'h0];
+  assign T81 = 1'h1 << T82;
+  assign T82 = r_refill_waddr;
+  assign T83 = T84 ? io_ptw_resp_bits_pte_d : dirty_array_1;
+  assign T84 = io_ptw_resp_valid & T85;
+  assign T85 = T81[1'h1];
+  assign T86 = {dirty_array_3, dirty_array_2};
+  assign T87 = T88 ? io_ptw_resp_bits_pte_d : dirty_array_2;
+  assign T88 = io_ptw_resp_valid & T89;
+  assign T89 = T81[2'h2];
+  assign T90 = T91 ? io_ptw_resp_bits_pte_d : dirty_array_3;
+  assign T91 = io_ptw_resp_valid & T92;
+  assign T92 = T81[2'h3];
+  assign vm_enabled = T94 & T93;
+  assign T93 = io_req_bits_passthrough ^ 1'h1;
+  assign T94 = T95 & priv_uses_vm;
   assign priv_uses_vm = priv <= 2'h1;
-  assign T151 = io_ptw_status_vm[2'h3];
-  assign T152 = {T154, T153};
-  assign T153 = R4[T154];
-  assign T154 = {1'h1, T155};
-  assign T155 = R4[1'h1];
-  assign T490 = T503 ? 1'h0 : T491;
-  assign T491 = T502 ? 1'h1 : T492;
-  assign T492 = T501 ? 2'h2 : T493;
-  assign T493 = T500 ? 2'h3 : T494;
-  assign T494 = T499 ? 3'h4 : T495;
-  assign T495 = T498 ? 3'h5 : T496;
-  assign T496 = T497 ? 3'h6 : 3'h7;
-  assign T497 = T156[3'h6];
-  assign T156 = ~ tag_cam_io_valid_bits;
-  assign T498 = T156[3'h5];
-  assign T499 = T156[3'h4];
-  assign T500 = T156[2'h3];
-  assign T501 = T156[2'h2];
-  assign T502 = T156[1'h1];
-  assign T503 = T156[1'h0];
-  assign has_invalid_entry = T157 ^ 1'h1;
-  assign T157 = tag_cam_io_valid_bits == 8'hff;
-  assign T158 = T164 & tlb_miss;
-  assign tlb_miss = T162 & T159;
-  assign T159 = bad_va ^ 1'h1;
-  assign bad_va = T161 != T160;
-  assign T160 = io_req_bits_vpn[5'h1a];
-  assign T161 = io_req_bits_vpn[5'h1b];
-  assign T162 = vm_enabled & T163;
-  assign T163 = tag_hit ^ 1'h1;
-  assign T164 = io_req_ready & io_req_valid;
-  assign T504 = r_refill_tag[6'h21:1'h0];
-  assign T165 = T158 ? lookup_tag : r_refill_tag;
-  assign lookup_tag = T166;
-  assign T166 = {io_req_bits_asid, io_req_bits_vpn};
-  assign T167 = T168 & io_ptw_resp_valid;
-  assign T168 = state == 2'h2;
-  assign T505 = reset ? 2'h0 : T169;
-  assign T169 = io_ptw_resp_valid ? 2'h0 : T170;
-  assign T170 = T179 ? 2'h3 : T171;
-  assign T171 = T178 ? 2'h3 : T172;
-  assign T172 = T177 ? 2'h2 : T173;
-  assign T173 = T175 ? 2'h0 : T174;
-  assign T174 = T158 ? 2'h1 : state;
-  assign T175 = T176 & io_ptw_invalidate;
-  assign T176 = state == 2'h1;
-  assign T177 = T176 & io_ptw_req_ready;
-  assign T178 = T177 & io_ptw_invalidate;
-  assign T179 = T180 & io_ptw_invalidate;
-  assign T180 = state == 2'h2;
-  assign T506 = lookup_tag[6'h21:1'h0];
-  assign T181 = io_ptw_invalidate ? 8'hff : T182;
-  assign T182 = T185 | T183;
-  assign T183 = tag_cam_io_hits & T184;
-  assign T184 = ~ tag_hits;
-  assign T185 = ~ T186;
-  assign T186 = T187;
-  assign T187 = {T206, T188};
-  assign T188 = {T199, T189};
-  assign T189 = {valid_array_1, valid_array_0};
-  assign T190 = T192 ? T191 : valid_array_0;
-  assign T191 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T192 = io_ptw_resp_valid & T193;
-  assign T193 = T194[1'h0];
-  assign T194 = 1'h1 << T195;
-  assign T195 = r_refill_waddr;
-  assign T196 = T197 ? T191 : valid_array_1;
-  assign T197 = io_ptw_resp_valid & T198;
-  assign T198 = T194[1'h1];
-  assign T199 = {valid_array_3, valid_array_2};
-  assign T200 = T201 ? T191 : valid_array_2;
-  assign T201 = io_ptw_resp_valid & T202;
-  assign T202 = T194[2'h2];
-  assign T203 = T204 ? T191 : valid_array_3;
-  assign T204 = io_ptw_resp_valid & T205;
-  assign T205 = T194[2'h3];
-  assign T206 = {T214, T207};
-  assign T207 = {valid_array_5, valid_array_4};
-  assign T208 = T209 ? T191 : valid_array_4;
-  assign T209 = io_ptw_resp_valid & T210;
-  assign T210 = T194[3'h4];
-  assign T211 = T212 ? T191 : valid_array_5;
-  assign T212 = io_ptw_resp_valid & T213;
-  assign T213 = T194[3'h5];
-  assign T214 = {valid_array_7, valid_array_6};
-  assign T215 = T216 ? T191 : valid_array_6;
-  assign T216 = io_ptw_resp_valid & T217;
-  assign T217 = T194[3'h6];
-  assign T218 = T219 ? T191 : valid_array_7;
-  assign T219 = io_ptw_resp_valid & T220;
-  assign T220 = T194[3'h7];
-  assign T221 = io_ptw_invalidate | T222;
-  assign T222 = io_req_ready & io_req_valid;
+  assign T95 = io_ptw_status_vm[2'h3];
+  assign T96 = {1'h1, T97};
+  assign T97 = R4[1'h1];
+  assign T331 = T336 ? 1'h0 : T332;
+  assign T332 = T335 ? 1'h1 : T333;
+  assign T333 = T334 ? 2'h2 : 2'h3;
+  assign T334 = T98[2'h2];
+  assign T98 = ~ tag_cam_io_valid_bits;
+  assign T335 = T98[1'h1];
+  assign T336 = T98[1'h0];
+  assign has_invalid_entry = T99 ^ 1'h1;
+  assign T99 = tag_cam_io_valid_bits == 4'hf;
+  assign T100 = T106 & tlb_miss;
+  assign tlb_miss = T104 & T101;
+  assign T101 = bad_va ^ 1'h1;
+  assign bad_va = T103 != T102;
+  assign T102 = io_req_bits_vpn[5'h1a];
+  assign T103 = io_req_bits_vpn[5'h1b];
+  assign T104 = vm_enabled & T105;
+  assign T105 = tag_hit ^ 1'h1;
+  assign T106 = io_req_ready & io_req_valid;
+  assign T337 = r_refill_tag[6'h21:1'h0];
+  assign T107 = T100 ? lookup_tag : r_refill_tag;
+  assign lookup_tag = T108;
+  assign T108 = {io_req_bits_asid, io_req_bits_vpn};
+  assign T109 = T110 & io_ptw_resp_valid;
+  assign T110 = state == 2'h2;
+  assign T338 = reset ? 2'h0 : T111;
+  assign T111 = io_ptw_resp_valid ? 2'h0 : T112;
+  assign T112 = T121 ? 2'h3 : T113;
+  assign T113 = T120 ? 2'h3 : T114;
+  assign T114 = T119 ? 2'h2 : T115;
+  assign T115 = T117 ? 2'h0 : T116;
+  assign T116 = T100 ? 2'h1 : state;
+  assign T117 = T118 & io_ptw_invalidate;
+  assign T118 = state == 2'h1;
+  assign T119 = T118 & io_ptw_req_ready;
+  assign T120 = T119 & io_ptw_invalidate;
+  assign T121 = T122 & io_ptw_invalidate;
+  assign T122 = state == 2'h2;
+  assign T339 = lookup_tag[6'h21:1'h0];
+  assign T123 = io_ptw_invalidate ? 4'hf : T124;
+  assign T124 = T127 | T125;
+  assign T125 = tag_cam_io_hits & T126;
+  assign T126 = ~ tag_hits;
+  assign T127 = ~ T128;
+  assign T128 = T129;
+  assign T129 = {T140, T130};
+  assign T130 = {valid_array_1, valid_array_0};
+  assign T131 = T133 ? T132 : valid_array_0;
+  assign T132 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T133 = io_ptw_resp_valid & T134;
+  assign T134 = T135[1'h0];
+  assign T135 = 1'h1 << T136;
+  assign T136 = r_refill_waddr;
+  assign T137 = T138 ? T132 : valid_array_1;
+  assign T138 = io_ptw_resp_valid & T139;
+  assign T139 = T135[1'h1];
+  assign T140 = {valid_array_3, valid_array_2};
+  assign T141 = T142 ? T132 : valid_array_2;
+  assign T142 = io_ptw_resp_valid & T143;
+  assign T143 = T135[2'h2];
+  assign T144 = T145 ? T132 : valid_array_3;
+  assign T145 = io_ptw_resp_valid & T146;
+  assign T146 = T135[2'h3];
+  assign T147 = io_ptw_invalidate | T148;
+  assign T148 = io_req_ready & io_req_valid;
   assign io_ptw_req_bits_fetch = r_req_instruction;
-  assign T223 = T158 ? io_req_bits_instruction : r_req_instruction;
+  assign T149 = T100 ? io_req_bits_instruction : r_req_instruction;
   assign io_ptw_req_bits_store = r_req_store;
-  assign T224 = T158 ? io_req_bits_store : r_req_store;
+  assign T150 = T100 ? io_req_bits_store : r_req_store;
   assign io_ptw_req_bits_prv = io_ptw_status_prv;
-  assign io_ptw_req_bits_addr = T507;
-  assign T507 = r_refill_tag[5'h1a:1'h0];
-  assign io_ptw_req_valid = T225;
-  assign T225 = state == 2'h1;
+  assign io_ptw_req_bits_addr = T340;
+  assign T340 = r_refill_tag[5'h1a:1'h0];
+  assign io_ptw_req_valid = T151;
+  assign T151 = state == 2'h1;
   assign io_resp_hit_idx = tag_cam_io_hits;
-  assign io_resp_xcpt_if = T226;
-  assign T226 = T313 | T227;
-  assign T227 = tlb_hit & T228;
-  assign T228 = T229 ^ 1'h1;
-  assign T229 = T230 != 8'h0;
-  assign T230 = x_array & tag_cam_io_hits;
-  assign x_array = priv_s ? T273 : T231;
-  assign T231 = T232;
-  assign T232 = {T258, T233};
-  assign T233 = {T251, T234};
-  assign T234 = {ux_array_1, ux_array_0};
-  assign T235 = T244 ? T236 : ux_array_0;
-  assign T236 = T238 & T237;
-  assign T237 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T238 = T240 & T239;
-  assign T239 = io_ptw_resp_bits_pte_typ[1'h1];
-  assign T240 = T242 & T241;
-  assign T241 = io_ptw_resp_bits_pte_typ < 4'h8;
-  assign T242 = io_ptw_resp_bits_pte_v & T243;
-  assign T243 = 4'h2 <= io_ptw_resp_bits_pte_typ;
-  assign T244 = io_ptw_resp_valid & T245;
-  assign T245 = T246[1'h0];
-  assign T246 = 1'h1 << T247;
-  assign T247 = r_refill_waddr;
-  assign T248 = T249 ? T236 : ux_array_1;
-  assign T249 = io_ptw_resp_valid & T250;
-  assign T250 = T246[1'h1];
-  assign T251 = {ux_array_3, ux_array_2};
-  assign T252 = T253 ? T236 : ux_array_2;
-  assign T253 = io_ptw_resp_valid & T254;
-  assign T254 = T246[2'h2];
-  assign T255 = T256 ? T236 : ux_array_3;
-  assign T256 = io_ptw_resp_valid & T257;
-  assign T257 = T246[2'h3];
-  assign T258 = {T266, T259};
-  assign T259 = {ux_array_5, ux_array_4};
-  assign T260 = T261 ? T236 : ux_array_4;
-  assign T261 = io_ptw_resp_valid & T262;
-  assign T262 = T246[3'h4];
-  assign T263 = T264 ? T236 : ux_array_5;
-  assign T264 = io_ptw_resp_valid & T265;
-  assign T265 = T246[3'h5];
-  assign T266 = {ux_array_7, ux_array_6};
-  assign T267 = T268 ? T236 : ux_array_6;
-  assign T268 = io_ptw_resp_valid & T269;
-  assign T269 = T246[3'h6];
-  assign T270 = T271 ? T236 : ux_array_7;
-  assign T271 = io_ptw_resp_valid & T272;
-  assign T272 = T246[3'h7];
-  assign T273 = T274;
-  assign T274 = {T298, T275};
-  assign T275 = {T291, T276};
-  assign T276 = {sx_array_1, sx_array_0};
-  assign T277 = T284 ? T278 : sx_array_0;
-  assign T278 = T280 & T279;
-  assign T279 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T280 = T282 & T281;
-  assign T281 = io_ptw_resp_bits_pte_typ[1'h1];
-  assign T282 = io_ptw_resp_bits_pte_v & T283;
-  assign T283 = 4'h4 <= io_ptw_resp_bits_pte_typ;
-  assign T284 = io_ptw_resp_valid & T285;
-  assign T285 = T286[1'h0];
-  assign T286 = 1'h1 << T287;
-  assign T287 = r_refill_waddr;
-  assign T288 = T289 ? T278 : sx_array_1;
-  assign T289 = io_ptw_resp_valid & T290;
-  assign T290 = T286[1'h1];
-  assign T291 = {sx_array_3, sx_array_2};
-  assign T292 = T293 ? T278 : sx_array_2;
-  assign T293 = io_ptw_resp_valid & T294;
-  assign T294 = T286[2'h2];
-  assign T295 = T296 ? T278 : sx_array_3;
-  assign T296 = io_ptw_resp_valid & T297;
-  assign T297 = T286[2'h3];
-  assign T298 = {T306, T299};
-  assign T299 = {sx_array_5, sx_array_4};
-  assign T300 = T301 ? T278 : sx_array_4;
-  assign T301 = io_ptw_resp_valid & T302;
-  assign T302 = T286[3'h4];
-  assign T303 = T304 ? T278 : sx_array_5;
-  assign T304 = io_ptw_resp_valid & T305;
-  assign T305 = T286[3'h5];
-  assign T306 = {sx_array_7, sx_array_6};
-  assign T307 = T308 ? T278 : sx_array_6;
-  assign T308 = io_ptw_resp_valid & T309;
-  assign T309 = T286[3'h6];
-  assign T310 = T311 ? T278 : sx_array_7;
-  assign T311 = io_ptw_resp_valid & T312;
-  assign T312 = T286[3'h7];
-  assign T313 = T314 | bad_va;
-  assign T314 = T333 | T315;
-  assign T315 = T316 ^ 1'h1;
-  assign T316 = T317[2'h2];
-  assign T317 = T332 ? 3'h7 : T318;
-  assign T318 = T323 | T319;
-  assign T319 = T320 ? 3'h3 : 3'h0;
-  assign T320 = T322 & T321;
-  assign T321 = paddr < 32'h40010200;
+  assign io_resp_xcpt_if = T152;
+  assign T152 = T207 | T153;
+  assign T153 = tlb_hit & T154;
+  assign T154 = T155 ^ 1'h1;
+  assign T155 = T156 != 4'h0;
+  assign T156 = x_array & tag_cam_io_hits;
+  assign x_array = priv_s ? T183 : T157;
+  assign T157 = T158;
+  assign T158 = {T176, T159};
+  assign T159 = {ux_array_1, ux_array_0};
+  assign T160 = T169 ? T161 : ux_array_0;
+  assign T161 = T163 & T162;
+  assign T162 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T163 = T165 & T164;
+  assign T164 = io_ptw_resp_bits_pte_typ[1'h1];
+  assign T165 = T167 & T166;
+  assign T166 = io_ptw_resp_bits_pte_typ < 4'h8;
+  assign T167 = io_ptw_resp_bits_pte_v & T168;
+  assign T168 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign T169 = io_ptw_resp_valid & T170;
+  assign T170 = T171[1'h0];
+  assign T171 = 1'h1 << T172;
+  assign T172 = r_refill_waddr;
+  assign T173 = T174 ? T161 : ux_array_1;
+  assign T174 = io_ptw_resp_valid & T175;
+  assign T175 = T171[1'h1];
+  assign T176 = {ux_array_3, ux_array_2};
+  assign T177 = T178 ? T161 : ux_array_2;
+  assign T178 = io_ptw_resp_valid & T179;
+  assign T179 = T171[2'h2];
+  assign T180 = T181 ? T161 : ux_array_3;
+  assign T181 = io_ptw_resp_valid & T182;
+  assign T182 = T171[2'h3];
+  assign T183 = T184;
+  assign T184 = {T200, T185};
+  assign T185 = {sx_array_1, sx_array_0};
+  assign T186 = T193 ? T187 : sx_array_0;
+  assign T187 = T189 & T188;
+  assign T188 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T189 = T191 & T190;
+  assign T190 = io_ptw_resp_bits_pte_typ[1'h1];
+  assign T191 = io_ptw_resp_bits_pte_v & T192;
+  assign T192 = 4'h4 <= io_ptw_resp_bits_pte_typ;
+  assign T193 = io_ptw_resp_valid & T194;
+  assign T194 = T195[1'h0];
+  assign T195 = 1'h1 << T196;
+  assign T196 = r_refill_waddr;
+  assign T197 = T198 ? T187 : sx_array_1;
+  assign T198 = io_ptw_resp_valid & T199;
+  assign T199 = T195[1'h1];
+  assign T200 = {sx_array_3, sx_array_2};
+  assign T201 = T202 ? T187 : sx_array_2;
+  assign T202 = io_ptw_resp_valid & T203;
+  assign T203 = T195[2'h2];
+  assign T204 = T205 ? T187 : sx_array_3;
+  assign T205 = io_ptw_resp_valid & T206;
+  assign T206 = T195[2'h3];
+  assign T207 = T208 | bad_va;
+  assign T208 = T227 | T209;
+  assign T209 = T210 ^ 1'h1;
+  assign T210 = T211[2'h2];
+  assign T211 = T226 ? 3'h7 : T212;
+  assign T212 = T217 | T213;
+  assign T213 = T214 ? 3'h3 : 3'h0;
+  assign T214 = T216 & T215;
+  assign T215 = paddr < 32'h40010200;
   assign paddr = {io_resp_ppn, 12'h0};
-  assign T322 = 32'h40010000 <= paddr;
-  assign T323 = T328 | T324;
-  assign T324 = T325 ? 3'h3 : 3'h0;
-  assign T325 = T327 & T326;
-  assign T326 = paddr < 32'h40010000;
-  assign T327 = 32'h40008000 <= paddr;
-  assign T328 = T329 ? 3'h1 : 3'h0;
-  assign T329 = T331 & T330;
-  assign T330 = paddr < 32'h40008000;
-  assign T331 = 32'h40000000 <= paddr;
-  assign T332 = paddr < 32'h40000000;
-  assign T333 = addr_ok ^ 1'h1;
-  assign addr_ok = T345 | T334;
-  assign T334 = T338 | T335;
-  assign T335 = T337 & T336;
-  assign T336 = paddr < 32'h40010200;
-  assign T337 = 32'h40010000 <= paddr;
-  assign T338 = T342 | T339;
-  assign T339 = T341 & T340;
-  assign T340 = paddr < 32'h40010000;
-  assign T341 = 32'h40008000 <= paddr;
-  assign T342 = T344 & T343;
-  assign T343 = paddr < 32'h40008000;
-  assign T344 = 32'h40000000 <= paddr;
-  assign T345 = paddr < 32'h40000000;
-  assign io_resp_xcpt_st = T346;
-  assign T346 = T351 | T347;
-  assign T347 = tlb_hit & T348;
-  assign T348 = T349 ^ 1'h1;
-  assign T349 = T350 != 8'h0;
-  assign T350 = w_array & tag_cam_io_hits;
-  assign T351 = T352 | bad_va;
-  assign T352 = T355 | T353;
-  assign T353 = T354 ^ 1'h1;
-  assign T354 = T317[1'h1];
-  assign T355 = addr_ok ^ 1'h1;
-  assign io_resp_xcpt_ld = T356;
-  assign T356 = T439 | T357;
-  assign T357 = tlb_hit & T358;
-  assign T358 = T359 ^ 1'h1;
-  assign T359 = T360 != 8'h0;
-  assign T360 = r_array & tag_cam_io_hits;
-  assign r_array = priv_s ? T401 : T361;
-  assign T361 = T362;
-  assign T362 = {T386, T363};
-  assign T363 = {T379, T364};
-  assign T364 = {ur_array_1, ur_array_0};
-  assign T365 = T372 ? T366 : ur_array_0;
-  assign T366 = T368 & T367;
-  assign T367 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T368 = T370 & T369;
-  assign T369 = io_ptw_resp_bits_pte_typ < 4'h8;
-  assign T370 = io_ptw_resp_bits_pte_v & T371;
-  assign T371 = 4'h2 <= io_ptw_resp_bits_pte_typ;
-  assign T372 = io_ptw_resp_valid & T373;
-  assign T373 = T374[1'h0];
-  assign T374 = 1'h1 << T375;
-  assign T375 = r_refill_waddr;
-  assign T376 = T377 ? T366 : ur_array_1;
-  assign T377 = io_ptw_resp_valid & T378;
-  assign T378 = T374[1'h1];
-  assign T379 = {ur_array_3, ur_array_2};
-  assign T380 = T381 ? T366 : ur_array_2;
-  assign T381 = io_ptw_resp_valid & T382;
-  assign T382 = T374[2'h2];
-  assign T383 = T384 ? T366 : ur_array_3;
-  assign T384 = io_ptw_resp_valid & T385;
-  assign T385 = T374[2'h3];
-  assign T386 = {T394, T387};
-  assign T387 = {ur_array_5, ur_array_4};
-  assign T388 = T389 ? T366 : ur_array_4;
-  assign T389 = io_ptw_resp_valid & T390;
-  assign T390 = T374[3'h4];
-  assign T391 = T392 ? T366 : ur_array_5;
-  assign T392 = io_ptw_resp_valid & T393;
-  assign T393 = T374[3'h5];
-  assign T394 = {ur_array_7, ur_array_6};
-  assign T395 = T396 ? T366 : ur_array_6;
-  assign T396 = io_ptw_resp_valid & T397;
-  assign T397 = T374[3'h6];
-  assign T398 = T399 ? T366 : ur_array_7;
-  assign T399 = io_ptw_resp_valid & T400;
-  assign T400 = T374[3'h7];
-  assign T401 = T402;
-  assign T402 = {T424, T403};
-  assign T403 = {T417, T404};
-  assign T404 = {sr_array_1, sr_array_0};
-  assign T405 = T410 ? T406 : sr_array_0;
-  assign T406 = T408 & T407;
-  assign T407 = io_ptw_resp_bits_error ^ 1'h1;
-  assign T408 = io_ptw_resp_bits_pte_v & T409;
-  assign T409 = 4'h2 <= io_ptw_resp_bits_pte_typ;
-  assign T410 = io_ptw_resp_valid & T411;
-  assign T411 = T412[1'h0];
-  assign T412 = 1'h1 << T413;
-  assign T413 = r_refill_waddr;
-  assign T414 = T415 ? T406 : sr_array_1;
-  assign T415 = io_ptw_resp_valid & T416;
-  assign T416 = T412[1'h1];
-  assign T417 = {sr_array_3, sr_array_2};
-  assign T418 = T419 ? T406 : sr_array_2;
-  assign T419 = io_ptw_resp_valid & T420;
-  assign T420 = T412[2'h2];
-  assign T421 = T422 ? T406 : sr_array_3;
-  assign T422 = io_ptw_resp_valid & T423;
-  assign T423 = T412[2'h3];
-  assign T424 = {T432, T425};
-  assign T425 = {sr_array_5, sr_array_4};
-  assign T426 = T427 ? T406 : sr_array_4;
-  assign T427 = io_ptw_resp_valid & T428;
-  assign T428 = T412[3'h4];
-  assign T429 = T430 ? T406 : sr_array_5;
-  assign T430 = io_ptw_resp_valid & T431;
-  assign T431 = T412[3'h5];
-  assign T432 = {sr_array_7, sr_array_6};
-  assign T433 = T434 ? T406 : sr_array_6;
-  assign T434 = io_ptw_resp_valid & T435;
-  assign T435 = T412[3'h6];
-  assign T436 = T437 ? T406 : sr_array_7;
-  assign T437 = io_ptw_resp_valid & T438;
-  assign T438 = T412[3'h7];
-  assign T439 = T440 | bad_va;
-  assign T440 = T443 | T441;
-  assign T441 = T442 ^ 1'h1;
-  assign T442 = T317[1'h0];
-  assign T443 = addr_ok ^ 1'h1;
-  assign io_resp_ppn = T444;
-  assign T444 = vm_enabled ? T446 : T445;
-  assign T445 = io_req_bits_vpn[5'h13:1'h0];
-  assign T446 = T451 | T447;
-  assign T447 = T450 ? T448 : 20'h0;
-  assign T448 = tag_ram[3'h7];
-  assign T450 = tag_cam_io_hits[3'h7];
-  assign T451 = T455 | T452;
-  assign T452 = T454 ? T453 : 20'h0;
-  assign T453 = tag_ram[3'h6];
-  assign T454 = tag_cam_io_hits[3'h6];
-  assign T455 = T459 | T456;
-  assign T456 = T458 ? T457 : 20'h0;
-  assign T457 = tag_ram[3'h5];
-  assign T458 = tag_cam_io_hits[3'h5];
-  assign T459 = T463 | T460;
-  assign T460 = T462 ? T461 : 20'h0;
-  assign T461 = tag_ram[3'h4];
-  assign T462 = tag_cam_io_hits[3'h4];
-  assign T463 = T467 | T464;
-  assign T464 = T466 ? T465 : 20'h0;
-  assign T465 = tag_ram[3'h3];
-  assign T466 = tag_cam_io_hits[2'h3];
-  assign T467 = T471 | T468;
-  assign T468 = T470 ? T469 : 20'h0;
-  assign T469 = tag_ram[3'h2];
-  assign T470 = tag_cam_io_hits[2'h2];
-  assign T471 = T475 | T472;
-  assign T472 = T474 ? T473 : 20'h0;
-  assign T473 = tag_ram[3'h1];
-  assign T474 = tag_cam_io_hits[1'h1];
-  assign T475 = T477 ? T476 : 20'h0;
-  assign T476 = tag_ram[3'h0];
-  assign T477 = tag_cam_io_hits[1'h0];
+  assign T216 = 32'h40010000 <= paddr;
+  assign T217 = T222 | T218;
+  assign T218 = T219 ? 3'h3 : 3'h0;
+  assign T219 = T221 & T220;
+  assign T220 = paddr < 32'h40010000;
+  assign T221 = 32'h40008000 <= paddr;
+  assign T222 = T223 ? 3'h1 : 3'h0;
+  assign T223 = T225 & T224;
+  assign T224 = paddr < 32'h40008000;
+  assign T225 = 32'h40000000 <= paddr;
+  assign T226 = paddr < 32'h40000000;
+  assign T227 = addr_ok ^ 1'h1;
+  assign addr_ok = T239 | T228;
+  assign T228 = T232 | T229;
+  assign T229 = T231 & T230;
+  assign T230 = paddr < 32'h40010200;
+  assign T231 = 32'h40010000 <= paddr;
+  assign T232 = T236 | T233;
+  assign T233 = T235 & T234;
+  assign T234 = paddr < 32'h40010000;
+  assign T235 = 32'h40008000 <= paddr;
+  assign T236 = T238 & T237;
+  assign T237 = paddr < 32'h40008000;
+  assign T238 = 32'h40000000 <= paddr;
+  assign T239 = paddr < 32'h40000000;
+  assign io_resp_xcpt_st = T240;
+  assign T240 = T245 | T241;
+  assign T241 = tlb_hit & T242;
+  assign T242 = T243 ^ 1'h1;
+  assign T243 = T244 != 4'h0;
+  assign T244 = w_array & tag_cam_io_hits;
+  assign T245 = T246 | bad_va;
+  assign T246 = T249 | T247;
+  assign T247 = T248 ^ 1'h1;
+  assign T248 = T211[1'h1];
+  assign T249 = addr_ok ^ 1'h1;
+  assign io_resp_xcpt_ld = T250;
+  assign T250 = T301 | T251;
+  assign T251 = tlb_hit & T252;
+  assign T252 = T253 ^ 1'h1;
+  assign T253 = T254 != 4'h0;
+  assign T254 = r_array & tag_cam_io_hits;
+  assign r_array = priv_s ? T279 : T255;
+  assign T255 = T256;
+  assign T256 = {T272, T257};
+  assign T257 = {ur_array_1, ur_array_0};
+  assign T258 = T265 ? T259 : ur_array_0;
+  assign T259 = T261 & T260;
+  assign T260 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T261 = T263 & T262;
+  assign T262 = io_ptw_resp_bits_pte_typ < 4'h8;
+  assign T263 = io_ptw_resp_bits_pte_v & T264;
+  assign T264 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign T265 = io_ptw_resp_valid & T266;
+  assign T266 = T267[1'h0];
+  assign T267 = 1'h1 << T268;
+  assign T268 = r_refill_waddr;
+  assign T269 = T270 ? T259 : ur_array_1;
+  assign T270 = io_ptw_resp_valid & T271;
+  assign T271 = T267[1'h1];
+  assign T272 = {ur_array_3, ur_array_2};
+  assign T273 = T274 ? T259 : ur_array_2;
+  assign T274 = io_ptw_resp_valid & T275;
+  assign T275 = T267[2'h2];
+  assign T276 = T277 ? T259 : ur_array_3;
+  assign T277 = io_ptw_resp_valid & T278;
+  assign T278 = T267[2'h3];
+  assign T279 = T280;
+  assign T280 = {T294, T281};
+  assign T281 = {sr_array_1, sr_array_0};
+  assign T282 = T287 ? T283 : sr_array_0;
+  assign T283 = T285 & T284;
+  assign T284 = io_ptw_resp_bits_error ^ 1'h1;
+  assign T285 = io_ptw_resp_bits_pte_v & T286;
+  assign T286 = 4'h2 <= io_ptw_resp_bits_pte_typ;
+  assign T287 = io_ptw_resp_valid & T288;
+  assign T288 = T289[1'h0];
+  assign T289 = 1'h1 << T290;
+  assign T290 = r_refill_waddr;
+  assign T291 = T292 ? T283 : sr_array_1;
+  assign T292 = io_ptw_resp_valid & T293;
+  assign T293 = T289[1'h1];
+  assign T294 = {sr_array_3, sr_array_2};
+  assign T295 = T296 ? T283 : sr_array_2;
+  assign T296 = io_ptw_resp_valid & T297;
+  assign T297 = T289[2'h2];
+  assign T298 = T299 ? T283 : sr_array_3;
+  assign T299 = io_ptw_resp_valid & T300;
+  assign T300 = T289[2'h3];
+  assign T301 = T302 | bad_va;
+  assign T302 = T305 | T303;
+  assign T303 = T304 ^ 1'h1;
+  assign T304 = T211[1'h0];
+  assign T305 = addr_ok ^ 1'h1;
+  assign io_resp_ppn = T306;
+  assign T306 = vm_enabled ? T308 : T307;
+  assign T307 = io_req_bits_vpn[5'h13:1'h0];
+  assign T308 = T313 | T309;
+  assign T309 = T312 ? T310 : 20'h0;
+  assign T310 = tag_ram[2'h3];
+  assign T312 = tag_cam_io_hits[2'h3];
+  assign T313 = T317 | T314;
+  assign T314 = T316 ? T315 : 20'h0;
+  assign T315 = tag_ram[2'h2];
+  assign T316 = tag_cam_io_hits[2'h2];
+  assign T317 = T321 | T318;
+  assign T318 = T320 ? T319 : 20'h0;
+  assign T319 = tag_ram[2'h1];
+  assign T320 = tag_cam_io_hits[1'h1];
+  assign T321 = T323 ? T322 : 20'h0;
+  assign T322 = tag_ram[2'h0];
+  assign T323 = tag_cam_io_hits[1'h0];
   assign io_resp_miss = tlb_miss;
-  assign io_req_ready = T478;
-  assign T478 = state == 2'h0;
+  assign io_req_ready = T324;
+  assign T324 = state == 2'h0;
   RocketCAM tag_cam(.clk(clk), .reset(reset),
-       .io_clear( T221 ),
-       .io_clear_mask( T181 ),
-       .io_tag( T506 ),
+       .io_clear( T147 ),
+       .io_clear_mask( T123 ),
+       .io_tag( T339 ),
        //.io_hit(  )
        .io_hits( tag_cam_io_hits ),
        .io_valid_bits( tag_cam_io_valid_bits ),
-       .io_write( T167 ),
-       .io_write_tag( T504 ),
+       .io_write( T109 ),
+       .io_write_tag( T337 ),
        .io_write_addr( r_refill_waddr )
   );
 
   always @(posedge clk) begin
-    if(T158) begin
+    if(T100) begin
       r_refill_waddr <= repl_waddr;
     end
-    if(T27) begin
+    if(T19) begin
       R4 <= T6;
     end
+    if(T35) begin
+      uw_array_0 <= T27;
+    end
+    if(T40) begin
+      uw_array_1 <= T27;
+    end
     if(T44) begin
-      uw_array_0 <= T36;
+      uw_array_2 <= T27;
     end
-    if(T49) begin
-      uw_array_1 <= T36;
+    if(T47) begin
+      uw_array_3 <= T27;
     end
-    if(T53) begin
-      uw_array_2 <= T36;
-    end
-    if(T56) begin
-      uw_array_3 <= T36;
-    end
-    if(T61) begin
-      uw_array_4 <= T36;
+    if(T59) begin
+      sw_array_0 <= T53;
     end
     if(T64) begin
-      uw_array_5 <= T36;
+      sw_array_1 <= T53;
     end
     if(T68) begin
-      uw_array_6 <= T36;
+      sw_array_2 <= T53;
     end
     if(T71) begin
-      uw_array_7 <= T36;
+      sw_array_3 <= T53;
     end
-    if(T84) begin
-      sw_array_0 <= T78;
-    end
-    if(T89) begin
-      sw_array_1 <= T78;
-    end
-    if(T93) begin
-      sw_array_2 <= T78;
-    end
-    if(T96) begin
-      sw_array_3 <= T78;
-    end
-    if(T101) begin
-      sw_array_4 <= T78;
-    end
-    if(T104) begin
-      sw_array_5 <= T78;
-    end
-    if(T108) begin
-      sw_array_6 <= T78;
-    end
-    if(T111) begin
-      sw_array_7 <= T78;
-    end
-    if(T120) begin
+    if(T79) begin
       dirty_array_0 <= io_ptw_resp_bits_pte_d;
     end
-    if(T125) begin
+    if(T84) begin
       dirty_array_1 <= io_ptw_resp_bits_pte_d;
     end
-    if(T129) begin
+    if(T88) begin
       dirty_array_2 <= io_ptw_resp_bits_pte_d;
     end
-    if(T132) begin
+    if(T91) begin
       dirty_array_3 <= io_ptw_resp_bits_pte_d;
     end
-    if(T137) begin
-      dirty_array_4 <= io_ptw_resp_bits_pte_d;
-    end
-    if(T140) begin
-      dirty_array_5 <= io_ptw_resp_bits_pte_d;
-    end
-    if(T144) begin
-      dirty_array_6 <= io_ptw_resp_bits_pte_d;
-    end
-    if(T147) begin
-      dirty_array_7 <= io_ptw_resp_bits_pte_d;
-    end
-    if(T158) begin
+    if(T100) begin
       r_refill_tag <= lookup_tag;
     end
     if(reset) begin
       state <= 2'h0;
     end else if(io_ptw_resp_valid) begin
       state <= 2'h0;
-    end else if(T179) begin
+    end else if(T121) begin
       state <= 2'h3;
-    end else if(T178) begin
+    end else if(T120) begin
       state <= 2'h3;
-    end else if(T177) begin
+    end else if(T119) begin
       state <= 2'h2;
-    end else if(T175) begin
+    end else if(T117) begin
       state <= 2'h0;
-    end else if(T158) begin
+    end else if(T100) begin
       state <= 2'h1;
     end
-    if(T192) begin
-      valid_array_0 <= T191;
+    if(T133) begin
+      valid_array_0 <= T132;
     end
-    if(T197) begin
-      valid_array_1 <= T191;
+    if(T138) begin
+      valid_array_1 <= T132;
     end
-    if(T201) begin
-      valid_array_2 <= T191;
+    if(T142) begin
+      valid_array_2 <= T132;
     end
-    if(T204) begin
-      valid_array_3 <= T191;
+    if(T145) begin
+      valid_array_3 <= T132;
     end
-    if(T209) begin
-      valid_array_4 <= T191;
-    end
-    if(T212) begin
-      valid_array_5 <= T191;
-    end
-    if(T216) begin
-      valid_array_6 <= T191;
-    end
-    if(T219) begin
-      valid_array_7 <= T191;
-    end
-    if(T158) begin
+    if(T100) begin
       r_req_instruction <= io_req_bits_instruction;
     end
-    if(T158) begin
+    if(T100) begin
       r_req_store <= io_req_bits_store;
     end
-    if(T244) begin
-      ux_array_0 <= T236;
+    if(T169) begin
+      ux_array_0 <= T161;
     end
-    if(T249) begin
-      ux_array_1 <= T236;
+    if(T174) begin
+      ux_array_1 <= T161;
     end
-    if(T253) begin
-      ux_array_2 <= T236;
+    if(T178) begin
+      ux_array_2 <= T161;
     end
-    if(T256) begin
-      ux_array_3 <= T236;
+    if(T181) begin
+      ux_array_3 <= T161;
     end
-    if(T261) begin
-      ux_array_4 <= T236;
+    if(T193) begin
+      sx_array_0 <= T187;
     end
-    if(T264) begin
-      ux_array_5 <= T236;
+    if(T198) begin
+      sx_array_1 <= T187;
     end
-    if(T268) begin
-      ux_array_6 <= T236;
+    if(T202) begin
+      sx_array_2 <= T187;
     end
-    if(T271) begin
-      ux_array_7 <= T236;
+    if(T205) begin
+      sx_array_3 <= T187;
     end
-    if(T284) begin
-      sx_array_0 <= T278;
+    if(T265) begin
+      ur_array_0 <= T259;
     end
-    if(T289) begin
-      sx_array_1 <= T278;
+    if(T270) begin
+      ur_array_1 <= T259;
     end
-    if(T293) begin
-      sx_array_2 <= T278;
+    if(T274) begin
+      ur_array_2 <= T259;
+    end
+    if(T277) begin
+      ur_array_3 <= T259;
+    end
+    if(T287) begin
+      sr_array_0 <= T283;
+    end
+    if(T292) begin
+      sr_array_1 <= T283;
     end
     if(T296) begin
-      sx_array_3 <= T278;
+      sr_array_2 <= T283;
     end
-    if(T301) begin
-      sx_array_4 <= T278;
-    end
-    if(T304) begin
-      sx_array_5 <= T278;
-    end
-    if(T308) begin
-      sx_array_6 <= T278;
-    end
-    if(T311) begin
-      sx_array_7 <= T278;
-    end
-    if(T372) begin
-      ur_array_0 <= T366;
-    end
-    if(T377) begin
-      ur_array_1 <= T366;
-    end
-    if(T381) begin
-      ur_array_2 <= T366;
-    end
-    if(T384) begin
-      ur_array_3 <= T366;
-    end
-    if(T389) begin
-      ur_array_4 <= T366;
-    end
-    if(T392) begin
-      ur_array_5 <= T366;
-    end
-    if(T396) begin
-      ur_array_6 <= T366;
-    end
-    if(T399) begin
-      ur_array_7 <= T366;
-    end
-    if(T410) begin
-      sr_array_0 <= T406;
-    end
-    if(T415) begin
-      sr_array_1 <= T406;
-    end
-    if(T419) begin
-      sr_array_2 <= T406;
-    end
-    if(T422) begin
-      sr_array_3 <= T406;
-    end
-    if(T427) begin
-      sr_array_4 <= T406;
-    end
-    if(T430) begin
-      sr_array_5 <= T406;
-    end
-    if(T434) begin
-      sr_array_6 <= T406;
-    end
-    if(T437) begin
-      sr_array_7 <= T406;
+    if(T299) begin
+      sr_array_3 <= T283;
     end
     if (io_ptw_resp_valid)
       tag_ram[r_refill_waddr] <= io_ptw_resp_bits_pte_ppn;
@@ -54743,8 +49401,8 @@ module Frontend(input clk, input reset,
     output io_cpu_btb_resp_bits_mask,
     output io_cpu_btb_resp_bits_bridx,
     output[38:0] io_cpu_btb_resp_bits_target,
-    output[5:0] io_cpu_btb_resp_bits_entry,
-    output[6:0] io_cpu_btb_resp_bits_bht_history,
+    output[2:0] io_cpu_btb_resp_bits_entry,
+    output[3:0] io_cpu_btb_resp_bits_bht_history,
     output[1:0] io_cpu_btb_resp_bits_bht_value,
     input  io_cpu_btb_update_valid,
     input  io_cpu_btb_update_bits_prediction_valid,
@@ -54752,8 +49410,8 @@ module Frontend(input clk, input reset,
     input  io_cpu_btb_update_bits_prediction_bits_mask,
     input  io_cpu_btb_update_bits_prediction_bits_bridx,
     input [38:0] io_cpu_btb_update_bits_prediction_bits_target,
-    input [5:0] io_cpu_btb_update_bits_prediction_bits_entry,
-    input [6:0] io_cpu_btb_update_bits_prediction_bits_bht_history,
+    input [2:0] io_cpu_btb_update_bits_prediction_bits_entry,
+    input [3:0] io_cpu_btb_update_bits_prediction_bits_bht_history,
     input [1:0] io_cpu_btb_update_bits_prediction_bits_bht_value,
     input [38:0] io_cpu_btb_update_bits_pc,
     input [38:0] io_cpu_btb_update_bits_target,
@@ -54767,8 +49425,8 @@ module Frontend(input clk, input reset,
     input  io_cpu_bht_update_bits_prediction_bits_mask,
     input  io_cpu_bht_update_bits_prediction_bits_bridx,
     input [38:0] io_cpu_bht_update_bits_prediction_bits_target,
-    input [5:0] io_cpu_bht_update_bits_prediction_bits_entry,
-    input [6:0] io_cpu_bht_update_bits_prediction_bits_bht_history,
+    input [2:0] io_cpu_bht_update_bits_prediction_bits_entry,
+    input [3:0] io_cpu_bht_update_bits_prediction_bits_bht_history,
     input [1:0] io_cpu_bht_update_bits_prediction_bits_bht_value,
     input [38:0] io_cpu_bht_update_bits_pc,
     input  io_cpu_bht_update_bits_taken,
@@ -54782,8 +49440,8 @@ module Frontend(input clk, input reset,
     input  io_cpu_ras_update_bits_prediction_bits_mask,
     input  io_cpu_ras_update_bits_prediction_bits_bridx,
     input [38:0] io_cpu_ras_update_bits_prediction_bits_target,
-    input [5:0] io_cpu_ras_update_bits_prediction_bits_entry,
-    input [6:0] io_cpu_ras_update_bits_prediction_bits_bht_history,
+    input [2:0] io_cpu_ras_update_bits_prediction_bits_entry,
+    input [3:0] io_cpu_ras_update_bits_prediction_bits_bht_history,
     input [1:0] io_cpu_ras_update_bits_prediction_bits_bht_value,
     input  io_cpu_invalidate,
     output[39:0] io_cpu_npc,
@@ -54909,10 +49567,10 @@ module Frontend(input clk, input reset,
   reg [1:0] s2_btb_resp_bits_bht_value;
   wire[1:0] T51;
   wire T52;
-  reg [6:0] s2_btb_resp_bits_bht_history;
-  wire[6:0] T53;
-  reg [5:0] s2_btb_resp_bits_entry;
-  wire[5:0] T54;
+  reg [3:0] s2_btb_resp_bits_bht_history;
+  wire[3:0] T53;
+  reg [2:0] s2_btb_resp_bits_entry;
+  wire[2:0] T54;
   reg [38:0] s2_btb_resp_bits_target;
   wire[38:0] T55;
   reg  s2_btb_resp_bits_bridx;
@@ -54943,8 +49601,8 @@ module Frontend(input clk, input reset,
   wire btb_io_resp_bits_mask;
   wire btb_io_resp_bits_bridx;
   wire[38:0] btb_io_resp_bits_target;
-  wire[5:0] btb_io_resp_bits_entry;
-  wire[6:0] btb_io_resp_bits_bht_history;
+  wire[2:0] btb_io_resp_bits_entry;
+  wire[3:0] btb_io_resp_bits_bht_history;
   wire[1:0] btb_io_resp_bits_bht_value;
   wire Queue_io_enq_ready;
   wire Queue_io_deq_valid;
@@ -55316,15 +49974,15 @@ module WritebackUnit(input clk, input reset,
     input  io_req_bits_voluntary,
     input [2:0] io_req_bits_r_type,
     input [127:0] io_req_bits_data,
-    input [3:0] io_req_bits_way_en,
+    input  io_req_bits_way_en,
     input  io_meta_read_ready,
     output io_meta_read_valid,
     output[5:0] io_meta_read_bits_idx,
-    //output[3:0] io_meta_read_bits_way_en
+    //output io_meta_read_bits_way_en
     output[19:0] io_meta_read_bits_tag,
     input  io_data_req_ready,
     output io_data_req_valid,
-    output[3:0] io_data_req_bits_way_en,
+    output io_data_req_bits_way_en,
     output[11:0] io_data_req_bits_addr,
     input [127:0] io_data_resp,
     input  io_release_ready,
@@ -55389,8 +50047,8 @@ module WritebackUnit(input clk, input reset,
   wire[7:0] T34;
   wire[1:0] T35;
   wire[5:0] req_idx;
-  reg [3:0] req_way_en;
-  wire[3:0] T36;
+  reg  req_way_en;
+  wire T36;
   wire fire;
   wire T37;
   wire[19:0] T38;
@@ -55556,12 +50214,12 @@ module ProbeUnit(input clk, input reset,
     input  io_meta_read_ready,
     output io_meta_read_valid,
     output[5:0] io_meta_read_bits_idx,
-    //output[3:0] io_meta_read_bits_way_en
+    //output io_meta_read_bits_way_en
     output[19:0] io_meta_read_bits_tag,
     input  io_meta_write_ready,
     output io_meta_write_valid,
     output[5:0] io_meta_write_bits_idx,
-    output[3:0] io_meta_write_bits_way_en,
+    output io_meta_write_bits_way_en,
     output[19:0] io_meta_write_bits_data_tag,
     output[1:0] io_meta_write_bits_data_coh_state,
     input  io_wb_req_ready,
@@ -55572,8 +50230,8 @@ module ProbeUnit(input clk, input reset,
     output io_wb_req_bits_voluntary,
     output[2:0] io_wb_req_bits_r_type,
     output[127:0] io_wb_req_bits_data,
-    output[3:0] io_wb_req_bits_way_en,
-    input [3:0] io_way_en,
+    output io_wb_req_bits_way_en,
+    input  io_way_en,
     input  io_mshr_rdy,
     input [1:0] io_block_state_state
 );
@@ -55588,8 +50246,8 @@ module ProbeUnit(input clk, input reset,
   wire T7;
   wire T8;
   wire T9;
-  reg [3:0] way_en;
-  wire[3:0] T10;
+  reg  way_en;
+  wire T10;
   wire T11;
   reg [3:0] state;
   wire[3:0] T68;
@@ -55715,7 +50373,7 @@ module ProbeUnit(input clk, input reset,
   assign T28 = tag_matches & T29;
   assign T29 = 2'h3 == old_coh_state;
   assign T30 = T11 ? io_block_state_state : old_coh_state;
-  assign tag_matches = way_en != 4'h0;
+  assign tag_matches = way_en != 1'h0;
   assign T31 = state == 4'h4;
   assign T32 = tag_matches ? 4'h8 : 4'h0;
   assign T33 = T34 & io_rep_ready;
@@ -55838,17 +50496,17 @@ module Arbiter_6(
     output io_in_1_ready,
     input  io_in_1_valid,
     input [5:0] io_in_1_bits_idx,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     input [19:0] io_in_1_bits_tag,
     output io_in_0_ready,
     input  io_in_0_valid,
     input [5:0] io_in_0_bits_idx,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input [19:0] io_in_0_bits_tag,
     input  io_out_ready,
     output io_out_valid,
     output[5:0] io_out_bits_idx,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output[19:0] io_out_bits_tag,
     output io_chosen
 );
@@ -55857,7 +50515,7 @@ module Arbiter_6(
   wire choose;
   wire[19:0] T0;
   wire T1;
-  wire[3:0] T2;
+  wire T2;
   wire[5:0] T3;
   wire T4;
   wire T5;
@@ -55886,19 +50544,19 @@ module Arbiter_1(
     output io_in_1_ready,
     input  io_in_1_valid,
     input [5:0] io_in_1_bits_idx,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     input [19:0] io_in_1_bits_data_tag,
     input [1:0] io_in_1_bits_data_coh_state,
     output io_in_0_ready,
     input  io_in_0_valid,
     input [5:0] io_in_0_bits_idx,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input [19:0] io_in_0_bits_data_tag,
     input [1:0] io_in_0_bits_data_coh_state,
     input  io_out_ready,
     output io_out_valid,
     output[5:0] io_out_bits_idx,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output[19:0] io_out_bits_data_tag,
     output[1:0] io_out_bits_data_coh_state,
     output io_chosen
@@ -55909,7 +50567,7 @@ module Arbiter_1(
   wire[1:0] T0;
   wire T1;
   wire[19:0] T2;
-  wire[3:0] T3;
+  wire T3;
   wire[5:0] T4;
   wire T5;
   wire T6;
@@ -56177,7 +50835,7 @@ module Arbiter_4(
     input  io_in_1_bits_voluntary,
     input [2:0] io_in_1_bits_r_type,
     input [127:0] io_in_1_bits_data,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     output io_in_0_ready,
     input  io_in_0_valid,
     input [1:0] io_in_0_bits_addr_beat,
@@ -56186,7 +50844,7 @@ module Arbiter_4(
     input  io_in_0_bits_voluntary,
     input [2:0] io_in_0_bits_r_type,
     input [127:0] io_in_0_bits_data,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input  io_out_ready,
     output io_out_valid,
     output[1:0] io_out_bits_addr_beat,
@@ -56195,13 +50853,13 @@ module Arbiter_4(
     output io_out_bits_voluntary,
     output[2:0] io_out_bits_r_type,
     output[127:0] io_out_bits_data,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output io_chosen
 );
 
   wire chosen;
   wire choose;
-  wire[3:0] T0;
+  wire T0;
   wire T1;
   wire[127:0] T2;
   wire[2:0] T3;
@@ -56507,7 +51165,7 @@ module MSHR_0(input clk, input reset,
     input  io_req_bits_tag_match,
     input [19:0] io_req_bits_old_meta_tag,
     input [1:0] io_req_bits_old_meta_coh_state,
-    input [3:0] io_req_bits_way_en,
+    input  io_req_bits_way_en,
     output io_idx_match,
     output[19:0] io_tag,
     input  io_mem_req_ready,
@@ -56519,17 +51177,17 @@ module MSHR_0(input clk, input reset,
     output[2:0] io_mem_req_bits_a_type,
     output[16:0] io_mem_req_bits_union,
     output[127:0] io_mem_req_bits_data,
-    output[3:0] io_refill_way_en,
+    output io_refill_way_en,
     output[11:0] io_refill_addr,
     input  io_meta_read_ready,
     output io_meta_read_valid,
     output[5:0] io_meta_read_bits_idx,
-    //output[3:0] io_meta_read_bits_way_en
+    //output io_meta_read_bits_way_en
     output[19:0] io_meta_read_bits_tag,
     input  io_meta_write_ready,
     output io_meta_write_valid,
     output[5:0] io_meta_write_bits_idx,
-    output[3:0] io_meta_write_bits_way_en,
+    output io_meta_write_bits_way_en,
     output[19:0] io_meta_write_bits_data_tag,
     output[1:0] io_meta_write_bits_data_coh_state,
     input  io_replay_ready,
@@ -56556,7 +51214,7 @@ module MSHR_0(input clk, input reset,
     output io_wb_req_bits_voluntary,
     output[2:0] io_wb_req_bits_r_type,
     output[127:0] io_wb_req_bits_data,
-    output[3:0] io_wb_req_bits_way_en,
+    output io_wb_req_bits_way_en,
     output io_probe_rdy
 );
 
@@ -56708,8 +51366,8 @@ module MSHR_0(input clk, input reset,
   wire T130;
   wire T131;
   wire T132;
-  reg [3:0] req_way_en;
-  wire[3:0] T133;
+  reg  req_way_en;
+  wire T133;
   wire[127:0] T134;
   wire[2:0] T135;
   wire[2:0] T136;
@@ -57208,7 +51866,7 @@ module MSHR_1(input clk, input reset,
     input  io_req_bits_tag_match,
     input [19:0] io_req_bits_old_meta_tag,
     input [1:0] io_req_bits_old_meta_coh_state,
-    input [3:0] io_req_bits_way_en,
+    input  io_req_bits_way_en,
     output io_idx_match,
     output[19:0] io_tag,
     input  io_mem_req_ready,
@@ -57220,17 +51878,17 @@ module MSHR_1(input clk, input reset,
     output[2:0] io_mem_req_bits_a_type,
     output[16:0] io_mem_req_bits_union,
     output[127:0] io_mem_req_bits_data,
-    output[3:0] io_refill_way_en,
+    output io_refill_way_en,
     output[11:0] io_refill_addr,
     input  io_meta_read_ready,
     output io_meta_read_valid,
     output[5:0] io_meta_read_bits_idx,
-    //output[3:0] io_meta_read_bits_way_en
+    //output io_meta_read_bits_way_en
     output[19:0] io_meta_read_bits_tag,
     input  io_meta_write_ready,
     output io_meta_write_valid,
     output[5:0] io_meta_write_bits_idx,
-    output[3:0] io_meta_write_bits_way_en,
+    output io_meta_write_bits_way_en,
     output[19:0] io_meta_write_bits_data_tag,
     output[1:0] io_meta_write_bits_data_coh_state,
     input  io_replay_ready,
@@ -57257,7 +51915,7 @@ module MSHR_1(input clk, input reset,
     output io_wb_req_bits_voluntary,
     output[2:0] io_wb_req_bits_r_type,
     output[127:0] io_wb_req_bits_data,
-    output[3:0] io_wb_req_bits_way_en,
+    output io_wb_req_bits_way_en,
     output io_probe_rdy
 );
 
@@ -57409,8 +52067,8 @@ module MSHR_1(input clk, input reset,
   wire T130;
   wire T131;
   wire T132;
-  reg [3:0] req_way_en;
-  wire[3:0] T133;
+  reg  req_way_en;
+  wire T133;
   wire[127:0] T134;
   wire[2:0] T135;
   wire[2:0] T136;
@@ -58436,7 +53094,7 @@ module MSHRFile(input clk, input reset,
     input  io_req_bits_tag_match,
     input [19:0] io_req_bits_old_meta_tag,
     input [1:0] io_req_bits_old_meta_coh_state,
-    input [3:0] io_req_bits_way_en,
+    input  io_req_bits_way_en,
     input  io_resp_ready,
     output io_resp_valid,
     output[39:0] io_resp_bits_addr,
@@ -58459,17 +53117,17 @@ module MSHRFile(input clk, input reset,
     output[2:0] io_mem_req_bits_a_type,
     output[16:0] io_mem_req_bits_union,
     output[127:0] io_mem_req_bits_data,
-    output[3:0] io_refill_way_en,
+    output io_refill_way_en,
     output[11:0] io_refill_addr,
     input  io_meta_read_ready,
     output io_meta_read_valid,
     output[5:0] io_meta_read_bits_idx,
-    output[3:0] io_meta_read_bits_way_en,
+    output io_meta_read_bits_way_en,
     output[19:0] io_meta_read_bits_tag,
     input  io_meta_write_ready,
     output io_meta_write_valid,
     output[5:0] io_meta_write_bits_idx,
-    output[3:0] io_meta_write_bits_way_en,
+    output io_meta_write_bits_way_en,
     output[19:0] io_meta_write_bits_data_tag,
     output[1:0] io_meta_write_bits_data_coh_state,
     input  io_replay_ready,
@@ -58496,7 +53154,7 @@ module MSHRFile(input clk, input reset,
     output io_wb_req_bits_voluntary,
     output[2:0] io_wb_req_bits_r_type,
     output[127:0] io_wb_req_bits_data,
-    output[3:0] io_wb_req_bits_way_en,
+    output io_wb_req_bits_way_en,
     output io_probe_rdy,
     output io_fence_rdy
 );
@@ -58662,9 +53320,9 @@ module MSHRFile(input clk, input reset,
   wire[11:0] refillMux_1_addr;
   wire T104;
   wire T152;
-  wire[3:0] T105;
-  wire[3:0] refillMux_0_way_en;
-  wire[3:0] refillMux_1_way_en;
+  wire T105;
+  wire refillMux_0_way_en;
+  wire refillMux_1_way_en;
   wire T106;
   wire T107;
   wire T108;
@@ -58676,13 +53334,13 @@ module MSHRFile(input clk, input reset,
   wire meta_read_arb_io_in_0_ready;
   wire meta_read_arb_io_out_valid;
   wire[5:0] meta_read_arb_io_out_bits_idx;
-  wire[3:0] meta_read_arb_io_out_bits_way_en;
+  wire meta_read_arb_io_out_bits_way_en;
   wire[19:0] meta_read_arb_io_out_bits_tag;
   wire meta_write_arb_io_in_1_ready;
   wire meta_write_arb_io_in_0_ready;
   wire meta_write_arb_io_out_valid;
   wire[5:0] meta_write_arb_io_out_bits_idx;
-  wire[3:0] meta_write_arb_io_out_bits_way_en;
+  wire meta_write_arb_io_out_bits_way_en;
   wire[19:0] meta_write_arb_io_out_bits_data_tag;
   wire[1:0] meta_write_arb_io_out_bits_data_coh_state;
   wire mem_req_arb_io_in_2_ready;
@@ -58705,7 +53363,7 @@ module MSHRFile(input clk, input reset,
   wire wb_req_arb_io_out_bits_voluntary;
   wire[2:0] wb_req_arb_io_out_bits_r_type;
   wire[127:0] wb_req_arb_io_out_bits_data;
-  wire[3:0] wb_req_arb_io_out_bits_way_en;
+  wire wb_req_arb_io_out_bits_way_en;
   wire replay_arb_io_in_1_ready;
   wire replay_arb_io_in_0_ready;
   wire replay_arb_io_out_valid;
@@ -58762,14 +53420,14 @@ module MSHRFile(input clk, input reset,
   wire[2:0] MSHR_io_mem_req_bits_a_type;
   wire[16:0] MSHR_io_mem_req_bits_union;
   wire[127:0] MSHR_io_mem_req_bits_data;
-  wire[3:0] MSHR_io_refill_way_en;
+  wire MSHR_io_refill_way_en;
   wire[11:0] MSHR_io_refill_addr;
   wire MSHR_io_meta_read_valid;
   wire[5:0] MSHR_io_meta_read_bits_idx;
   wire[19:0] MSHR_io_meta_read_bits_tag;
   wire MSHR_io_meta_write_valid;
   wire[5:0] MSHR_io_meta_write_bits_idx;
-  wire[3:0] MSHR_io_meta_write_bits_way_en;
+  wire MSHR_io_meta_write_bits_way_en;
   wire[19:0] MSHR_io_meta_write_bits_data_tag;
   wire[1:0] MSHR_io_meta_write_bits_data_coh_state;
   wire MSHR_io_replay_valid;
@@ -58787,7 +53445,7 @@ module MSHRFile(input clk, input reset,
   wire MSHR_io_wb_req_bits_voluntary;
   wire[2:0] MSHR_io_wb_req_bits_r_type;
   wire[127:0] MSHR_io_wb_req_bits_data;
-  wire[3:0] MSHR_io_wb_req_bits_way_en;
+  wire MSHR_io_wb_req_bits_way_en;
   wire MSHR_io_probe_rdy;
   wire MSHR_1_io_req_pri_rdy;
   wire MSHR_1_io_req_sec_rdy;
@@ -58801,14 +53459,14 @@ module MSHRFile(input clk, input reset,
   wire[2:0] MSHR_1_io_mem_req_bits_a_type;
   wire[16:0] MSHR_1_io_mem_req_bits_union;
   wire[127:0] MSHR_1_io_mem_req_bits_data;
-  wire[3:0] MSHR_1_io_refill_way_en;
+  wire MSHR_1_io_refill_way_en;
   wire[11:0] MSHR_1_io_refill_addr;
   wire MSHR_1_io_meta_read_valid;
   wire[5:0] MSHR_1_io_meta_read_bits_idx;
   wire[19:0] MSHR_1_io_meta_read_bits_tag;
   wire MSHR_1_io_meta_write_valid;
   wire[5:0] MSHR_1_io_meta_write_bits_idx;
-  wire[3:0] MSHR_1_io_meta_write_bits_way_en;
+  wire MSHR_1_io_meta_write_bits_way_en;
   wire[19:0] MSHR_1_io_meta_write_bits_data_tag;
   wire[1:0] MSHR_1_io_meta_write_bits_data_coh_state;
   wire MSHR_1_io_replay_valid;
@@ -58826,7 +53484,7 @@ module MSHRFile(input clk, input reset,
   wire MSHR_1_io_wb_req_bits_voluntary;
   wire[2:0] MSHR_1_io_wb_req_bits_r_type;
   wire[127:0] MSHR_1_io_wb_req_bits_data;
-  wire[3:0] MSHR_1_io_wb_req_bits_way_en;
+  wire MSHR_1_io_wb_req_bits_way_en;
   wire MSHR_1_io_probe_rdy;
 
 `ifndef SYNTHESIS
@@ -59455,85 +54113,52 @@ module MetadataArray(input clk, input reset,
     output io_read_ready,
     input  io_read_valid,
     input [5:0] io_read_bits_idx,
-    input [3:0] io_read_bits_way_en,
+    input  io_read_bits_way_en,
     output io_write_ready,
     input  io_write_valid,
     input [5:0] io_write_bits_idx,
-    input [3:0] io_write_bits_way_en,
+    input  io_write_bits_way_en,
     input [19:0] io_write_bits_data_tag,
     input [1:0] io_write_bits_data_coh_state,
-    output[19:0] io_resp_3_tag,
-    output[1:0] io_resp_3_coh_state,
-    output[19:0] io_resp_2_tag,
-    output[1:0] io_resp_2_coh_state,
-    output[19:0] io_resp_1_tag,
-    output[1:0] io_resp_1_coh_state,
     output[19:0] io_resp_0_tag,
     output[1:0] io_resp_0_coh_state
 );
 
   wire[1:0] T0;
-  wire[87:0] T1;
-  wire[87:0] T2;
-  wire[43:0] T3;
-  wire[21:0] T4;
-  wire[87:0] T5;
-  wire[87:0] T7;
-  wire[87:0] T8;
-  wire[87:0] T9;
-  wire[43:0] T10;
-  wire[21:0] T11;
-  wire[21:0] T50;
-  wire T12;
-  wire[3:0] T13;
-  wire[3:0] T14;
+  wire[21:0] T1;
+  wire[21:0] T2;
+  wire[21:0] T3;
+  wire[21:0] T5;
+  wire[21:0] T6;
+  wire[21:0] T7;
+  wire[21:0] T26;
+  wire T8;
+  wire T9;
+  wire T10;
   wire rst;
   reg [6:0] rst_cnt;
-  wire[6:0] T51;
-  wire[6:0] T15;
-  wire[6:0] T16;
-  wire[21:0] T17;
-  wire[21:0] T52;
-  wire T18;
-  wire[43:0] T19;
-  wire[21:0] T20;
-  wire[21:0] T53;
-  wire T21;
-  wire[21:0] T22;
-  wire[21:0] T54;
-  wire T23;
-  wire[87:0] T24;
-  wire[87:0] T25;
-  wire[43:0] T26;
+  wire[6:0] T27;
+  wire[6:0] T11;
+  wire[6:0] T12;
+  wire[21:0] T13;
   wire[21:0] wdata;
-  wire[21:0] T27;
-  wire[1:0] T28;
+  wire[21:0] T14;
+  wire[1:0] T15;
   wire[1:0] rstVal_coh_state;
-  wire[1:0] T29;
-  wire[19:0] T30;
+  wire[1:0] T16;
+  wire[19:0] T17;
   wire[19:0] rstVal_tag;
-  wire[43:0] T31;
-  wire T32;
-  wire[5:0] T55;
+  wire T18;
+  wire[5:0] T28;
   wire[6:0] waddr;
-  wire[6:0] T56;
-  reg [5:0] R33;
-  wire[5:0] T34;
-  wire[21:0] T35;
-  wire[43:0] T36;
-  wire[21:0] T37;
-  wire[21:0] T38;
-  wire[19:0] T39;
-  wire[1:0] T40;
-  wire[19:0] T41;
-  wire[1:0] T42;
-  wire[19:0] T43;
-  wire[1:0] T44;
-  wire[19:0] T45;
-  wire T46;
-  wire T47;
-  wire T48;
-  wire T49;
+  wire[6:0] T29;
+  reg [5:0] R19;
+  wire[5:0] T20;
+  wire[19:0] T21;
+  wire T22;
+  wire T23;
+  wire T24;
+  wire T25;
 
 `ifndef SYNTHESIS
 // synthesis translate_off
@@ -59541,7 +54166,7 @@ module MetadataArray(input clk, input reset,
   initial begin
     #0.002;
     rst_cnt = {1{$random}};
-    R33 = {1{$random}};
+    R19 = {1{$random}};
   end
 // synthesis translate_on
 `endif
@@ -59549,90 +54174,57 @@ module MetadataArray(input clk, input reset,
   assign io_resp_0_coh_state = T0;
   assign T0 = T1[1'h1:1'h0];
   assign T1 = T2;
-  assign T2 = {T36, T3};
-  assign T3 = {T35, T4};
-  assign T4 = T5[5'h15:1'h0];
-  MetadataArray_T6 T6 (
+  assign T2 = T3;
+  MetadataArray_T4 T4 (
     .CLK(clk),
-    .W0A(T55),
-    .W0E(T32),
-    .W0I(T24),
-    .W0M(T8),
+    .W0A(T28),
+    .W0E(T18),
+    .W0I(T13),
+    .W0M(T6),
     .R1A(io_read_bits_idx),
     .R1E(io_read_valid),
-    .R1O(T5)
+    .R1O(T3)
   );
+  assign T6 = T7;
+  assign T7 = 22'h0 - T26;
+  assign T26 = {21'h0, T8};
   assign T8 = T9;
-  assign T9 = {T19, T10};
-  assign T10 = {T17, T11};
-  assign T11 = 22'h0 - T50;
-  assign T50 = {21'h0, T12};
-  assign T12 = T13[1'h0];
-  assign T13 = rst ? 4'hf : T14;
-  assign T14 = io_write_bits_way_en;
+  assign T9 = rst ? 1'h1 : T10;
+  assign T10 = io_write_bits_way_en;
   assign rst = rst_cnt < 7'h40;
-  assign T51 = reset ? 7'h0 : T15;
-  assign T15 = rst ? T16 : rst_cnt;
-  assign T16 = rst_cnt + 7'h1;
-  assign T17 = 22'h0 - T52;
-  assign T52 = {21'h0, T18};
-  assign T18 = T13[1'h1];
-  assign T19 = {T22, T20};
-  assign T20 = 22'h0 - T53;
-  assign T53 = {21'h0, T21};
-  assign T21 = T13[2'h2];
-  assign T22 = 22'h0 - T54;
-  assign T54 = {21'h0, T23};
-  assign T23 = T13[2'h3];
-  assign T24 = T25;
-  assign T25 = {T31, T26};
-  assign T26 = {wdata, wdata};
-  assign wdata = T27;
-  assign T27 = {T30, T28};
-  assign T28 = rst ? rstVal_coh_state : io_write_bits_data_coh_state;
-  assign rstVal_coh_state = T29;
-  assign T29 = 2'h0;
-  assign T30 = rst ? rstVal_tag : io_write_bits_data_tag;
+  assign T27 = reset ? 7'h0 : T11;
+  assign T11 = rst ? T12 : rst_cnt;
+  assign T12 = rst_cnt + 7'h1;
+  assign T13 = wdata;
+  assign wdata = T14;
+  assign T14 = {T17, T15};
+  assign T15 = rst ? rstVal_coh_state : io_write_bits_data_coh_state;
+  assign rstVal_coh_state = T16;
+  assign T16 = 2'h0;
+  assign T17 = rst ? rstVal_tag : io_write_bits_data_tag;
   assign rstVal_tag = 20'h0;
-  assign T31 = {wdata, wdata};
-  assign T32 = rst | io_write_valid;
-  assign T55 = waddr[3'h5:1'h0];
-  assign waddr = rst ? rst_cnt : T56;
-  assign T56 = {1'h0, io_write_bits_idx};
-  assign T34 = io_read_valid ? io_read_bits_idx : R33;
-  assign T35 = T5[6'h2b:5'h16];
-  assign T36 = {T38, T37};
-  assign T37 = T5[7'h41:6'h2c];
-  assign T38 = T5[7'h57:7'h42];
-  assign io_resp_0_tag = T39;
-  assign T39 = T1[5'h15:2'h2];
-  assign io_resp_1_coh_state = T40;
-  assign T40 = T1[5'h17:5'h16];
-  assign io_resp_1_tag = T41;
-  assign T41 = T1[6'h2b:5'h18];
-  assign io_resp_2_coh_state = T42;
-  assign T42 = T1[6'h2d:6'h2c];
-  assign io_resp_2_tag = T43;
-  assign T43 = T1[7'h41:6'h2e];
-  assign io_resp_3_coh_state = T44;
-  assign T44 = T1[7'h43:7'h42];
-  assign io_resp_3_tag = T45;
-  assign T45 = T1[7'h57:7'h44];
-  assign io_write_ready = T46;
-  assign T46 = rst ^ 1'h1;
-  assign io_read_ready = T47;
-  assign T47 = T49 & T48;
-  assign T48 = io_write_valid ^ 1'h1;
-  assign T49 = rst ^ 1'h1;
+  assign T18 = rst | io_write_valid;
+  assign T28 = waddr[3'h5:1'h0];
+  assign waddr = rst ? rst_cnt : T29;
+  assign T29 = {1'h0, io_write_bits_idx};
+  assign T20 = io_read_valid ? io_read_bits_idx : R19;
+  assign io_resp_0_tag = T21;
+  assign T21 = T1[5'h15:2'h2];
+  assign io_write_ready = T22;
+  assign T22 = rst ^ 1'h1;
+  assign io_read_ready = T23;
+  assign T23 = T25 & T24;
+  assign T24 = io_write_valid ^ 1'h1;
+  assign T25 = rst ^ 1'h1;
 
   always @(posedge clk) begin
     if(reset) begin
       rst_cnt <= 7'h0;
     end else if(rst) begin
-      rst_cnt <= T16;
+      rst_cnt <= T12;
     end
     if(io_read_valid) begin
-      R33 <= io_read_bits_idx;
+      R19 <= io_read_bits_idx;
     end
   end
 endmodule
@@ -59641,27 +54233,27 @@ module Arbiter_0(
     output io_in_4_ready,
     input  io_in_4_valid,
     input [5:0] io_in_4_bits_idx,
-    input [3:0] io_in_4_bits_way_en,
+    input  io_in_4_bits_way_en,
     output io_in_3_ready,
     input  io_in_3_valid,
     input [5:0] io_in_3_bits_idx,
-    input [3:0] io_in_3_bits_way_en,
+    input  io_in_3_bits_way_en,
     output io_in_2_ready,
     input  io_in_2_valid,
     input [5:0] io_in_2_bits_idx,
-    input [3:0] io_in_2_bits_way_en,
+    input  io_in_2_bits_way_en,
     output io_in_1_ready,
     input  io_in_1_valid,
     input [5:0] io_in_1_bits_idx,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     output io_in_0_ready,
     input  io_in_0_valid,
     input [5:0] io_in_0_bits_idx,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input  io_out_ready,
     output io_out_valid,
     output[5:0] io_out_bits_idx,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output[2:0] io_chosen
 );
 
@@ -59670,12 +54262,12 @@ module Arbiter_0(
   wire[2:0] T0;
   wire[2:0] T1;
   wire[2:0] T2;
-  wire[3:0] T3;
-  wire[3:0] T4;
-  wire[3:0] T5;
+  wire T3;
+  wire T4;
+  wire T5;
   wire T6;
   wire[2:0] T7;
-  wire[3:0] T8;
+  wire T8;
   wire T9;
   wire T10;
   wire T11;
@@ -59769,379 +54361,90 @@ endmodule
 module DataArray(input clk,
     output io_read_ready,
     input  io_read_valid,
-    input [3:0] io_read_bits_way_en,
+    input  io_read_bits_way_en,
     input [11:0] io_read_bits_addr,
     output io_write_ready,
     input  io_write_valid,
-    input [3:0] io_write_bits_way_en,
+    input  io_write_bits_way_en,
     input [11:0] io_write_bits_addr,
     input [1:0] io_write_bits_wmask,
     input [127:0] io_write_bits_data,
-    output[127:0] io_resp_3,
-    output[127:0] io_resp_2,
-    output[127:0] io_resp_1,
     output[127:0] io_resp_0
 );
 
   wire[127:0] T0;
   wire[127:0] T1;
   wire[63:0] T2;
-  wire[63:0] T3;
-  wire[127:0] T4;
+  wire[127:0] T3;
+  wire T19;
+  wire[7:0] raddr;
   wire[127:0] T5;
   wire[127:0] T6;
-  wire[63:0] T7;
-  wire[127:0] T8;
-  wire T28;
-  wire T29;
-  wire[1:0] T30;
-  wire[7:0] raddr;
-  wire[127:0] T10;
-  wire[127:0] T11;
-  wire[127:0] T12;
-  wire[63:0] T13;
-  wire[63:0] T140;
-  wire T14;
-  wire[1:0] T15;
-  wire[63:0] T16;
-  wire[63:0] T141;
-  wire T17;
-  wire[127:0] T18;
-  wire[127:0] T19;
-  wire[63:0] T20;
+  wire[127:0] T7;
+  wire[63:0] T8;
   wire[63:0] T21;
-  wire T22;
-  wire T23;
-  wire T24;
-  wire T25;
+  wire T9;
+  wire[63:0] T10;
+  wire[63:0] T22;
+  wire T11;
+  wire[127:0] T12;
+  wire[127:0] T13;
+  wire[63:0] T14;
+  wire[63:0] T15;
+  wire T16;
   wire[7:0] waddr;
-  reg [7:0] R26;
-  wire[7:0] T27;
-  wire[63:0] T31;
-  wire T32;
-  wire T33;
-  reg [11:0] R34;
-  wire[11:0] T35;
-  wire[63:0] T36;
-  wire[127:0] T37;
-  wire[127:0] T38;
-  wire[127:0] T39;
-  wire[63:0] T40;
-  wire[127:0] T41;
-  wire T60;
-  wire T61;
-  wire[127:0] T43;
-  wire[127:0] T44;
-  wire[127:0] T45;
-  wire[63:0] T46;
-  wire[63:0] T142;
-  wire T47;
-  wire[63:0] T48;
-  wire[63:0] T143;
-  wire T49;
-  wire[127:0] T50;
-  wire[127:0] T51;
-  wire[63:0] T52;
-  wire[63:0] T53;
-  wire T54;
-  wire T55;
-  wire T56;
-  wire T57;
-  reg [7:0] R58;
-  wire[7:0] T59;
-  wire[63:0] T62;
-  wire[127:0] T63;
-  wire[127:0] T64;
-  wire[63:0] T65;
-  wire[63:0] T66;
-  wire T67;
-  wire T68;
-  wire[63:0] T69;
-  wire[127:0] T70;
-  wire[127:0] T71;
-  wire[63:0] T72;
-  wire[63:0] T73;
-  wire[127:0] T74;
-  wire[127:0] T75;
-  wire[127:0] T76;
-  wire[63:0] T77;
-  wire[127:0] T78;
-  wire T98;
-  wire T99;
-  wire[1:0] T100;
-  wire[127:0] T80;
-  wire[127:0] T81;
-  wire[127:0] T82;
-  wire[63:0] T83;
-  wire[63:0] T144;
-  wire T84;
-  wire[1:0] T85;
-  wire[63:0] T86;
-  wire[63:0] T145;
-  wire T87;
-  wire[127:0] T88;
-  wire[127:0] T89;
-  wire[63:0] T90;
-  wire[63:0] T91;
-  wire T92;
-  wire T93;
-  wire T94;
-  wire T95;
-  reg [7:0] R96;
-  wire[7:0] T97;
-  wire[63:0] T101;
-  wire T102;
-  wire T103;
-  reg [11:0] R104;
-  wire[11:0] T105;
-  wire[63:0] T106;
-  wire[127:0] T107;
-  wire[127:0] T108;
-  wire[127:0] T109;
-  wire[63:0] T110;
-  wire[127:0] T111;
-  wire T130;
-  wire T131;
-  wire[127:0] T113;
-  wire[127:0] T114;
-  wire[127:0] T115;
-  wire[63:0] T116;
-  wire[63:0] T146;
-  wire T117;
-  wire[63:0] T118;
-  wire[63:0] T147;
-  wire T119;
-  wire[127:0] T120;
-  wire[127:0] T121;
-  wire[63:0] T122;
-  wire[63:0] T123;
-  wire T124;
-  wire T125;
-  wire T126;
-  wire T127;
-  reg [7:0] R128;
-  wire[7:0] T129;
-  wire[63:0] T132;
-  wire[127:0] T133;
-  wire[127:0] T134;
-  wire[63:0] T135;
-  wire[63:0] T136;
-  wire T137;
-  wire T138;
-  wire[63:0] T139;
+  reg [7:0] R17;
+  wire[7:0] T18;
+  wire[63:0] T20;
 
 `ifndef SYNTHESIS
 // synthesis translate_off
   integer initvar;
   initial begin
     #0.002;
-    R26 = {1{$random}};
-    R34 = {1{$random}};
-    R58 = {1{$random}};
-    R96 = {1{$random}};
-    R104 = {1{$random}};
-    R128 = {1{$random}};
+    R17 = {1{$random}};
   end
 // synthesis translate_on
 `endif
 
   assign io_resp_0 = T0;
   assign T0 = T1;
-  assign T1 = {T36, T2};
-  assign T2 = T32 ? T36 : T3;
-  assign T3 = T4[6'h3f:1'h0];
-  assign T4 = T5;
-  assign T5 = T6;
-  assign T6 = {T31, T7};
-  assign T7 = T8[6'h3f:1'h0];
-  assign T28 = T29 & io_read_valid;
-  assign T29 = T30 != 2'h0;
-  assign T30 = io_read_bits_way_en[1'h1:1'h0];
+  assign T1 = {T20, T2};
+  assign T2 = T3[6'h3f:1'h0];
+  assign T19 = io_read_bits_way_en & io_read_valid;
   assign raddr = io_read_bits_addr >> 3'h4;
-  DataArray_T9 T9 (
+  DataArray_T4 T4 (
     .CLK(clk),
     .W0A(waddr),
-    .W0E(T22),
-    .W0I(T18),
-    .W0M(T11),
+    .W0E(T16),
+    .W0I(T12),
+    .W0M(T6),
     .R1A(raddr),
-    .R1E(T28),
-    .R1O(T8)
+    .R1E(T19),
+    .R1O(T3)
   );
-  assign T11 = T12;
-  assign T12 = {T16, T13};
-  assign T13 = 64'h0 - T140;
-  assign T140 = {63'h0, T14};
-  assign T14 = T15[1'h0];
-  assign T15 = io_write_bits_way_en[1'h1:1'h0];
-  assign T16 = 64'h0 - T141;
-  assign T141 = {63'h0, T17};
-  assign T17 = T15[1'h1];
-  assign T18 = T19;
-  assign T19 = {T21, T20};
-  assign T20 = io_write_bits_data[6'h3f:1'h0];
-  assign T21 = io_write_bits_data[6'h3f:1'h0];
-  assign T22 = T24 & T23;
-  assign T23 = io_write_bits_wmask[1'h0];
-  assign T24 = T25 & io_write_valid;
-  assign T25 = T15 != 2'h0;
+  assign T6 = T7;
+  assign T7 = {T10, T8};
+  assign T8 = 64'h0 - T21;
+  assign T21 = {63'h0, T9};
+  assign T9 = io_write_bits_wmask[1'h0];
+  assign T10 = 64'h0 - T22;
+  assign T22 = {63'h0, T11};
+  assign T11 = io_write_bits_wmask[1'h1];
+  assign T12 = T13;
+  assign T13 = {T15, T14};
+  assign T14 = io_write_bits_data[6'h3f:1'h0];
+  assign T15 = io_write_bits_data[7'h7f:7'h40];
+  assign T16 = io_write_bits_way_en & io_write_valid;
   assign waddr = io_write_bits_addr >> 3'h4;
-  assign T27 = T28 ? raddr : R26;
-  assign T31 = T8[7'h7f:7'h40];
-  assign T32 = T33;
-  assign T33 = R34[2'h3];
-  assign T35 = io_read_valid ? io_read_bits_addr : R34;
-  assign T36 = T37[6'h3f:1'h0];
-  assign T37 = T38;
-  assign T38 = T39;
-  assign T39 = {T62, T40};
-  assign T40 = T41[6'h3f:1'h0];
-  assign T60 = T61 & io_read_valid;
-  assign T61 = T30 != 2'h0;
-  DataArray_T9 T42 (
-    .CLK(clk),
-    .W0A(waddr),
-    .W0E(T54),
-    .W0I(T50),
-    .W0M(T44),
-    .R1A(raddr),
-    .R1E(T60),
-    .R1O(T41)
-  );
-  assign T44 = T45;
-  assign T45 = {T48, T46};
-  assign T46 = 64'h0 - T142;
-  assign T142 = {63'h0, T47};
-  assign T47 = T15[1'h0];
-  assign T48 = 64'h0 - T143;
-  assign T143 = {63'h0, T49};
-  assign T49 = T15[1'h1];
-  assign T50 = T51;
-  assign T51 = {T53, T52};
-  assign T52 = io_write_bits_data[7'h7f:7'h40];
-  assign T53 = io_write_bits_data[7'h7f:7'h40];
-  assign T54 = T56 & T55;
-  assign T55 = io_write_bits_wmask[1'h1];
-  assign T56 = T57 & io_write_valid;
-  assign T57 = T15 != 2'h0;
-  assign T59 = T60 ? raddr : R58;
-  assign T62 = T41[7'h7f:7'h40];
-  assign io_resp_1 = T63;
-  assign T63 = T64;
-  assign T64 = {T69, T65};
-  assign T65 = T67 ? T69 : T66;
-  assign T66 = T4[7'h7f:7'h40];
-  assign T67 = T68;
-  assign T68 = R34[2'h3];
-  assign T69 = T37[7'h7f:7'h40];
-  assign io_resp_2 = T70;
-  assign T70 = T71;
-  assign T71 = {T106, T72};
-  assign T72 = T102 ? T106 : T73;
-  assign T73 = T74[6'h3f:1'h0];
-  assign T74 = T75;
-  assign T75 = T76;
-  assign T76 = {T101, T77};
-  assign T77 = T78[6'h3f:1'h0];
-  assign T98 = T99 & io_read_valid;
-  assign T99 = T100 != 2'h0;
-  assign T100 = io_read_bits_way_en[2'h3:2'h2];
-  DataArray_T9 T79 (
-    .CLK(clk),
-    .W0A(waddr),
-    .W0E(T92),
-    .W0I(T88),
-    .W0M(T81),
-    .R1A(raddr),
-    .R1E(T98),
-    .R1O(T78)
-  );
-  assign T81 = T82;
-  assign T82 = {T86, T83};
-  assign T83 = 64'h0 - T144;
-  assign T144 = {63'h0, T84};
-  assign T84 = T85[1'h0];
-  assign T85 = io_write_bits_way_en[2'h3:2'h2];
-  assign T86 = 64'h0 - T145;
-  assign T145 = {63'h0, T87};
-  assign T87 = T85[1'h1];
-  assign T88 = T89;
-  assign T89 = {T91, T90};
-  assign T90 = io_write_bits_data[6'h3f:1'h0];
-  assign T91 = io_write_bits_data[6'h3f:1'h0];
-  assign T92 = T94 & T93;
-  assign T93 = io_write_bits_wmask[1'h0];
-  assign T94 = T95 & io_write_valid;
-  assign T95 = T85 != 2'h0;
-  assign T97 = T98 ? raddr : R96;
-  assign T101 = T78[7'h7f:7'h40];
-  assign T102 = T103;
-  assign T103 = R104[2'h3];
-  assign T105 = io_read_valid ? io_read_bits_addr : R104;
-  assign T106 = T107[6'h3f:1'h0];
-  assign T107 = T108;
-  assign T108 = T109;
-  assign T109 = {T132, T110};
-  assign T110 = T111[6'h3f:1'h0];
-  assign T130 = T131 & io_read_valid;
-  assign T131 = T100 != 2'h0;
-  DataArray_T9 T112 (
-    .CLK(clk),
-    .W0A(waddr),
-    .W0E(T124),
-    .W0I(T120),
-    .W0M(T114),
-    .R1A(raddr),
-    .R1E(T130),
-    .R1O(T111)
-  );
-  assign T114 = T115;
-  assign T115 = {T118, T116};
-  assign T116 = 64'h0 - T146;
-  assign T146 = {63'h0, T117};
-  assign T117 = T85[1'h0];
-  assign T118 = 64'h0 - T147;
-  assign T147 = {63'h0, T119};
-  assign T119 = T85[1'h1];
-  assign T120 = T121;
-  assign T121 = {T123, T122};
-  assign T122 = io_write_bits_data[7'h7f:7'h40];
-  assign T123 = io_write_bits_data[7'h7f:7'h40];
-  assign T124 = T126 & T125;
-  assign T125 = io_write_bits_wmask[1'h1];
-  assign T126 = T127 & io_write_valid;
-  assign T127 = T85 != 2'h0;
-  assign T129 = T130 ? raddr : R128;
-  assign T132 = T111[7'h7f:7'h40];
-  assign io_resp_3 = T133;
-  assign T133 = T134;
-  assign T134 = {T139, T135};
-  assign T135 = T137 ? T139 : T136;
-  assign T136 = T74[7'h7f:7'h40];
-  assign T137 = T138;
-  assign T138 = R104[2'h3];
-  assign T139 = T107[7'h7f:7'h40];
+  assign T18 = T19 ? raddr : R17;
+  assign T20 = T3[7'h7f:7'h40];
   assign io_write_ready = 1'h1;
   assign io_read_ready = 1'h1;
 
   always @(posedge clk) begin
-    if(T28) begin
-      R26 <= raddr;
-    end
-    if(io_read_valid) begin
-      R34 <= io_read_bits_addr;
-    end
-    if(T60) begin
-      R58 <= raddr;
-    end
-    if(T98) begin
-      R96 <= raddr;
-    end
-    if(io_read_valid) begin
-      R104 <= io_read_bits_addr;
-    end
-    if(T130) begin
-      R128 <= raddr;
+    if(T19) begin
+      R17 <= raddr;
     end
   end
 endmodule
@@ -60149,23 +54452,23 @@ endmodule
 module Arbiter_2(
     output io_in_3_ready,
     input  io_in_3_valid,
-    input [3:0] io_in_3_bits_way_en,
+    input  io_in_3_bits_way_en,
     input [11:0] io_in_3_bits_addr,
     output io_in_2_ready,
     input  io_in_2_valid,
-    input [3:0] io_in_2_bits_way_en,
+    input  io_in_2_bits_way_en,
     input [11:0] io_in_2_bits_addr,
     output io_in_1_ready,
     input  io_in_1_valid,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     input [11:0] io_in_1_bits_addr,
     output io_in_0_ready,
     input  io_in_0_valid,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input [11:0] io_in_0_bits_addr,
     input  io_out_ready,
     output io_out_valid,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output[11:0] io_out_bits_addr,
     output[1:0] io_chosen
 );
@@ -60181,10 +54484,10 @@ module Arbiter_2(
   wire[11:0] T6;
   wire T7;
   wire T8;
-  wire[3:0] T9;
-  wire[3:0] T10;
+  wire T9;
+  wire T10;
   wire T11;
-  wire[3:0] T12;
+  wire T12;
   wire T13;
   wire T14;
   wire T15;
@@ -60249,19 +54552,19 @@ endmodule
 module Arbiter_3(
     output io_in_1_ready,
     input  io_in_1_valid,
-    input [3:0] io_in_1_bits_way_en,
+    input  io_in_1_bits_way_en,
     input [11:0] io_in_1_bits_addr,
     input [1:0] io_in_1_bits_wmask,
     input [127:0] io_in_1_bits_data,
     output io_in_0_ready,
     input  io_in_0_valid,
-    input [3:0] io_in_0_bits_way_en,
+    input  io_in_0_bits_way_en,
     input [11:0] io_in_0_bits_addr,
     input [1:0] io_in_0_bits_wmask,
     input [127:0] io_in_0_bits_data,
     input  io_out_ready,
     output io_out_valid,
-    output[3:0] io_out_bits_way_en,
+    output io_out_bits_way_en,
     output[11:0] io_out_bits_addr,
     output[1:0] io_out_bits_wmask,
     output[127:0] io_out_bits_data,
@@ -60274,7 +54577,7 @@ module Arbiter_3(
   wire T1;
   wire[1:0] T2;
   wire[11:0] T3;
-  wire[3:0] T4;
+  wire T4;
   wire T5;
   wire T6;
   wire T7;
@@ -60873,7 +55176,7 @@ module HellaCache(input clk, input reset,
   wire[63:0] T18;
   wire[63:0] T19;
   reg  s1_replay;
-  wire T559;
+  wire T411;
   wire T20;
   wire T21;
   wire s1_write;
@@ -60888,107 +55191,131 @@ module HellaCache(input clk, input reset,
   wire s2_recycle;
   wire T28;
   reg  s2_recycle_next;
-  wire T560;
+  wire T412;
   wire T29;
   wire T30;
   reg  s1_valid;
-  wire T561;
+  wire T413;
   wire T31;
   wire s2_recycle_ecc;
   wire s2_data_correctable;
-  wire[1:0] T32;
-  wire T33;
+  wire s2_word_idx;
+  reg [39:0] s2_req_addr;
+  wire[39:0] T32;
+  wire[39:0] T414;
+  wire[31:0] s1_addr;
+  wire[11:0] T33;
+  reg [39:0] s1_req_addr;
+  wire[39:0] T34;
+  wire[39:0] T35;
+  wire[39:0] T36;
+  wire[39:0] T37;
+  wire[39:0] T38;
+  wire[39:0] T415;
+  wire[31:0] T39;
+  wire[25:0] T40;
+  wire[39:0] T416;
+  wire[31:0] T41;
+  wire[25:0] T42;
+  wire[1:0] T43;
+  wire T44;
   wire s2_hit;
-  wire T34;
-  wire[1:0] T35;
-  wire[1:0] T36;
-  wire T37;
-  wire T38;
-  wire T39;
-  wire T40;
-  wire T41;
-  wire T42;
-  wire T43;
-  wire[1:0] T44;
-  wire[1:0] T45;
+  wire T45;
   wire[1:0] T46;
   wire[1:0] T47;
-  reg [1:0] R48;
-  wire[1:0] T49;
+  wire T48;
+  wire T49;
   wire T50;
-  reg [3:0] s2_tag_match_way;
-  wire[3:0] T51;
-  wire[3:0] s1_tag_match_way;
-  wire[3:0] T52;
-  wire[1:0] T53;
+  wire T51;
+  wire T52;
+  wire T53;
   wire T54;
-  wire T55;
+  reg [1:0] s2_hit_state_state;
+  wire[1:0] T55;
   wire T56;
-  wire[3:0] s1_tag_eq_way;
-  wire[3:0] T57;
-  wire[1:0] T58;
+  wire T57;
+  wire T58;
   wire T59;
-  wire[19:0] T60;
-  wire[31:0] s1_addr;
-  wire[11:0] T61;
-  reg [39:0] s1_req_addr;
-  wire[39:0] T62;
-  wire[39:0] T63;
-  wire[39:0] T64;
-  wire[39:0] T65;
-  wire[39:0] T66;
-  wire[39:0] T562;
-  wire[31:0] T67;
-  wire[25:0] T68;
-  wire[39:0] T563;
-  wire[31:0] T69;
-  wire[25:0] T70;
-  reg [39:0] s2_req_addr;
-  wire[39:0] T71;
-  wire[39:0] T564;
+  wire T60;
+  wire T61;
+  wire T62;
+  wire T63;
+  wire T64;
+  wire T65;
+  wire T66;
+  wire T67;
+  wire T68;
+  wire T69;
+  wire T70;
+  wire T71;
   wire T72;
-  wire[19:0] T73;
-  wire[1:0] T74;
+  wire T73;
+  wire T74;
   wire T75;
-  wire[19:0] T76;
+  wire T76;
+  wire s2_tag_match;
+  reg  s2_tag_match_way;
   wire T77;
-  wire[19:0] T78;
+  wire s1_tag_match_way;
+  wire T78;
   wire T79;
   wire T80;
+  wire s1_tag_eq_way;
   wire T81;
-  wire[1:0] T82;
+  wire[19:0] T82;
   wire T83;
+  wire s2_replay;
   wire T84;
-  wire T85;
+  reg  R85;
+  wire T417;
+  reg  s2_valid;
+  wire T418;
+  wire s1_valid_masked;
   wire T86;
   wire T87;
   wire T88;
-  wire[1:0] T89;
-  wire[1:0] T90;
-  wire[1:0] T91;
-  reg [1:0] R92;
-  wire[1:0] T93;
+  wire T89;
+  wire T90;
+  reg  s1_clk_en;
+  reg [63:0] s1_req_data;
+  wire[63:0] T91;
+  wire[63:0] T92;
+  wire[63:0] T93;
   wire T94;
-  wire[1:0] T95;
-  wire[1:0] T96;
-  wire[1:0] T97;
-  reg [1:0] R98;
-  wire[1:0] T99;
-  wire T100;
-  wire[1:0] T101;
-  wire[1:0] T102;
-  reg [1:0] R103;
-  wire[1:0] T104;
+  reg  s1_recycled;
+  wire T419;
+  wire T95;
+  wire[63:0] T420;
+  wire[127:0] s2_data_word;
+  wire[127:0] s2_data_word_prebypass;
+  wire[6:0] T96;
+  wire[127:0] s2_data_uncorrected;
+  wire[127:0] T97;
+  wire[63:0] T98;
+  wire[127:0] s2_data_0;
+  wire[127:0] T99;
+  wire[127:0] T100;
+  reg [63:0] R101;
+  wire[63:0] T421;
+  wire[127:0] T102;
+  wire[127:0] T422;
+  wire[127:0] T103;
+  wire T104;
   wire T105;
-  wire T106;
-  wire T107;
-  wire T108;
-  wire T109;
-  wire T110;
-  wire T111;
-  wire T112;
-  wire T113;
+  reg [63:0] R106;
+  wire[63:0] T107;
+  wire[63:0] T108;
+  wire[63:0] T109;
+  wire[127:0] T423;
+  reg [63:0] s2_store_bypass_data;
+  wire[63:0] T110;
+  wire[63:0] T111;
+  wire[63:0] T112;
+  reg [63:0] s4_req_data;
+  wire[63:0] T113;
   wire T114;
+  reg  s3_valid;
+  wire T424;
   wire T115;
   wire T116;
   wire T117;
@@ -60999,187 +55326,182 @@ module HellaCache(input clk, input reset,
   wire T122;
   wire T123;
   wire T124;
+  wire s2_sc_fail;
   wire T125;
+  wire s2_lrsc_addr_match;
   wire T126;
-  wire s2_tag_match;
-  wire T127;
-  wire s2_replay;
-  wire T128;
-  reg  R129;
-  wire T565;
-  reg  s2_valid;
-  wire T566;
-  wire s1_valid_masked;
+  wire[33:0] T127;
+  reg [33:0] lrsc_addr;
+  wire[33:0] T128;
+  wire[33:0] T129;
   wire T130;
+  wire s2_lr;
   wire T131;
   wire T132;
+  wire s2_valid_masked;
   wire T133;
   wire T134;
-  reg  s1_clk_en;
-  reg [63:0] s1_req_data;
-  wire[63:0] T135;
-  wire[63:0] T136;
-  wire[63:0] T137;
+  wire s2_nack;
+  wire s2_nack_miss;
+  wire T135;
+  wire T136;
+  wire T137;
+  wire s2_nack_victim;
+  reg  s2_nack_hit;
   wire T138;
-  reg  s1_recycled;
-  wire T567;
+  wire s1_nack;
   wire T139;
-  wire[63:0] T568;
-  wire[127:0] s2_data_word;
-  wire[127:0] s2_data_word_prebypass;
-  wire[127:0] s2_data_uncorrected;
-  wire[127:0] T140;
-  wire[63:0] T141;
-  wire[127:0] s2_data_muxed;
-  wire[127:0] T142;
-  wire[127:0] s2_data_3;
-  wire[127:0] T143;
-  wire[127:0] T144;
-  reg [63:0] R145;
-  wire[63:0] T569;
-  wire[127:0] T146;
-  wire[127:0] T570;
-  wire[127:0] T147;
-  wire T148;
-  wire T149;
-  reg [63:0] R150;
-  wire[63:0] T151;
-  wire[63:0] T152;
+  wire T140;
+  wire T141;
+  wire[5:0] T142;
+  wire T143;
+  wire T144;
+  wire lrsc_valid;
+  reg [4:0] lrsc_count;
+  wire[4:0] T425;
+  wire[4:0] T145;
+  wire[4:0] T146;
+  wire[4:0] T147;
+  wire[4:0] T148;
+  wire[4:0] T149;
+  wire T150;
+  wire T151;
+  wire T152;
+  wire s2_sc;
   wire T153;
-  wire s1_writeback;
   wire T154;
-  wire T155;
-  wire T156;
-  wire T157;
+  reg [63:0] s3_req_data;
+  wire[63:0] T426;
+  wire[127:0] T155;
+  wire[127:0] T427;
+  wire[63:0] T156;
+  wire[127:0] T157;
+  wire[127:0] T428;
+  wire[127:0] s2_data_corrected;
   wire[127:0] T158;
-  wire[127:0] T159;
-  wire[127:0] s2_data_2;
-  wire[127:0] T160;
-  wire[127:0] T161;
-  reg [63:0] R162;
-  wire[63:0] T571;
-  wire[127:0] T163;
-  wire[127:0] T572;
-  wire[127:0] T164;
+  wire T159;
+  wire T160;
+  wire T161;
+  wire T162;
+  wire T163;
+  wire T164;
   wire T165;
   wire T166;
-  reg [63:0] R167;
-  wire[63:0] T168;
-  wire[63:0] T169;
+  wire T167;
+  wire T168;
+  wire T169;
   wire T170;
   wire T171;
-  wire[127:0] T172;
-  wire[127:0] T173;
-  wire[127:0] s2_data_1;
-  wire[127:0] T174;
-  wire[127:0] T175;
-  reg [63:0] R176;
-  wire[63:0] T573;
-  wire[127:0] T177;
-  wire[127:0] T574;
-  wire[127:0] T178;
+  wire T172;
+  reg [4:0] s3_req_cmd;
+  wire[4:0] T173;
+  wire T174;
+  wire T175;
+  wire T176;
+  wire T177;
+  wire T178;
   wire T179;
-  wire T180;
-  reg [63:0] R181;
-  wire[63:0] T182;
-  wire[63:0] T183;
+  wire[36:0] T180;
+  reg [39:0] s3_req_addr;
+  wire[39:0] T181;
+  wire[36:0] T429;
+  wire[28:0] T182;
+  wire T183;
   wire T184;
   wire T185;
-  wire[127:0] T186;
-  wire[127:0] s2_data_0;
-  wire[127:0] T187;
-  wire[127:0] T188;
-  reg [63:0] R189;
-  wire[63:0] T575;
-  wire[127:0] T190;
-  wire[127:0] T576;
-  wire[127:0] T191;
+  wire T186;
+  wire T187;
+  wire T188;
+  wire T189;
+  wire T190;
+  wire T191;
   wire T192;
-  wire T193;
-  reg [63:0] R194;
-  wire[63:0] T195;
-  wire[63:0] T196;
+  wire[36:0] T193;
+  wire[36:0] T430;
+  wire[28:0] T194;
+  wire T195;
+  wire T196;
   wire T197;
   wire T198;
-  wire[63:0] T199;
-  wire[127:0] T577;
-  reg [63:0] s2_store_bypass_data;
-  wire[63:0] T200;
-  wire[63:0] T201;
-  wire[63:0] T202;
-  reg [63:0] s4_req_data;
-  wire[63:0] T203;
-  wire T204;
-  reg  s3_valid;
-  wire T578;
+  wire T199;
+  wire T200;
+  wire T201;
+  wire T202;
+  wire T203;
+  reg [4:0] s4_req_cmd;
+  wire[4:0] T204;
   wire T205;
   wire T206;
   wire T207;
   wire T208;
   wire T209;
   wire T210;
-  wire T211;
-  wire T212;
-  wire T213;
+  wire[36:0] T211;
+  reg [39:0] s4_req_addr;
+  wire[39:0] T212;
+  wire[36:0] T431;
+  wire[28:0] T213;
+  reg  s4_valid;
+  wire T432;
   wire T214;
-  wire s2_sc_fail;
+  reg  s2_store_bypass;
   wire T215;
-  wire s2_lrsc_addr_match;
   wire T216;
-  wire[33:0] T217;
-  reg [33:0] lrsc_addr;
-  wire[33:0] T218;
-  wire[33:0] T219;
-  wire T220;
-  wire s2_lr;
-  wire T221;
+  reg [2:0] s2_req_typ;
+  wire[2:0] T217;
+  reg [2:0] s1_req_typ;
+  wire[2:0] T218;
+  wire[2:0] T219;
+  wire[2:0] T220;
+  wire[5:0] T433;
+  wire[127:0] T221;
+  wire[1:0] rowWMask;
+  wire rowIdx;
   wire T222;
-  wire s2_valid_masked;
+  wire[11:0] T434;
+  reg  s3_way;
   wire T223;
   wire T224;
-  wire s2_nack;
-  wire s2_nack_miss;
   wire T225;
   wire T226;
   wire T227;
-  wire s2_nack_victim;
-  reg  s2_nack_hit;
   wire T228;
-  wire s1_nack;
   wire T229;
   wire T230;
   wire T231;
-  wire[5:0] T232;
+  wire T232;
   wire T233;
   wire T234;
-  wire lrsc_valid;
-  reg [4:0] lrsc_count;
-  wire[4:0] T579;
-  wire[4:0] T235;
-  wire[4:0] T236;
-  wire[4:0] T237;
-  wire[4:0] T238;
-  wire[4:0] T239;
+  wire T235;
+  wire[11:0] T435;
+  wire[11:0] T436;
+  wire[11:0] T437;
+  wire[127:0] T236;
+  wire[127:0] T237;
+  wire[63:0] wdata_encoded_0;
+  wire[63:0] wdata_encoded_1;
+  wire[5:0] T438;
+  wire[33:0] T238;
+  wire[5:0] T439;
+  wire[33:0] T239;
+  reg  s1_req_phys;
   wire T240;
   wire T241;
   wire T242;
-  wire s2_sc;
   wire T243;
   wire T244;
-  reg [63:0] s3_req_data;
-  wire[63:0] T580;
-  wire[127:0] T245;
-  wire[127:0] T581;
-  wire[63:0] T246;
-  wire[127:0] T247;
-  wire[127:0] T582;
-  wire[127:0] s2_data_corrected;
-  wire[127:0] T248;
+  reg  s2_req_phys;
+  wire T245;
+  wire[27:0] T246;
+  wire T247;
+  wire T248;
   wire T249;
+  wire s1_readwrite;
   wire T250;
   wire T251;
   wire T252;
   wire T253;
+  wire s1_read;
   wire T254;
   wire T255;
   wire T256;
@@ -61189,32 +55511,39 @@ module HellaCache(input clk, input reset,
   wire T260;
   wire T261;
   wire T262;
-  reg [4:0] s3_req_cmd;
-  wire[4:0] T263;
+  wire T263;
+  wire cache_pass;
   wire T264;
+  reg  s2_killed;
   wire T265;
-  wire T266;
-  wire T267;
+  wire T440;
+  wire[1:0] T266;
+  wire[1:0] s2_replaced_way_en;
+  reg  R267;
   wire T268;
-  wire T269;
-  wire[36:0] T270;
-  reg [39:0] s3_req_addr;
-  wire[39:0] T271;
-  wire[36:0] T583;
-  wire[28:0] T272;
-  wire T273;
-  wire T274;
+  wire[1:0] T441;
+  wire[1:0] T269;
+  reg [1:0] s2_repl_meta_coh_state;
+  wire[1:0] T270;
+  wire[1:0] T271;
+  wire[19:0] T272;
+  reg [19:0] s2_repl_meta_tag;
+  wire[19:0] T273;
+  wire[19:0] T274;
+  reg  s2_req_kill;
   wire T275;
+  reg  s1_req_kill;
   wire T276;
   wire T277;
   wire T278;
-  wire T279;
-  wire T280;
-  wire T281;
-  wire T282;
-  wire[36:0] T283;
-  wire[36:0] T584;
-  wire[28:0] T284;
+  reg [8:0] s2_req_tag;
+  wire[8:0] T279;
+  reg [8:0] s1_req_tag;
+  wire[8:0] T280;
+  wire[8:0] T281;
+  wire[8:0] T282;
+  wire T283;
+  wire T284;
   wire T285;
   wire T286;
   wire T287;
@@ -61224,80 +55553,63 @@ module HellaCache(input clk, input reset,
   wire T291;
   wire T292;
   wire T293;
-  reg [4:0] s4_req_cmd;
-  wire[4:0] T294;
+  wire T294;
   wire T295;
   wire T296;
   wire T297;
   wire T298;
   wire T299;
   wire T300;
-  wire[36:0] T301;
-  reg [39:0] s4_req_addr;
-  wire[39:0] T302;
-  wire[36:0] T585;
-  wire[28:0] T303;
-  reg  s4_valid;
-  wire T586;
+  wire T301;
+  wire T302;
+  wire T303;
   wire T304;
-  reg  s2_store_bypass;
   wire T305;
   wire T306;
-  reg [2:0] s2_req_typ;
-  wire[2:0] T307;
-  reg [2:0] s1_req_typ;
-  wire[2:0] T308;
-  wire[2:0] T309;
-  wire[2:0] T310;
-  wire[5:0] T587;
-  wire[127:0] T311;
-  wire[1:0] rowWMask;
-  wire rowIdx;
+  wire T307;
+  wire T308;
+  wire T309;
+  wire T310;
+  wire T311;
   wire T312;
-  wire[11:0] T588;
-  reg [3:0] s3_way;
-  wire[3:0] T313;
+  wire T313;
   wire T314;
   wire T315;
   wire T316;
   wire T317;
   wire T318;
-  wire T319;
-  wire T320;
-  wire T321;
-  wire T322;
-  wire T323;
+  wire misaligned;
+  wire[39:0] T319;
+  wire[39:0] T442;
+  wire[2:0] T320;
+  wire[3:0] T321;
+  wire[3:0] T322;
+  wire[1:0] T323;
   wire T324;
   wire T325;
-  wire[11:0] T589;
-  wire[11:0] T590;
-  wire[11:0] T591;
-  wire[127:0] T326;
-  wire[127:0] T327;
-  wire[63:0] wdata_encoded_0;
-  wire[63:0] wdata_encoded_1;
-  wire[5:0] T592;
-  wire[33:0] T328;
-  wire[5:0] T593;
-  wire[33:0] T329;
-  reg  s1_req_phys;
-  wire T330;
+  wire[63:0] T326;
+  wire[63:0] uncache_resp_bits_store_data;
+  wire[63:0] cache_resp_bits_store_data;
+  wire[63:0] T327;
+  wire[31:0] T328;
+  wire[31:0] T329;
+  wire[31:0] T330;
   wire T331;
-  wire T332;
-  wire T333;
-  wire T334;
-  reg  s2_req_phys;
+  wire[31:0] T332;
+  wire[31:0] T333;
+  wire[31:0] T334;
+  wire[31:0] T443;
   wire T335;
-  wire[27:0] T336;
+  wire T336;
   wire T337;
-  wire T338;
+  wire[2:0] T338;
   wire T339;
-  wire s1_readwrite;
-  wire T340;
+  wire[1:0] T340;
   wire T341;
+  wire uncache_resp_bits_has_data;
+  wire cache_resp_bits_has_data;
   wire T342;
   wire T343;
-  wire s1_read;
   wire T344;
   wire T345;
   wire T346;
@@ -61306,257 +55618,93 @@ module HellaCache(input clk, input reset,
   wire T349;
   wire T350;
   wire T351;
-  wire T352;
-  wire T353;
-  wire cache_pass;
-  wire T354;
-  reg  s2_killed;
-  wire T355;
-  wire[3:0] T356;
-  wire[3:0] s2_replaced_way_en;
-  reg [1:0] R357;
-  wire[1:0] T358;
-  wire[1:0] T359;
-  reg [15:0] R360;
-  wire[15:0] T594;
-  wire[15:0] T361;
-  wire[15:0] T362;
-  wire[14:0] T363;
-  wire T364;
-  wire T365;
-  wire T366;
-  wire T367;
-  wire T368;
-  wire T369;
-  wire T370;
-  wire T371;
-  wire T372;
-  wire[1:0] T373;
-  wire[1:0] T374;
-  wire[21:0] T375;
-  wire[21:0] T376;
-  wire[21:0] T377;
-  wire[21:0] T378;
-  reg [1:0] R379;
-  wire[1:0] T380;
-  wire T381;
-  wire T382;
-  wire[3:0] s1_replaced_way_en;
-  wire[1:0] T383;
-  reg [19:0] R384;
-  wire[19:0] T385;
-  wire T386;
-  wire[21:0] T387;
-  wire[21:0] T388;
-  wire[21:0] T389;
-  wire[21:0] T390;
-  reg [1:0] R391;
-  wire[1:0] T392;
-  wire T393;
-  wire T394;
-  reg [19:0] R395;
-  wire[19:0] T396;
-  wire T397;
-  wire[21:0] T398;
-  wire[21:0] T399;
-  wire[21:0] T400;
-  wire[21:0] T401;
-  reg [1:0] R402;
-  wire[1:0] T403;
-  wire T404;
-  wire T405;
-  reg [19:0] R406;
-  wire[19:0] T407;
-  wire T408;
-  wire[21:0] T409;
-  wire[21:0] T410;
-  wire[21:0] T411;
-  reg [1:0] R412;
-  wire[1:0] T413;
-  wire T414;
-  wire T415;
-  reg [19:0] R416;
-  wire[19:0] T417;
-  wire T418;
-  wire[1:0] T419;
-  wire[19:0] T420;
-  wire[19:0] T421;
-  wire[19:0] T422;
-  reg  s2_req_kill;
-  wire T423;
-  reg  s1_req_kill;
-  wire T424;
-  wire T425;
-  wire T426;
-  reg [8:0] s2_req_tag;
-  wire[8:0] T427;
-  reg [8:0] s1_req_tag;
-  wire[8:0] T428;
-  wire[8:0] T429;
-  wire[8:0] T430;
-  wire T431;
-  wire T432;
-  wire T433;
-  wire T434;
-  wire T435;
-  wire T436;
-  wire T437;
-  wire T438;
-  wire T439;
-  wire T440;
-  wire T441;
-  wire T442;
-  wire T443;
-  wire T444;
-  wire T445;
-  wire T446;
-  wire T447;
-  wire T448;
-  wire T449;
-  wire T450;
-  wire T451;
-  wire T452;
-  wire T453;
-  wire T454;
-  wire T455;
-  wire T456;
-  wire T457;
-  wire T458;
-  wire T459;
-  wire T460;
-  wire T461;
-  wire T462;
-  wire T463;
-  wire T464;
-  wire T465;
-  wire T466;
-  wire misaligned;
-  wire[39:0] T467;
-  wire[39:0] T595;
-  wire[2:0] T468;
-  wire[3:0] T469;
-  wire[3:0] T470;
-  wire[1:0] T471;
-  wire T472;
-  wire T473;
-  wire[63:0] T474;
-  wire[63:0] uncache_resp_bits_store_data;
-  wire[63:0] cache_resp_bits_store_data;
-  wire[63:0] T475;
-  wire[31:0] T476;
-  wire[31:0] T477;
-  wire[31:0] T478;
-  wire T479;
-  wire[31:0] T480;
-  wire[31:0] T481;
-  wire[31:0] T482;
-  wire[31:0] T596;
-  wire T483;
-  wire T484;
-  wire T485;
-  wire[2:0] T486;
-  wire T487;
-  wire[1:0] T488;
-  wire T489;
-  wire uncache_resp_bits_has_data;
-  wire cache_resp_bits_has_data;
-  wire T490;
-  wire T491;
-  wire T492;
-  wire T493;
-  wire T494;
-  wire T495;
-  wire T496;
-  wire T497;
-  wire T498;
-  wire T499;
   wire uncache_resp_bits_replay;
   wire cache_resp_bits_replay;
-  wire T500;
+  wire T352;
   wire uncache_resp_bits_nack;
   wire cache_resp_bits_nack;
-  wire T501;
-  wire[63:0] T502;
+  wire T353;
+  wire[63:0] T354;
   wire[63:0] uncache_resp_bits_data;
   wire[63:0] cache_resp_bits_data;
-  wire[63:0] T503;
-  wire[63:0] T597;
-  wire[63:0] T504;
-  wire[7:0] T505;
-  wire[7:0] T506;
-  wire[7:0] T507;
-  wire[63:0] T508;
-  wire[15:0] T509;
-  wire[15:0] T510;
-  wire[63:0] T511;
-  wire[31:0] T512;
-  wire[31:0] T513;
-  wire[31:0] T514;
-  wire T515;
-  wire[31:0] T516;
-  wire[31:0] T517;
-  wire[31:0] T518;
-  wire[31:0] T598;
-  wire T519;
-  wire T520;
-  wire T521;
-  wire[15:0] T522;
-  wire T523;
-  wire[47:0] T524;
-  wire[47:0] T525;
-  wire[47:0] T526;
-  wire[47:0] T599;
-  wire T527;
-  wire T528;
-  wire T529;
-  wire[7:0] T530;
-  wire T531;
-  wire[55:0] T532;
-  wire[55:0] T533;
-  wire[55:0] T534;
-  wire[55:0] T600;
-  wire T535;
-  wire T536;
-  wire T537;
-  wire T538;
-  wire[2:0] T539;
+  wire[63:0] T355;
+  wire[63:0] T444;
+  wire[63:0] T356;
+  wire[7:0] T357;
+  wire[7:0] T358;
+  wire[7:0] T359;
+  wire[63:0] T360;
+  wire[15:0] T361;
+  wire[15:0] T362;
+  wire[63:0] T363;
+  wire[31:0] T364;
+  wire[31:0] T365;
+  wire[31:0] T366;
+  wire T367;
+  wire[31:0] T368;
+  wire[31:0] T369;
+  wire[31:0] T370;
+  wire[31:0] T445;
+  wire T371;
+  wire T372;
+  wire T373;
+  wire[15:0] T374;
+  wire T375;
+  wire[47:0] T376;
+  wire[47:0] T377;
+  wire[47:0] T378;
+  wire[47:0] T446;
+  wire T379;
+  wire T380;
+  wire T381;
+  wire[7:0] T382;
+  wire T383;
+  wire[55:0] T384;
+  wire[55:0] T385;
+  wire[55:0] T386;
+  wire[55:0] T447;
+  wire T387;
+  wire T388;
+  wire T389;
+  wire T390;
+  wire[2:0] T391;
   wire[2:0] uncache_resp_bits_typ;
   wire[2:0] cache_resp_bits_typ;
-  wire[4:0] T540;
+  wire[4:0] T392;
   wire[4:0] uncache_resp_bits_cmd;
   wire[4:0] cache_resp_bits_cmd;
-  wire[8:0] T541;
+  wire[8:0] T393;
   wire[8:0] uncache_resp_bits_tag;
   wire[8:0] cache_resp_bits_tag;
-  wire[39:0] T542;
+  wire[39:0] T394;
   wire[39:0] uncache_resp_bits_addr;
   wire[39:0] cache_resp_bits_addr;
-  wire T543;
+  wire T395;
   wire uncache_resp_valid;
   wire cache_resp_valid;
-  wire T544;
-  wire T545;
-  wire T546;
-  wire T547;
-  wire T548;
-  wire T549;
-  wire T550;
-  wire T551;
-  wire T552;
-  wire T553;
-  wire T554;
-  wire T555;
-  wire T556;
+  wire T396;
+  wire T397;
+  wire T398;
+  wire T399;
+  wire T400;
+  wire T401;
+  wire T402;
+  wire T403;
+  wire T404;
+  wire T405;
+  wire T406;
+  wire T407;
+  wire T408;
   reg  block_miss;
-  wire T601;
-  wire T557;
-  wire T558;
+  wire T448;
+  wire T409;
+  wire T410;
   wire wb_io_req_ready;
   wire wb_io_meta_read_valid;
   wire[5:0] wb_io_meta_read_bits_idx;
   wire[19:0] wb_io_meta_read_bits_tag;
   wire wb_io_data_req_valid;
-  wire[3:0] wb_io_data_req_bits_way_en;
+  wire wb_io_data_req_bits_way_en;
   wire[11:0] wb_io_data_req_bits_addr;
   wire wb_io_release_valid;
   wire[1:0] wb_io_release_bits_addr_beat;
@@ -61578,7 +55726,7 @@ module HellaCache(input clk, input reset,
   wire[19:0] prober_io_meta_read_bits_tag;
   wire prober_io_meta_write_valid;
   wire[5:0] prober_io_meta_write_bits_idx;
-  wire[3:0] prober_io_meta_write_bits_way_en;
+  wire prober_io_meta_write_bits_way_en;
   wire[19:0] prober_io_meta_write_bits_data_tag;
   wire[1:0] prober_io_meta_write_bits_data_coh_state;
   wire prober_io_wb_req_valid;
@@ -61588,15 +55736,9 @@ module HellaCache(input clk, input reset,
   wire prober_io_wb_req_bits_voluntary;
   wire[2:0] prober_io_wb_req_bits_r_type;
   wire[127:0] prober_io_wb_req_bits_data;
-  wire[3:0] prober_io_wb_req_bits_way_en;
+  wire prober_io_wb_req_bits_way_en;
   wire meta_io_read_ready;
   wire meta_io_write_ready;
-  wire[19:0] meta_io_resp_3_tag;
-  wire[1:0] meta_io_resp_3_coh_state;
-  wire[19:0] meta_io_resp_2_tag;
-  wire[1:0] meta_io_resp_2_coh_state;
-  wire[19:0] meta_io_resp_1_tag;
-  wire[1:0] meta_io_resp_1_coh_state;
   wire[19:0] meta_io_resp_0_tag;
   wire[1:0] meta_io_resp_0_coh_state;
   wire metaReadArb_io_in_4_ready;
@@ -61605,28 +55747,25 @@ module HellaCache(input clk, input reset,
   wire metaReadArb_io_in_1_ready;
   wire metaReadArb_io_out_valid;
   wire[5:0] metaReadArb_io_out_bits_idx;
-  wire[3:0] metaReadArb_io_out_bits_way_en;
+  wire metaReadArb_io_out_bits_way_en;
   wire metaWriteArb_io_in_1_ready;
   wire metaWriteArb_io_in_0_ready;
   wire metaWriteArb_io_out_valid;
   wire[5:0] metaWriteArb_io_out_bits_idx;
-  wire[3:0] metaWriteArb_io_out_bits_way_en;
+  wire metaWriteArb_io_out_bits_way_en;
   wire[19:0] metaWriteArb_io_out_bits_data_tag;
   wire[1:0] metaWriteArb_io_out_bits_data_coh_state;
   wire data_io_write_ready;
-  wire[127:0] data_io_resp_3;
-  wire[127:0] data_io_resp_2;
-  wire[127:0] data_io_resp_1;
   wire[127:0] data_io_resp_0;
   wire readArb_io_in_3_ready;
   wire readArb_io_in_2_ready;
   wire readArb_io_in_1_ready;
   wire readArb_io_out_valid;
-  wire[3:0] readArb_io_out_bits_way_en;
+  wire readArb_io_out_bits_way_en;
   wire[11:0] readArb_io_out_bits_addr;
   wire writeArb_io_in_1_ready;
   wire writeArb_io_out_valid;
-  wire[3:0] writeArb_io_out_bits_way_en;
+  wire writeArb_io_out_bits_way_en;
   wire[11:0] writeArb_io_out_bits_addr;
   wire[1:0] writeArb_io_out_bits_wmask;
   wire[127:0] writeArb_io_out_bits_data;
@@ -61657,7 +55796,7 @@ module HellaCache(input clk, input reset,
   wire wbArb_io_out_bits_voluntary;
   wire[2:0] wbArb_io_out_bits_r_type;
   wire[127:0] wbArb_io_out_bits_data;
-  wire[3:0] wbArb_io_out_bits_way_en;
+  wire wbArb_io_out_bits_way_en;
   wire dtlb_io_req_ready;
   wire dtlb_io_resp_miss;
   wire[19:0] dtlb_io_resp_ppn;
@@ -61688,14 +55827,14 @@ module HellaCache(input clk, input reset,
   wire[2:0] mshrs_io_mem_req_bits_a_type;
   wire[16:0] mshrs_io_mem_req_bits_union;
   wire[127:0] mshrs_io_mem_req_bits_data;
-  wire[3:0] mshrs_io_refill_way_en;
+  wire mshrs_io_refill_way_en;
   wire[11:0] mshrs_io_refill_addr;
   wire mshrs_io_meta_read_valid;
   wire[5:0] mshrs_io_meta_read_bits_idx;
-  wire[3:0] mshrs_io_meta_read_bits_way_en;
+  wire mshrs_io_meta_read_bits_way_en;
   wire mshrs_io_meta_write_valid;
   wire[5:0] mshrs_io_meta_write_bits_idx;
-  wire[3:0] mshrs_io_meta_write_bits_way_en;
+  wire mshrs_io_meta_write_bits_way_en;
   wire[19:0] mshrs_io_meta_write_bits_data_tag;
   wire[1:0] mshrs_io_meta_write_bits_data_coh_state;
   wire mshrs_io_replay_valid;
@@ -61713,7 +55852,7 @@ module HellaCache(input clk, input reset,
   wire mshrs_io_wb_req_bits_voluntary;
   wire[2:0] mshrs_io_wb_req_bits_r_type;
   wire[127:0] mshrs_io_wb_req_bits_data;
-  wire[3:0] mshrs_io_wb_req_bits_way_en;
+  wire mshrs_io_wb_req_bits_way_en;
   wire mshrs_io_probe_rdy;
   wire mshrs_io_fence_rdy;
 
@@ -61730,26 +55869,17 @@ module HellaCache(input clk, input reset,
     s2_req_cmd = {1{$random}};
     s2_recycle_next = {1{$random}};
     s1_valid = {1{$random}};
-    R48 = {1{$random}};
-    s2_tag_match_way = {1{$random}};
-    s1_req_addr = {2{$random}};
     s2_req_addr = {2{$random}};
-    R92 = {1{$random}};
-    R98 = {1{$random}};
-    R103 = {1{$random}};
-    R129 = {1{$random}};
+    s1_req_addr = {2{$random}};
+    s2_hit_state_state = {1{$random}};
+    s2_tag_match_way = {1{$random}};
+    R85 = {1{$random}};
     s2_valid = {1{$random}};
     s1_clk_en = {1{$random}};
     s1_req_data = {2{$random}};
     s1_recycled = {1{$random}};
-    R145 = {2{$random}};
-    R150 = {2{$random}};
-    R162 = {2{$random}};
-    R167 = {2{$random}};
-    R176 = {2{$random}};
-    R181 = {2{$random}};
-    R189 = {2{$random}};
-    R194 = {2{$random}};
+    R101 = {2{$random}};
+    R106 = {2{$random}};
     s2_store_bypass_data = {2{$random}};
     s4_req_data = {2{$random}};
     s3_valid = {1{$random}};
@@ -61769,16 +55899,9 @@ module HellaCache(input clk, input reset,
     s1_req_phys = {1{$random}};
     s2_req_phys = {1{$random}};
     s2_killed = {1{$random}};
-    R357 = {1{$random}};
-    R360 = {1{$random}};
-    R379 = {1{$random}};
-    R384 = {1{$random}};
-    R391 = {1{$random}};
-    R395 = {1{$random}};
-    R402 = {1{$random}};
-    R406 = {1{$random}};
-    R412 = {1{$random}};
-    R416 = {1{$random}};
+    R267 = {1{$random}};
+    s2_repl_meta_coh_state = {1{$random}};
+    s2_repl_meta_tag = {1{$random}};
     s2_req_kill = {1{$random}};
     s1_req_kill = {1{$random}};
     s2_req_tag = {1{$random}};
@@ -61803,14 +55926,14 @@ module HellaCache(input clk, input reset,
   assign T14 = T16 | T15;
   assign T15 = 4'h4 == FlowThroughSerializer_io_out_bits_g_type;
   assign T16 = 4'h5 == FlowThroughSerializer_io_out_bits_g_type;
-  assign T17 = T138 ? s1_req_data : T18;
+  assign T17 = T94 ? s1_req_data : T18;
   assign T18 = T21 ? T19 : s2_req_data;
   assign T19 = s1_replay ? mshrs_io_replay_bits_data : io_cpu_req_bits_data;
-  assign T559 = reset ? 1'h0 : T20;
+  assign T411 = reset ? 1'h0 : T20;
   assign T20 = mshrs_io_replay_valid & readArb_io_in_1_ready;
   assign T21 = s1_clk_en & s1_write;
-  assign s1_write = T132 | T22;
-  assign T22 = T131 | T23;
+  assign s1_write = T88 | T22;
+  assign T22 = T87 | T23;
   assign T23 = s1_req_cmd == 5'h4;
   assign T24 = s2_recycle ? s2_req_cmd : T25;
   assign T25 = mshrs_io_replay_valid ? mshrs_io_replay_bits_cmd : T26;
@@ -61818,485 +55941,346 @@ module HellaCache(input clk, input reset,
   assign T27 = s1_clk_en ? s1_req_cmd : s2_req_cmd;
   assign s2_recycle = T28;
   assign T28 = s2_recycle_ecc | s2_recycle_next;
-  assign T560 = reset ? 1'h0 : T29;
+  assign T412 = reset ? 1'h0 : T29;
   assign T29 = T30 ? s2_recycle_ecc : s2_recycle_next;
   assign T30 = s1_valid | s1_replay;
-  assign T561 = reset ? 1'h0 : T31;
+  assign T413 = reset ? 1'h0 : T31;
   assign T31 = io_cpu_req_ready & io_cpu_req_valid;
-  assign s2_recycle_ecc = T33 & s2_data_correctable;
-  assign s2_data_correctable = T32[1'h0];
-  assign T32 = 2'h0;
-  assign T33 = T127 & s2_hit;
-  assign s2_hit = T106 & T34;
-  assign T34 = T44 == T35;
-  assign T35 = T36;
-  assign T36 = T37 ? 2'h3 : T44;
-  assign T37 = T41 | T38;
-  assign T38 = T40 | T39;
-  assign T39 = s2_req_cmd == 5'h4;
-  assign T40 = s2_req_cmd[2'h3];
-  assign T41 = T43 | T42;
-  assign T42 = s2_req_cmd == 5'h7;
-  assign T43 = s2_req_cmd == 5'h1;
-  assign T44 = T45;
-  assign T45 = T89 | T46;
-  assign T46 = T50 ? T47 : 2'h0;
-  assign T47 = R48;
-  assign T49 = s1_clk_en ? meta_io_resp_3_coh_state : R48;
-  assign T50 = s2_tag_match_way[2'h3];
-  assign T51 = s1_clk_en ? s1_tag_match_way : s2_tag_match_way;
-  assign s1_tag_match_way = T52;
-  assign T52 = {T82, T53};
-  assign T53 = {T79, T54};
-  assign T54 = T56 & T55;
-  assign T55 = meta_io_resp_0_coh_state != 2'h0;
-  assign T56 = s1_tag_eq_way[1'h0];
-  assign s1_tag_eq_way = T57;
-  assign T57 = {T74, T58};
-  assign T58 = {T72, T59};
-  assign T59 = meta_io_resp_0_tag == T60;
-  assign T60 = s1_addr >> 4'hc;
-  assign s1_addr = {dtlb_io_resp_ppn, T61};
-  assign T61 = s1_req_addr[4'hb:1'h0];
-  assign T62 = s2_recycle ? s2_req_addr : T63;
-  assign T63 = mshrs_io_replay_valid ? mshrs_io_replay_bits_addr : T64;
-  assign T64 = prober_io_meta_read_valid ? T563 : T65;
-  assign T65 = wb_io_meta_read_valid ? T562 : T66;
-  assign T66 = io_cpu_req_valid ? io_cpu_req_bits_addr : s1_req_addr;
-  assign T562 = {8'h0, T67};
-  assign T67 = T68 << 3'h6;
-  assign T68 = {wb_io_meta_read_bits_tag, wb_io_meta_read_bits_idx};
-  assign T563 = {8'h0, T69};
-  assign T69 = T70 << 3'h6;
-  assign T70 = {prober_io_meta_read_bits_tag, prober_io_meta_read_bits_idx};
-  assign T71 = s1_clk_en ? T564 : s2_req_addr;
-  assign T564 = {8'h0, s1_addr};
-  assign T72 = meta_io_resp_1_tag == T73;
-  assign T73 = s1_addr >> 4'hc;
-  assign T74 = {T77, T75};
-  assign T75 = meta_io_resp_2_tag == T76;
-  assign T76 = s1_addr >> 4'hc;
-  assign T77 = meta_io_resp_3_tag == T78;
-  assign T78 = s1_addr >> 4'hc;
-  assign T79 = T81 & T80;
-  assign T80 = meta_io_resp_1_coh_state != 2'h0;
-  assign T81 = s1_tag_eq_way[1'h1];
-  assign T82 = {T86, T83};
-  assign T83 = T85 & T84;
-  assign T84 = meta_io_resp_2_coh_state != 2'h0;
-  assign T85 = s1_tag_eq_way[2'h2];
-  assign T86 = T88 & T87;
-  assign T87 = meta_io_resp_3_coh_state != 2'h0;
-  assign T88 = s1_tag_eq_way[2'h3];
-  assign T89 = T95 | T90;
-  assign T90 = T94 ? T91 : 2'h0;
-  assign T91 = R92;
-  assign T93 = s1_clk_en ? meta_io_resp_2_coh_state : R92;
-  assign T94 = s2_tag_match_way[2'h2];
-  assign T95 = T101 | T96;
-  assign T96 = T100 ? T97 : 2'h0;
-  assign T97 = R98;
-  assign T99 = s1_clk_en ? meta_io_resp_1_coh_state : R98;
-  assign T100 = s2_tag_match_way[1'h1];
-  assign T101 = T105 ? T102 : 2'h0;
-  assign T102 = R103;
-  assign T104 = s1_clk_en ? meta_io_resp_0_coh_state : R103;
-  assign T105 = s2_tag_match_way[1'h0];
-  assign T106 = s2_tag_match & T107;
-  assign T107 = T116 ? T113 : T108;
-  assign T108 = T110 | T109;
-  assign T109 = 2'h3 == T44;
-  assign T110 = T112 | T111;
-  assign T111 = 2'h2 == T44;
-  assign T112 = 2'h1 == T44;
-  assign T113 = T115 | T114;
-  assign T114 = 2'h3 == T44;
-  assign T115 = 2'h2 == T44;
-  assign T116 = T118 | T117;
-  assign T117 = s2_req_cmd == 5'h6;
-  assign T118 = T120 | T119;
-  assign T119 = s2_req_cmd == 5'h3;
-  assign T120 = T124 | T121;
-  assign T121 = T123 | T122;
-  assign T122 = s2_req_cmd == 5'h4;
-  assign T123 = s2_req_cmd[2'h3];
-  assign T124 = T126 | T125;
-  assign T125 = s2_req_cmd == 5'h7;
-  assign T126 = s2_req_cmd == 5'h1;
-  assign s2_tag_match = s2_tag_match_way != 4'h0;
-  assign T127 = s2_valid | s2_replay;
-  assign s2_replay = R129 & T128;
-  assign T128 = s2_req_cmd != 5'h5;
-  assign T565 = reset ? 1'h0 : s1_replay;
-  assign T566 = reset ? 1'h0 : s1_valid_masked;
-  assign s1_valid_masked = s1_valid & T130;
-  assign T130 = io_cpu_req_bits_kill ^ 1'h1;
-  assign T131 = s1_req_cmd[2'h3];
-  assign T132 = T134 | T133;
-  assign T133 = s1_req_cmd == 5'h7;
-  assign T134 = s1_req_cmd == 5'h1;
-  assign T135 = s2_recycle ? s2_req_data : T136;
-  assign T136 = mshrs_io_replay_valid ? mshrs_io_replay_bits_data : T137;
-  assign T137 = io_cpu_req_valid ? io_cpu_req_bits_data : s1_req_data;
-  assign T138 = s1_clk_en & s1_recycled;
-  assign T567 = reset ? 1'h0 : T139;
-  assign T139 = s1_clk_en ? s2_recycle : s1_recycled;
-  assign T568 = s2_data_word[6'h3f:1'h0];
-  assign s2_data_word = s2_store_bypass ? T577 : s2_data_word_prebypass;
-  assign s2_data_word_prebypass = s2_data_uncorrected >> 7'h0;
-  assign s2_data_uncorrected = T140;
-  assign T140 = {T199, T141};
-  assign T141 = s2_data_muxed[6'h3f:1'h0];
-  assign s2_data_muxed = T158 | T142;
-  assign T142 = T157 ? s2_data_3 : 128'h0;
-  assign s2_data_3 = T143;
-  assign T143 = T144;
-  assign T144 = {R150, R145};
-  assign T569 = T146[6'h3f:1'h0];
-  assign T146 = T148 ? T147 : T570;
-  assign T570 = {64'h0, R145};
-  assign T147 = data_io_resp_3 >> 1'h0;
-  assign T148 = s1_clk_en & T149;
-  assign T149 = s1_tag_eq_way[2'h3];
-  assign T151 = T153 ? T152 : R150;
-  assign T152 = data_io_resp_3 >> 7'h40;
-  assign T153 = T148 & s1_writeback;
-  assign s1_writeback = T155 & T154;
-  assign T154 = s1_replay ^ 1'h1;
-  assign T155 = s1_clk_en & T156;
-  assign T156 = s1_valid ^ 1'h1;
-  assign T157 = s2_tag_match_way[2'h3];
-  assign T158 = T172 | T159;
-  assign T159 = T171 ? s2_data_2 : 128'h0;
-  assign s2_data_2 = T160;
-  assign T160 = T161;
-  assign T161 = {R167, R162};
-  assign T571 = T163[6'h3f:1'h0];
-  assign T163 = T165 ? T164 : T572;
-  assign T572 = {64'h0, R162};
-  assign T164 = data_io_resp_2 >> 1'h0;
-  assign T165 = s1_clk_en & T166;
-  assign T166 = s1_tag_eq_way[2'h2];
-  assign T168 = T170 ? T169 : R167;
-  assign T169 = data_io_resp_2 >> 7'h40;
-  assign T170 = T165 & s1_writeback;
-  assign T171 = s2_tag_match_way[2'h2];
-  assign T172 = T186 | T173;
-  assign T173 = T185 ? s2_data_1 : 128'h0;
-  assign s2_data_1 = T174;
-  assign T174 = T175;
-  assign T175 = {R181, R176};
-  assign T573 = T177[6'h3f:1'h0];
-  assign T177 = T179 ? T178 : T574;
-  assign T574 = {64'h0, R176};
-  assign T178 = data_io_resp_1 >> 1'h0;
-  assign T179 = s1_clk_en & T180;
-  assign T180 = s1_tag_eq_way[1'h1];
-  assign T182 = T184 ? T183 : R181;
-  assign T183 = data_io_resp_1 >> 7'h40;
-  assign T184 = T179 & s1_writeback;
-  assign T185 = s2_tag_match_way[1'h1];
-  assign T186 = T198 ? s2_data_0 : 128'h0;
-  assign s2_data_0 = T187;
-  assign T187 = T188;
-  assign T188 = {R194, R189};
-  assign T575 = T190[6'h3f:1'h0];
-  assign T190 = T192 ? T191 : T576;
-  assign T576 = {64'h0, R189};
-  assign T191 = data_io_resp_0 >> 1'h0;
-  assign T192 = s1_clk_en & T193;
-  assign T193 = s1_tag_eq_way[1'h0];
-  assign T195 = T197 ? T196 : R194;
-  assign T196 = data_io_resp_0 >> 7'h40;
-  assign T197 = T192 & s1_writeback;
-  assign T198 = s2_tag_match_way[1'h0];
-  assign T199 = s2_data_muxed[7'h7f:7'h40];
-  assign T577 = {64'h0, s2_store_bypass_data};
-  assign T200 = T288 ? T201 : s2_store_bypass_data;
-  assign T201 = T273 ? amoalu_io_out : T202;
-  assign T202 = T259 ? s3_req_data : s4_req_data;
-  assign T203 = T204 ? s3_req_data : s4_req_data;
-  assign T204 = s3_valid & metaReadArb_io_out_valid;
-  assign T578 = reset ? 1'h0 : T205;
-  assign T205 = T213 & T206;
-  assign T206 = T210 | T207;
-  assign T207 = T209 | T208;
-  assign T208 = s2_req_cmd == 5'h4;
-  assign T209 = s2_req_cmd[2'h3];
-  assign T210 = T212 | T211;
-  assign T211 = s2_req_cmd == 5'h7;
-  assign T212 = s2_req_cmd == 5'h1;
-  assign T213 = T243 & T214;
-  assign T214 = s2_sc_fail ^ 1'h1;
-  assign s2_sc_fail = s2_sc & T215;
-  assign T215 = s2_lrsc_addr_match ^ 1'h1;
-  assign s2_lrsc_addr_match = lrsc_valid & T216;
-  assign T216 = lrsc_addr == T217;
-  assign T217 = s2_req_addr >> 3'h6;
-  assign T218 = T220 ? T219 : lrsc_addr;
-  assign T219 = s2_req_addr >> 3'h6;
-  assign T220 = T221 & s2_lr;
+  assign s2_recycle_ecc = T44 & s2_data_correctable;
+  assign s2_data_correctable = T43[s2_word_idx];
+  assign s2_word_idx = s2_req_addr[2'h3];
+  assign T32 = s1_clk_en ? T414 : s2_req_addr;
+  assign T414 = {8'h0, s1_addr};
+  assign s1_addr = {dtlb_io_resp_ppn, T33};
+  assign T33 = s1_req_addr[4'hb:1'h0];
+  assign T34 = s2_recycle ? s2_req_addr : T35;
+  assign T35 = mshrs_io_replay_valid ? mshrs_io_replay_bits_addr : T36;
+  assign T36 = prober_io_meta_read_valid ? T416 : T37;
+  assign T37 = wb_io_meta_read_valid ? T415 : T38;
+  assign T38 = io_cpu_req_valid ? io_cpu_req_bits_addr : s1_req_addr;
+  assign T415 = {8'h0, T39};
+  assign T39 = T40 << 3'h6;
+  assign T40 = {wb_io_meta_read_bits_tag, wb_io_meta_read_bits_idx};
+  assign T416 = {8'h0, T41};
+  assign T41 = T42 << 3'h6;
+  assign T42 = {prober_io_meta_read_bits_tag, prober_io_meta_read_bits_idx};
+  assign T43 = 2'h0;
+  assign T44 = T83 & s2_hit;
+  assign s2_hit = T56 & T45;
+  assign T45 = s2_hit_state_state == T46;
+  assign T46 = T47;
+  assign T47 = T48 ? 2'h3 : s2_hit_state_state;
+  assign T48 = T52 | T49;
+  assign T49 = T51 | T50;
+  assign T50 = s2_req_cmd == 5'h4;
+  assign T51 = s2_req_cmd[2'h3];
+  assign T52 = T54 | T53;
+  assign T53 = s2_req_cmd == 5'h7;
+  assign T54 = s2_req_cmd == 5'h1;
+  assign T55 = s1_clk_en ? meta_io_resp_0_coh_state : s2_hit_state_state;
+  assign T56 = s2_tag_match & T57;
+  assign T57 = T66 ? T63 : T58;
+  assign T58 = T60 | T59;
+  assign T59 = 2'h3 == s2_hit_state_state;
+  assign T60 = T62 | T61;
+  assign T61 = 2'h2 == s2_hit_state_state;
+  assign T62 = 2'h1 == s2_hit_state_state;
+  assign T63 = T65 | T64;
+  assign T64 = 2'h3 == s2_hit_state_state;
+  assign T65 = 2'h2 == s2_hit_state_state;
+  assign T66 = T68 | T67;
+  assign T67 = s2_req_cmd == 5'h6;
+  assign T68 = T70 | T69;
+  assign T69 = s2_req_cmd == 5'h3;
+  assign T70 = T74 | T71;
+  assign T71 = T73 | T72;
+  assign T72 = s2_req_cmd == 5'h4;
+  assign T73 = s2_req_cmd[2'h3];
+  assign T74 = T76 | T75;
+  assign T75 = s2_req_cmd == 5'h7;
+  assign T76 = s2_req_cmd == 5'h1;
+  assign s2_tag_match = s2_tag_match_way != 1'h0;
+  assign T77 = s1_clk_en ? s1_tag_match_way : s2_tag_match_way;
+  assign s1_tag_match_way = T78;
+  assign T78 = T80 & T79;
+  assign T79 = meta_io_resp_0_coh_state != 2'h0;
+  assign T80 = s1_tag_eq_way;
+  assign s1_tag_eq_way = T81;
+  assign T81 = meta_io_resp_0_tag == T82;
+  assign T82 = s1_addr >> 4'hc;
+  assign T83 = s2_valid | s2_replay;
+  assign s2_replay = R85 & T84;
+  assign T84 = s2_req_cmd != 5'h5;
+  assign T417 = reset ? 1'h0 : s1_replay;
+  assign T418 = reset ? 1'h0 : s1_valid_masked;
+  assign s1_valid_masked = s1_valid & T86;
+  assign T86 = io_cpu_req_bits_kill ^ 1'h1;
+  assign T87 = s1_req_cmd[2'h3];
+  assign T88 = T90 | T89;
+  assign T89 = s1_req_cmd == 5'h7;
+  assign T90 = s1_req_cmd == 5'h1;
+  assign T91 = s2_recycle ? s2_req_data : T92;
+  assign T92 = mshrs_io_replay_valid ? mshrs_io_replay_bits_data : T93;
+  assign T93 = io_cpu_req_valid ? io_cpu_req_bits_data : s1_req_data;
+  assign T94 = s1_clk_en & s1_recycled;
+  assign T419 = reset ? 1'h0 : T95;
+  assign T95 = s1_clk_en ? s2_recycle : s1_recycled;
+  assign T420 = s2_data_word[6'h3f:1'h0];
+  assign s2_data_word = s2_store_bypass ? T423 : s2_data_word_prebypass;
+  assign s2_data_word_prebypass = s2_data_uncorrected >> T96;
+  assign T96 = {s2_word_idx, 6'h0};
+  assign s2_data_uncorrected = T97;
+  assign T97 = {T109, T98};
+  assign T98 = s2_data_0[6'h3f:1'h0];
+  assign s2_data_0 = T99;
+  assign T99 = T100;
+  assign T100 = {R106, R101};
+  assign T421 = T102[6'h3f:1'h0];
+  assign T102 = T104 ? T103 : T422;
+  assign T422 = {64'h0, R101};
+  assign T103 = data_io_resp_0 >> 1'h0;
+  assign T104 = s1_clk_en & T105;
+  assign T105 = s1_tag_eq_way;
+  assign T107 = T104 ? T108 : R106;
+  assign T108 = data_io_resp_0 >> 7'h40;
+  assign T109 = s2_data_0[7'h7f:7'h40];
+  assign T423 = {64'h0, s2_store_bypass_data};
+  assign T110 = T198 ? T111 : s2_store_bypass_data;
+  assign T111 = T183 ? amoalu_io_out : T112;
+  assign T112 = T169 ? s3_req_data : s4_req_data;
+  assign T113 = T114 ? s3_req_data : s4_req_data;
+  assign T114 = s3_valid & metaReadArb_io_out_valid;
+  assign T424 = reset ? 1'h0 : T115;
+  assign T115 = T123 & T116;
+  assign T116 = T120 | T117;
+  assign T117 = T119 | T118;
+  assign T118 = s2_req_cmd == 5'h4;
+  assign T119 = s2_req_cmd[2'h3];
+  assign T120 = T122 | T121;
+  assign T121 = s2_req_cmd == 5'h7;
+  assign T122 = s2_req_cmd == 5'h1;
+  assign T123 = T153 & T124;
+  assign T124 = s2_sc_fail ^ 1'h1;
+  assign s2_sc_fail = s2_sc & T125;
+  assign T125 = s2_lrsc_addr_match ^ 1'h1;
+  assign s2_lrsc_addr_match = lrsc_valid & T126;
+  assign T126 = lrsc_addr == T127;
+  assign T127 = s2_req_addr >> 3'h6;
+  assign T128 = T130 ? T129 : lrsc_addr;
+  assign T129 = s2_req_addr >> 3'h6;
+  assign T130 = T131 & s2_lr;
   assign s2_lr = s2_req_cmd == 5'h6;
-  assign T221 = T222 | s2_replay;
-  assign T222 = s2_valid_masked & s2_hit;
-  assign s2_valid_masked = T223;
-  assign T223 = s2_valid & T224;
-  assign T224 = s2_nack ^ 1'h1;
-  assign s2_nack = T227 | s2_nack_miss;
-  assign s2_nack_miss = T226 & T225;
-  assign T225 = mshrs_io_req_ready ^ 1'h1;
-  assign T226 = s2_hit ^ 1'h1;
-  assign T227 = s2_nack_hit | s2_nack_victim;
+  assign T131 = T132 | s2_replay;
+  assign T132 = s2_valid_masked & s2_hit;
+  assign s2_valid_masked = T133;
+  assign T133 = s2_valid & T134;
+  assign T134 = s2_nack ^ 1'h1;
+  assign s2_nack = T137 | s2_nack_miss;
+  assign s2_nack_miss = T136 & T135;
+  assign T135 = mshrs_io_req_ready ^ 1'h1;
+  assign T136 = s2_hit ^ 1'h1;
+  assign T137 = s2_nack_hit | s2_nack_victim;
   assign s2_nack_victim = s2_hit & mshrs_io_secondary_miss;
-  assign T228 = T234 ? s1_nack : s2_nack_hit;
-  assign s1_nack = T233 | T229;
-  assign T229 = T231 & T230;
-  assign T230 = prober_io_req_ready ^ 1'h1;
-  assign T231 = T232 == prober_io_meta_write_bits_idx;
-  assign T232 = s1_req_addr[4'hb:3'h6];
-  assign T233 = T337 & dtlb_io_resp_miss;
-  assign T234 = s1_valid | s1_replay;
+  assign T138 = T144 ? s1_nack : s2_nack_hit;
+  assign s1_nack = T143 | T139;
+  assign T139 = T141 & T140;
+  assign T140 = prober_io_req_ready ^ 1'h1;
+  assign T141 = T142 == prober_io_meta_write_bits_idx;
+  assign T142 = s1_req_addr[4'hb:3'h6];
+  assign T143 = T247 & dtlb_io_resp_miss;
+  assign T144 = s1_valid | s1_replay;
   assign lrsc_valid = lrsc_count != 5'h0;
-  assign T579 = reset ? 5'h0 : T235;
-  assign T235 = io_cpu_invalidate_lr ? 5'h0 : T236;
-  assign T236 = T242 ? 5'h0 : T237;
-  assign T237 = T240 ? 5'h1f : T238;
-  assign T238 = lrsc_valid ? T239 : lrsc_count;
-  assign T239 = lrsc_count - 5'h1;
-  assign T240 = T220 & T241;
-  assign T241 = lrsc_valid ^ 1'h1;
-  assign T242 = T221 & s2_sc;
+  assign T425 = reset ? 5'h0 : T145;
+  assign T145 = io_cpu_invalidate_lr ? 5'h0 : T146;
+  assign T146 = T152 ? 5'h0 : T147;
+  assign T147 = T150 ? 5'h1f : T148;
+  assign T148 = lrsc_valid ? T149 : lrsc_count;
+  assign T149 = lrsc_count - 5'h1;
+  assign T150 = T130 & T151;
+  assign T151 = lrsc_valid ^ 1'h1;
+  assign T152 = T131 & s2_sc;
   assign s2_sc = s2_req_cmd == 5'h7;
-  assign T243 = T244 | s2_replay;
-  assign T244 = s2_valid_masked & s2_hit;
-  assign T580 = T245[6'h3f:1'h0];
-  assign T245 = T249 ? T247 : T581;
-  assign T581 = {64'h0, T246};
-  assign T246 = T249 ? s2_req_data : s3_req_data;
-  assign T247 = s2_data_correctable ? s2_data_corrected : T582;
-  assign T582 = {64'h0, amoalu_io_out};
-  assign s2_data_corrected = T248;
-  assign T248 = {T199, T141};
-  assign T249 = T258 & T250;
-  assign T250 = T251 | s2_data_correctable;
-  assign T251 = T255 | T252;
-  assign T252 = T254 | T253;
-  assign T253 = s2_req_cmd == 5'h4;
-  assign T254 = s2_req_cmd[2'h3];
-  assign T255 = T257 | T256;
-  assign T256 = s2_req_cmd == 5'h7;
-  assign T257 = s2_req_cmd == 5'h1;
-  assign T258 = s2_valid | s2_replay;
-  assign T259 = T268 & T260;
-  assign T260 = T265 | T261;
-  assign T261 = T264 | T262;
-  assign T262 = s3_req_cmd == 5'h4;
-  assign T263 = T249 ? s2_req_cmd : s3_req_cmd;
-  assign T264 = s3_req_cmd[2'h3];
-  assign T265 = T267 | T266;
-  assign T266 = s3_req_cmd == 5'h7;
-  assign T267 = s3_req_cmd == 5'h1;
-  assign T268 = s3_valid & T269;
-  assign T269 = T583 == T270;
-  assign T270 = s3_req_addr >> 2'h3;
-  assign T271 = T249 ? s2_req_addr : s3_req_addr;
-  assign T583 = {8'h0, T272};
-  assign T272 = s1_addr >> 2'h3;
-  assign T273 = T281 & T274;
-  assign T274 = T278 | T275;
-  assign T275 = T277 | T276;
-  assign T276 = s2_req_cmd == 5'h4;
-  assign T277 = s2_req_cmd[2'h3];
-  assign T278 = T280 | T279;
-  assign T279 = s2_req_cmd == 5'h7;
-  assign T280 = s2_req_cmd == 5'h1;
-  assign T281 = T285 & T282;
-  assign T282 = T584 == T283;
-  assign T283 = s2_req_addr >> 2'h3;
-  assign T584 = {8'h0, T284};
-  assign T284 = s1_addr >> 2'h3;
-  assign T285 = T287 & T286;
-  assign T286 = s2_sc_fail ^ 1'h1;
-  assign T287 = s2_valid_masked | s2_replay;
-  assign T288 = s1_clk_en & T289;
-  assign T289 = T304 | T290;
-  assign T290 = T299 & T291;
-  assign T291 = T296 | T292;
-  assign T292 = T295 | T293;
-  assign T293 = s4_req_cmd == 5'h4;
-  assign T294 = T204 ? s3_req_cmd : s4_req_cmd;
-  assign T295 = s4_req_cmd[2'h3];
-  assign T296 = T298 | T297;
-  assign T297 = s4_req_cmd == 5'h7;
-  assign T298 = s4_req_cmd == 5'h1;
-  assign T299 = s4_valid & T300;
-  assign T300 = T585 == T301;
-  assign T301 = s4_req_addr >> 2'h3;
-  assign T302 = T204 ? s3_req_addr : s4_req_addr;
-  assign T585 = {8'h0, T303};
-  assign T303 = s1_addr >> 2'h3;
-  assign T586 = reset ? 1'h0 : s3_valid;
-  assign T304 = T273 | T259;
-  assign T305 = T288 ? 1'h1 : T306;
-  assign T306 = s1_clk_en ? 1'h0 : s2_store_bypass;
-  assign T307 = s1_clk_en ? s1_req_typ : s2_req_typ;
-  assign T308 = s2_recycle ? s2_req_typ : T309;
-  assign T309 = mshrs_io_replay_valid ? mshrs_io_replay_bits_typ : T310;
-  assign T310 = io_cpu_req_valid ? io_cpu_req_bits_typ : s1_req_typ;
-  assign T587 = s2_req_addr[3'h5:1'h0];
-  assign T311 = {s3_req_data, s3_req_data};
+  assign T153 = T154 | s2_replay;
+  assign T154 = s2_valid_masked & s2_hit;
+  assign T426 = T155[6'h3f:1'h0];
+  assign T155 = T159 ? T157 : T427;
+  assign T427 = {64'h0, T156};
+  assign T156 = T159 ? s2_req_data : s3_req_data;
+  assign T157 = s2_data_correctable ? s2_data_corrected : T428;
+  assign T428 = {64'h0, amoalu_io_out};
+  assign s2_data_corrected = T158;
+  assign T158 = {T109, T98};
+  assign T159 = T168 & T160;
+  assign T160 = T161 | s2_data_correctable;
+  assign T161 = T165 | T162;
+  assign T162 = T164 | T163;
+  assign T163 = s2_req_cmd == 5'h4;
+  assign T164 = s2_req_cmd[2'h3];
+  assign T165 = T167 | T166;
+  assign T166 = s2_req_cmd == 5'h7;
+  assign T167 = s2_req_cmd == 5'h1;
+  assign T168 = s2_valid | s2_replay;
+  assign T169 = T178 & T170;
+  assign T170 = T175 | T171;
+  assign T171 = T174 | T172;
+  assign T172 = s3_req_cmd == 5'h4;
+  assign T173 = T159 ? s2_req_cmd : s3_req_cmd;
+  assign T174 = s3_req_cmd[2'h3];
+  assign T175 = T177 | T176;
+  assign T176 = s3_req_cmd == 5'h7;
+  assign T177 = s3_req_cmd == 5'h1;
+  assign T178 = s3_valid & T179;
+  assign T179 = T429 == T180;
+  assign T180 = s3_req_addr >> 2'h3;
+  assign T181 = T159 ? s2_req_addr : s3_req_addr;
+  assign T429 = {8'h0, T182};
+  assign T182 = s1_addr >> 2'h3;
+  assign T183 = T191 & T184;
+  assign T184 = T188 | T185;
+  assign T185 = T187 | T186;
+  assign T186 = s2_req_cmd == 5'h4;
+  assign T187 = s2_req_cmd[2'h3];
+  assign T188 = T190 | T189;
+  assign T189 = s2_req_cmd == 5'h7;
+  assign T190 = s2_req_cmd == 5'h1;
+  assign T191 = T195 & T192;
+  assign T192 = T430 == T193;
+  assign T193 = s2_req_addr >> 2'h3;
+  assign T430 = {8'h0, T194};
+  assign T194 = s1_addr >> 2'h3;
+  assign T195 = T197 & T196;
+  assign T196 = s2_sc_fail ^ 1'h1;
+  assign T197 = s2_valid_masked | s2_replay;
+  assign T198 = s1_clk_en & T199;
+  assign T199 = T214 | T200;
+  assign T200 = T209 & T201;
+  assign T201 = T206 | T202;
+  assign T202 = T205 | T203;
+  assign T203 = s4_req_cmd == 5'h4;
+  assign T204 = T114 ? s3_req_cmd : s4_req_cmd;
+  assign T205 = s4_req_cmd[2'h3];
+  assign T206 = T208 | T207;
+  assign T207 = s4_req_cmd == 5'h7;
+  assign T208 = s4_req_cmd == 5'h1;
+  assign T209 = s4_valid & T210;
+  assign T210 = T431 == T211;
+  assign T211 = s4_req_addr >> 2'h3;
+  assign T212 = T114 ? s3_req_addr : s4_req_addr;
+  assign T431 = {8'h0, T213};
+  assign T213 = s1_addr >> 2'h3;
+  assign T432 = reset ? 1'h0 : s3_valid;
+  assign T214 = T183 | T169;
+  assign T215 = T198 ? 1'h1 : T216;
+  assign T216 = s1_clk_en ? 1'h0 : s2_store_bypass;
+  assign T217 = s1_clk_en ? s1_req_typ : s2_req_typ;
+  assign T218 = s2_recycle ? s2_req_typ : T219;
+  assign T219 = mshrs_io_replay_valid ? mshrs_io_replay_bits_typ : T220;
+  assign T220 = io_cpu_req_valid ? io_cpu_req_bits_typ : s1_req_typ;
+  assign T433 = s2_req_addr[3'h5:1'h0];
+  assign T221 = {s3_req_data, s3_req_data};
   assign rowWMask = 1'h1 << rowIdx;
-  assign rowIdx = T312;
-  assign T312 = s3_req_addr[2'h3];
-  assign T588 = s3_req_addr[4'hb:1'h0];
-  assign T313 = T249 ? s2_tag_match_way : s3_way;
-  assign T314 = T316 & T315;
-  assign T315 = FlowThroughSerializer_io_out_bits_client_xact_id < 2'h2;
-  assign T316 = FlowThroughSerializer_io_out_valid & T317;
-  assign T317 = FlowThroughSerializer_io_out_bits_is_builtin_type ? T321 : T318;
-  assign T318 = T320 | T319;
-  assign T319 = 4'h1 == FlowThroughSerializer_io_out_bits_g_type;
-  assign T320 = 4'h0 == FlowThroughSerializer_io_out_bits_g_type;
-  assign T321 = T323 | T322;
-  assign T322 = 4'h4 == FlowThroughSerializer_io_out_bits_g_type;
-  assign T323 = 4'h5 == FlowThroughSerializer_io_out_bits_g_type;
-  assign T324 = T325 | T8;
-  assign T325 = FlowThroughSerializer_io_out_valid ^ 1'h1;
-  assign T589 = s2_req_addr[4'hb:1'h0];
-  assign T590 = mshrs_io_replay_bits_addr[4'hb:1'h0];
-  assign T591 = io_cpu_req_bits_addr[4'hb:1'h0];
-  assign T326 = T327;
-  assign T327 = {wdata_encoded_1, wdata_encoded_0};
+  assign rowIdx = T222;
+  assign T222 = s3_req_addr[2'h3];
+  assign T434 = s3_req_addr[4'hb:1'h0];
+  assign T223 = T159 ? s2_tag_match_way : s3_way;
+  assign T224 = T226 & T225;
+  assign T225 = FlowThroughSerializer_io_out_bits_client_xact_id < 2'h2;
+  assign T226 = FlowThroughSerializer_io_out_valid & T227;
+  assign T227 = FlowThroughSerializer_io_out_bits_is_builtin_type ? T231 : T228;
+  assign T228 = T230 | T229;
+  assign T229 = 4'h1 == FlowThroughSerializer_io_out_bits_g_type;
+  assign T230 = 4'h0 == FlowThroughSerializer_io_out_bits_g_type;
+  assign T231 = T233 | T232;
+  assign T232 = 4'h4 == FlowThroughSerializer_io_out_bits_g_type;
+  assign T233 = 4'h5 == FlowThroughSerializer_io_out_bits_g_type;
+  assign T234 = T235 | T8;
+  assign T235 = FlowThroughSerializer_io_out_valid ^ 1'h1;
+  assign T435 = s2_req_addr[4'hb:1'h0];
+  assign T436 = mshrs_io_replay_bits_addr[4'hb:1'h0];
+  assign T437 = io_cpu_req_bits_addr[4'hb:1'h0];
+  assign T236 = T237;
+  assign T237 = {wdata_encoded_1, wdata_encoded_0};
   assign wdata_encoded_0 = writeArb_io_out_bits_data[6'h3f:1'h0];
   assign wdata_encoded_1 = writeArb_io_out_bits_data[7'h7f:7'h40];
-  assign T592 = T328[3'h5:1'h0];
-  assign T328 = s2_req_addr >> 3'h6;
-  assign T593 = T329[3'h5:1'h0];
-  assign T329 = io_cpu_req_bits_addr >> 3'h6;
-  assign T330 = s2_recycle ? s2_req_phys : T331;
-  assign T331 = mshrs_io_replay_valid ? mshrs_io_replay_bits_phys : T332;
-  assign T332 = prober_io_meta_read_valid ? 1'h1 : T333;
-  assign T333 = wb_io_meta_read_valid ? 1'h1 : T334;
-  assign T334 = io_cpu_req_valid ? io_cpu_req_bits_phys : s1_req_phys;
-  assign T335 = s1_clk_en ? s1_req_phys : s2_req_phys;
-  assign T336 = s1_req_addr >> 4'hc;
-  assign T337 = T339 & T338;
-  assign T338 = s1_req_phys ^ 1'h1;
-  assign T339 = s1_valid_masked & s1_readwrite;
-  assign s1_readwrite = T343 | T340;
-  assign T340 = T342 | T341;
-  assign T341 = s1_req_cmd == 5'h3;
-  assign T342 = s1_req_cmd == 5'h2;
-  assign T343 = s1_read | s1_write;
-  assign s1_read = T347 | T344;
-  assign T344 = T346 | T345;
-  assign T345 = s1_req_cmd == 5'h4;
-  assign T346 = s1_req_cmd[2'h3];
-  assign T347 = T349 | T348;
-  assign T348 = s1_req_cmd == 5'h7;
-  assign T349 = T351 | T350;
-  assign T350 = s1_req_cmd == 5'h6;
-  assign T351 = s1_req_cmd == 5'h0;
-  assign T352 = T8 & FlowThroughSerializer_io_out_valid;
-  assign T353 = cache_pass ^ 1'h1;
-  assign cache_pass = T354 | s2_replay;
-  assign T354 = s2_valid | s2_killed;
-  assign T355 = s1_valid & io_cpu_req_bits_kill;
-  assign T356 = s2_tag_match ? s2_tag_match_way : s2_replaced_way_en;
-  assign s2_replaced_way_en = 1'h1 << R357;
-  assign T358 = s1_clk_en ? T359 : R357;
-  assign T359 = R360[1'h1:1'h0];
-  assign T594 = reset ? 16'h1 : T361;
-  assign T361 = T371 ? T362 : R360;
-  assign T362 = {T364, T363};
-  assign T363 = R360[4'hf:1'h1];
-  assign T364 = T366 ^ T365;
-  assign T365 = R360[3'h5];
-  assign T366 = T368 ^ T367;
-  assign T367 = R360[2'h3];
-  assign T368 = T370 ^ T369;
-  assign T369 = R360[2'h2];
-  assign T370 = R360[1'h0];
-  assign T371 = T372;
-  assign T372 = mshrs_io_req_ready & T431;
-  assign T373 = s2_tag_match ? T419 : T374;
-  assign T374 = T375[1'h1:1'h0];
-  assign T375 = T387 | T376;
-  assign T376 = T386 ? T377 : 22'h0;
-  assign T377 = T378;
-  assign T378 = {R384, R379};
-  assign T380 = T381 ? meta_io_resp_3_coh_state : R379;
-  assign T381 = s1_clk_en & T382;
-  assign T382 = s1_replaced_way_en[2'h3];
-  assign s1_replaced_way_en = 1'h1 << T383;
-  assign T383 = R360[1'h1:1'h0];
-  assign T385 = T381 ? meta_io_resp_3_tag : R384;
-  assign T386 = s2_replaced_way_en[2'h3];
-  assign T387 = T398 | T388;
-  assign T388 = T397 ? T389 : 22'h0;
-  assign T389 = T390;
-  assign T390 = {R395, R391};
-  assign T392 = T393 ? meta_io_resp_2_coh_state : R391;
-  assign T393 = s1_clk_en & T394;
-  assign T394 = s1_replaced_way_en[2'h2];
-  assign T396 = T393 ? meta_io_resp_2_tag : R395;
-  assign T397 = s2_replaced_way_en[2'h2];
-  assign T398 = T409 | T399;
-  assign T399 = T408 ? T400 : 22'h0;
-  assign T400 = T401;
-  assign T401 = {R406, R402};
-  assign T403 = T404 ? meta_io_resp_1_coh_state : R402;
-  assign T404 = s1_clk_en & T405;
-  assign T405 = s1_replaced_way_en[1'h1];
-  assign T407 = T404 ? meta_io_resp_1_tag : R406;
-  assign T408 = s2_replaced_way_en[1'h1];
-  assign T409 = T418 ? T410 : 22'h0;
-  assign T410 = T411;
-  assign T411 = {R416, R412};
-  assign T413 = T414 ? meta_io_resp_0_coh_state : R412;
-  assign T414 = s1_clk_en & T415;
-  assign T415 = s1_replaced_way_en[1'h0];
-  assign T417 = T414 ? meta_io_resp_0_tag : R416;
-  assign T418 = s2_replaced_way_en[1'h0];
-  assign T419 = T44;
-  assign T420 = s2_tag_match ? T422 : T421;
-  assign T421 = T375[5'h15:2'h2];
-  assign T422 = T421;
-  assign T423 = s1_clk_en ? s1_req_kill : s2_req_kill;
-  assign T424 = s2_recycle ? s2_req_kill : T425;
-  assign T425 = mshrs_io_replay_valid ? mshrs_io_replay_bits_kill : T426;
-  assign T426 = io_cpu_req_valid ? io_cpu_req_bits_kill : s1_req_kill;
-  assign T427 = s1_clk_en ? s1_req_tag : s2_req_tag;
-  assign T428 = s2_recycle ? s2_req_tag : T429;
-  assign T429 = mshrs_io_replay_valid ? mshrs_io_replay_bits_tag : T430;
-  assign T430 = io_cpu_req_valid ? io_cpu_req_bits_tag : s1_req_tag;
-  assign T431 = s2_nack_hit ? 1'h0 : T432;
-  assign T432 = T454 & T433;
-  assign T433 = T441 | T434;
-  assign T434 = T438 | T435;
-  assign T435 = T437 | T436;
-  assign T436 = s2_req_cmd == 5'h4;
-  assign T437 = s2_req_cmd[2'h3];
-  assign T438 = T440 | T439;
-  assign T439 = s2_req_cmd == 5'h7;
-  assign T440 = s2_req_cmd == 5'h1;
-  assign T441 = T451 | T442;
-  assign T442 = T446 | T443;
-  assign T443 = T445 | T444;
-  assign T444 = s2_req_cmd == 5'h4;
-  assign T445 = s2_req_cmd[2'h3];
-  assign T446 = T448 | T447;
-  assign T447 = s2_req_cmd == 5'h7;
-  assign T448 = T450 | T449;
-  assign T449 = s2_req_cmd == 5'h6;
-  assign T450 = s2_req_cmd == 5'h0;
-  assign T451 = T453 | T452;
-  assign T452 = s2_req_cmd == 5'h3;
-  assign T453 = s2_req_cmd == 5'h2;
-  assign T454 = s2_valid_masked & T455;
-  assign T455 = s2_hit ^ 1'h1;
-  assign T456 = io_mem_probe_valid & T457;
-  assign T457 = lrsc_valid ^ 1'h1;
+  assign T438 = T238[3'h5:1'h0];
+  assign T238 = s2_req_addr >> 3'h6;
+  assign T439 = T239[3'h5:1'h0];
+  assign T239 = io_cpu_req_bits_addr >> 3'h6;
+  assign T240 = s2_recycle ? s2_req_phys : T241;
+  assign T241 = mshrs_io_replay_valid ? mshrs_io_replay_bits_phys : T242;
+  assign T242 = prober_io_meta_read_valid ? 1'h1 : T243;
+  assign T243 = wb_io_meta_read_valid ? 1'h1 : T244;
+  assign T244 = io_cpu_req_valid ? io_cpu_req_bits_phys : s1_req_phys;
+  assign T245 = s1_clk_en ? s1_req_phys : s2_req_phys;
+  assign T246 = s1_req_addr >> 4'hc;
+  assign T247 = T249 & T248;
+  assign T248 = s1_req_phys ^ 1'h1;
+  assign T249 = s1_valid_masked & s1_readwrite;
+  assign s1_readwrite = T253 | T250;
+  assign T250 = T252 | T251;
+  assign T251 = s1_req_cmd == 5'h3;
+  assign T252 = s1_req_cmd == 5'h2;
+  assign T253 = s1_read | s1_write;
+  assign s1_read = T257 | T254;
+  assign T254 = T256 | T255;
+  assign T255 = s1_req_cmd == 5'h4;
+  assign T256 = s1_req_cmd[2'h3];
+  assign T257 = T259 | T258;
+  assign T258 = s1_req_cmd == 5'h7;
+  assign T259 = T261 | T260;
+  assign T260 = s1_req_cmd == 5'h6;
+  assign T261 = s1_req_cmd == 5'h0;
+  assign T262 = T8 & FlowThroughSerializer_io_out_valid;
+  assign T263 = cache_pass ^ 1'h1;
+  assign cache_pass = T264 | s2_replay;
+  assign T264 = s2_valid | s2_killed;
+  assign T265 = s1_valid & io_cpu_req_bits_kill;
+  assign T440 = T266[1'h0];
+  assign T266 = s2_tag_match ? T441 : s2_replaced_way_en;
+  assign s2_replaced_way_en = 1'h1 << R267;
+  assign T268 = s1_clk_en ? 1'h0 : R267;
+  assign T441 = {1'h0, s2_tag_match_way};
+  assign T269 = s2_tag_match ? T271 : s2_repl_meta_coh_state;
+  assign T270 = s1_clk_en ? meta_io_resp_0_coh_state : s2_repl_meta_coh_state;
+  assign T271 = s2_hit_state_state;
+  assign T272 = s2_tag_match ? T274 : s2_repl_meta_tag;
+  assign T273 = s1_clk_en ? meta_io_resp_0_tag : s2_repl_meta_tag;
+  assign T274 = s2_repl_meta_tag;
+  assign T275 = s1_clk_en ? s1_req_kill : s2_req_kill;
+  assign T276 = s2_recycle ? s2_req_kill : T277;
+  assign T277 = mshrs_io_replay_valid ? mshrs_io_replay_bits_kill : T278;
+  assign T278 = io_cpu_req_valid ? io_cpu_req_bits_kill : s1_req_kill;
+  assign T279 = s1_clk_en ? s1_req_tag : s2_req_tag;
+  assign T280 = s2_recycle ? s2_req_tag : T281;
+  assign T281 = mshrs_io_replay_valid ? mshrs_io_replay_bits_tag : T282;
+  assign T282 = io_cpu_req_valid ? io_cpu_req_bits_tag : s1_req_tag;
+  assign T283 = s2_nack_hit ? 1'h0 : T284;
+  assign T284 = T306 & T285;
+  assign T285 = T293 | T286;
+  assign T286 = T290 | T287;
+  assign T287 = T289 | T288;
+  assign T288 = s2_req_cmd == 5'h4;
+  assign T289 = s2_req_cmd[2'h3];
+  assign T290 = T292 | T291;
+  assign T291 = s2_req_cmd == 5'h7;
+  assign T292 = s2_req_cmd == 5'h1;
+  assign T293 = T303 | T294;
+  assign T294 = T298 | T295;
+  assign T295 = T297 | T296;
+  assign T296 = s2_req_cmd == 5'h4;
+  assign T297 = s2_req_cmd[2'h3];
+  assign T298 = T300 | T299;
+  assign T299 = s2_req_cmd == 5'h7;
+  assign T300 = T302 | T301;
+  assign T301 = s2_req_cmd == 5'h6;
+  assign T302 = s2_req_cmd == 5'h0;
+  assign T303 = T305 | T304;
+  assign T304 = s2_req_cmd == 5'h3;
+  assign T305 = s2_req_cmd == 5'h2;
+  assign T306 = s2_valid_masked & T307;
+  assign T307 = s2_hit ^ 1'h1;
+  assign T308 = io_mem_probe_valid & T309;
+  assign T309 = lrsc_valid ^ 1'h1;
   assign io_mem_release_bits_data = releaseArb_io_out_bits_data;
   assign io_mem_release_bits_r_type = releaseArb_io_out_bits_r_type;
   assign io_mem_release_bits_voluntary = releaseArb_io_out_bits_voluntary;
@@ -62304,9 +56288,9 @@ module HellaCache(input clk, input reset,
   assign io_mem_release_bits_addr_block = releaseArb_io_out_bits_addr_block;
   assign io_mem_release_bits_addr_beat = releaseArb_io_out_bits_addr_beat;
   assign io_mem_release_valid = releaseArb_io_out_valid;
-  assign io_mem_probe_ready = T458;
-  assign T458 = prober_io_req_ready & T459;
-  assign T459 = lrsc_valid ^ 1'h1;
+  assign io_mem_probe_ready = T310;
+  assign T310 = prober_io_req_ready & T311;
+  assign T311 = lrsc_valid ^ 1'h1;
   assign io_mem_grant_ready = FlowThroughSerializer_io_in_ready;
   assign io_mem_acquire_bits_data = mshrs_io_mem_req_bits_data;
   assign io_mem_acquire_bits_union = mshrs_io_mem_req_bits_union;
@@ -62321,152 +56305,152 @@ module HellaCache(input clk, input reset,
   assign io_ptw_req_bits_prv = dtlb_io_ptw_req_bits_prv;
   assign io_ptw_req_bits_addr = dtlb_io_ptw_req_bits_addr;
   assign io_ptw_req_valid = dtlb_io_ptw_req_valid;
-  assign io_cpu_ordered = T460;
-  assign T460 = T462 & T461;
-  assign T461 = s2_valid ^ 1'h1;
-  assign T462 = mshrs_io_fence_rdy & T463;
-  assign T463 = s1_valid ^ 1'h1;
-  assign io_cpu_xcpt_pf_st = T464;
-  assign T464 = s1_write & dtlb_io_resp_xcpt_st;
-  assign io_cpu_xcpt_pf_ld = T465;
-  assign T465 = s1_read & dtlb_io_resp_xcpt_ld;
-  assign io_cpu_xcpt_ma_st = T466;
-  assign T466 = s1_write & misaligned;
-  assign misaligned = T467 != 40'h0;
-  assign T467 = s1_req_addr & T595;
-  assign T595 = {37'h0, T468};
-  assign T468 = T469[2'h2:1'h0];
-  assign T469 = T470 - 4'h1;
-  assign T470 = 1'h1 << T471;
-  assign T471 = s1_req_typ[1'h1:1'h0];
-  assign io_cpu_xcpt_ma_ld = T472;
-  assign T472 = s1_read & misaligned;
+  assign io_cpu_ordered = T312;
+  assign T312 = T314 & T313;
+  assign T313 = s2_valid ^ 1'h1;
+  assign T314 = mshrs_io_fence_rdy & T315;
+  assign T315 = s1_valid ^ 1'h1;
+  assign io_cpu_xcpt_pf_st = T316;
+  assign T316 = s1_write & dtlb_io_resp_xcpt_st;
+  assign io_cpu_xcpt_pf_ld = T317;
+  assign T317 = s1_read & dtlb_io_resp_xcpt_ld;
+  assign io_cpu_xcpt_ma_st = T318;
+  assign T318 = s1_write & misaligned;
+  assign misaligned = T319 != 40'h0;
+  assign T319 = s1_req_addr & T442;
+  assign T442 = {37'h0, T320};
+  assign T320 = T321[2'h2:1'h0];
+  assign T321 = T322 - 4'h1;
+  assign T322 = 1'h1 << T323;
+  assign T323 = s1_req_typ[1'h1:1'h0];
+  assign io_cpu_xcpt_ma_ld = T324;
+  assign T324 = s1_read & misaligned;
   assign io_cpu_replay_next_bits = s1_req_tag;
-  assign io_cpu_replay_next_valid = T473;
-  assign T473 = s1_replay & s1_read;
-  assign io_cpu_resp_bits_store_data = T474;
-  assign T474 = cache_pass ? cache_resp_bits_store_data : uncache_resp_bits_store_data;
+  assign io_cpu_replay_next_valid = T325;
+  assign T325 = s1_replay & s1_read;
+  assign io_cpu_resp_bits_store_data = T326;
+  assign T326 = cache_pass ? cache_resp_bits_store_data : uncache_resp_bits_store_data;
   assign uncache_resp_bits_store_data = mshrs_io_resp_bits_store_data;
   assign cache_resp_bits_store_data = s2_req_data;
-  assign io_cpu_resp_bits_data_word_bypass = T475;
-  assign T475 = {T480, T476};
-  assign T476 = T479 ? T478 : T477;
-  assign T477 = s2_data_word[5'h1f:1'h0];
-  assign T478 = s2_data_word[6'h3f:6'h20];
-  assign T479 = s2_req_addr[2'h2];
-  assign T480 = T487 ? T482 : T481;
-  assign T481 = s2_data_word[6'h3f:6'h20];
-  assign T482 = 32'h0 - T596;
-  assign T596 = {31'h0, T483};
-  assign T483 = T485 & T484;
-  assign T484 = T476[5'h1f];
-  assign T485 = $signed(1'h0) <= $signed(T486);
-  assign T486 = s2_req_typ;
-  assign T487 = T488 == 2'h2;
-  assign T488 = s2_req_typ[1'h1:1'h0];
-  assign io_cpu_resp_bits_has_data = T489;
-  assign T489 = cache_pass ? cache_resp_bits_has_data : uncache_resp_bits_has_data;
+  assign io_cpu_resp_bits_data_word_bypass = T327;
+  assign T327 = {T332, T328};
+  assign T328 = T331 ? T330 : T329;
+  assign T329 = s2_data_word[5'h1f:1'h0];
+  assign T330 = s2_data_word[6'h3f:6'h20];
+  assign T331 = s2_req_addr[2'h2];
+  assign T332 = T339 ? T334 : T333;
+  assign T333 = s2_data_word[6'h3f:6'h20];
+  assign T334 = 32'h0 - T443;
+  assign T443 = {31'h0, T335};
+  assign T335 = T337 & T336;
+  assign T336 = T328[5'h1f];
+  assign T337 = $signed(1'h0) <= $signed(T338);
+  assign T338 = s2_req_typ;
+  assign T339 = T340 == 2'h2;
+  assign T340 = s2_req_typ[1'h1:1'h0];
+  assign io_cpu_resp_bits_has_data = T341;
+  assign T341 = cache_pass ? cache_resp_bits_has_data : uncache_resp_bits_has_data;
   assign uncache_resp_bits_has_data = mshrs_io_resp_bits_has_data;
-  assign cache_resp_bits_has_data = T490;
-  assign T490 = T494 | T491;
-  assign T491 = T493 | T492;
-  assign T492 = s2_req_cmd == 5'h4;
-  assign T493 = s2_req_cmd[2'h3];
-  assign T494 = T496 | T495;
-  assign T495 = s2_req_cmd == 5'h7;
-  assign T496 = T498 | T497;
-  assign T497 = s2_req_cmd == 5'h6;
-  assign T498 = s2_req_cmd == 5'h0;
-  assign io_cpu_resp_bits_replay = T499;
-  assign T499 = cache_pass ? cache_resp_bits_replay : uncache_resp_bits_replay;
+  assign cache_resp_bits_has_data = T342;
+  assign T342 = T346 | T343;
+  assign T343 = T345 | T344;
+  assign T344 = s2_req_cmd == 5'h4;
+  assign T345 = s2_req_cmd[2'h3];
+  assign T346 = T348 | T347;
+  assign T347 = s2_req_cmd == 5'h7;
+  assign T348 = T350 | T349;
+  assign T349 = s2_req_cmd == 5'h6;
+  assign T350 = s2_req_cmd == 5'h0;
+  assign io_cpu_resp_bits_replay = T351;
+  assign T351 = cache_pass ? cache_resp_bits_replay : uncache_resp_bits_replay;
   assign uncache_resp_bits_replay = mshrs_io_resp_bits_replay;
   assign cache_resp_bits_replay = s2_replay;
-  assign io_cpu_resp_bits_nack = T500;
-  assign T500 = cache_pass ? cache_resp_bits_nack : uncache_resp_bits_nack;
+  assign io_cpu_resp_bits_nack = T352;
+  assign T352 = cache_pass ? cache_resp_bits_nack : uncache_resp_bits_nack;
   assign uncache_resp_bits_nack = mshrs_io_resp_bits_nack;
-  assign cache_resp_bits_nack = T501;
-  assign T501 = s2_valid & s2_nack;
-  assign io_cpu_resp_bits_data = T502;
-  assign T502 = cache_pass ? cache_resp_bits_data : uncache_resp_bits_data;
+  assign cache_resp_bits_nack = T353;
+  assign T353 = s2_valid & s2_nack;
+  assign io_cpu_resp_bits_data = T354;
+  assign T354 = cache_pass ? cache_resp_bits_data : uncache_resp_bits_data;
   assign uncache_resp_bits_data = mshrs_io_resp_bits_data;
-  assign cache_resp_bits_data = T503;
-  assign T503 = T504 | T597;
-  assign T597 = {63'h0, s2_sc_fail};
-  assign T504 = {T532, T505};
-  assign T505 = s2_sc ? 8'h0 : T506;
-  assign T506 = T531 ? T530 : T507;
-  assign T507 = T508[3'h7:1'h0];
-  assign T508 = {T524, T509};
-  assign T509 = T523 ? T522 : T510;
-  assign T510 = T511[4'hf:1'h0];
-  assign T511 = {T516, T512};
-  assign T512 = T515 ? T514 : T513;
-  assign T513 = s2_data_word[5'h1f:1'h0];
-  assign T514 = s2_data_word[6'h3f:6'h20];
-  assign T515 = s2_req_addr[2'h2];
-  assign T516 = T521 ? T518 : T517;
-  assign T517 = s2_data_word[6'h3f:6'h20];
-  assign T518 = 32'h0 - T598;
-  assign T598 = {31'h0, T519};
-  assign T519 = T485 & T520;
-  assign T520 = T512[5'h1f];
-  assign T521 = T488 == 2'h2;
-  assign T522 = T511[5'h1f:5'h10];
-  assign T523 = s2_req_addr[1'h1];
-  assign T524 = T529 ? T526 : T525;
-  assign T525 = T511[6'h3f:5'h10];
-  assign T526 = 48'h0 - T599;
-  assign T599 = {47'h0, T527};
-  assign T527 = T485 & T528;
-  assign T528 = T509[4'hf];
-  assign T529 = T488 == 2'h1;
-  assign T530 = T508[4'hf:4'h8];
-  assign T531 = s2_req_addr[1'h0];
-  assign T532 = T537 ? T534 : T533;
-  assign T533 = T508[6'h3f:4'h8];
-  assign T534 = 56'h0 - T600;
-  assign T600 = {55'h0, T535};
-  assign T535 = T485 & T536;
-  assign T536 = T505[3'h7];
-  assign T537 = T538 | s2_sc;
-  assign T538 = T488 == 2'h0;
-  assign io_cpu_resp_bits_typ = T539;
-  assign T539 = cache_pass ? cache_resp_bits_typ : uncache_resp_bits_typ;
+  assign cache_resp_bits_data = T355;
+  assign T355 = T356 | T444;
+  assign T444 = {63'h0, s2_sc_fail};
+  assign T356 = {T384, T357};
+  assign T357 = s2_sc ? 8'h0 : T358;
+  assign T358 = T383 ? T382 : T359;
+  assign T359 = T360[3'h7:1'h0];
+  assign T360 = {T376, T361};
+  assign T361 = T375 ? T374 : T362;
+  assign T362 = T363[4'hf:1'h0];
+  assign T363 = {T368, T364};
+  assign T364 = T367 ? T366 : T365;
+  assign T365 = s2_data_word[5'h1f:1'h0];
+  assign T366 = s2_data_word[6'h3f:6'h20];
+  assign T367 = s2_req_addr[2'h2];
+  assign T368 = T373 ? T370 : T369;
+  assign T369 = s2_data_word[6'h3f:6'h20];
+  assign T370 = 32'h0 - T445;
+  assign T445 = {31'h0, T371};
+  assign T371 = T337 & T372;
+  assign T372 = T364[5'h1f];
+  assign T373 = T340 == 2'h2;
+  assign T374 = T363[5'h1f:5'h10];
+  assign T375 = s2_req_addr[1'h1];
+  assign T376 = T381 ? T378 : T377;
+  assign T377 = T363[6'h3f:5'h10];
+  assign T378 = 48'h0 - T446;
+  assign T446 = {47'h0, T379};
+  assign T379 = T337 & T380;
+  assign T380 = T361[4'hf];
+  assign T381 = T340 == 2'h1;
+  assign T382 = T360[4'hf:4'h8];
+  assign T383 = s2_req_addr[1'h0];
+  assign T384 = T389 ? T386 : T385;
+  assign T385 = T360[6'h3f:4'h8];
+  assign T386 = 56'h0 - T447;
+  assign T447 = {55'h0, T387};
+  assign T387 = T337 & T388;
+  assign T388 = T357[3'h7];
+  assign T389 = T390 | s2_sc;
+  assign T390 = T340 == 2'h0;
+  assign io_cpu_resp_bits_typ = T391;
+  assign T391 = cache_pass ? cache_resp_bits_typ : uncache_resp_bits_typ;
   assign uncache_resp_bits_typ = mshrs_io_resp_bits_typ;
   assign cache_resp_bits_typ = s2_req_typ;
-  assign io_cpu_resp_bits_cmd = T540;
-  assign T540 = cache_pass ? cache_resp_bits_cmd : uncache_resp_bits_cmd;
+  assign io_cpu_resp_bits_cmd = T392;
+  assign T392 = cache_pass ? cache_resp_bits_cmd : uncache_resp_bits_cmd;
   assign uncache_resp_bits_cmd = mshrs_io_resp_bits_cmd;
   assign cache_resp_bits_cmd = s2_req_cmd;
-  assign io_cpu_resp_bits_tag = T541;
-  assign T541 = cache_pass ? cache_resp_bits_tag : uncache_resp_bits_tag;
+  assign io_cpu_resp_bits_tag = T393;
+  assign T393 = cache_pass ? cache_resp_bits_tag : uncache_resp_bits_tag;
   assign uncache_resp_bits_tag = mshrs_io_resp_bits_tag;
   assign cache_resp_bits_tag = s2_req_tag;
-  assign io_cpu_resp_bits_addr = T542;
-  assign T542 = cache_pass ? cache_resp_bits_addr : uncache_resp_bits_addr;
+  assign io_cpu_resp_bits_addr = T394;
+  assign T394 = cache_pass ? cache_resp_bits_addr : uncache_resp_bits_addr;
   assign uncache_resp_bits_addr = mshrs_io_resp_bits_addr;
   assign cache_resp_bits_addr = s2_req_addr;
-  assign io_cpu_resp_valid = T543;
-  assign T543 = cache_pass ? cache_resp_valid : uncache_resp_valid;
+  assign io_cpu_resp_valid = T395;
+  assign T395 = cache_pass ? cache_resp_valid : uncache_resp_valid;
   assign uncache_resp_valid = mshrs_io_resp_valid;
-  assign cache_resp_valid = T544;
-  assign T544 = T546 & T545;
-  assign T545 = s2_data_correctable ^ 1'h1;
-  assign T546 = s2_replay | T547;
-  assign T547 = s2_valid_masked & s2_hit;
-  assign io_cpu_req_ready = T548;
-  assign T548 = block_miss ? 1'h0 : T549;
-  assign T549 = T556 ? 1'h0 : T550;
-  assign T550 = T555 ? 1'h0 : T551;
-  assign T551 = T552 == 1'h0;
-  assign T552 = T554 & T553;
-  assign T553 = io_cpu_req_bits_phys ^ 1'h1;
-  assign T554 = dtlb_io_req_ready ^ 1'h1;
-  assign T555 = metaReadArb_io_in_4_ready ^ 1'h1;
-  assign T556 = readArb_io_in_3_ready ^ 1'h1;
-  assign T601 = reset ? 1'h0 : T557;
-  assign T557 = T558 & s2_nack_miss;
-  assign T558 = s2_valid | block_miss;
+  assign cache_resp_valid = T396;
+  assign T396 = T398 & T397;
+  assign T397 = s2_data_correctable ^ 1'h1;
+  assign T398 = s2_replay | T399;
+  assign T399 = s2_valid_masked & s2_hit;
+  assign io_cpu_req_ready = T400;
+  assign T400 = block_miss ? 1'h0 : T401;
+  assign T401 = T408 ? 1'h0 : T402;
+  assign T402 = T407 ? 1'h0 : T403;
+  assign T403 = T404 == 1'h0;
+  assign T404 = T406 & T405;
+  assign T405 = io_cpu_req_bits_phys ^ 1'h1;
+  assign T406 = dtlb_io_req_ready ^ 1'h1;
+  assign T407 = metaReadArb_io_in_4_ready ^ 1'h1;
+  assign T408 = readArb_io_in_3_ready ^ 1'h1;
+  assign T448 = reset ? 1'h0 : T409;
+  assign T409 = T410 & s2_nack_miss;
+  assign T410 = s2_valid | block_miss;
   WritebackUnit wb(.clk(clk), .reset(reset),
        .io_req_ready( wb_io_req_ready ),
        .io_req_valid( wbArb_io_out_valid ),
@@ -62498,7 +56482,7 @@ module HellaCache(input clk, input reset,
   );
   ProbeUnit prober(.clk(clk), .reset(reset),
        .io_req_ready( prober_io_req_ready ),
-       .io_req_valid( T456 ),
+       .io_req_valid( T308 ),
        .io_req_bits_addr_block( io_mem_probe_bits_addr_block ),
        .io_req_bits_p_type( io_mem_probe_bits_p_type ),
        //.io_req_bits_client_xact_id(  )
@@ -62532,11 +56516,11 @@ module HellaCache(input clk, input reset,
        .io_wb_req_bits_way_en( prober_io_wb_req_bits_way_en ),
        .io_way_en( s2_tag_match_way ),
        .io_mshr_rdy( mshrs_io_probe_rdy ),
-       .io_block_state_state( T44 )
+       .io_block_state_state( s2_hit_state_state )
   );
   MSHRFile mshrs(.clk(clk), .reset(reset),
        .io_req_ready( mshrs_io_req_ready ),
-       .io_req_valid( T431 ),
+       .io_req_valid( T283 ),
        .io_req_bits_addr( s2_req_addr ),
        .io_req_bits_tag( s2_req_tag ),
        .io_req_bits_cmd( s2_req_cmd ),
@@ -62545,10 +56529,10 @@ module HellaCache(input clk, input reset,
        .io_req_bits_phys( s2_req_phys ),
        .io_req_bits_data( s2_req_data ),
        .io_req_bits_tag_match( s2_tag_match ),
-       .io_req_bits_old_meta_tag( T420 ),
-       .io_req_bits_old_meta_coh_state( T373 ),
-       .io_req_bits_way_en( T356 ),
-       .io_resp_ready( T353 ),
+       .io_req_bits_old_meta_tag( T272 ),
+       .io_req_bits_old_meta_coh_state( T269 ),
+       .io_req_bits_way_en( T440 ),
+       .io_resp_ready( T263 ),
        .io_resp_valid( mshrs_io_resp_valid ),
        .io_resp_bits_addr( mshrs_io_resp_bits_addr ),
        .io_resp_bits_tag( mshrs_io_resp_bits_tag ),
@@ -62592,7 +56576,7 @@ module HellaCache(input clk, input reset,
        .io_replay_bits_kill( mshrs_io_replay_bits_kill ),
        .io_replay_bits_phys( mshrs_io_replay_bits_phys ),
        .io_replay_bits_data( mshrs_io_replay_bits_data ),
-       .io_mem_grant_valid( T352 ),
+       .io_mem_grant_valid( T262 ),
        .io_mem_grant_bits_addr_beat( FlowThroughSerializer_io_out_bits_addr_beat ),
        .io_mem_grant_bits_client_xact_id( FlowThroughSerializer_io_out_bits_client_xact_id ),
        .io_mem_grant_bits_manager_xact_id( FlowThroughSerializer_io_out_bits_manager_xact_id ),
@@ -62613,9 +56597,9 @@ module HellaCache(input clk, input reset,
   );
   TLB dtlb(.clk(clk), .reset(reset),
        .io_req_ready( dtlb_io_req_ready ),
-       .io_req_valid( T337 ),
+       .io_req_valid( T247 ),
        .io_req_bits_asid( 7'h0 ),
-       .io_req_bits_vpn( T336 ),
+       .io_req_bits_vpn( T246 ),
        .io_req_bits_passthrough( s1_req_phys ),
        .io_req_bits_instruction( 1'h0 ),
        .io_req_bits_store( s1_write ),
@@ -62668,19 +56652,13 @@ module HellaCache(input clk, input reset,
        .io_write_bits_way_en( metaWriteArb_io_out_bits_way_en ),
        .io_write_bits_data_tag( metaWriteArb_io_out_bits_data_tag ),
        .io_write_bits_data_coh_state( metaWriteArb_io_out_bits_data_coh_state ),
-       .io_resp_3_tag( meta_io_resp_3_tag ),
-       .io_resp_3_coh_state( meta_io_resp_3_coh_state ),
-       .io_resp_2_tag( meta_io_resp_2_tag ),
-       .io_resp_2_coh_state( meta_io_resp_2_coh_state ),
-       .io_resp_1_tag( meta_io_resp_1_tag ),
-       .io_resp_1_coh_state( meta_io_resp_1_coh_state ),
        .io_resp_0_tag( meta_io_resp_0_tag ),
        .io_resp_0_coh_state( meta_io_resp_0_coh_state )
   );
   Arbiter_0 metaReadArb(
        .io_in_4_ready( metaReadArb_io_in_4_ready ),
        .io_in_4_valid( io_cpu_req_valid ),
-       .io_in_4_bits_idx( T593 ),
+       .io_in_4_bits_idx( T439 ),
        //.io_in_4_bits_way_en(  )
        .io_in_3_ready( metaReadArb_io_in_3_ready ),
        .io_in_3_valid( wb_io_meta_read_valid ),
@@ -62696,7 +56674,7 @@ module HellaCache(input clk, input reset,
        .io_in_1_bits_way_en( mshrs_io_meta_read_bits_way_en ),
        //.io_in_0_ready(  )
        .io_in_0_valid( s2_recycle ),
-       .io_in_0_bits_idx( T592 ),
+       .io_in_0_bits_idx( T438 ),
        //.io_in_0_bits_way_en(  )
        .io_out_ready( meta_io_read_ready ),
        .io_out_valid( metaReadArb_io_out_valid ),
@@ -62743,30 +56721,27 @@ module HellaCache(input clk, input reset,
        .io_write_bits_way_en( writeArb_io_out_bits_way_en ),
        .io_write_bits_addr( writeArb_io_out_bits_addr ),
        .io_write_bits_wmask( writeArb_io_out_bits_wmask ),
-       .io_write_bits_data( T326 ),
-       .io_resp_3( data_io_resp_3 ),
-       .io_resp_2( data_io_resp_2 ),
-       .io_resp_1( data_io_resp_1 ),
+       .io_write_bits_data( T236 ),
        .io_resp_0( data_io_resp_0 )
   );
   Arbiter_2 readArb(
        .io_in_3_ready( readArb_io_in_3_ready ),
        .io_in_3_valid( io_cpu_req_valid ),
-       .io_in_3_bits_way_en( 4'hf ),
-       .io_in_3_bits_addr( T591 ),
+       .io_in_3_bits_way_en( 1'h1 ),
+       .io_in_3_bits_addr( T437 ),
        .io_in_2_ready( readArb_io_in_2_ready ),
        .io_in_2_valid( wb_io_data_req_valid ),
        .io_in_2_bits_way_en( wb_io_data_req_bits_way_en ),
        .io_in_2_bits_addr( wb_io_data_req_bits_addr ),
        .io_in_1_ready( readArb_io_in_1_ready ),
        .io_in_1_valid( mshrs_io_replay_valid ),
-       .io_in_1_bits_way_en( 4'hf ),
-       .io_in_1_bits_addr( T590 ),
+       .io_in_1_bits_way_en( 1'h1 ),
+       .io_in_1_bits_addr( T436 ),
        //.io_in_0_ready(  )
        .io_in_0_valid( s2_recycle ),
-       .io_in_0_bits_way_en( 4'hf ),
-       .io_in_0_bits_addr( T589 ),
-       .io_out_ready( T324 ),
+       .io_in_0_bits_way_en( 1'h1 ),
+       .io_in_0_bits_addr( T435 ),
+       .io_out_ready( T234 ),
        .io_out_valid( readArb_io_out_valid ),
        .io_out_bits_way_en( readArb_io_out_bits_way_en ),
        .io_out_bits_addr( readArb_io_out_bits_addr )
@@ -62774,7 +56749,7 @@ module HellaCache(input clk, input reset,
   );
   Arbiter_3 writeArb(
        .io_in_1_ready( writeArb_io_in_1_ready ),
-       .io_in_1_valid( T314 ),
+       .io_in_1_valid( T224 ),
        .io_in_1_bits_way_en( mshrs_io_refill_way_en ),
        .io_in_1_bits_addr( mshrs_io_refill_addr ),
        .io_in_1_bits_wmask( 2'h3 ),
@@ -62782,9 +56757,9 @@ module HellaCache(input clk, input reset,
        //.io_in_0_ready(  )
        .io_in_0_valid( s3_valid ),
        .io_in_0_bits_way_en( s3_way ),
-       .io_in_0_bits_addr( T588 ),
+       .io_in_0_bits_addr( T434 ),
        .io_in_0_bits_wmask( rowWMask ),
-       .io_in_0_bits_data( T311 ),
+       .io_in_0_bits_data( T221 ),
        .io_out_ready( data_io_write_ready ),
        .io_out_valid( writeArb_io_out_valid ),
        .io_out_bits_way_en( writeArb_io_out_bits_way_en ),
@@ -62794,10 +56769,10 @@ module HellaCache(input clk, input reset,
        //.io_chosen(  )
   );
   AMOALU amoalu(
-       .io_addr( T587 ),
+       .io_addr( T433 ),
        .io_cmd( s2_req_cmd ),
        .io_typ( s2_req_typ ),
-       .io_lhs( T568 ),
+       .io_lhs( T420 ),
        .io_rhs( s2_req_data ),
        .io_out( amoalu_io_out )
   );
@@ -62890,7 +56865,7 @@ module HellaCache(input clk, input reset,
 // synthesis translate_on
 `endif
     R4 <= T5;
-    if(T138) begin
+    if(T94) begin
       s2_req_data <= s1_req_data;
     end else if(T21) begin
       s2_req_data <= T19;
@@ -62921,38 +56896,29 @@ module HellaCache(input clk, input reset,
       s1_valid <= T31;
     end
     if(s1_clk_en) begin
-      R48 <= meta_io_resp_3_coh_state;
-    end
-    if(s1_clk_en) begin
-      s2_tag_match_way <= s1_tag_match_way;
+      s2_req_addr <= T414;
     end
     if(s2_recycle) begin
       s1_req_addr <= s2_req_addr;
     end else if(mshrs_io_replay_valid) begin
       s1_req_addr <= mshrs_io_replay_bits_addr;
     end else if(prober_io_meta_read_valid) begin
-      s1_req_addr <= T563;
+      s1_req_addr <= T416;
     end else if(wb_io_meta_read_valid) begin
-      s1_req_addr <= T562;
+      s1_req_addr <= T415;
     end else if(io_cpu_req_valid) begin
       s1_req_addr <= io_cpu_req_bits_addr;
     end
     if(s1_clk_en) begin
-      s2_req_addr <= T564;
+      s2_hit_state_state <= meta_io_resp_0_coh_state;
     end
     if(s1_clk_en) begin
-      R92 <= meta_io_resp_2_coh_state;
-    end
-    if(s1_clk_en) begin
-      R98 <= meta_io_resp_1_coh_state;
-    end
-    if(s1_clk_en) begin
-      R103 <= meta_io_resp_0_coh_state;
+      s2_tag_match_way <= s1_tag_match_way;
     end
     if(reset) begin
-      R129 <= 1'h0;
+      R85 <= 1'h0;
     end else begin
-      R129 <= s1_replay;
+      R85 <= s1_replay;
     end
     if(reset) begin
       s2_valid <= 1'h0;
@@ -62972,61 +56938,49 @@ module HellaCache(input clk, input reset,
     end else if(s1_clk_en) begin
       s1_recycled <= s2_recycle;
     end
-    R145 <= T569;
-    if(T153) begin
-      R150 <= T152;
+    R101 <= T421;
+    if(T104) begin
+      R106 <= T108;
     end
-    R162 <= T571;
-    if(T170) begin
-      R167 <= T169;
+    if(T198) begin
+      s2_store_bypass_data <= T111;
     end
-    R176 <= T573;
-    if(T184) begin
-      R181 <= T183;
-    end
-    R189 <= T575;
-    if(T197) begin
-      R194 <= T196;
-    end
-    if(T288) begin
-      s2_store_bypass_data <= T201;
-    end
-    if(T204) begin
+    if(T114) begin
       s4_req_data <= s3_req_data;
     end
     if(reset) begin
       s3_valid <= 1'h0;
     end else begin
-      s3_valid <= T205;
+      s3_valid <= T115;
     end
-    if(T220) begin
-      lrsc_addr <= T219;
+    if(T130) begin
+      lrsc_addr <= T129;
     end
-    if(T234) begin
+    if(T144) begin
       s2_nack_hit <= s1_nack;
     end
     if(reset) begin
       lrsc_count <= 5'h0;
     end else if(io_cpu_invalidate_lr) begin
       lrsc_count <= 5'h0;
-    end else if(T242) begin
+    end else if(T152) begin
       lrsc_count <= 5'h0;
-    end else if(T240) begin
+    end else if(T150) begin
       lrsc_count <= 5'h1f;
     end else if(lrsc_valid) begin
-      lrsc_count <= T239;
+      lrsc_count <= T149;
     end
-    s3_req_data <= T580;
-    if(T249) begin
+    s3_req_data <= T426;
+    if(T159) begin
       s3_req_cmd <= s2_req_cmd;
     end
-    if(T249) begin
+    if(T159) begin
       s3_req_addr <= s2_req_addr;
     end
-    if(T204) begin
+    if(T114) begin
       s4_req_cmd <= s3_req_cmd;
     end
-    if(T204) begin
+    if(T114) begin
       s4_req_addr <= s3_req_addr;
     end
     if(reset) begin
@@ -63034,7 +56988,7 @@ module HellaCache(input clk, input reset,
     end else begin
       s4_valid <= s3_valid;
     end
-    if(T288) begin
+    if(T198) begin
       s2_store_bypass <= 1'h1;
     end else if(s1_clk_en) begin
       s2_store_bypass <= 1'h0;
@@ -63049,7 +57003,7 @@ module HellaCache(input clk, input reset,
     end else if(io_cpu_req_valid) begin
       s1_req_typ <= io_cpu_req_bits_typ;
     end
-    if(T249) begin
+    if(T159) begin
       s3_way <= s2_tag_match_way;
     end
     if(s2_recycle) begin
@@ -63066,38 +57020,15 @@ module HellaCache(input clk, input reset,
     if(s1_clk_en) begin
       s2_req_phys <= s1_req_phys;
     end
-    s2_killed <= T355;
+    s2_killed <= T265;
     if(s1_clk_en) begin
-      R357 <= T359;
+      R267 <= 1'h0;
     end
-    if(reset) begin
-      R360 <= 16'h1;
-    end else if(T371) begin
-      R360 <= T362;
+    if(s1_clk_en) begin
+      s2_repl_meta_coh_state <= meta_io_resp_0_coh_state;
     end
-    if(T381) begin
-      R379 <= meta_io_resp_3_coh_state;
-    end
-    if(T381) begin
-      R384 <= meta_io_resp_3_tag;
-    end
-    if(T393) begin
-      R391 <= meta_io_resp_2_coh_state;
-    end
-    if(T393) begin
-      R395 <= meta_io_resp_2_tag;
-    end
-    if(T404) begin
-      R402 <= meta_io_resp_1_coh_state;
-    end
-    if(T404) begin
-      R406 <= meta_io_resp_1_tag;
-    end
-    if(T414) begin
-      R412 <= meta_io_resp_0_coh_state;
-    end
-    if(T414) begin
-      R416 <= meta_io_resp_0_tag;
+    if(s1_clk_en) begin
+      s2_repl_meta_tag <= meta_io_resp_0_tag;
     end
     if(s1_clk_en) begin
       s2_req_kill <= s1_req_kill;
@@ -63122,7 +57053,7 @@ module HellaCache(input clk, input reset,
     if(reset) begin
       block_miss <= 1'h0;
     end else begin
-      block_miss <= T557;
+      block_miss <= T409;
     end
   end
 endmodule
@@ -64455,8 +58386,8 @@ module RocketTile(input clk, input reset,
   wire core_io_imem_btb_update_bits_prediction_bits_mask;
   wire core_io_imem_btb_update_bits_prediction_bits_bridx;
   wire[38:0] core_io_imem_btb_update_bits_prediction_bits_target;
-  wire[5:0] core_io_imem_btb_update_bits_prediction_bits_entry;
-  wire[6:0] core_io_imem_btb_update_bits_prediction_bits_bht_history;
+  wire[2:0] core_io_imem_btb_update_bits_prediction_bits_entry;
+  wire[3:0] core_io_imem_btb_update_bits_prediction_bits_bht_history;
   wire[1:0] core_io_imem_btb_update_bits_prediction_bits_bht_value;
   wire[38:0] core_io_imem_btb_update_bits_pc;
   wire[38:0] core_io_imem_btb_update_bits_target;
@@ -64469,8 +58400,8 @@ module RocketTile(input clk, input reset,
   wire core_io_imem_bht_update_bits_prediction_bits_mask;
   wire core_io_imem_bht_update_bits_prediction_bits_bridx;
   wire[38:0] core_io_imem_bht_update_bits_prediction_bits_target;
-  wire[5:0] core_io_imem_bht_update_bits_prediction_bits_entry;
-  wire[6:0] core_io_imem_bht_update_bits_prediction_bits_bht_history;
+  wire[2:0] core_io_imem_bht_update_bits_prediction_bits_entry;
+  wire[3:0] core_io_imem_bht_update_bits_prediction_bits_bht_history;
   wire[1:0] core_io_imem_bht_update_bits_prediction_bits_bht_value;
   wire[38:0] core_io_imem_bht_update_bits_pc;
   wire core_io_imem_bht_update_bits_taken;
@@ -64484,8 +58415,8 @@ module RocketTile(input clk, input reset,
   wire core_io_imem_ras_update_bits_prediction_bits_mask;
   wire core_io_imem_ras_update_bits_prediction_bits_bridx;
   wire[38:0] core_io_imem_ras_update_bits_prediction_bits_target;
-  wire[5:0] core_io_imem_ras_update_bits_prediction_bits_entry;
-  wire[6:0] core_io_imem_ras_update_bits_prediction_bits_bht_history;
+  wire[2:0] core_io_imem_ras_update_bits_prediction_bits_entry;
+  wire[3:0] core_io_imem_ras_update_bits_prediction_bits_bht_history;
   wire[1:0] core_io_imem_ras_update_bits_prediction_bits_bht_value;
   wire core_io_imem_invalidate;
   wire core_io_dmem_req_valid;
@@ -64584,8 +58515,8 @@ module RocketTile(input clk, input reset,
   wire icache_io_cpu_btb_resp_bits_mask;
   wire icache_io_cpu_btb_resp_bits_bridx;
   wire[38:0] icache_io_cpu_btb_resp_bits_target;
-  wire[5:0] icache_io_cpu_btb_resp_bits_entry;
-  wire[6:0] icache_io_cpu_btb_resp_bits_bht_history;
+  wire[2:0] icache_io_cpu_btb_resp_bits_entry;
+  wire[3:0] icache_io_cpu_btb_resp_bits_bht_history;
   wire[1:0] icache_io_cpu_btb_resp_bits_bht_value;
   wire[39:0] icache_io_cpu_npc;
   wire icache_io_ptw_req_valid;
@@ -66269,7 +60200,7 @@ module Rocket_Core_RV64IMA(input clk, input reset,
   end
 endmodule
 
-module DataArray_T9(
+module DataArray_T4(
   input CLK,
   input RST,
   input init,
@@ -66317,24 +60248,24 @@ assign R1O = ram[reg_R1A];
 endmodule
 
 
-module MetadataArray_T6(
+module MetadataArray_T4(
   input CLK,
   input RST,
   input init,
   input [5:0] W0A,
   input W0E,
-  input [87:0] W0I,
-  input [87:0] W0M,
+  input [21:0] W0I,
+  input [21:0] W0M,
   input [5:0] R1A,
   input R1E,
-  output [87:0] R1O
+  output [21:0] R1O
 );
 
 `ifndef SYNTHESIS
 integer i;
 integer j;
 always @(posedge CLK) begin
-  for (i=0; i<4; i=i+22) begin
+  for (i=0; i<1; i=i+22) begin
     for (j=1; j<22; j=j+1) begin
       if (W0M[i] != W0M[i+j]) begin
         $fwrite(32'h80000002, "ASSERTION FAILED: write mask granularity\n");
@@ -66345,29 +60276,72 @@ always @(posedge CLK) begin
 end
 `endif
 
-reg [87:0] ram [63:0];
+reg [21:0] ram [63:0];
   `ifndef SYNTHESIS
     integer initvar;
     initial begin
       #0.002;
       for (initvar = 0; initvar < 64; initvar = initvar+1)
-        ram[initvar] = {3 {$random}};
+        ram[initvar] = {1 {$random}};
     end
   `endif
   reg [5:0] reg_R1A;
 always @(posedge CLK) begin
   if (R1E) reg_R1A <= R1A;
   if (W0E && W0M[0]) ram[W0A][21:0] <= W0I[21:0];
-  if (W0E && W0M[22]) ram[W0A][43:22] <= W0I[43:22];
-  if (W0E && W0M[44]) ram[W0A][65:44] <= W0I[65:44];
-  if (W0E && W0M[66]) ram[W0A][87:66] <= W0I[87:66];
 end
 assign R1O = ram[reg_R1A];
 
 endmodule
 
 
-module ICache_T178(
+module ICache_tag_array(
+  input CLK,
+  input RST,
+  input init,
+  input [5:0] RW0A,
+  input RW0E,
+  input RW0W,
+  input [19:0] RW0M,
+  input [19:0] RW0I,
+  output [19:0] RW0O
+);
+
+`ifndef SYNTHESIS
+integer i;
+integer j;
+always @(posedge CLK) begin
+  for (i=0; i<1; i=i+20) begin
+    for (j=1; j<20; j=j+1) begin
+      if (RW0M[i] != RW0M[i+j]) begin
+        $fwrite(32'h80000002, "ASSERTION FAILED: write mask granularity\n");
+        $finish;
+      end
+    end
+  end
+end
+`endif
+
+reg [19:0] ram [63:0];
+  `ifndef SYNTHESIS
+    integer initvar;
+    initial begin
+      #0.002;
+      for (initvar = 0; initvar < 64; initvar = initvar+1)
+        ram[initvar] = {1 {$random}};
+    end
+  `endif
+  reg [5:0] reg_RW0A;
+always @(posedge CLK) begin
+  if (RW0E && !RW0W) reg_RW0A <= RW0A;
+  if (RW0E && RW0W && RW0M[0]) ram[RW0A][19:0] <= RW0I[19:0];
+end
+assign RW0O = ram[reg_RW0A];
+
+endmodule
+
+
+module ICache_T91(
   input CLK,
   input RST,
   input init,
@@ -66391,55 +60365,6 @@ reg [127:0] ram [255:0];
 always @(posedge CLK) begin
   if (RW0E && !RW0W) reg_RW0A <= RW0A;
   if (RW0E && RW0W) ram[RW0A] <= RW0I;
-end
-assign RW0O = ram[reg_RW0A];
-
-endmodule
-
-
-module ICache_tag_array(
-  input CLK,
-  input RST,
-  input init,
-  input [5:0] RW0A,
-  input RW0E,
-  input RW0W,
-  input [79:0] RW0M,
-  input [79:0] RW0I,
-  output [79:0] RW0O
-);
-
-`ifndef SYNTHESIS
-integer i;
-integer j;
-always @(posedge CLK) begin
-  for (i=0; i<4; i=i+20) begin
-    for (j=1; j<20; j=j+1) begin
-      if (RW0M[i] != RW0M[i+j]) begin
-        $fwrite(32'h80000002, "ASSERTION FAILED: write mask granularity\n");
-        $finish;
-      end
-    end
-  end
-end
-`endif
-
-reg [79:0] ram [63:0];
-  `ifndef SYNTHESIS
-    integer initvar;
-    initial begin
-      #0.002;
-      for (initvar = 0; initvar < 64; initvar = initvar+1)
-        ram[initvar] = {3 {$random}};
-    end
-  `endif
-  reg [5:0] reg_RW0A;
-always @(posedge CLK) begin
-  if (RW0E && !RW0W) reg_RW0A <= RW0A;
-  if (RW0E && RW0W && RW0M[0]) ram[RW0A][19:0] <= RW0I[19:0];
-  if (RW0E && RW0W && RW0M[20]) ram[RW0A][39:20] <= RW0I[39:20];
-  if (RW0E && RW0W && RW0M[40]) ram[RW0A][59:40] <= RW0I[59:40];
-  if (RW0E && RW0W && RW0M[60]) ram[RW0A][79:60] <= RW0I[79:60];
 end
 assign RW0O = ram[reg_RW0A];
 

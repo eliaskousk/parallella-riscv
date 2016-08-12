@@ -376,12 +376,14 @@ class DefaultFPGAConfig extends Config(new FPGAConfig ++ new DefaultConfig)
 class NoFPUConfig extends Config (
     topDefinitions = { (pname,site,here) => pname match {
       case UseFPU => false
+      case NTLBEntries => 4
+      case BtbKey => BtbParameters(nEntries = 8)
     }},
   knobValues = {
     case "L1D_SETS" => 64
-    case "L1D_WAYS" => 4
+    case "L1D_WAYS" => 1
     case "L1I_SETS" => 64
-    case "L1I_WAYS" => 4
+    case "L1I_WAYS" => 1
   }
 )
 
