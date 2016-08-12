@@ -24,12 +24,23 @@ set ip_repos [list \
 #All source files
 set hdl_files []
 
+
 #All constraints files
 set constraints_files [list \
-                       $parallella/parallella/fpga/parallella_timing.xdc \
-                       $parallella/parallella/fpga/parallella_io.xdc \
-                       $parallella/parallella/fpga/parallella_7020_io.xdc \
+                       ${parallella}/parallella/fpga/parallella_timing.xdc \
+                       ${parallella}/parallella/fpga/parallella_io.xdc \
                       ]
+
+# Parallellla Embedded / Kickstarter Editions only (normal FPGA device, 24 GPIO pins)
+if {$partname == "xc7z020clg400-1"} {
+    set parallella_gpio_ports 24
+    lappend constraints_files ${parallella}/parallella/fpga/parallella_7020_io.xdc
+}
+
+# Parallellla Desktop / Microserver Editions only (small FPGA device, 12 GPIO pins)
+if {$partname == "xc7z010clg400-1"} {
+    set parallella_gpio_ports 12
+}
 
 # RISC-V Core architecture (RV64IMA or IMAFD)
 set riscv_core_arch $::env(RISCV_CORE_ARCH)

@@ -124,6 +124,10 @@ proc create_root_design { parentCell } {
   global rv64_clk_divider1
   global rv64_clk_divider2
 
+  global parallella_gpio_ports
+
+  set parallella_gpio_last [expr {$parallella_gpio_ports - 1}]
+
   if { $parentCell eq "" } {
      set parentCell [get_bd_cells /]
   }
@@ -157,8 +161,8 @@ proc create_root_design { parentCell } {
   set cclk_n [ create_bd_port -dir O cclk_n ]
   set cclk_p [ create_bd_port -dir O cclk_p ]
   set chip_nreset [ create_bd_port -dir O chip_nreset ]
-  set gpio_n [ create_bd_port -dir IO -from 23 -to 0 gpio_n ]
-  set gpio_p [ create_bd_port -dir IO -from 23 -to 0 gpio_p ]
+  set gpio_n [ create_bd_port -dir IO -from $parallella_gpio_last -to 0 gpio_n ]
+  set gpio_p [ create_bd_port -dir IO -from $parallella_gpio_last -to 0 gpio_p ]
   set hdmi_clk [ create_bd_port -dir O hdmi_clk ]
   set hdmi_d [ create_bd_port -dir O -from 23 -to 8 hdmi_d ]
   set hdmi_de [ create_bd_port -dir O hdmi_de ]
@@ -229,7 +233,7 @@ CONFIG.RESET_TYPE {ACTIVE_LOW} \
   # Create instance: parallella_base_0, and set properties
   set parallella_base_0 [ create_bd_cell -type ip -vlnv www.parallella.org:user:parallella_base: parallella_base_0 ]
   set_property -dict [ list \
-CONFIG.NGPIO {24} \
+CONFIG.NGPIO $parallella_gpio_ports \
  ] $parallella_base_0
 
   # Create instance: proc_sys_reset_0, and set properties
