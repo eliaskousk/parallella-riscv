@@ -7,14 +7,18 @@
 #
 
 
-# For Parallella Desktop or MiniServer
-# change the BOARD_PART to xc7z010clg400-1
+# For Parallella Desktop or Microserver
+# set the BOARD_PART to xc7z010clg400-1
+#
+# For Parallella Embedded or Kickstarter
+# set the BOARD_PART to xc7z020clg400-1
+#
 # This will soon happen automatically
 # if you change the BOARD_EDITION variable.
 
 BOARD_NAME = parallella
 
-BOARD_EDITION = kickstarter
+BOARD_EDITION = desktop
 
 BOARD_PART =
 
