@@ -67,7 +67,7 @@ system_project = $(fpga_dir)/$(BOARD_NAME)_riscv/system.xpr
 $(system_project): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	cd $(fpga_dir) && \
 	rm -rf $(BOARD_NAME)_riscv && \
-	sed -i "s/\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
+	sed -i "s/^\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
 	export BOARD_DEVICE=$(BOARD_DEVICE) && \
 	export BOARD_PART=$(BOARD_PART) && \
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
@@ -99,10 +99,10 @@ $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
 riscv_ip_package: $(riscv_ip_package)
 
 riscv_ip_setup:
-	sed -i "s/\(\`define RISCV_CORE_ARCH_\)[a-zA-Z0-9]*/\1$(RISCV_CORE_ARCH)/" $(RocketCoreIPDir)/settings.vh
-	sed -i "s/\(\`define RISCV_DRAM_BASE\) [0-9]\'d[0-9]/\1 $(RISCV_DRAM_BASE_RTL)/" $(RocketCoreIPDir)/settings.vh
-	sed -i "s/\(\`define RISCV_DRAM_BITS\) [0-9]\{2\}/\1 $(RISCV_DRAM_BITS_RTL)/" $(RocketCoreIPDir)/settings.vh
-	sed -i "s/\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_ARCH)\2/" $(RocketCoreIPDir)/RV64.Core.v
+	sed -i "s/^\(\`define RISCV_CORE_ARCH_\)[a-zA-Z0-9]*/\1$(RISCV_CORE_ARCH)/" $(RocketCoreIPDir)/settings.vh
+	sed -i "s/^\(\`define RISCV_DRAM_BASE\) [0-9]\'d[0-9]/\1 $(RISCV_DRAM_BASE_RTL)/" $(RocketCoreIPDir)/settings.vh
+	sed -i "s/^\(\`define RISCV_DRAM_BITS\) [0-9]\{2\}/\1 $(RISCV_DRAM_BITS_RTL)/" $(RocketCoreIPDir)/settings.vh
+	sed -i "s/^\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_ARCH)\2/" $(RocketCoreIPDir)/RV64.Core.v
 
 
 #
@@ -168,8 +168,8 @@ arm-dtc:
 	cd $(dtc_dir) && make -j${JOBS}
 
 arm-dtb:
-	sed -i "s/\(#define RISCV_DRAM_BASE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_BASE_DTS)/" $(dts_dir)/settings.h
-	sed -i "s/\(#define RISCV_DRAM_SIZE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_SIZE_DTS)/" $(dts_dir)/settings.h
+	sed -i "s/^\(#define RISCV_DRAM_BASE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_BASE_DTS)/" $(dts_dir)/settings.h
+	sed -i "s/^\(#define RISCV_DRAM_SIZE\) 0x[0-9A-Fa-f]\{8\}/\1 $(RISCV_DRAM_SIZE_DTS)/" $(dts_dir)/settings.h
 	cp $(dts_dir)/settings.h $(dtb_dir)
 	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir)
 	cd $(arm_linux_dir) && \
@@ -205,7 +205,7 @@ riscv_rocketcore:
 	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CORE_CONFIG) && \
 	cp generated-src/Top.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh && \
 	cp generated-src/ZynqAdapter.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/RV64.HostIO.Adapter.v && \
-	sed -i "s/\(module\) Top(/\1 Rocket_Core_$(RISCV_CORE_ARCH)(/" $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh
+	sed -i "s/^\(module\) Top(/\1 Rocket_Core_$(RISCV_CORE_ARCH)(/" $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
@@ -218,8 +218,8 @@ riscv_toolchain:
 	git checkout -B current && \
 	git checkout master && \
 	git submodule update --init --recursive && \
-	sed -i "s/\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
-	sed -i "s/\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
+	sed -i "s/^\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
+	sed -i "s/^\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
 	cd ${RISCVTOOLS} && \
 	export MAKEFLAGS=-j${JOBS} && \
 	./build.sh && \
@@ -228,6 +228,7 @@ riscv_toolchain:
 	make linux && \
 	cd ${RISCVTOOLS} && \
 	git checkout current && \
+	git checkout -- build.sh && \
 	git submodule update --init --recursive
 
 
@@ -278,7 +279,7 @@ riscv_kernel:
 	rsync -a --ignore-existing linux-$(RISCVLinuxVersion)/ riscv-linux/ && \
 	rm -rf linux-$(RISCVLinuxVersion) && \
 	cd riscv-linux && \
-	sed -i "s/\(CONFIG_CMDLINE=\"root=\/dev\/htifblk0\)\"/\1 mem=$(RISCV_DRAM_SIZE_LINUX)\"/" arch/riscv/configs/riscv64_spike && \
+	sed -i "s/^\(CONFIG_CMDLINE=\"root=\/dev\/htifblk0\)\"/\1 mem=$(RISCV_DRAM_SIZE_LINUX)\"/" arch/riscv/configs/riscv64_spike && \
 	make ARCH=riscv defconfig && \
 	make -j${JOBS} ARCH=riscv vmlinux && \
 	cp vmlinux $(final_output_dir)/riscv/
