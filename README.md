@@ -132,14 +132,15 @@ In order to run baremetal programs on the board run the following script:
 All the output files will be placed in the  `${TOP}/${BOARD}/final/output/riscv/` folder.
 
 To copy the built files to an already booted board you can run the following (assuming your Parallella
-can be reached inside your network with the `parallella` host (you can replace this with its IP):
+can be reached inside your network with the `parallella` host. You can replace this with parallella@IP
+where IP is the IP address of Parallella in your local network):
 
 ```bash
 cd parallella/output/final/riscv/
-scp fesvr parallella:~/
-scp libfesvr.so parallella:~/
-scp pk parallella:~/
-scp hello parallella:~/
+scp fesvr parallella@parallella:~/
+scp libfesvr.so parallella@parallella:~/
+scp pk parallella@parallella:~/
+scp hello parallella@parallella:~/
 ```
 
 All the above tranfered files will be placed in the home directory of the parallella user but you can
@@ -180,13 +181,14 @@ connectivity so please be patient. We suggest you download the prebuilt image fr
 All the output files will be placed in the  `${TOP}/${BOARD}/final/output/riscv/` folder.
 
 To copy the built files to an already booted board you can run the following (assuming your Parallella
-can be reached inside your network with the `parallella` host (you can replace this with its IP):
+can be reached inside your network with the `parallella` host. You can replace this with parallella@IP
+where IP is the IP address of Parallella in your local network):
 
 ```bash
 cd parallella/output/final/riscv/
-scp bbl parallella:~/
-scp vmlinux parallella:~/
-scp root.bin parallella:~/
+scp bbl parallella@parallella:~/
+scp vmlinux parallella@parallella:~/
+scp root.bin parallella@parallella:~/
 ```
 
 All the above tranfered files will be placed in the home directory of the parallella user but you can
@@ -507,5 +509,5 @@ extensions.
 
 ### GSoC Mentors
 
-- Olof    Kindgren ([OpenRISC](http://openrisc.io))
+- Olof    Kindgren ([FOSSi Foundation](http://fossi-foundation.org))
 - Andreas Olofsson ([Adapteva](http://www.adapteva.com))
