@@ -20,11 +20,17 @@ or software code.
 ## Contents of this document
 
 [Current status at the end of GSoC 2016](#current-status-at-the-end-of-gsoc-2016)
+
 [Using the prebuilt images](#using-the-prebuilt-images)
+
 [Instructions for building everything from scratch](#instructions-for-building-everything-from-scratch)
+
 [Setup Dependencies](#setup-dependencies)
+
 [Design](#design)
+
 [Links](#links)
+
 [Contributors](#contributors)
 
 ## Current status at the end of GSoC 2016
