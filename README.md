@@ -22,27 +22,27 @@ or software code.
 Now that Google Summer of Code 2016 is approaching its end, the current status of
 the project is reported here, split on what was completed and what wasn't due to
 reasons that were out of our immediate control. The numbers correspond to the
-original proposal's milestones.
+[original proposal](doc/fossi.parallela.risc-v.proposal.pdf)'s milestones.
 
-### Completed milestones (5.5 out of 6)
+### Completed milestones (4.5 out of 6)
 
-1. Build the GCC/Newlib toolchain and a companion Linux image for RISC-V.
+- Build the GCC/Newlib toolchain and a companion Linux image for RISC-V.
 
 The build system automatically generates the complete baremetal (GCC / Newlib)
 and RISC-V Linux (GCC / glibc) toolchains so that users can execute both
 types of programs on the RISC-V core inside the Zynq FPGA of Parallella.
  
-2. Configure and generate a 64-bit RISC-V rocket core.
+- Configure and generate a 64-bit RISC-V rocket core.
 
 The build system is able to generate both RV64IMA and RV64IMAFD RISC-V cores with
 frequncies of 50 MHz and 25 MHz respectively.
 
-3. Create an IP block that will contain the above created RISC-V rocket core.
+- Create an IP block that will contain the above created RISC-V rocket core.
 
 The RISC-V cores were also packaged as AXI peripherals with full IP-XACT specifications 
 for further use in any system that supports AXI buses. 
 
-4. Create a complete SoC by instantiating the RISC-V IP block created in 3. with other
+- Create a complete SoC by instantiating the RISC-V IP block created in 3. with other
 parallella/oh devices.
 
 This was the main milestone and involved the creation of a complete SoC into the Zynq
@@ -56,7 +56,7 @@ or an RV64IMAFD running at 25 MHz. The latter is capable of executing floating p
 natively (of single or double precision). It communicates with its host (Zynq ARM cores / memory)
 with an AXI slave interface for HTIF and an AXI master interface for DDR3 memory accesses.
 
-5. Boot Linux on the RISC-V rocket core and run the Epiphany SDK host software.
+- Boot Linux on the RISC-V rocket core and run the Epiphany SDK host software.
 
 Booting the RISC-V Linux on the RISC-V core inside the Zynq FPGA device was also an important
 milestone of the project. This was achieved by using both the RISC-V Linux and RISC-V Poky
@@ -65,7 +65,7 @@ filesystem respectively.
 
 ### Canceled milestones (1.5 out of 6)
 
-5. Boot Linux on the RISC-V rocket core and run the Epiphany SDK host software.
+- Boot Linux on the RISC-V rocket core and run the Epiphany SDK host software.
 
 Unfortunately the second part of this milestone was impossible to complete in the current timeframe
 since the RISC-V Linux port that is currently available has, as we found out, limited functionality and
@@ -78,7 +78,7 @@ the realization that even if such a port was made, the SDK would run really poor
 These three reasons along with the realization that this port is not so important after all, since
 the Epiphany SDK runs fine on its intended Zynq ARM target, made us cancel this part of milestone 5.
 
-6. Create a new IP block that interfaces the RISC-V rocket core to a simple 104 bit
+- Create a new IP block that interfaces the RISC-V rocket core to a simple 104 bit
 emesh interface, instead of AXI. This will allow communication with the Epiphany 16 core
 chip present on each Parallella board.
 
@@ -107,11 +107,11 @@ branch it will be resumed as soon as the RISC-V Debug system is ready in the roc
 Moreover the initially planned deliverables were all completed on time and here is a short
 report on them:
 
-1. Source code for everything developed in hardware and software with good comments.
+- Source code for everything developed in hardware and software with good comments.
 
 This repository contains source code for everything developed.
 
-2. Build scripts to automate the building procedure of the final SoC without requiring to
+- Build scripts to automate the building procedure of the final SoC without requiring to
 open Vivado GUI. The build scripts would generate a final binary image, optionally
 copying to the SD card of Parallela. This in short means the system will “run out of
 the box”.
@@ -119,14 +119,14 @@ the box”.
 This repository contains a fully automated build system that builds everything from scratch. The rest of
 the README file describes the usage of all the build scripts.
 
-3. Final binary image produced with the above scripts.
+- Final binary image produced with the above scripts.
 
 The companion [Parallella RISC-V Prebuilt Images](https://github.com/eliaskousk/parallella-riscv-images)
 repository contains all the files needed to successfully boot RISC-V Linux and run RISC-V programs on a
 RISC-V RV64IMA core that is placed inside the Zynq FPGA device of any Parallellla board, without the need
 to build anything.
 
-4. Complete documentation especially of what the build scripts do and what a
+- Complete documentation especially of what the build scripts do and what a
 determined user can try to change and what he cannot. This will be a tutorial style
 document for using the RISC-V rocket core inside the Zynq FPGA device and
 running simple example programs or custom hardware.
