@@ -53,7 +53,9 @@ fpga_dir = $(base_dir)/$(BOARD_NAME)/fpga
 
 bitstream = $(fpga_dir)/$(BOARD_NAME).bit
 $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
+	sed -i "s/^\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" $(fpga_dir)/system_bd.tcl
 	cd $(fpga_dir) && \
+	rm -rf $(BOARD_NAME)_riscv && \
 	export BOARD_DEVICE=$(BOARD_DEVICE) && \
 	export BOARD_PART=$(BOARD_PART) && \
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
@@ -65,9 +67,9 @@ bitstream: $(bitstream)
 
 system_project = $(fpga_dir)/$(BOARD_NAME)_riscv/system.xpr
 $(system_project): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
+	sed -i "s/^\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" $(fpga_dir)/system_bd.tcl
 	cd $(fpga_dir) && \
 	rm -rf $(BOARD_NAME)_riscv && \
-	sed -i "s/^\(set scripts_vivado_version \)[0-9]\{4\}\.[0-9]/\1${VIVADO_VERSION}/" system_bd.tcl
 	export BOARD_DEVICE=$(BOARD_DEVICE) && \
 	export BOARD_PART=$(BOARD_PART) && \
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
@@ -91,7 +93,7 @@ parallella_ip_package: $(parallella_ip_package)
 riscv_ip_package = $(fpga_dir)/riscv_rv64g/riscv_rv64g.xpr
 $(riscv_ip_package): $(fpga_dir)/ip_params_riscv.tcl
 	cd $(fpga_dir) && \
-	rm -rf riscv_rv64g && \
+	rm -rf riscv_rv64 && \
 	export BOARD_DEVICE=$(BOARD_DEVICE) && \
 	export BOARD_PART=$(BOARD_PART) && \
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
