@@ -17,6 +17,16 @@ will be created to aid inexperienced users make the most of this work and allow
 them to modify it for their own needs and purposes with custom hardware and /
 or software code.
 
+## Contents of this document
+
+[Current status at the end of GSoC 2016](#current-status-at-the-end-of-gsoc-2016)
+[Using the prebuilt images](#using-the-prebuilt-images)
+[Instructions for building everything from scratch](#instructions-for-building-everything-from-scratch)
+[Setup Dependencies](#setup-dependencies)
+[Design](#design)
+[Links](#links)
+[Contributors](#contributors)
+
 ## Current status at the end of GSoC 2016
 
 Now that Google Summer of Code 2016 is approaching its end, the current status of
