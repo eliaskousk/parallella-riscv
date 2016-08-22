@@ -19,13 +19,13 @@ or software code.
 
 ## Contents of this document
 
-[Current status at the end of GSoC 2016](#current-status-at-the-end-of-gsoc-2016)
+[Project status at the end of GSoC 2016](#project-status-at-the-end-of-gsoc-2016)
 
 [Using the prebuilt images](#using-the-prebuilt-images)
 
 [Instructions for building everything from scratch](#instructions-for-building-everything-from-scratch)
 
-[Setup Dependencies](#setup-dependencies)
+[Submodules Used](#submodules-used)
 
 [Design](#design)
 
@@ -33,12 +33,18 @@ or software code.
 
 [Contributors](#contributors)
 
-## Current status at the end of GSoC 2016
+## Project status at the end of GSoC 2016
 
 Now that Google Summer of Code 2016 is approaching its end, the current status of
 the project is reported here, split on what was completed and what wasn't due to
 reasons that were out of our immediate control. The numbers correspond to the
 [original proposal](doc/fossi.parallela.risc-v.proposal.pdf)'s milestones.
+
+My mentors and I agreed that it's best to keep this repository intact instead of performing a
+difficult merge with [Parallella Open Hardware](https://github.com/parallella/oh) repo since
+the work here contins intagration among many different components, some of them residing on
+git submodules. This might happen in the future, along with a merge to a suitable RISC-V repo
+in order to more officially make Parallella a first class FPGA board target for RISC-V cores.
 
 ### Completed milestones (4.5 out of 6)
 
@@ -51,7 +57,7 @@ types of programs on the RISC-V core inside the Zynq FPGA of Parallella.
 - Configure and generate a 64-bit RISC-V rocket core.
 
 The build system is able to generate both RV64IMA and RV64IMAFD RISC-V cores with
-frequncies of 50 MHz and 25 MHz respectively.
+frequencies of 50 MHz and 25 MHz respectively.
 
 - Create an IP block that will contain the above created RISC-V rocket core.
 
@@ -156,8 +162,8 @@ some parts of the project.
 
 ## Using the prebuilt images
 
-If you don't have a working Vivado installation or you just want to test everything
-quickly without the necessary long build times you can use the prebuilt images that
+If you don't have a working Vivado installation, or you just want to test everything
+quickly without the necessary long build times, you can use the prebuilt images that
 have been prepared and hosted on the [Parallella RISC-V Prebuilt images]
 (https://github.com/eliaskousk/parallella-riscv-images) repository. It contains images
 for both types of Zynq devices that the various Paralllella editions contain, along with
@@ -504,7 +510,7 @@ run the targets in a the sequence you desire. Make sure you source the `${TOP}/s
 though to set the necessary environment variables and your Vivado settings64.sh file if you need to use
 Vivado to e.g build a bitstream.
 
-## Setup Dependencies
+## Submodules Used
 
 This repository uses the following Git submodules. You can initialize each one separately if needed
 to clean things up or perform any advanced action but this is normally not needed since the build
