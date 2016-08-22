@@ -42,7 +42,7 @@ reasons that were out of our immediate control. The numbers correspond to the
 
 My mentors and I agreed that it's best to keep this repository intact instead of performing a
 difficult merge with [Parallella Open Hardware](https://github.com/parallella/oh) repo since
-the work here contins intagration among many different components, some of them residing on
+the work here contains integration among many different components, some of them residing on
 git submodules. This might happen in the future, along with a merge to a suitable RISC-V repo
 in order to more officially make Parallella a first class FPGA board target for RISC-V cores.
 
