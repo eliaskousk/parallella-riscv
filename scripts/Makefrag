@@ -104,7 +104,7 @@ riscv_ip_setup:
 	sed -i "s/^\(\`define RISCV_CORE_ARCH_\)[a-zA-Z0-9]*/\1$(RISCV_CORE_ARCH)/" $(RocketCoreIPDir)/settings.vh
 	sed -i "s/^\(\`define RISCV_DRAM_BASE\) [0-9]\'d[0-9]/\1 $(RISCV_DRAM_BASE_RTL)/" $(RocketCoreIPDir)/settings.vh
 	sed -i "s/^\(\`define RISCV_DRAM_BITS\) [0-9]\{2\}/\1 $(RISCV_DRAM_BITS_RTL)/" $(RocketCoreIPDir)/settings.vh
-	sed -i "s/^\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_ARCH)\2/" $(RocketCoreIPDir)/RV64.Core.v
+	sed -i "s/^\(\`include \"\)[a-zA-Z0-9]*\(\.Core\.vh\"\)/\1$(RISCV_CORE_ARCH)\2/" $(RocketCoreIPDir)/RISCV_Rocket_Core_RV64_AXI.v
 
 
 #
