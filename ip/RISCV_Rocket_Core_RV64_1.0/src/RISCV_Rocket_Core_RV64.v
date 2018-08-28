@@ -113,8 +113,8 @@ module RISCV_Rocket_Core_RV64 #(
         .C_M_AXI_ID_WIDTH       (C_M_AXI_ID_WIDTH),
         .C_M_AXI_ADDR_WIDTH     (C_M_AXI_ADDR_WIDTH),
         .C_M_AXI_DATA_WIDTH     (C_M_AXI_DATA_WIDTH),
-        
-        // AXI Slave            
+
+        // AXI Slave
         .C_S_AXI_ID_WIDTH       (C_S_AXI_ID_WIDTH),
         .C_S_AXI_DATA_WIDTH     (C_S_AXI_DATA_WIDTH),
         .C_S_AXI_ADDR_WIDTH     (C_S_AXI_ADDR_WIDTH)

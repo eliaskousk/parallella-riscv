@@ -1,6 +1,7 @@
 `timescale 1 ns / 1 ps
 
 `include "settings.vh"
+`include "RV64IMA.Core.vh"
 
 module RISCV_Rocket_Core_RV64_AXI #
 (
@@ -8,7 +9,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     parameter integer C_DRAM_BITS        = 29,
 
     // AXI Master
-    
+
     // Thread ID Width
     parameter integer C_M_AXI_ID_WIDTH   = 5,
     // Width of Address Bus
@@ -17,7 +18,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     parameter integer C_M_AXI_DATA_WIDTH = 64,
 
     // AXI Slave
-    
+
     // Width of ID for for write address, write data, read address and read data
     parameter integer C_S_AXI_ID_WIDTH     = 12,
     // Width of S_AXI data bus
@@ -27,7 +28,7 @@ module RISCV_Rocket_Core_RV64_AXI #
 )
 (
     // AXI Master
-    
+
     // Global Clock Signal.
     input wire                                M_AXI_ACLK,
     // Global Reset Singal. This Signal is Active Low
@@ -40,7 +41,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     output wire [7 : 0]                       M_AXI_AWLEN,
     // Burst size. This signal indicates the size of each transfer in the burst
     output wire [2 : 0]                       M_AXI_AWSIZE,
-    // Burst type. The burst type and the size information, 
+    // Burst type. The burst type and the size information,
     // determine how the address for each transfer within the burst is calculated.
     output wire [1 : 0]                       M_AXI_AWBURST,
     // Lock type. Provides additional information about the
@@ -97,7 +98,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     output wire [7 : 0]                       M_AXI_ARLEN,
     // Burst size. This signal indicates the size of each transfer in the burst
     output wire [2 : 0]                       M_AXI_ARSIZE,
-    // Burst type. The burst type and the size information, 
+    // Burst type. The burst type and the size information,
     // determine how the address for each transfer within the burst is calculated.
     output wire [1 : 0]                       M_AXI_ARBURST,
     // Lock type. Provides additional information about the
@@ -136,11 +137,11 @@ module RISCV_Rocket_Core_RV64_AXI #
     // Read ready. This signal indicates that the master can
     // accept the read data and response information.
     output wire                               M_AXI_RREADY,
-    
+
     // =========
     // AXI Slave
     // =========
-    
+
     // Global Clock Signal
     input wire                                S_AXI_ACLK,
     // Global Reset Signal. This Signal is Active LOW
@@ -153,7 +154,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     input wire [7 : 0]                        S_AXI_AWLEN,
     // Burst size. This signal indicates the size of each transfer in the burst
     input wire [2 : 0]                        S_AXI_AWSIZE,
-    // Burst type. The burst type and the size information, 
+    // Burst type. The burst type and the size information,
     // determine how the address for each transfer within the burst is calculated.
     input wire [1 : 0]                        S_AXI_AWBURST,
     // Lock type. Provides additional information about the
@@ -217,7 +218,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     input wire [7 : 0]                        S_AXI_ARLEN,
     // Burst size. This signal indicates the size of each transfer in the burst
     input wire [2 : 0]                        S_AXI_ARSIZE,
-    // Burst type. The burst type and the size information, 
+    // Burst type. The burst type and the size information,
     // determine how the address for each transfer within the burst is calculated.
     input wire [1 : 0]                        S_AXI_ARBURST,
     // Lock type. Provides additional information about the
@@ -274,9 +275,9 @@ module RISCV_Rocket_Core_RV64_AXI #
     wire [15:0] host_out_bits;
 
     assign reset = !S_AXI_ARESETN;
-        
+
     BUFG bufg_host_clk (.I(S_AXI_ACLK), .O(host_clk));
-    
+
     // ===========================
     // AXI Slave to HostIO Adapter
     // ===========================
@@ -284,14 +285,14 @@ module RISCV_Rocket_Core_RV64_AXI #
     ZynqAdapter RV64_AXI_HostIO_Adapter (
         .clk                     (host_clk),
         .reset                   (reset),
-        
+
         // ========================================================
         // HostIO Interface
         // ========================================================
         // Host IO AXI Slave Adapter to Rocket Core
         // Connects the HostIO AXI Slave interface with Rocket Core
         // ========================================================
-        
+
         .io_reset                (reset_cpu),
         .io_host_in_ready        (host_in_ready),
         .io_host_in_valid        (host_in_valid),
@@ -300,7 +301,7 @@ module RISCV_Rocket_Core_RV64_AXI #
         .io_host_out_ready       (host_out_ready),
         .io_host_out_valid       (host_out_valid),
         .io_host_out_bits        (host_out_bits),
-        
+
         // =================================================================
         // HostIO AXI Slave Interface
         // =================================================================
@@ -350,7 +351,7 @@ module RISCV_Rocket_Core_RV64_AXI #
         .io_nasti_b_bits_id      (S_AXI_BID),
         .io_nasti_b_bits_resp    (S_AXI_BRESP)
     );
-    
+
     // ======================
     // Rocket Core with MemIO
     // ======================
@@ -368,29 +369,29 @@ module RISCV_Rocket_Core_RV64_AXI #
 `endif
         .clk                     (host_clk),
         .reset                   (reset_cpu),
-        
+
         // ==============================================================
         // HostIO Interface
         // ==============================================================
         // Rocket Core to HostIO AXI Slave Adapter
         // Connects the Rocket Core to the above HostIO AXI Slave Adapter
         // ==============================================================
-        
+
         .io_host_in_ready        (host_in_ready),
         .io_host_in_valid        (host_in_valid),
         .io_host_in_bits         (host_in_bits),
-        
+
         .io_host_out_ready       (host_out_ready),
         .io_host_out_valid       (host_out_valid),
         .io_host_out_bits        (host_out_bits),
-        
+
         // =========================================================
         // MemIO AXI Master Interface
         // =========================================================
         // PL AXI Master to PS AXI Slave
         // Connects to S_AXI_HP port on PS for access to DDR3 memory
         // =========================================================
-        
+
         .io_mem_0_ar_valid       (M_AXI_ARVALID),
         .io_mem_0_ar_ready       (M_AXI_ARREADY),
         .io_mem_0_ar_bits_addr   (mem_araddr),
@@ -403,7 +404,7 @@ module RISCV_Rocket_Core_RV64_AXI #
         .io_mem_0_ar_bits_prot   (M_AXI_ARPROT),
         .io_mem_0_ar_bits_qos    (M_AXI_ARQOS),
         .io_mem_0_ar_bits_region (M_AXI_ARREGION),
-        
+
         .io_mem_0_aw_valid       (M_AXI_AWVALID),
         .io_mem_0_aw_ready       (M_AXI_AWREADY),
         .io_mem_0_aw_bits_addr   (mem_awaddr),
@@ -416,18 +417,18 @@ module RISCV_Rocket_Core_RV64_AXI #
         .io_mem_0_aw_bits_prot   (M_AXI_AWPROT),
         .io_mem_0_aw_bits_qos    (M_AXI_AWQOS),
         .io_mem_0_aw_bits_region (M_AXI_AWREGION),
-        
+
         .io_mem_0_w_valid        (M_AXI_WVALID),
         .io_mem_0_w_ready        (M_AXI_WREADY),
         .io_mem_0_w_bits_strb    (M_AXI_WSTRB),
         .io_mem_0_w_bits_data    (M_AXI_WDATA),
         .io_mem_0_w_bits_last    (M_AXI_WLAST),
-        
+
         .io_mem_0_b_valid        (M_AXI_BVALID),
         .io_mem_0_b_ready        (M_AXI_BREADY),
         .io_mem_0_b_bits_resp    (M_AXI_BRESP),
         .io_mem_0_b_bits_id      (M_AXI_BID),
-        
+
         .io_mem_0_r_valid        (M_AXI_RVALID),
         .io_mem_0_r_ready        (M_AXI_RREADY),
         .io_mem_0_r_bits_resp    (M_AXI_RRESP),

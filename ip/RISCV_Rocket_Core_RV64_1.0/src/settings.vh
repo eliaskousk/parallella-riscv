@@ -16,7 +16,7 @@
 //
 
 `define RISCV_DRAM_BASE 3'd1
-`define RISCV_DRAM_BITS 29
+`define RISCV_DRAM_BITS 28
 
 
 `endif // settings_vh
