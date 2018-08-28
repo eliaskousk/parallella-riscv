@@ -12,7 +12,7 @@ VIVADO_PATH=/opt/Xilinx/Vivado
 export VIVADO_PATH
 echo "Vivado path set to ${VIVADO_PATH}"
 
-VIVADO_VERSION=2015.4
+VIVADO_VERSION=2018.2
 export VIVADO_VERSION
 echo "Vivado version set to ${VIVADO_VERSION}"
 
