@@ -11,7 +11,7 @@ BOARD_NAME = zedboard
 
 BOARD_EDITION = none
 
-BOARD_PART = em.avnet.com:zed:part0:1.0
+BOARD_PART = em.avnet.com:zed:part0:1.4
 
 BOARD_DEVICE = xc7z020clg484-1
 
@@ -44,4 +44,3 @@ RISCV_DRAM_SIZE_LINUX = 256M
 # Include the rest of the make configuration
 # which is common for all boards
 include ../scripts/Makefrag
-
