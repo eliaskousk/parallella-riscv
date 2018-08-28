@@ -1,34 +1,32 @@
-#Design name ("system" recommended)
+# Design name ("system" recommended)
 set design system
 
-#Project directory
+# Vivado project directory
 set projdir ./zedboard_riscv/
 
-#Device name
-#set partname "xc7z020clg484-1"
+# FPGA device name
 set partname $::env(BOARD_DEVICE)
 
 # Board name (Zedboard)
-#set boardpart "em.avnet.com:zed:part0:1.3"
 set boardpart $::env(BOARD_PART)
 
-#Paths to all IP blocks to use in Vivado "system.bd"
-
+# Paths to all IP blocks to use in Vivado "system.bd"
 set ip_repos [list "./riscv_rv64"]
 
-#All source files
+# HDL source file list
 set hdl_files []
 
-#All constraints files
+# Constraints file list
 set constraints_files []
 
 # RISC-V Core architecture (RV64IMA or IMAFD)
 set riscv_core_arch $::env(RISCV_CORE_ARCH)
 
-# Set RISC-V Core MMCM settings
+# Set MMCM settings for the RISC-V Core
+#
 # Clocks supported:
-# - 50 MHz for RV64IMA
-# - 25 MHz for RV64IMAFD
+# - 50 MHz for RV64IMA Core
+# - 25 MHz for RV64IMAFD Core
 #
 if {$riscv_core_arch == "RV64IMA" } {
     set rv64_clk_jitter 151.636
