@@ -123,6 +123,8 @@ dtb_dir = $(arm_linux_dir)/arch/arm/boot/dts
 
 dts_dir = $(base_dir)/$(BOARD_NAME)/dts
 
+CROSS_TOOLCHAIN_LINUX = arm-linux-gnueabihf-
+
 
 # Unset LD_LIBRARY_PATH that points to Xilinx libraries (from sourcing setting64.sh)
 # in order to not break various commandline tools that are used during building (e.g awk)
@@ -136,14 +138,14 @@ arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its 
 	# No make clean included here since one copy of linux should work on all boards
 	# Configure Linux kernel
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_CONFIG)_defconfig
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(LINUX_CONFIG)_defconfig
 	# Build Linux kernel
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
 	# Convert zImage to uImage
 	cd $(arm_linux_dir) && \
 	export PATH=$(uboot_dir)/tools:$$PATH && \
-	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- UIMAGE_LOADADDR=0x8000 uImage
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) UIMAGE_LOADADDR=0x8000 uImage
 	mkdir -p $(final_output_dir)
 	cp $(arm_linux_dir)/arch/arm/boot/uImage $(final_output_dir)/
 
@@ -157,13 +159,14 @@ arm-uboot:
 	cp uboot/$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
 	# Configure U-Boot
 	cd $(uboot_dir) && \
-	make CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(UBOOT_CONFIG)_defconfig
+	make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(UBOOT_CONFIG)_defconfig
 	# Build U-Boot
 	export PATH=$(dtc_dir):$$PATH && \
-	cd $(uboot_dir) && make CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j${JOBS}
+	cd $(uboot_dir) && make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
 	mkdir -p $(boot_build_dir)
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
+# Need Flex & Bison software (Ubuntu: sudo apt install flex bison)
 arm-dtc:
 	# Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
 	git submodule update --init $(dtc_dir)
@@ -175,7 +178,7 @@ arm-dtb:
 	cp $(dts_dir)/settings.h $(dtb_dir)
 	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir)
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- $(LINUX_DTB).dtb
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(LINUX_DTB).dtb
 	cp $(dtb_dir)/$(LINUX_DTB).dtb $(final_output_dir)/devicetree.dtb
 
 # Instead of using the above you can use the following to build locally (not in Linux repo)
@@ -248,8 +251,12 @@ riscv_baremetal: riscv_fesvr riscv_pk riscv_hello
 
 riscv_fesvr:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
+    #
 	# Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
 	# Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
+    # Update August 2018: It seems the latest Vivado / SDK versions (i.e 2018.2)
+    # have the correct Linaro hardfloat toolchain (arm-linux-gnueabihf- prefix)
+    #
 	cd ${RISCVTOOLS}/riscv-fesvr && \
 	mkdir -p build.arm && cd build.arm && \
 	../configure --host=arm-linux-gnueabihf && \
