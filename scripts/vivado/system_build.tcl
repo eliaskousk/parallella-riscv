@@ -19,9 +19,9 @@ wait_on_run synth_1
 #report_timing_summary -file synth_timing_summary.rpt
 
 ###########################################################
-# PLACE AND ROUTE
+# PLACE AND ROUTE AND BITSTREAM
 ###########################################################
-launch_runs impl_1
+launch_runs impl_1 -to_step write_bitstream
 wait_on_run impl_1
 #report_timing_summary -file impl_timing_summary.rpt
 
@@ -29,12 +29,3 @@ wait_on_run impl_1
 # CREATE NETLIST + REPORTS
 ###########################################################
 #write_verilog ./system.v
-
-###########################################################
-# Write Bitstream
-###########################################################
-launch_runs impl_1 -to_step write_bitstream
-wait_on_run impl_1
-
-
-
