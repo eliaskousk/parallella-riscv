@@ -57,13 +57,14 @@ Important Note: The build system by default generates a Parallella bitstream for
 editions. If you have an Embedded or Kickstarter Parallella you should set the correct `BOARD` variables
 in the `${TOP}/parallella/Makefile` (top of the file) as explained in the related comments there.
 
-### Build Bitstream and Host Software
+### Build Bitstream and Host (ARM) Software
 
-To build the bitstream and / or the host software you must do the following:
+To build the bitstream and the needed host (ARM) software you must do the following:
 
-* Build only the Host Software
+* Step 1: Build the Host Software
 
-The host software consists of U-Boot, the Linux kernel and the devicetree DTB file (Device Tree Blob).
+The host software for the ARM dual-core processor of the Zynq device consists of U-Boot, the Linux kernel
+and the devicetree DTB file (Device Tree Blob).
 
 - **U-Boot** is not currently used for Parallella since the one contained in its Flash chip is fine and
 there is always a risk when performing re-flashes.
@@ -80,7 +81,7 @@ You can build all three of them by running the following:
 ./scripts/build.host.software.sh
 ```
 
-* Build only the FPGA Bitstream
+* Step 2: Build the FPGA Bitstream
 
 This will build either the `parallella.bit.bin` FPGA bitstream for Parallella board or `zedboard.bit`
 for Zedboard:
@@ -95,7 +96,7 @@ After it finishes you can view / edit the design in Vivado by opening the
 Keep in mind that everytime you run the above build bitstream script the project's folder is
 deleted so any modifications you have made there will be lost.
 
-* Build both the Host Software and the FPGA Bitstream
+* Step 1 & 2 Combined: Build the Host Software and the FPGA Bitstream
 
 To build both the host software and FPGA Bitstream run the following:
 
@@ -107,7 +108,7 @@ To build both the host software and FPGA Bitstream run the following:
 You must run them in this order for Zedboard since the bitstream step will also generate the final
 `boot.bin` image which contains `FSBL (First Stage Bootloader) + FPGA Bitstream + U-Boot Bootloader`.
 
-* Copy output in your SD card's boot partition
+* Step 3: Copy output in your SD card's boot partition
 
 All the final output files are placed in the `${TOP}/${BOARD}/output/final/` directory. After generation
 you should copy them in your SD card's boot partition. To actually test RISC-V you should also build its
