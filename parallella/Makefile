@@ -18,11 +18,11 @@
 
 BOARD_NAME = parallella
 
-BOARD_EDITION = desktop
+BOARD_EDITION = embedded
 
 BOARD_PART =
 
-BOARD_DEVICE = xc7z010clg400-1
+BOARD_DEVICE = xc7z020clg400-1
 
 
 #
