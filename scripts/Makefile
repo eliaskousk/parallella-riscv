@@ -158,7 +158,11 @@ arm-uboot:
   # Copy relevant configuration files
 	cp uboot/$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
   # Fix missing GCC configuration (for Parallella's U-Boot)
+ifeq ($(BOARD_NAME),parallella)
 	cp $(uboot_dir)/include/linux/compiler-gcc5.h $(uboot_dir)/include/linux/compiler-gcc7.h
+endif
+  # Install openssl development package (Ubuntu)
+	sudo apt install libssl-dev
   # Configure U-Boot
 	cd $(uboot_dir) && \
 	make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(UBOOT_CONFIG)_defconfig
@@ -168,10 +172,11 @@ arm-uboot:
 	mkdir -p $(boot_build_dir)
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
-# Need Flex & Bison software (Ubuntu: sudo apt install flex bison)
 arm-dtc:
   # Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
 	git submodule update --init $(dtc_dir)
+  # Install flex & bison software packages (Ubuntu)
+	sudo apt install flex bison
 	cd $(dtc_dir) && make -j${JOBS}
 
 arm-dtb:
