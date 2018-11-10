@@ -43,4 +43,4 @@ RISCV_DRAM_SIZE_LINUX = 256M
 
 # Include the rest of the make configuration
 # which is common for all boards
-include ../scripts/Makefrag
+include ../scripts/Makefile

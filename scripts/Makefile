@@ -25,7 +25,7 @@ default: $(BOARD_NAME)
 
 parallella_bitstream = $(final_output_dir)/parallella.bit.bin
 $(parallella_bitstream): bitstream
-	# Make final Parallella bitstream image (bin instead of bit)
+  # Make final Parallella bitstream image (bin instead of bit)
 	cd $(boot_build_dir) && \
 	bootgen -image bit2bin.bif -w on -split bin && \
 	rm bit2bin.bin && \
@@ -34,7 +34,7 @@ parallella_bitstream: $(parallella_bitstream)
 
 zedboard_bitstream = $(final_output_dir)/boot.bin
 $(zedboard_bitstream): bitstream
-	# Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
+  # Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
 	cd $(boot_build_dir) && \
 	bootgen -image boot.bif -w on -o boot.bin && \
 	cp boot.bin $(final_output_dir)/
@@ -133,16 +133,16 @@ export LD_LIBRARY_PATH=
 $(BOARD_NAME)_software: arm-uboot-$(BOARD_NAME) arm-linux arm-dtb
 
 arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its tools
-	# Compile kernel
+  # Compile kernel
 	git submodule update --init $(arm_linux_dir)
-	# No make clean included here since one copy of linux should work on all boards
-	# Configure Linux kernel
+  # No make clean included here since one copy of linux should work on all boards
+  # Configure Linux kernel
 	cd $(arm_linux_dir) && \
 	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(LINUX_CONFIG)_defconfig
-	# Build Linux kernel
+  # Build Linux kernel
 	cd $(arm_linux_dir) && \
 	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
-	# Convert zImage to uImage
+  # Convert zImage to uImage
 	cd $(arm_linux_dir) && \
 	export PATH=$(uboot_dir)/tools:$$PATH && \
 	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) UIMAGE_LOADADDR=0x8000 uImage
@@ -153,14 +153,16 @@ arm-uboot-parallella: arm-uboot
 arm-uboot-zedboard: arm-dtc arm-uboot # We need dtc to build ZedBoard's U-Boot from upstream u-boot-xlnx repo
 
 arm-uboot:
-	# Compile board-compatible u-boot
+  # Compile board-compatible u-boot
 	git submodule update --init $(uboot_dir)
-	# Copy relevant configuration files
+  # Copy relevant configuration files
 	cp uboot/$(UBOOT_CONFIG).h $(uboot_dir)/include/configs/
-	# Configure U-Boot
+  # Fix missing GCC configuration (for Parallella's U-Boot)
+	cp $(uboot_dir)/include/linux/compiler-gcc5.h $(uboot_dir)/include/linux/compiler-gcc7.h
+  # Configure U-Boot
 	cd $(uboot_dir) && \
 	make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(UBOOT_CONFIG)_defconfig
-	# Build U-Boot
+  # Build U-Boot
 	export PATH=$(dtc_dir):$$PATH && \
 	cd $(uboot_dir) && make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
 	mkdir -p $(boot_build_dir)
@@ -168,7 +170,7 @@ arm-uboot:
 
 # Need Flex & Bison software (Ubuntu: sudo apt install flex bison)
 arm-dtc:
-	# Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
+  # Compile device tree compiler (needed by upstream U-Boot for ZedBoard)
 	git submodule update --init $(dtc_dir)
 	cd $(dtc_dir) && make -j${JOBS}
 
@@ -197,14 +199,14 @@ arm-dtb-local: arm-dtc
 
 riscv_emulator:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
-	# Build the Rocket Chip emulator
+  # Build the Rocket Chip emulator
 	cd ${ROCKETCHIP}/emulator && \
 	make -j${JOBS}
 
 riscv_rocketcore:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
 	cp ${TOP}/ip/config/Rocket.Core.Configs.scala ${ROCKETCHIP}/src/main/scala/Configs.scala
-	# Build the Rocket Chip Verilog RTL (for FPGAs)
+  # Build the Rocket Chip Verilog RTL (for FPGAs)
 	cd ${ROCKETCHIP}/fsim && \
 	make verilog CONFIG=$(RISCV_CORE_CONFIG) && \
 	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CORE_CONFIG) && \
@@ -214,19 +216,19 @@ riscv_rocketcore:
 
 riscv_toolchain:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
-	# Install necessary packages (Ubuntu)
+  # Install necessary packages (Ubuntu)
 	sudo apt-get install autoconf automake autotools-dev curl \
 	libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex \
 	texinfo gperf libtool patchutils bc
-	# Switch to the master (priv1.7 ISA) branch and setup build script
+  # Switch to the master (priv1.7 ISA) branch and setup build script
 	cd ${RISCVTOOLS} && \
 	git checkout -B current && \
 	git checkout master && \
 	git submodule update --init --recursive
 	sed -i "s/^\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
 	sed -i "s/^\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
-	# Build the RISC-V Toolchain
-	# (First Newlib version for use without an OS, then the Linux version with glibc)
+  # Build the RISC-V Toolchain
+  # (First Newlib version for use without an OS, then the Linux version with glibc)
 	cd ${RISCVTOOLS} && \
 	export MAKEFLAGS=-j${JOBS} && \
 	./build.sh && \
@@ -252,8 +254,8 @@ riscv_baremetal: riscv_fesvr riscv_pk riscv_hello
 riscv_fesvr:
 	${SCRIPTS}/setup.rocketchip.submodule.sh
     #
-	# Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
-	# Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
+  # Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
+  # Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
     # Update August 2018: It seems the latest Vivado / SDK versions (i.e 2018.2)
     # have the correct Linaro hardfloat toolchain (arm-linux-gnueabihf- prefix)
     #
