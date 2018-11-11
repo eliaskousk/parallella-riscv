@@ -1,7 +1,7 @@
 `timescale 1 ns / 1 ps
 
 `include "settings.vh"
-`include "RV64IMA.Core.vh"
+`include "RV64IMAFD.Core.vh"
 
 module RISCV_Rocket_Core_RV64_AXI #
 (
@@ -56,7 +56,7 @@ module RISCV_Rocket_Core_RV64_AXI #
     output wire [2 : 0]                       M_AXI_AWPROT,
     // Quality of Service, QoS identifier sent for each write transaction.
     output wire [3 : 0]                       M_AXI_AWQOS,
-    // Region identifier. Permits a single physical interface
+    // Region identifier. Permits aHardware single physical interface
     // on a slave to be used for multiple logical interfaces.
     output wire [3 : 0]                       M_AXI_AWREGION,
     // Write address valid. This signal indicates that
@@ -265,176 +265,131 @@ module RISCV_Rocket_Core_RV64_AXI #
 );
 
     wire reset;
-    wire reset_cpu;
     wire host_clk;
-    wire host_in_valid;
-    wire host_in_ready;
-    wire host_out_ready;
-    wire host_out_valid;
-    wire [15:0] host_in_bits;
-    wire [15:0] host_out_bits;
 
     assign reset = !S_AXI_ARESETN;
 
     BUFG bufg_host_clk (.I(S_AXI_ACLK), .O(host_clk));
 
-    // ===========================
-    // AXI Slave to HostIO Adapter
-    // ===========================
-
-    ZynqAdapter RV64_AXI_HostIO_Adapter (
-        .clk                     (host_clk),
-        .reset                   (reset),
-
-        // ========================================================
-        // HostIO Interface
-        // ========================================================
-        // Host IO AXI Slave Adapter to Rocket Core
-        // Connects the HostIO AXI Slave interface with Rocket Core
-        // ========================================================
-
-        .io_reset                (reset_cpu),
-        .io_host_in_ready        (host_in_ready),
-        .io_host_in_valid        (host_in_valid),
-        .io_host_in_bits         (host_in_bits),
-
-        .io_host_out_ready       (host_out_ready),
-        .io_host_out_valid       (host_out_valid),
-        .io_host_out_bits        (host_out_bits),
-
-        // =================================================================
-        // HostIO AXI Slave Interface
-        // =================================================================
-        // Host IO AXI Slave Adapter to PS AXI Master
-        // Connects the adapter and thus Rocket Core to an AXI Master on PS
-        // =================================================================
-
-        .io_nasti_aw_ready       (S_AXI_AWREADY),
-        .io_nasti_aw_valid       (S_AXI_AWVALID),
-        .io_nasti_aw_bits_addr   (S_AXI_AWADDR),
-        .io_nasti_aw_bits_len    (S_AXI_AWLEN),
-        .io_nasti_aw_bits_size   (S_AXI_AWSIZE),
-        .io_nasti_aw_bits_burst  (S_AXI_AWBURST),
-        .io_nasti_aw_bits_id     (S_AXI_AWID),
-        .io_nasti_aw_bits_lock   (),
-        .io_nasti_aw_bits_prot   (),
-        .io_nasti_aw_bits_qos    (),
-        .io_nasti_aw_bits_region (),
-
-        .io_nasti_ar_ready       (S_AXI_ARREADY),
-        .io_nasti_ar_valid       (S_AXI_ARVALID),
-        .io_nasti_ar_bits_addr   (S_AXI_ARADDR),
-        .io_nasti_ar_bits_len    (S_AXI_ARLEN),
-        .io_nasti_ar_bits_size   (S_AXI_ARSIZE),
-        .io_nasti_ar_bits_burst  (S_AXI_ARBURST),
-        .io_nasti_ar_bits_id     (S_AXI_ARID),
-        .io_nasti_ar_bits_lock   (),
-        .io_nasti_ar_bits_prot   (),
-        .io_nasti_ar_bits_qos    (),
-        .io_nasti_ar_bits_region (),
-
-        .io_nasti_w_valid        (S_AXI_WVALID),
-        .io_nasti_w_ready        (S_AXI_WREADY),
-        .io_nasti_w_bits_data    (S_AXI_WDATA),
-        .io_nasti_w_bits_strb    (S_AXI_WSTRB),
-        .io_nasti_w_bits_last    (S_AXI_WLAST),
-
-        .io_nasti_r_valid        (S_AXI_RVALID),
-        .io_nasti_r_ready        (S_AXI_RREADY),
-        .io_nasti_r_bits_id      (S_AXI_RID),
-        .io_nasti_r_bits_resp    (S_AXI_RRESP),
-        .io_nasti_r_bits_data    (S_AXI_RDATA),
-        .io_nasti_r_bits_last    (S_AXI_RLAST),
-
-        .io_nasti_b_valid        (S_AXI_BVALID),
-        .io_nasti_b_ready        (S_AXI_BREADY),
-        .io_nasti_b_bits_id      (S_AXI_BID),
-        .io_nasti_b_bits_resp    (S_AXI_BRESP)
-    );
-
-    // ======================
-    // Rocket Core with MemIO
-    // ======================
-
     wire [31:0] mem_araddr;
     wire [31:0] mem_awaddr;
 
+    assign S_AXI_BRESP    = 2'b0;
+
     assign M_AXI_ARADDR = {C_DRAM_BASE, mem_araddr[C_DRAM_BITS-1:0]};
     assign M_AXI_AWADDR = {C_DRAM_BASE, mem_awaddr[C_DRAM_BITS-1:0]};
+
+  // ==============================================================
+  // Rocket Core with Host AXI Slave and Host AXI Master Interfaces
+  // ==============================================================
 
 `ifdef RISCV_CORE_ARCH_RV64IMAFD
     Rocket_Core_RV64IMAFD RV64IMAFD_Rocket_Core (
 `elsif RISCV_CORE_ARCH_RV64IMA
     Rocket_Core_RV64IMA RV64IMA_Rocket_Core (
 `endif
-        .clk                     (host_clk),
-        .reset                   (reset_cpu),
+        .clock                   (host_clk),
+        .reset                   (reset),
 
-        // ==============================================================
-        // HostIO Interface
-        // ==============================================================
-        // Rocket Core to HostIO AXI Slave Adapter
-        // Connects the Rocket Core to the above HostIO AXI Slave Adapter
-        // ==============================================================
+        // ===========================================================
+        // Host AXI Slave Interface for Control
+        // ===========================================================
+        // Zynq PS AXI Master to Rocket Core's AXI Slave
+        // Connects the Zynq PS to Rocket Core for controling it
+        // ===========================================================
 
-        .io_host_in_ready        (host_in_ready),
-        .io_host_in_valid        (host_in_valid),
-        .io_host_in_bits         (host_in_bits),
+        .io_ps_axi_slave_aw_ready       (S_AXI_AWREADY),
+        .io_ps_axi_slave_aw_valid       (S_AXI_AWVALID),
+        .io_ps_axi_slave_aw_bits_addr   (S_AXI_AWADDR[30:0]),
+        .io_ps_axi_slave_aw_bits_len    (S_AXI_AWLEN),
+        .io_ps_axi_slave_aw_bits_size   (S_AXI_AWSIZE),
+        .io_ps_axi_slave_aw_bits_burst  (S_AXI_AWBURST),
+        .io_ps_axi_slave_aw_bits_id     (S_AXI_AWID),
+        .io_ps_axi_slave_aw_bits_lock   (1'b0),
+        .io_ps_axi_slave_aw_bits_cache  (4'b0),
+        .io_ps_axi_slave_aw_bits_prot   (3'b0),
+        .io_ps_axi_slave_aw_bits_qos    (4'b0),
+        // .io_ps_axi_slave_aw_bits_region (),
 
-        .io_host_out_ready       (host_out_ready),
-        .io_host_out_valid       (host_out_valid),
-        .io_host_out_bits        (host_out_bits),
+        .io_ps_axi_slave_ar_ready       (S_AXI_ARREADY),
+        .io_ps_axi_slave_ar_valid       (S_AXI_ARVALID),
+        .io_ps_axi_slave_ar_bits_addr   (S_AXI_ARADDR[30:0]),
+        .io_ps_axi_slave_ar_bits_len    (S_AXI_ARLEN),
+        .io_ps_axi_slave_ar_bits_size   (S_AXI_ARSIZE),
+        .io_ps_axi_slave_ar_bits_burst  (S_AXI_ARBURST),
+        .io_ps_axi_slave_ar_bits_id     (S_AXI_ARID),
+        .io_ps_axi_slave_ar_bits_lock   (1'b0),
+        .io_ps_axi_slave_ar_bits_cache  (4'b0),
+        .io_ps_axi_slave_ar_bits_prot   (3'b0),
+        .io_ps_axi_slave_ar_bits_qos    (4'b0),
+        // .io_ps_axi_slave_ar_bits_region (),
+
+        .io_ps_axi_slave_w_valid        (S_AXI_WVALID),
+        .io_ps_axi_slave_w_ready        (S_AXI_WREADY),
+        .io_ps_axi_slave_w_bits_data    (S_AXI_WDATA),
+        .io_ps_axi_slave_w_bits_strb    (S_AXI_WSTRB),
+        .io_ps_axi_slave_w_bits_last    (S_AXI_WLAST),
+
+        .io_ps_axi_slave_r_valid        (S_AXI_RVALID),
+        .io_ps_axi_slave_r_ready        (S_AXI_RREADY),
+        .io_ps_axi_slave_r_bits_id      (S_AXI_RID),
+        .io_ps_axi_slave_r_bits_resp    (S_AXI_RRESP),
+        .io_ps_axi_slave_r_bits_data    (S_AXI_RDATA),
+        .io_ps_axi_slave_r_bits_last    (S_AXI_RLAST),
+
+        .io_ps_axi_slave_b_valid        (S_AXI_BVALID),
+        .io_ps_axi_slave_b_ready        (S_AXI_BREADY),
+        .io_ps_axi_slave_b_bits_id      (S_AXI_BID),
+        .io_ps_axi_slave_b_bits_resp    (),
 
         // =========================================================
-        // MemIO AXI Master Interface
+        // Host AXI Master Interface for Memory Access
         // =========================================================
-        // PL AXI Master to PS AXI Slave
+        // Rocket Core's AXI Master to Zynq PS AXI Slave
         // Connects to S_AXI_HP port on PS for access to DDR3 memory
         // =========================================================
 
-        .io_mem_0_ar_valid       (M_AXI_ARVALID),
-        .io_mem_0_ar_ready       (M_AXI_ARREADY),
-        .io_mem_0_ar_bits_addr   (mem_araddr),
-        .io_mem_0_ar_bits_id     (M_AXI_ARID),
-        .io_mem_0_ar_bits_size   (M_AXI_ARSIZE),
-        .io_mem_0_ar_bits_len    (M_AXI_ARLEN),
-        .io_mem_0_ar_bits_burst  (M_AXI_ARBURST),
-        .io_mem_0_ar_bits_cache  (M_AXI_ARCACHE),
-        .io_mem_0_ar_bits_lock   (M_AXI_ARLOCK),
-        .io_mem_0_ar_bits_prot   (M_AXI_ARPROT),
-        .io_mem_0_ar_bits_qos    (M_AXI_ARQOS),
-        .io_mem_0_ar_bits_region (M_AXI_ARREGION),
+        .io_mem_axi_ar_valid       (M_AXI_ARVALID),
+        .io_mem_axi_ar_ready       (M_AXI_ARREADY),
+        .io_mem_axi_ar_bits_addr   (mem_araddr),
+        .io_mem_axi_ar_bits_id     (M_AXI_ARID),
+        .io_mem_axi_ar_bits_size   (M_AXI_ARSIZE),
+        .io_mem_axi_ar_bits_len    (M_AXI_ARLEN),
+        .io_mem_axi_ar_bits_burst  (M_AXI_ARBURST),
+        .io_mem_axi_ar_bits_cache  (M_AXI_ARCACHE),
+        .io_mem_axi_ar_bits_lock   (M_AXI_ARLOCK),
+        .io_mem_axi_ar_bits_prot   (M_AXI_ARPROT),
+        .io_mem_axi_ar_bits_qos    (M_AXI_ARQOS),
 
-        .io_mem_0_aw_valid       (M_AXI_AWVALID),
-        .io_mem_0_aw_ready       (M_AXI_AWREADY),
-        .io_mem_0_aw_bits_addr   (mem_awaddr),
-        .io_mem_0_aw_bits_id     (M_AXI_AWID),
-        .io_mem_0_aw_bits_size   (M_AXI_AWSIZE),
-        .io_mem_0_aw_bits_len    (M_AXI_AWLEN),
-        .io_mem_0_aw_bits_burst  (M_AXI_AWBURST),
-        .io_mem_0_aw_bits_cache  (M_AXI_AWCACHE),
-        .io_mem_0_aw_bits_lock   (M_AXI_AWLOCK),
-        .io_mem_0_aw_bits_prot   (M_AXI_AWPROT),
-        .io_mem_0_aw_bits_qos    (M_AXI_AWQOS),
-        .io_mem_0_aw_bits_region (M_AXI_AWREGION),
+        .io_mem_axi_aw_valid       (M_AXI_AWVALID),
+        .io_mem_axi_aw_ready       (M_AXI_AWREADY),
+        .io_mem_axi_aw_bits_addr   (mem_awaddr),
+        .io_mem_axi_aw_bits_id     (M_AXI_AWID),
+        .io_mem_axi_aw_bits_size   (M_AXI_AWSIZE),
+        .io_mem_axi_aw_bits_len    (M_AXI_AWLEN),
+        .io_mem_axi_aw_bits_burst  (M_AXI_AWBURST),
+        .io_mem_axi_aw_bits_cache  (M_AXI_AWCACHE),
+        .io_mem_axi_aw_bits_lock   (M_AXI_AWLOCK),
+        .io_mem_axi_aw_bits_prot   (M_AXI_AWPROT),
+        .io_mem_axi_aw_bits_qos    (M_AXI_AWQOS),
 
-        .io_mem_0_w_valid        (M_AXI_WVALID),
-        .io_mem_0_w_ready        (M_AXI_WREADY),
-        .io_mem_0_w_bits_strb    (M_AXI_WSTRB),
-        .io_mem_0_w_bits_data    (M_AXI_WDATA),
-        .io_mem_0_w_bits_last    (M_AXI_WLAST),
+        .io_mem_axi_w_valid        (M_AXI_WVALID),
+        .io_mem_axi_w_ready        (M_AXI_WREADY),
+        .io_mem_axi_w_bits_strb    (M_AXI_WSTRB),
+        .io_mem_axi_w_bits_data    (M_AXI_WDATA),
+        .io_mem_axi_w_bits_last    (M_AXI_WLAST),
 
-        .io_mem_0_b_valid        (M_AXI_BVALID),
-        .io_mem_0_b_ready        (M_AXI_BREADY),
-        .io_mem_0_b_bits_resp    (M_AXI_BRESP),
-        .io_mem_0_b_bits_id      (M_AXI_BID),
+        .io_mem_axi_b_valid        (M_AXI_BVALID),
+        .io_mem_axi_b_ready        (M_AXI_BREADY),
+        .io_mem_axi_b_bits_resp    (M_AXI_BRESP),
+        .io_mem_axi_b_bits_id      (M_AXI_BID),
 
-        .io_mem_0_r_valid        (M_AXI_RVALID),
-        .io_mem_0_r_ready        (M_AXI_RREADY),
-        .io_mem_0_r_bits_resp    (M_AXI_RRESP),
-        .io_mem_0_r_bits_id      (M_AXI_RID),
-        .io_mem_0_r_bits_data    (M_AXI_RDATA),
-        .io_mem_0_r_bits_last    (M_AXI_RLAST)
+        .io_mem_axi_r_valid        (M_AXI_RVALID),
+        .io_mem_axi_r_ready        (M_AXI_RREADY),
+        .io_mem_axi_r_bits_resp    (M_AXI_RRESP),
+        .io_mem_axi_r_bits_id      (M_AXI_RID),
+        .io_mem_axi_r_bits_data    (M_AXI_RDATA),
+        .io_mem_axi_r_bits_last    (M_AXI_RLAST)
     );
 
 endmodule

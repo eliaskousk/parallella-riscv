@@ -8,7 +8,7 @@ module RISCV_Rocket_Core_RV64 #(
     parameter integer C_DRAM_BITS             = `RISCV_DRAM_BITS,
 
     // AXI Master
-    parameter integer C_M_AXI_ID_WIDTH        = 5,
+    parameter integer C_M_AXI_ID_WIDTH        = 6,
     parameter integer C_M_AXI_ADDR_WIDTH      = 32,
     parameter integer C_M_AXI_DATA_WIDTH      = 64,
 
@@ -172,7 +172,7 @@ module RISCV_Rocket_Core_RV64 #(
         .S_AXI_AWSIZE   (s_axi_awsize),
         .S_AXI_AWBURST  (s_axi_awburst),
         .S_AXI_AWLOCK   (s_axi_awlock),
-        .S_AXI_AWCACHE  (),
+        .S_AXI_AWCACHE  (s_axi_awcache),
         .S_AXI_AWPROT   (s_axi_awprot),
         .S_AXI_AWQOS    (s_axi_awqos),
         .S_AXI_AWREGION (s_axi_awregion),
@@ -184,7 +184,7 @@ module RISCV_Rocket_Core_RV64 #(
         .S_AXI_WVALID   (s_axi_wvalid),
         .S_AXI_WREADY   (s_axi_wready),
         .S_AXI_BID      (s_axi_bid),
-        .S_AXI_BRESP    (2'b00),
+        .S_AXI_BRESP    (s_axi_bresp),
         .S_AXI_BVALID   (s_axi_bvalid),
         .S_AXI_BREADY   (s_axi_bready),
         .S_AXI_ARID     (s_axi_arid),
@@ -193,7 +193,7 @@ module RISCV_Rocket_Core_RV64 #(
         .S_AXI_ARSIZE   (s_axi_arsize),
         .S_AXI_ARBURST  (s_axi_arburst),
         .S_AXI_ARLOCK   (s_axi_arlock),
-        .S_AXI_ARCACHE  (),
+        .S_AXI_ARCACHE  (s_axi_arcache),
         .S_AXI_ARPROT   (s_axi_arprot),
         .S_AXI_ARQOS    (s_axi_arqos),
         .S_AXI_ARREGION (s_axi_arregion),
@@ -201,7 +201,7 @@ module RISCV_Rocket_Core_RV64 #(
         .S_AXI_ARREADY  (s_axi_arready),
         .S_AXI_RID      (s_axi_rid),
         .S_AXI_RDATA    (s_axi_rdata),
-        .S_AXI_RRESP    (),
+        .S_AXI_RRESP    (s_axi_rresp),
         .S_AXI_RLAST    (s_axi_rlast),
         .S_AXI_RVALID   (s_axi_rvalid),
         .S_AXI_RREADY   (s_axi_rready)

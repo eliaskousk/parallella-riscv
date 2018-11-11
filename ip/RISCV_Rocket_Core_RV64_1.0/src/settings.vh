@@ -6,7 +6,7 @@
 // RV64 Core Name
 //
 
-`define RISCV_CORE_ARCH_RV64IMA
+`define RISCV_CORE_ARCH_RV64IMAFD
 
 //
 // Memory address base and width to use
@@ -16,7 +16,7 @@
 //
 
 `define RISCV_DRAM_BASE 3'd1
-`define RISCV_DRAM_BITS 29
+`define RISCV_DRAM_BITS 28
 
 
 `endif // settings_vh
