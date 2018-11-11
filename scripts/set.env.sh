@@ -3,6 +3,9 @@
 # This script sets the needed environment variables for building
 # and should be sourced before running additional build commands
 
+# Fix SBT error if TERM is set to xterm-256color
+export TERM=xterm-color
+
 echo "Setting Parallela RISC-V environment"
 echo "You must source this script"
 
@@ -20,15 +23,23 @@ BOOT=${TOP}/boot
 export BOOT
 echo "\$BOOT directory was set to ${BOOT}"
 
-ROCKETCHIP=${TOP}/ip/rocket-chip
+IP=${TOP}/ip
+export IP
+echo "\$IP directory was set to ${IP}"
+
+ROCKETCHIP=${IP}/rocket-chip
 export ROCKETCHIP
 echo "\$ROCKETCHIP directory was set to ${ROCKETCHIP}"
+
+TESTCHIPIP=${IP}/testchipip
+export TESTCHIPIP
+echo "\$TESTCHIPIP directory was set to ${TESTCHIPIP}"
 
 RISCVTOOLS=${ROCKETCHIP}/riscv-tools
 export RISCVTOOLS
 echo "\$RISCVTOOLS directory was set to ${RISCVTOOLS}"
 
-RISCV=${TOP}/ip/toolchain
+RISCV=${IP}/toolchain
 export RISCV
 echo "\$RISCV directory was set to ${RISCV}"
 

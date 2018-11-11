@@ -123,7 +123,7 @@ dtb_dir = $(arm_linux_dir)/arch/arm/boot/dts
 
 dts_dir = $(base_dir)/$(BOARD_NAME)/dts
 
-CROSS_TOOLCHAIN_LINUX = arm-linux-gnueabihf-
+CROSS_TOOLCHAIN_LINUX = arm-linux-gnueabihf
 
 
 # Unset LD_LIBRARY_PATH that points to Xilinx libraries (from sourcing setting64.sh)
@@ -202,36 +202,70 @@ arm-dtb-local: arm-dtc
 # ---------------------------------
 #
 
-riscv_emulator:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-  # Build the Rocket Chip emulator
-	cd ${ROCKETCHIP}/emulator && \
-	make -j${JOBS}
+ROCKET_ZYNQ = ${IP}/rocket-zynq
+ROCKET_ZYNQ_BUILD = ${ROCKET_ZYNQ}/build
+SCALA_VERSION=2.11.12
+bootrom_img = $(TESTCHIPIP)/bootrom/bootrom.rv64.img $(TESTCHIPIP)/bootrom/bootrom.rv32.img
+rocketchip_stamp = $(ROCKET_ZYNQ)/lib/rocketchip.stamp
+extra_stamps = $(addprefix $(ROCKET_ZYNQ)/lib/,$(addsuffix .stamp,testchipip))
 
-riscv_rocketcore:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-	cp ${TOP}/ip/config/Rocket.Core.Configs.scala ${ROCKETCHIP}/src/main/scala/Configs.scala
-  # Build the Rocket Chip Verilog RTL (for FPGAs)
-	cd ${ROCKETCHIP}/fsim && \
-	make verilog CONFIG=$(RISCV_CORE_CONFIG) && \
-	make verilog MODEL=ZynqAdapter CONFIG=$(RISCV_CORE_CONFIG) && \
-	cp generated-src/Top.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh && \
-	cp generated-src/ZynqAdapter.$(RISCV_CORE_CONFIG).v $(RocketCoreIPDir)/RV64.HostIO.Adapter.v && \
+# Taken from rocket chip 2a5aeea. TODO: Maybe source this directly from makefrag?
+SBT ?= java -Xmx2G -Xss8M -XX:MaxPermSize=256M -jar $(ROCKETCHIP)/sbt-launch.jar
+
+FIRRTL_JAR ?= $(ROCKETCHIP)/firrtl/utils/bin/firrtl.jar
+FIRRTL ?= java -Xmx2G -Xss8M -XX:MaxPermSize=256M -cp $(FIRRTL_JAR) firrtl.Driver
+
+$(FIRRTL_JAR): $(shell find $(ROCKETCHIP)/firrtl/src/main/scala -iname "*.scala" 2> /dev/null)
+	$(MAKE) -C $(ROCKETCHIP)/firrtl SBT="$(SBT)" root_dir=$(ROCKETCHIP)/firrtl build-scala
+
+CHISEL_ARGS := $(ROCKET_ZYNQ_BUILD)
+
+lookup_scala_srcs = $(shell find $(1)/. -iname "*.scala" 2> /dev/null)
+
+$(RocketCoreIPDir)/%.v: $(ROCKETCHIP)/vsrc/%.v
+	cp $< $@
+
+$(ROCKETCHIP)/lib/firrtl.jar: $(FIRRTL_JAR)
+	mkdir -p $(@D)
+	cp $< $@
+
+$(rocketchip_stamp): $(call lookup_scala_srcs, $(ROCKETCHIP)) $(ROCKETCHIP)/lib/firrtl.jar
+	cd $(ROCKETCHIP) && $(SBT) pack
+	mkdir -p $(ROCKET_ZYNQ)/lib
+	cp $(ROCKETCHIP)/target/pack/lib/* $(ROCKET_ZYNQ)/lib
+	touch $(rocketchip_stamp)
+
+$(ROCKET_ZYNQ)/Makefrag.pkgs: $(ROCKET_ZYNQ)/generate-pkg-mk.sh
+	bash $(ROCKET_ZYNQ)/generate-pkg-mk.sh testchipip > $@
+
+-include $(ROCKET_ZYNQ)/Makefrag.pkgs
+
+$(ROCKET_ZYNQ_BUILD)/Top.$(RISCV_CORE_CONFIG).fir: arm-dtc $(rocketchip_stamp) $(extra_stamps) $(bootrom_img) $(call lookup_scala_srcs,$(ROCKET_ZYNQ))
+	mkdir -p $(@D)
+	export PATH=$(arm_linux_dir)/scripts/dtc:$$PATH && \
+	cd $(ROCKET_ZYNQ) && $(SBT) "run $(CHISEL_ARGS) zynq Top zynq $(RISCV_CORE_CONFIG)"
+
+$(ROCKET_ZYNQ_BUILD)/Top.$(RISCV_CORE_CONFIG).v: $(ROCKET_ZYNQ_BUILD)/Top.$(RISCV_CORE_CONFIG).fir $(FIRRTL_JAR)
+	$(FIRRTL) -i $< -o $@ -X verilog
+
+$(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh: $(ROCKET_ZYNQ_BUILD)/Top.$(RISCV_CORE_CONFIG).v
+	cp $< $@
+
+riscv_rocketcore: $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh
 	sed -i "s/^\(module\) Top(/\1 Rocket_Core_$(RISCV_CORE_ARCH)(/" $(RocketCoreIPDir)/$(RISCV_CORE_ARCH).Core.vh
 
 riscv_toolchain:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
   # Install necessary packages (Ubuntu)
-	sudo apt-get install autoconf automake autotools-dev curl \
-	libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex \
-	texinfo gperf libtool patchutils bc
+	# sudo apt-get install autoconf automake autotools-dev curl \
+	# libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex \
+	# texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
   # Switch to the master (priv1.7 ISA) branch and setup build script
-	cd ${RISCVTOOLS} && \
-	git checkout -B current && \
-	git checkout master && \
-	git submodule update --init --recursive
-	sed -i "s/^\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
-	sed -i "s/^\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
+	# cd ${RISCVTOOLS} && \
+	# git checkout -B current && \
+	# git checkout master && \
+	# git submodule update --init --recursive
+	# sed -i "s/^\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
+	# sed -i "s/^\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
   # Build the RISC-V Toolchain
   # (First Newlib version for use without an OS, then the Linux version with glibc)
 	cd ${RISCVTOOLS} && \
@@ -239,11 +273,11 @@ riscv_toolchain:
 	./build.sh && \
 	cd riscv-gnu-toolchain && \
 	./configure --prefix=${RISCV} && \
-	make linux && \
-	cd ${RISCVTOOLS} && \
-	git checkout current && \
-	git checkout -- build.sh && \
-	git submodule update --init --recursive
+	make linux # && \
+	# cd ${RISCVTOOLS} && \
+	# git checkout current && \
+	# git checkout -- build.sh && \
+	# git submodule update --init --recursive
 
 
 #
@@ -256,22 +290,38 @@ riscv_software: riscv_baremetal riscv_linux
 
 riscv_baremetal: riscv_fesvr riscv_pk riscv_hello
 
-riscv_fesvr:
-	${SCRIPTS}/setup.rocketchip.submodule.sh
-    #
-  # Build the RISC-V frontend server (fesvr) for Zynq's ARM with Xilinx Linaro toolchain (hardfloat)
-  # Note: the normal Xilinx Codesourcery toolchain doesn't produce a working fesvr
-    # Update August 2018: It seems the latest Vivado / SDK versions (i.e 2018.2)
-    # have the correct Linaro hardfloat toolchain (arm-linux-gnueabihf- prefix)
-    #
-	cd ${RISCVTOOLS}/riscv-fesvr && \
-	mkdir -p build.arm && cd build.arm && \
-	../configure --host=arm-linux-gnueabihf && \
-	make && \
-	cp fesvr-zedboard $(final_output_dir)/riscv/fesvr && \
-	cp libfesvr.so $(final_output_dir)/riscv/ && \
-	cd ${RISCVTOOLS}/riscv-fesvr && \
-	rm -rf build.arm
+fesvr-main = fesvr-zynq
+fesvr-srcs = \
+	$(ROCKET_ZYNQ)/csrc/fesvr_zynq.cc \
+	$(ROCKET_ZYNQ)/csrc/zynq_driver.cc \
+	$(TESTCHIPIP)/csrc/blkdev.cc \
+
+fesvr-hdrs = \
+	$(ROCKET_ZYNQ)/csrc/zynq_driver.h \
+	$(TESTCHIPIP)/csrc/blkdev.h \
+
+fesvr-lib = $(ROCKET_ZYNQ_BUILD)/libfesvr.so
+
+CXX_FPGA      = $(CROSS_TOOLCHAIN_LINUX)-g++
+CXXFLAGS_FPGA = -O2 -std=c++11 -Wall -L$(ROCKET_ZYNQ_BUILD) -lfesvr \
+                -Wl,-rpath,/usr/local/lib \
+		-I $(ROCKET_ZYNQ)/csrc -I $(TESTCHIPIP)/csrc \
+		-I $(ROCKETCHIP)/riscv-tools/riscv-fesvr/ \
+		-Wl,-rpath,/usr/local/lib \
+
+$(fesvr-lib):
+	mkdir -p $(ROCKET_ZYNQ_BUILD)
+	cd $(ROCKET_ZYNQ_BUILD) && \
+	$(ROCKETCHIP)/riscv-tools/riscv-fesvr/configure \
+		--host=$(CROSS_TOOLCHAIN_LINUX) && \
+	make libfesvr.so
+
+$(ROCKET_ZYNQ_BUILD)/$(fesvr-main): $(fesvr-lib) $(fesvr-srcs) $(fesvr-hdrs)
+	$(CXX_FPGA) $(CXXFLAGS_FPGA) -o $(ROCKET_ZYNQ_BUILD)/$(fesvr-main) $(fesvr-srcs)
+
+riscv_fesvr: $(ROCKET_ZYNQ_BUILD)/$(fesvr-main)
+	cp $(ROCKET_ZYNQ_BUILD)/$(fesvr-main) $(final_output_dir)/riscv/fesvr
+	cp $(fesvr-lib) $(final_output_dir)/riscv/
 
 riscv_pk:
 	cd ${RISCV}/riscv64-unknown-elf/bin/ && \
