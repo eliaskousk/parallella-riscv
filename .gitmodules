@@ -34,3 +34,7 @@
 	path = boot/riscv-poky
 	url = https://github.com/riscv/riscv-poky.git
 	branch = master
+[submodule "ip/testchipip"]
+	path = ip/testchipip
+	url = https://github.com/ucb-bar/testchipip.git
+	branch = master
