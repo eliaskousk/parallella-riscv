@@ -1,3 +1,4 @@
 *.bit
 /riscv_rv64/
 /zedboard_riscv/
+/system_bd_new.tcl

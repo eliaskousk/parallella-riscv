@@ -86,16 +86,10 @@ UBOOT_CONFIG = adapteva_parallella
 # and thus they cannot fit RISC-V cores with the F or D
 # extensions.
 #
-# Keep in mind that the RV64IMA runs at 50 MHz and the
-# RV64IMAFD runs at 25 MHz. So although the latter can
-# execute floating point instructions, the former is
-# much faster at everything else and thus it is the
-# preferred core architecture for all Parallella editions.
 
+RISCV_CORE_ARCH = RV64IMAFD
 
-RISCV_CORE_ARCH = RV64IMA
-
-RISCV_CORE_CONFIG = DefaultFPGANoFPUConfig
+RISCV_CORE_CONFIG = ZynqFPGAConfig
 
 
 #

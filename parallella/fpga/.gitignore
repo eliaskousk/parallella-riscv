@@ -3,3 +3,4 @@
 /parallella_base/
 /riscv_rv64/
 /parallella_riscv/
+/system_bd_new.tcl
