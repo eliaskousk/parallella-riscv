@@ -79,17 +79,19 @@ deleted so any modifications you have made there will be lost.
 * Step 2: Build the Host Software
 
 **Parallella:**
-The host software for the ARM dual-core processor of the Zynq device consists of U-Boot, the Linux kernel
-and the devicetree DTB file (Device Tree Blob).
 
-- **U-Boot** is not currently used for Parallella since the one contained in its Flash chip is fine and
-there is always a risk when performing re-flashes.
+The host software for the ARM dual-core processor of the Zynq device consists of the Linux kernel,
+the devicetree DTB file (Device Tree Blob) and the U-Boot bootloader.
 
-- **The Linux kernel (uImage)** is also identical with the one provided by the latest E-SDK and it's a
+- **The Linux kernel (uImage)** is identical with the one provided by the latest E-SDK and it's a
 matter of preference to use the one you build or the fefault from the E-SDK.
 
-- **The device tree DTB file** is necessary for both the Parallella and ZedBoard in order to use Rocket
-Core's Host I/O interface and thus the RISC-V RV64 core.
+- **The device tree DTB file** is needed in order to use Rocket Core's Host I/O interface
+and thus the RISC-V RV64 core.
+
+- **U-Boot** is the bootloader which programs the FPGA and boots the Linux kernel. A custom U-Boot build
+is not really needed for Parallella since the one contained in its Flash chip is fine and there is always
+a risk when performing re-flashes.
 
 **ZedBoard:** (Since November 2018)
 
@@ -101,7 +103,7 @@ The PetaLinux build will use the ZedBoard BSP for ZedBoard in order to build two
 - **The BOOT image BOOT.bin** which contains the Zynq PS FSB (First Stage BootLoader) & U-Boot & FPGA Bitstream
 - **The FIT image image.ub** which contains the Linux Kernel & Linux FileSystem Image & Linux Flatten Device Tree (FDT)
 
-You can build the host software by running the following:
+You can build the host software for all boards by running the following:
 
 ```bash
 ./scripts/build.host.software.sh
@@ -123,15 +125,15 @@ All the final output files are placed in the `${TOP}/${BOARD}/output/final/` dir
 you should copy them in your SD card's boot partition. To actually test RISC-V you should also build its
 software and copy the `${TOP}/${BOARD}/output/final/riscv` folder to your SD as well (more on this below).
 
-### Obtain an ARM Host Linux Root Image
+### Obtain an ARM Host Linux Root Image for Parallella
 
-For Parallella the software built above without PetaLinux does not include a root image for the Linux host
-running on the ARM cores of Zynq. If you don't want to bother with building your own you can use an existing
-from the following repository:
+For Parallella the software built above (PetaLinux works only for ZedBoard), does not include a root image
+for the Linux host running on the ARM cores of Zynq. If you don't want to bother with building your own you
+can use an existing from the following repository:
 
 * [Parallella](https://github.com/parallella/pubuntu/releases)
 
-If you use the `Parallella ESDK` image linked here you also have the choice of NOT building the ARM Linux
+If you use the `Parallella ESDK` image linked  there you also have the choice of NOT building the ARM Linux
 kernel yourself. This image contains both the Linux kernel and the root image to boot Parallella so you
 only need to build (see above) and copy on your SD card the device tree DTB file (Device Tree Blob) and
 of-course the bitstream.
@@ -192,7 +194,7 @@ parallella@parallella:~/$ sudo ./fesvr pk hello
 Hello World!
 ```
 
-### RISC-V Linux And Root Disk Image
+### RISC-V Linux And Root Disk Image (Might not work in 2018)
 
 You can build the RISC-V Linux kernel with the following script:
 
@@ -206,20 +208,31 @@ Afterwards you can build the RISC-V Linux root disk image with the following scr
 ./scripts/build.riscv.root.sh
 ```
 
-This might take a long time depending on the machine's computational power and network
+This uses RISC-V Poky and might take a long time depending on the machine's computational power and network
 connectivity so please be patient. We suggest you download the prebuilt image from here (coming soon!).
 
-All the output files will be placed in the  `${TOP}/${BOARD}/final/output/riscv/` folder.
+All the output files will be placed in the  `${TOP}/${BOARD}/final/output/riscv/ folder.
 
-To copy the built files to an already booted board you can run the following (assuming your Parallella
+**Update November 2018**
+
+If the above doesn't work or you just don't want to wait for such a build, you can use the following two files
+that are inside the home folder of root in this RISC-V root filesystem image of UCB's ZedBoard Image Repo:
+
+- The bbl binary that contains the kernel as a payload
+- The root filesystem buildroot.rootfs.ext2
+
+You can extract the files either by mounting the image or by using this tool or by just booting the complete release
+from the UCB repo and copying the files in your SD card.
+
+To copy the built or extracted files to an already booted board you can run the following (assuming your Parallella
 can be reached inside your network with the `parallella` host. You can replace this with parallella@IP
 where IP is the IP address of Parallella in your local network):
 
 ```bash
 cd parallella/output/final/riscv/
 scp bbl parallella@parallella:~/
-scp vmlinux parallella@parallella:~/
-scp root.bin parallella@parallella:~/
+scp vmlinux parallella@parallella:~/   # Update 2018 - Not needed anymore
+scp root.bin parallella@parallella:~/  # Update 2018 - You can use the buildroot.rootfs.ext2 file, see above
 ```
 
 All the above tranfered files will be placed in the home directory of the parallella user but you can
@@ -228,7 +241,7 @@ of-course transfer them wherever you wish on your SD card's root or boot partiti
 Then fesvr and bbl can be used to boot RISC-V Linux and perform simple tasks like shown below:
 
 ```bash
-parallella@parallella:~/$ sudo ./fesvr +disk=root.bin bbl vmlinux
+parallella@parallella:~/$ sudo ./fesvr +blkdev=root.bin bbl vmlinux
               vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
                   vvvvvvvvvvvvvvvvvvvvvvvvvvvv
 rrrrrrrrrrrrr       vvvvvvvvvvvvvvvvvvvvvvvvvv
