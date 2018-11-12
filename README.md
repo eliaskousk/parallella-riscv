@@ -1,4 +1,4 @@
-# RISC-V Rocket Core on Parallella & ZedBoard Zynq FPGA Boards
+# RISC-V on Parallella & ZedBoard Zynq FPGA Boards
 
 ## Contents of this document
 
