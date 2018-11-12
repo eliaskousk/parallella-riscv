@@ -32,13 +32,16 @@ $(parallella_bitstream): bitstream
 	cp parallella.bit.bin $(final_output_dir)/
 parallella_bitstream: $(parallella_bitstream)
 
-zedboard_bitstream = $(final_output_dir)/boot.bin
-$(zedboard_bitstream): bitstream
-  # Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
-	cd $(boot_build_dir) && \
-	bootgen -image boot.bif -w on -o boot.bin && \
-	cp boot.bin $(final_output_dir)/
-zedboard_bitstream: $(zedboard_bitstream)
+zedboard_bitstream : bitstream
+
+# Deprecated due to PetaLinux process
+# zedboard_bitstream = $(final_output_dir)/boot.bin
+# $(zedboard_bitstream): bitstream
+#   # Make final ZedBoard boot image (FSBL + bitstream + U-Boot)
+# 	cd $(boot_build_dir) && \
+# 	bootgen -image boot.bif -w on -o boot.bin && \
+# 	cp boot.bin $(final_output_dir)/
+# zedboard_bitstream: $(zedboard_bitstream)
 
 
 #
@@ -60,7 +63,8 @@ $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	export BOARD_PART=$(BOARD_PART) && \
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl && \
-	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit
+	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit && \
+	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.sysdef $(fpga_dir)/$(BOARD_NAME).hwdef
 	cd $(boot_build_dir) && \
 	ln -sf $(fpga_dir)/$(BOARD_NAME).bit .
 bitstream: $(bitstream)
@@ -113,6 +117,52 @@ riscv_ip_setup:
 # ----------------------------
 #
 
+#
+# ------------------------
+# ZedBoard PetaLinux Build
+# ------------------------
+#
+
+ZEDBOAD_BSP_FILE = avnet-digilent-zedboard-v2018.2-final.bsp
+ZEDBOARD_BSP_URL = https://xilinx-ax-dl.entitlenow.com/dl/ul/2018/06/15/R209939846/$(ZEDBOARD_BSP_FILE)\
+                   /7595fcdb7056b30dcc9ba5df18cc1f98/5BEA3BEA?akdm=0&filename=$(ZEDBOARD_BSP_FILE)
+ZEDBOARD_BSP_PATH = /tmp
+ZEDBOARD_BSP = $(ZEDBOARD_BSP_PATH)/$(ZEDBOARD_BSP_FILE)
+
+petalinux_dir = $(fpga_dir)/petalinux/
+
+# When configuring the rootfs
+# you need to enable libstdc++
+# (FileSystem Packages > misc > gcc runtime)
+
+zedboard_software:
+  wget -P $(ZEDBOARD_BSP_PATH) $(ZEDBOARD_BSP_URL)
+  mkdir $(petalinux_dir)
+	unset LD_LIBRARY_PATH && \
+	source $(PETALINUX_PATH)/settings.sh && \
+	source $(PETALINUX_PATH)/components/yocto/source/arm/environment-setup-cortexa9hf-neon-xilinx-linux-gnueabi && \
+  cd $(petalinux_dir) && \
+	petalinux-create -t project -s $(ZEDBOARD_BSP) --name riscv_zynq && \
+  cd riscv_zynq && \
+	petalinux-config --get-hw-description=../../fpga/ && \
+	petalinux-config -c rootfs && \ # Enable libstdc++ (FileSystem Packages > misc -> gcc runtime)
+  petalinux-build && \
+	petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/system.bit --u-boot
+  cp $(petalinux_dir)/riscv_zynq/images/linux/BOOT.BIN $(final_output_dir)
+  cp $(petalinux_dir)/riscv_zynq/images/linux/image.ub $(final_output_dir)
+
+#
+# --------------------------------------
+# Parallella U-Boot & Linux Kernel Build
+# --------------------------------------
+#
+# Below targets build U-Boot & Linux for ARM
+# on Parallella boards only (ZedBoard removed
+# since it cannot boot with the U-Boot & Kernel
+# built below - still investigating as to why)
+#
+# ------------------------------------------
+#
 arm_linux_dir = $(base_dir)/boot/$(LINUX_REPO)
 
 uboot_dir = $(base_dir)/boot/$(UBOOT_REPO)
@@ -128,9 +178,9 @@ CROSS_TOOLCHAIN_LINUX = arm-linux-gnueabihf
 
 # Unset LD_LIBRARY_PATH that points to Xilinx libraries (from sourcing setting64.sh)
 # in order to not break various commandline tools that are used during building (e.g awk)
-export LD_LIBRARY_PATH=
+# export LD_LIBRARY_PATH=
 
-$(BOARD_NAME)_software: arm-uboot-$(BOARD_NAME) arm-linux arm-dtb
+parallella_software: arm-uboot-$(BOARD_NAME) arm-linux arm-dtb
 
 arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its tools
   # Compile kernel
@@ -138,14 +188,14 @@ arm-linux: arm-uboot-$(BOARD_NAME) # Must first build uboot because we need its 
   # No make clean included here since one copy of linux should work on all boards
   # Configure Linux kernel
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(LINUX_CONFIG)_defconfig
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- $(LINUX_CONFIG)_defconfig
   # Build Linux kernel
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- -j${JOBS}
   # Convert zImage to uImage
 	cd $(arm_linux_dir) && \
 	export PATH=$(uboot_dir)/tools:$$PATH && \
-	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) UIMAGE_LOADADDR=0x8000 uImage
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- UIMAGE_LOADADDR=0x8000 uImage
 	mkdir -p $(final_output_dir)
 	cp $(arm_linux_dir)/arch/arm/boot/uImage $(final_output_dir)/
 
@@ -165,10 +215,10 @@ endif
 	sudo apt install libssl-dev
   # Configure U-Boot
 	cd $(uboot_dir) && \
-	make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(UBOOT_CONFIG)_defconfig
+	make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- $(UBOOT_CONFIG)_defconfig
   # Build U-Boot
 	export PATH=$(dtc_dir):$$PATH && \
-	cd $(uboot_dir) && make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) -j${JOBS}
+	cd $(uboot_dir) && make CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- -j${JOBS}
 	mkdir -p $(boot_build_dir)
 	cp $(uboot_dir)/u-boot $(boot_build_dir)/u-boot.elf
 
@@ -185,7 +235,7 @@ arm-dtb:
 	cp $(dts_dir)/settings.h $(dtb_dir)
 	cp $(dts_dir)/$(LINUX_DTS).dts* $(dtb_dir)
 	cd $(arm_linux_dir) && \
-	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX) $(LINUX_DTB).dtb
+	make ARCH=arm CROSS_COMPILE=$(CROSS_TOOLCHAIN_LINUX)- $(LINUX_DTB).dtb
 	cp $(dtb_dir)/$(LINUX_DTB).dtb $(final_output_dir)/devicetree.dtb
 
 # Instead of using the above you can use the following to build locally (not in Linux repo)
@@ -197,9 +247,9 @@ arm-dtb-local: arm-dtc
 
 
 #
-# ---------------------------------
-# RISC-V Rocket Cores and Toolchain
-# ---------------------------------
+# --------------------------------
+# RISC-V Rocket Core and Toolchain
+# --------------------------------
 #
 
 ROCKET_ZYNQ = ${IP}/rocket-zynq
@@ -259,13 +309,9 @@ riscv_toolchain:
 	# sudo apt-get install autoconf automake autotools-dev curl \
 	# libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex \
 	# texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config
-  # Switch to the master (priv1.7 ISA) branch and setup build script
-	# cd ${RISCVTOOLS} && \
-	# git checkout -B current && \
-	# git checkout master && \
-	# git submodule update --init --recursive
 	# sed -i "s/^\(build_project riscv-gnu-toolchain --prefix=\$$RISCV\)\( --with-arch=RV64[A-Z]\{1,5\}\)\{0,1\}/\1 --with-arch=$(RISCV_CORE_ARCH)/" ${RISCVTOOLS}/build.sh
 	# sed -i "s/^\(build_project riscv-tests\)/#\1/" ${RISCVTOOLS}/build.sh
+
   # Build the RISC-V Toolchain
   # (First Newlib version for use without an OS, then the Linux version with glibc)
 	cd ${RISCVTOOLS} && \
@@ -273,17 +319,13 @@ riscv_toolchain:
 	./build.sh && \
 	cd riscv-gnu-toolchain && \
 	./configure --prefix=${RISCV} && \
-	make linux # && \
-	# cd ${RISCVTOOLS} && \
-	# git checkout current && \
-	# git checkout -- build.sh && \
-	# git submodule update --init --recursive
+	make linux
 
 
 #
-# -----------------------------
-# RISC-V Software, Linux Kernel
-# -----------------------------
+# ----------------------------------------
+# RISC-V Baremetal Software & Linux Kernel
+# ----------------------------------------
 #
 
 riscv_software: riscv_baremetal riscv_linux
@@ -305,9 +347,9 @@ fesvr-lib = $(ROCKET_ZYNQ_BUILD)/libfesvr.so
 CXX_FPGA      = $(CROSS_TOOLCHAIN_LINUX)-g++
 CXXFLAGS_FPGA = -O2 -std=c++11 -Wall -L$(ROCKET_ZYNQ_BUILD) -lfesvr \
                 -Wl,-rpath,/usr/local/lib \
-		-I $(ROCKET_ZYNQ)/csrc -I $(TESTCHIPIP)/csrc \
-		-I $(ROCKETCHIP)/riscv-tools/riscv-fesvr/ \
-		-Wl,-rpath,/usr/local/lib \
+								-I $(ROCKET_ZYNQ)/csrc -I $(TESTCHIPIP)/csrc \
+								-I $(ROCKETCHIP)/riscv-tools/riscv-fesvr/ \
+								-Wl,-rpath,/usr/local/lib \
 
 $(fesvr-lib):
 	mkdir -p $(ROCKET_ZYNQ_BUILD)
