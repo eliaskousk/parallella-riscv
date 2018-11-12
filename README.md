@@ -61,8 +61,24 @@ in the `${TOP}/parallella/Makefile` (top of the file) as explained in the relate
 
 To build the bitstream and the needed host (ARM) software you must do the following:
 
-* Step 1: Build the Host Software
+* Step 1: Build the FPGA Bitstream
 
+This will build either the `parallella.bit.bin` FPGA bitstream for Parallella board or `zedboard.bit`
+for Zedboard:
+
+```bash
+./scripts/build.fpga.bitstream.sh
+```
+
+After it finishes you can view / edit the design in Vivado by opening the
+`${TOP}/${BOARD}/fpga/${BOARD}_riscv/system.xpr** project.
+
+Keep in mind that everytime you run the above build bitstream script the project's folder is
+deleted so any modifications you have made there will be lost.
+
+* Step 2: Build the Host Software
+
+**Parallella:**
 The host software for the ARM dual-core processor of the Zynq device consists of U-Boot, the Linux kernel
 and the devicetree DTB file (Device Tree Blob).
 
@@ -75,38 +91,31 @@ matter of preference to use the one you build or the fefault from the E-SDK.
 - **The device tree DTB file** is necessary for both the Parallella and ZedBoard in order to use Rocket
 Core's Host I/O interface and thus the RISC-V RV64 core.
 
-You can build all three of them by running the following:
+**ZedBoard:** (Since November 2018)
+
+ZedBoard host software is now built with [PetaLinux](https://www.xilinx.com/member/forms/download/xef.html?filename=petalinux-v2018.2-final-installer.run)
+so you must first download and install it from Xilinx download site. You need the 6 GB Installer and it only works on Ubuntu 16.04 or RHEL/CentoOS 7.2 - 7.4.
+
+The PetaLinux build will use the ZedBoard BSP for ZedBoard in order to build two following two files:
+
+- **The BOOT image BOOT.bin** which contains the Zynq PS FSB (First Stage BootLoader) & U-Boot & FPGA Bitstream
+- **The FIT image image.ub** which contains the Linux Kernel & Linux FileSystem Image & Linux Flatten Device Tree (FDT)
+
+You can build the host software by running the following:
 
 ```bash
 ./scripts/build.host.software.sh
 ```
-
-* Step 2: Build the FPGA Bitstream
-
-This will build either the `parallella.bit.bin` FPGA bitstream for Parallella board or `zedboard.bit`
-for Zedboard:
-
-```bash
-./scripts/build.fpga.bitstream.sh
-```
-
-After it finishes you can view / edit the design in Vivado by opening the
-`${TOP}/${BOARD}/fpga/${BOARD}_riscv/system.xpr` project.
-
-Keep in mind that everytime you run the above build bitstream script the project's folder is
-deleted so any modifications you have made there will be lost.
 
 * Step 1 & 2 Combined: Build the Host Software and the FPGA Bitstream
 
 To build both the host software and FPGA Bitstream run the following:
 
 ```bash
-./scripts/build.host.software.sh
 ./scripts/build.fpga.bitstream.sh
+./scripts/build.host.software.sh
 ```
-
-You must run them in this order for Zedboard since the bitstream step will also generate the final
-`boot.bin` image which contains `FSBL (First Stage Bootloader) + FPGA Bitstream + U-Boot Bootloader`.
+You must run them in this order for Zedboard since the bitstream is needed to build PetaLinux
 
 * Step 3: Copy output in your SD card's boot partition
 
@@ -116,20 +125,16 @@ software and copy the `${TOP}/${BOARD}/output/final/riscv` folder to your SD as 
 
 ### Obtain an ARM Host Linux Root Image
 
-The software above does not include a root image for the Linux host running on the ARM cores of Zynq.
-If you don't want to bother with building your own you can use an existing from the following repositories:
+For Parallella the software built above without PetaLinux does not include a root image for the Linux host
+running on the ARM cores of Zynq. If you don't want to bother with building your own you can use an existing
+from the following repository:
 
 * [Parallella](https://github.com/parallella/pubuntu/releases)
 
-If you use the `Parallella ESDK` image linked here you also have the choice of not building the ARM Linux
+If you use the `Parallella ESDK` image linked here you also have the choice of NOT building the ARM Linux
 kernel yourself. This image contains both the Linux kernel and the root image to boot Parallella so you
 only need to build (see above) and copy on your SD card the device tree DTB file (Device Tree Blob) and
 of-course the bitstream.
-
-* [ZedBoard](https://github.com/ucb-bar/fpga-images-zedboard/blob/master/uramdisk.image.gz)
-
-This is just a root image with very limited functionality and to use it you still need to build the Linux
-Kernel and the device tree DTB file (see above on `Host Software`), besides the FPGA Bitstream.
 
 ### Build the RISC-V Toolchain
 
