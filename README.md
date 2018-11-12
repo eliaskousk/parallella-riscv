@@ -1,21 +1,4 @@
-# RISC-V port to Parallella Board
-
-## A Google Summer of Code 2016 Project
-
-With this project I hope to benefit the open-source hardware enthusiast
-community with work related to the incredible Parallella board used by thousands
-of students and hobbyists around the world. This project will focus on the
-integration of the RISC-V rocket core, inside the Zynq FPGA device of Parallella.
-The RISC-V rocket core is an implementation of the RISV-V ISA that has gotten a
-lot of attention and support due to being clean, modular and power efficient.
-
-This project will allow owners of Parallella boards to write and execute RISC-V
-programs with minimal effort from their side. The system will work out of the
-box with a prebuilt binary image ready to be placed in an SD card and users
-will be able to re-build it with minimal effort. Moreover, a tutorial document
-will be created to aid inexperienced users make the most of this work and allow
-them to modify it for their own needs and purposes with custom hardware and /
-or software code.
+# RISC-V Rocket Core on Parallella & ZedBoard Zynq FPGA Boards
 
 ## Contents of this document
 
@@ -35,6 +18,8 @@ or software code.
 
 ## Using the prebuilt images
 
+**Out of date but they still work**
+
 If you don't have a working Vivado installation, or you just want to test everything
 quickly without the necessary long build times, you can use the prebuilt images that
 have been prepared and hosted on the [Parallella RISC-V Prebuilt images]
@@ -44,18 +29,27 @@ complete instructions on how to use them on your board.
 
 ## Instructions for building everything from scratch
 
+**Updated to use a modern RV64 Rocket Chip with Rocket Core Generator of April 2018**
+
+This repo has been updated to use a modern Rocket Core using the infrastructure found
+in the original fpga-zynq repository of UCB. The work done there was great (thank you!)
+but it is now not maintained and doesn't work with newer Xilinx Vivado tools (i.e 2018.2).
+
 ### Setup
 
 In order to build a bitstream and / or the necessary host software to boot the board you must first
-edit the `BOARD`, `JOBS`, `VIVADO_PATH` and `VIVADO_VERSION` variables in `${TOP}/scripts/settings.sh`
-if you need to change the target board (to e.g `zedboard` instead of the default `parallella`) or the
-number of jobs your machine can simultaneously handle while building (default is `8`) or the installation
-path and version of Vivado tools you have installed on your system. The system can be synthesized and
-implemented with the latest Xilinx Vivado tools (tested with 2015.4 and later).
+edit the `BOARD`, `JOBS`, `VIVADO_PATH` and `VIVADO_VERSION` and `PETALINUX_PATH` variables in
+`${TOP}/scripts/settings.sh` if you need to change the target board (to e.g `zedboard` instead of the
+default `parallella`) or the number of jobs your machine can simultaneously handle while building
+(default is `8`) or the installation path and version of Vivado tools you have installed on your system.
+The system can be synthesized and implemented with the latest Xilinx Vivado tools (tested with 2018.2).
 
-Important Note: The build system by default generates a Parallella bitstream for the Desktop / Microserver
-editions. If you have an Embedded or Kickstarter Parallella you should set the correct `BOARD` variables
-in the `${TOP}/parallella/Makefile` (top of the file) as explained in the related comments there.
+Important Note: The build system by default generates a ZedBoard build. If you need to build for the
+Parallella you should change the `BOARD` variable above. Moreover, you should make sure your Parallella
+version (Desktop / Microserver / Embedded or Kickstarter) is properly set using the `BOARD` variable in the
+`${TOP}/parallella/Makefile` (top of the file) as explained in the related comments there.
+
+Warning: As of 2018 the smaller Parallella's with the smaller Zynq device might not be able to fit a modern Rocket Core.
 
 ### Build Bitstream and Host (ARM) Software
 
@@ -63,8 +57,7 @@ To build the bitstream and the needed host (ARM) software you must do the follow
 
 * Step 1: Build the FPGA Bitstream
 
-This will build either the `parallella.bit.bin` FPGA bitstream for Parallella board or `zedboard.bit`
-for Zedboard:
+This will build the FPGA bitstream for Parallella or Zedboard:
 
 ```bash
 ./scripts/build.fpga.bitstream.sh
@@ -532,6 +525,25 @@ interfaces:
 The Parallella Base component runs with a 100 MHz clock and the RISC-V RV64 core runs with a 50 MHz clock
 when configured with the **IMA** extensions or with a 25 MHz clock when configured with the **IMAFD**
 extensions.
+
+# GSoC 2016 Documentation
+
+## A Google Summer of Code 2016 Project
+
+With this project I hope to benefit the open-source hardware enthusiast
+community with work related to the incredible Parallella board used by thousands
+of students and hobbyists around the world. This project will focus on the
+integration of the RISC-V rocket core, inside the Zynq FPGA device of Parallella.
+The RISC-V rocket core is an implementation of the RISV-V ISA that has gotten a
+lot of attention and support due to being clean, modular and power efficient.
+
+This project will allow owners of Parallella boards to write and execute RISC-V
+programs with minimal effort from their side. The system will work out of the
+box with a prebuilt binary image ready to be placed in an SD card and users
+will be able to re-build it with minimal effort. Moreover, a tutorial document
+will be created to aid inexperienced users make the most of this work and allow
+them to modify it for their own needs and purposes with custom hardware and /
+or software code.
 
 ## Project status at the end of GSoC 2016
 
