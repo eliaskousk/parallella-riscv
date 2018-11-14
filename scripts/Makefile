@@ -136,20 +136,20 @@ petalinux_dir = $(fpga_dir)/petalinux/
 # (FileSystem Packages > misc > gcc runtime)
 
 zedboard_software:
-  wget -P $(ZEDBOARD_BSP_PATH) $(ZEDBOARD_BSP_URL)
-  mkdir $(petalinux_dir)
+	wget -P $(ZEDBOARD_BSP_PATH) $(ZEDBOARD_BSP_URL)
+	mkdir $(petalinux_dir)
 	unset LD_LIBRARY_PATH && \
 	source $(PETALINUX_PATH)/settings.sh && \
 	source $(PETALINUX_PATH)/components/yocto/source/arm/environment-setup-cortexa9hf-neon-xilinx-linux-gnueabi && \
-  cd $(petalinux_dir) && \
+	cd $(petalinux_dir) && \
 	petalinux-create -t project -s $(ZEDBOARD_BSP) --name riscv_zynq && \
-  cd riscv_zynq && \
+	cd riscv_zynq && \
 	petalinux-config --get-hw-description=../../fpga/ && \
 	petalinux-config -c rootfs && \ # Enable libstdc++ (FileSystem Packages > misc -> gcc runtime)
-  petalinux-build && \
+	petalinux-build && \
 	petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/system.bit --u-boot
-  cp $(petalinux_dir)/riscv_zynq/images/linux/BOOT.BIN $(final_output_dir)
-  cp $(petalinux_dir)/riscv_zynq/images/linux/image.ub $(final_output_dir)
+	cp $(petalinux_dir)/riscv_zynq/images/linux/BOOT.BIN $(final_output_dir)
+	cp $(petalinux_dir)/riscv_zynq/images/linux/image.ub $(final_output_dir)
 
 #
 # --------------------------------------
