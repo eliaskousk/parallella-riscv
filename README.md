@@ -368,12 +368,14 @@ In case you want to (re)build the RISC-V RV64 rocket core IP you can run the fol
 ./scripts/build.riscv.rocketcore.sh
 ```
 
-Do not attempt to generate a new rocket-core with the latest rocket-chip upstream since the UCB guys have
-replaced the HTIF port (Host I/O interface) with a new Debug port. This means that their AXI -> HTIF
-adapter needs to be rewritten for AXI -> Debug if one wants to use a latest rocket-core inside Zynq.
+Do not attempt to generate a new rocket-core with the latest rocket-chip upstream (i.e by updating the
+`ip/rocket-chip` git hash) since it might not work with the `ip/rocket-zynq` customization sources for
+the generated rocket-core (`ip/rocket-zynq/src`) or the customized fesvr utility and associated library
+(`ip/rocket-zynq/csrc` folder).
 
-We currently use a core generated with an older rocket-chip version from March 2016 in order to overcome
-some RISC-V Linux incompatibilities introduced with later versions.
+This repo currently use a rocket-core generated with an older rocket-chip version from April 2018 that is
+stable and in sync with the customization sources in these folders (taken from the [UCB-BAR's original
+fpga-zynq repo](https://github.com/ucb-bar/fpga-zynq) which is not maintained any more.
 
 ### Build the RISC-V Emulator (Optional)
 
