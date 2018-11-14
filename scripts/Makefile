@@ -123,10 +123,10 @@ riscv_ip_setup:
 # ------------------------
 #
 
-ZEDBOARD_BSP_FILE = avnet-digilent-zedboard-v2018.2-final.bsp
-ZEDBOARD_BSP_URL = https://xilinx-ax-dl.entitlenow.com/dl/ul/2018/06/15/R209939846/$(ZEDBOARD_BSP_FILE)/6e5f5a7373badb9111b08de319b899e8/5BEC3A12?akdm=0&filename=$(ZEDBOARD_BSP_FILE)
-ZEDBOARD_BSP_PATH = ~/Downloads/Apps/Development/Xilinx/PetaLinux
-ZEDBOARD_BSP = $(ZEDBOARD_BSP_PATH)/$(ZEDBOARD_BSP_FILE)
+#ZEDBOARD_BSP_FILE = avnet-digilent-zedboard-v2018.2-final.bsp
+#ZEDBOARD_BSP_URL = https://xilinx-ax-dl.entitlenow.com/dl/ul/2018/06/15/R209939846/$(ZEDBOARD_BSP_FILE)/6e5f5a7373badb9111b08de319b899e8/5BEC3A12?akdm=0&filename=$(ZEDBOARD_BSP_FILE)
+
+ZEDBOARD_BSP = $(PETALINUX)/$(ZEDBOARD_BSP_FILE)
 
 petalinux_dir = $(base_dir)/zedboard/petalinux
 
