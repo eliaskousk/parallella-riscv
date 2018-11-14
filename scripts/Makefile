@@ -64,7 +64,7 @@ $(bitstream): $(BOARD_NAME)_ip_deps $(fpga_dir)/system_params.tcl
 	export RISCV_CORE_ARCH=$(RISCV_CORE_ARCH) && \
 	vivado -mode tcl -source $(fpga_dir)/system_bitstream.tcl && \
 	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.bit $(fpga_dir)/$(BOARD_NAME).bit && \
-	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.sysdef $(fpga_dir)/$(BOARD_NAME).hwdef
+	cp ./$(BOARD_NAME)_riscv/system.runs/impl_1/system_wrapper.sysdef $(fpga_dir)/$(BOARD_NAME).hdf
 	cd $(boot_build_dir) && \
 	ln -sf $(fpga_dir)/$(BOARD_NAME).bit .
 bitstream: $(bitstream)
@@ -123,29 +123,28 @@ riscv_ip_setup:
 # ------------------------
 #
 
-ZEDBOAD_BSP_FILE = avnet-digilent-zedboard-v2018.2-final.bsp
-ZEDBOARD_BSP_URL = https://xilinx-ax-dl.entitlenow.com/dl/ul/2018/06/15/R209939846/$(ZEDBOARD_BSP_FILE)\
-                   /7595fcdb7056b30dcc9ba5df18cc1f98/5BEA3BEA?akdm=0&filename=$(ZEDBOARD_BSP_FILE)
-ZEDBOARD_BSP_PATH = /tmp
+ZEDBOARD_BSP_FILE = avnet-digilent-zedboard-v2018.2-final.bsp
+ZEDBOARD_BSP_URL = https://xilinx-ax-dl.entitlenow.com/dl/ul/2018/06/15/R209939846/$(ZEDBOARD_BSP_FILE)/6e5f5a7373badb9111b08de319b899e8/5BEC3A12?akdm=0&filename=$(ZEDBOARD_BSP_FILE)
+ZEDBOARD_BSP_PATH = ~/Downloads/Apps/Development/Xilinx/PetaLinux
 ZEDBOARD_BSP = $(ZEDBOARD_BSP_PATH)/$(ZEDBOARD_BSP_FILE)
 
-petalinux_dir = $(fpga_dir)/petalinux/
+petalinux_dir = $(base_dir)/zedboard/petalinux
 
 # When configuring the rootfs
 # you need to enable libstdc++
 # (FileSystem Packages > misc > gcc runtime)
 
 zedboard_software:
-	wget -P $(ZEDBOARD_BSP_PATH) $(ZEDBOARD_BSP_URL)
-	mkdir $(petalinux_dir)
+# wget -P $(ZEDBOARD_BSP_PATH) $(ZEDBOARD_BSP_URL)
+	mkdir -p $(petalinux_dir)
 	unset LD_LIBRARY_PATH && \
 	source $(PETALINUX_PATH)/settings.sh && \
 	source $(PETALINUX_PATH)/components/yocto/source/arm/environment-setup-cortexa9hf-neon-xilinx-linux-gnueabi && \
 	cd $(petalinux_dir) && \
-	petalinux-create -t project -s $(ZEDBOARD_BSP) --name riscv_zynq && \
+	petalinux-create -t project -s $(ZEDBOARD_BSP) --name riscv_zynq --force && \
 	cd riscv_zynq && \
-	petalinux-config --get-hw-description=../../fpga/ && \
-	petalinux-config -c rootfs && \ # Enable libstdc++ (FileSystem Packages > misc -> gcc runtime)
+	petalinux-config --get-hw-description=../../fpga/ --oldconfig && \
+	petalinux-config -c rootfs && \
 	petalinux-build && \
 	petalinux-package --boot --fsbl images/linux/zynq_fsbl.elf --fpga images/linux/system.bit --u-boot
 	cp $(petalinux_dir)/riscv_zynq/images/linux/BOOT.BIN $(final_output_dir)

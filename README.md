@@ -86,7 +86,7 @@ and thus the RISC-V RV64 core.
 is not really needed for Parallella since the one contained in its Flash chip is fine and there is always
 a risk when performing re-flashes.
 
-**ZedBoard:** (Since November 2018)
+**ZedBoard:** (New November 2018)
 
 ZedBoard host software is now built with [PetaLinux](https://www.xilinx.com/member/forms/download/xef.html?filename=petalinux-v2018.2-final-installer.run)
 so you must first download and install it from Xilinx download site. You need the 6 GB Installer and it only works on Ubuntu 16.04 or RHEL/CentoOS 7.2 - 7.4.
@@ -101,6 +101,12 @@ You can build the host software for all boards by running the following:
 ```bash
 ./scripts/build.host.software.sh
 ```
+
+**Important Notes:**
+-Before running the host software build you must download the [ZedBoard BSP](https://www.xilinx.com/member/forms/download/xef.html?filename=avnet-digilent-zedboard-v2018.2-final.bsp)
+and place it into your PetaLinux installation directory (i.e `/opt/Xilinx/PetaLinux`)
+- When prompted to configure the rootfs image make sure to go into FileSystem Packages -> misc -> gcc runtime and select the libstdc++
+library package (just the normal package not the -dev one)
 
 * Step 1 & 2 Combined: Build the Host Software and the FPGA Bitstream
 
