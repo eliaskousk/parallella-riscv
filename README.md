@@ -102,24 +102,15 @@ You can build the host software for all boards by running the following:
 ./scripts/build.host.software.sh
 ```
 
-**Important Notes:**
+**Important Notes**
 
-- Before running the host software build you must download the [ZedBoard BSP](https://www.xilinx.com/member/forms/download/xef.html?filename=avnet-digilent-zedboard-v2018.2-final.bsp)
-and place it into your PetaLinux installation directory (i.e `/opt/Xilinx/PetaLinux`)
-- When prompted to configure the rootfs image make sure to go into FileSystem Packages -> misc -> gcc runtime and select the libstdc++
+Before running the build host software script make sure:
+
+1. You have a generated bitstream (with `./scripts/build.fpga.bitstream.sh` as described above) since the bitstream
+is needed to build PetaLinux
+2. You have downloaded the [ZedBoard BSP](https://www.xilinx.com/member/forms/download/xef.html?filename=avnet-digilent-zedboard-v2018.2-final.bsp) from the Xilinx site and placed it into your PetaLinux installation directory (i.e `/opt/Xilinx/PetaLinux`)
+3. When prompted to configure the rootfs image go into FileSystem Packages -> misc -> gcc runtime and select the `libstdc++`
 library package (just the normal package not the -dev one)
-
-* Step 1 & 2 Combined: Build the Host Software and the FPGA Bitstream
-
-To build both the host software and FPGA Bitstream run the following:
-
-```bash
-./scripts/build.fpga.bitstream.sh
-./scripts/build.host.software.sh
-```
-You must run them in this order for Zedboard since the bitstream is needed to build PetaLinux
-
-* Step 3: Copy output in your SD card's boot partition
 
 All the final output files are placed in the `${TOP}/${BOARD}/output/final/` directory. After generation
 you should copy them in your SD card's boot partition. To actually test RISC-V you should also build its
